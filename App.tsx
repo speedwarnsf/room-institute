@@ -57,7 +57,7 @@ import { generateShoppingList, shoppingListFromProducts } from './services/shopp
 type Chat = any;
 import { ModeSelect, type DesignPreferences } from './components/ModeSelect';
 import { DESIGN_STYLES, ROOM_FUNCTIONS } from './components/PreferencesPanel';
-import { LayoutGrid, ArrowLeft, AlertCircle, RefreshCw, WifiOff, Clock, Home, Camera, Palette, Wand2, FolderOpen, TrendingUp, Menu, X } from 'lucide-react';
+import { LayoutGrid, ArrowLeft, AlertCircle, RefreshCw, WifiOff, Clock, Home, Camera, Palette, Wand2, FolderOpen, TrendingUp } from 'lucide-react';
 
 /**
  * Animated counter for social proof — shows total designs generated
@@ -66,7 +66,7 @@ function DesignCounter() {
   const { t } = useI18n();
   const [count, setCount] = useState(0);
   // Seed: 14,847 designs + a slow trickle based on time
-  const target = 12645;
+  const target = 14847 + Math.floor((Date.now() - 1739500000000) / 180000);
 
   useEffect(() => {
     const duration = 1800;
@@ -145,9 +145,6 @@ function AppContent() {
   const [showUpgradePrompt, setShowUpgradePrompt] = useState<string | null>(null);
   const [showPricing, setShowPricing] = useState(false);
   const [showAuthGate, setShowAuthGate] = useState(false);
-
-  // Mobile menu state
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Network and accessibility hooks
   const networkStatus = useNetworkStatus();
@@ -237,7 +234,7 @@ function AppContent() {
       if (error instanceof GeminiApiError) {
         setError(buildAppError(error.code, error.message, error.isRetryable));
       } else {
-        setError(buildAppError('STRUCTURE_DETECTION_FAILED', t('error.structureDetectionFailed'), true));
+        setError(buildAppError('STRUCTURE_DETECTION_FAILED', 'Failed to analyze room structure', true));
       }
       setAppState(AppState.ERROR);
     } finally {
@@ -363,7 +360,7 @@ function AppContent() {
       if (error instanceof GeminiApiError) {
         setError(buildAppError(error.code, error.message, error.isRetryable));
       } else {
-        setError(buildAppError('DESIGN_GENERATION_FAILED', t('error.designGenerationFailed'), true));
+        setError(buildAppError('DESIGN_GENERATION_FAILED', 'Failed to generate design options', true));
       }
       setAppState(AppState.ERROR);
     } finally {
@@ -390,7 +387,7 @@ function AppContent() {
     if (!networkStatus.isOnline) {
       setError(buildAppError('NETWORK_OFFLINE'));
       setAppState(AppState.ERROR);
-      announce(t('app.error.noInternet'), 'assertive');
+      announce('Upload failed: No internet connection', 'assertive');
       playSound('error');
       return;
     }
@@ -398,7 +395,7 @@ function AppContent() {
     // Check rate limit before processing
     if (!rateLimiter.tryConsume()) {
       const waitTime = rateLimiter.formatWaitTime();
-      setRateLimitMessage(t('app.error.rateLimit').replace('{time}', waitTime));
+      setRateLimitMessage(`Too many requests. Please wait ${waitTime}.`);
       setTimeout(() => setRateLimitMessage(null), 5000);
       playSound('error');
       return;
@@ -415,17 +412,17 @@ function AppContent() {
       announce('Starting image analysis', 'polite');
 
       const validation = await validateImageFile(file);
-
+      
       if (!validation.canProceed) {
         setError(buildAppError(
           'VALIDATION_FAILED',
-          validation.error || t('app.error.invalidImage'),
+          validation.error || 'Invalid image file',
           true,
           validation.suggestion
         ));
         setAppState(AppState.ERROR);
         analytics.track('image_rejected', { reason: validation.error });
-        announce(validation.error || t('app.error.invalidImage'), 'assertive');
+        announce(`Upload failed: ${validation.error}`, 'assertive');
         playSound('error');
         setIsAnalyzing(false);
         return;
@@ -458,12 +455,12 @@ function AppContent() {
       reader.onerror = () => {
         setError(buildAppError(
           'FILE_READ_ERROR',
-          t('app.error.readFailed'),
+          'Failed to read the image file. Please try a different image.',
           true
         ));
         setAppState(AppState.ERROR);
         setIsAnalyzing(false);
-        announce(t('app.error.readFailed'), 'assertive');
+        announce('Failed to read image file', 'assertive');
         playSound('error');
         analytics.track('analysis_failed', { stage: 'file_read', error: 'FILE_READ_ERROR' });
       };
@@ -494,7 +491,7 @@ function AppContent() {
           console.error('Image processing error:', readError);
           setError(buildAppError('UNKNOWN', 'An unexpected error occurred. Please try again.', true));
           setAppState(AppState.ERROR);
-          announce(t('error.processingFailed'), 'assertive');
+          announce('Failed to process image', 'assertive');
           playSound('error');
         } finally {
           setIsAnalyzing(false);
@@ -505,7 +502,7 @@ function AppContent() {
       reader.readAsDataURL(processedFile);
     } catch (err) {
       console.error('File handling error:', err);
-      setError(buildAppError('PROCESSING_ERROR', t('error.processingRetry'), true));
+      setError(buildAppError('PROCESSING_ERROR', 'Failed to process the image. Please try again.', true));
       setIsAnalyzing(false);
       setAppState(AppState.ERROR);
     }
@@ -537,7 +534,7 @@ function AppContent() {
     // Check rate limit
     if (!rateLimiter.tryConsume()) {
       const waitTime = rateLimiter.formatWaitTime();
-      setVisualizationError(t('app.error.rateLimitWait').replace('{time}', waitTime));
+      setVisualizationError(`Rate limit exceeded. Please wait ${waitTime}.`);
       return;
     }
     
@@ -556,7 +553,7 @@ function AppContent() {
       if (err instanceof GeminiApiError) {
         setVisualizationError(getErrorMessage(err.code).description ?? err.message);
       } else {
-        setVisualizationError(t('error.visualizationFailed'));
+        setVisualizationError('Failed to generate visualization. Please try again.');
       }
     } finally {
       setIsVisualizing(false);
@@ -600,7 +597,7 @@ function AppContent() {
       const errorMsg: ChatMessage = {
         id: Date.now().toString(),
         role: 'model',
-        text: t('app.error.rateLimitChat').replace('{time}', waitTime),
+        text: `Rate limit exceeded. Please wait ${waitTime} before sending another message.`,
         timestamp: Date.now(),
         isError: true
       };
@@ -991,7 +988,7 @@ function AppContent() {
       });
       if (apiError instanceof GeminiApiError) {
         if (apiError.code === 'RATE_LIMIT' && apiError.retryAfterSeconds) {
-          setRateLimitMessage(t('app.error.tooManyRequests').replace('{seconds}', String(apiError.retryAfterSeconds)));
+          setRateLimitMessage(`Too many requests. Try again in ${apiError.retryAfterSeconds} seconds.`);
           // Auto-countdown
           let remaining = apiError.retryAfterSeconds;
           const interval = setInterval(() => {
@@ -1000,7 +997,7 @@ function AppContent() {
               clearInterval(interval);
               setRateLimitMessage(null);
             } else {
-              setRateLimitMessage(t('app.error.tooManyRequests').replace('{seconds}', String(remaining)));
+              setRateLimitMessage(`Too many requests. Try again in ${remaining} seconds.`);
             }
           }, 1000);
           setAppState(AppState.MODE_SELECT);
@@ -1012,8 +1009,7 @@ function AppContent() {
         setError(buildAppError('UNKNOWN', 'An unexpected error occurred. Please try again.', true));
         setAppState(AppState.ERROR);
       }
-      const errorMessage = apiError instanceof Error ? apiError.message : 'Unknown error';
-      announce(t('app.error.analysisFailed').replace('{message}', errorMessage), 'assertive');
+      announce(`Analysis failed: ${apiError instanceof Error ? apiError.message : 'Unknown error'}`, 'assertive');
       playSound('error');
     } finally {
       setIsAnalyzing(false);
@@ -1097,40 +1093,44 @@ function AppContent() {
   return (
     <div className="min-h-screen bg-stone-50 dark:bg-stone-900 flex flex-col font-sans transition-colors duration-300">
       {/* Header */}
-      <header
+      <header 
         className={`bg-white dark:bg-stone-800 border-b border-stone-200 dark:border-stone-700 sticky top-0 z-50 transition-colors duration-300 ${appState === AppState.DESIGN_STUDIO ? 'hidden' : ''}`}
         role="banner"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          {/* Logo */}
-          <button
+          <button 
             onClick={resetApp}
             className="flex items-center gap-2 hover:opacity-80 transition-opacity focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 dark:focus:ring-offset-stone-800 p-1 flex-shrink-0"
-            aria-label={t('nav.returnHome')}
+            aria-label="Room - Return to home"
           >
             <img src="/room-logo-dark.png" alt="Room" style={{ height: 28 }} className="dark:hidden" /><img src="/room-logo.png" alt="Room" style={{ height: 28 }} className="hidden dark:block" />
           </button>
-
-          {/* Desktop Navigation (sm and above) */}
-          <div className="hidden sm:flex items-center gap-1.5 sm:gap-3 flex-shrink min-w-0">
+          
+          <div className="flex items-center gap-1.5 sm:gap-3 flex-shrink min-w-0">
             {/* Network Status - desktop only */}
-            <NetworkStatus showIndicator={true} />
+            <span className="hidden sm:inline-flex">
+              <NetworkStatus showIndicator={true} />
+            </span>
 
-            {/* Language Switcher */}
-            <LanguageSwitcher />
+            {/* Language Switcher — hide on mobile */}
+            <span className="hidden sm:inline-flex">
+              <LanguageSwitcher />
+            </span>
 
-            {/* Theme Toggle */}
-            <ThemeToggle />
-
+            {/* Theme Toggle — hide on mobile */}
+            <span className="hidden sm:inline-flex">
+              <ThemeToggle />
+            </span>
+            
             {/* Back / Start Over — shown in sub-flows */}
             {(appState === AppState.MODE_SELECT || appState === AppState.STRUCTURE_ASSESSMENT || appState === AppState.DESIGN_OPTIONS || appState === AppState.LOOKBOOK || appState === AppState.RESULTS) && (
-              <button
+              <button 
                 onClick={resetApp}
                 className="text-sm text-stone-600 dark:text-stone-400 hover:text-emerald-600 dark:hover:text-emerald-400 flex items-center gap-1 font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 dark:focus:ring-offset-stone-800 px-2 sm:px-3 py-2 whitespace-nowrap"
-                aria-label={t('nav.startOver')}
+                aria-label="Start over with a new image"
               >
                 <ArrowLeft className="w-4 h-4" aria-hidden="true" />
-                <span>{(t as any)('app.button.new')}</span>
+                <span className="hidden sm:inline">{(t as any)('app.button.new')}</span>
               </button>
             )}
 
@@ -1139,10 +1139,10 @@ function AppContent() {
               <button
                 onClick={() => setAppState(AppState.DISCOVER)}
                 className="p-2 text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
-                title={t('nav.discover')}
+                title="Discover inspiration"
               >
                 <Palette className="w-4 h-4" />
-                <span className="hidden lg:inline ml-1">{(t as any)('app.button.discover')}</span>
+                <span className="hidden sm:inline">{(t as any)('app.button.discover')}</span>
               </button>
             )}
 
@@ -1151,10 +1151,10 @@ function AppContent() {
               <button
                 onClick={() => setAppState(AppState.ROOMS)}
                 className="p-2 text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
-                title={t('nav.myRooms')}
+                title="My Rooms"
               >
                 <Home className="w-4 h-4" />
-                <span className="hidden lg:inline ml-1">{(t as any)('app.button.rooms')}</span>
+                <span className="hidden sm:inline">{(t as any)('app.button.rooms')}</span>
               </button>
             )}
 
@@ -1169,10 +1169,10 @@ function AppContent() {
                   setAppState(AppState.PROJECTS);
                 }}
                 className="p-2 text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
-                title={t('nav.projects')}
+                title="Projects"
               >
                 <FolderOpen className="w-4 h-4" />
-                <span className="hidden lg:inline ml-1">{(t as any)('app.button.projects')}</span>
+                <span className="hidden sm:inline">{(t as any)('app.button.projects')}</span>
               </button>
             )}
 
@@ -1188,25 +1188,27 @@ function AppContent() {
                 title={currentRoomId ? 'Update Room' : 'Save Room'}
               >
                 <Home className="w-4 h-4" />
-                <span className="hidden lg:inline">{currentRoomId ? (t as any)('app.button.saved') : (t as any)('app.button.save')}</span>
+                <span className="hidden sm:inline">{currentRoomId ? (t as any)('app.button.saved') : (t as any)('app.button.save')}</span>
               </button>
             )}
 
-            {/* Session Manager + Share — results only */}
+            {/* Session Manager + Share — results only, desktop-prioritized */}
             {appState === AppState.RESULTS && (
               <>
-                <Suspense fallback={null}>
-                  <SessionManager
-                    currentSessionId={currentSessionId}
-                    onLoadSession={handleLoadSession}
-                    onSaveSession={handleSaveSession}
-                    hasUnsavedChanges={!!analysis}
-                  />
-                </Suspense>
+                <span className="hidden sm:inline-flex">
+                  <Suspense fallback={null}>
+                    <SessionManager
+                      currentSessionId={currentSessionId}
+                      onLoadSession={handleLoadSession}
+                      onSaveSession={handleSaveSession}
+                      hasUnsavedChanges={!!analysis}
+                    />
+                  </Suspense>
+                </span>
                 {analysis && (
                   <Suspense fallback={null}>
-                    <ShareButton
-                      analysis={analysis.rawText}
+                    <ShareButton 
+                      analysis={analysis.rawText} 
                       roomType="room"
                     />
                   </Suspense>
@@ -1216,134 +1218,8 @@ function AppContent() {
 
             <UserMenu onOpenPricing={() => setShowPricing(true)} onOpenAuth={() => setShowAuthGate(true)} />
           </div>
-
-          {/* Mobile Hamburger Menu Button (below sm) */}
-          <button
-            onClick={() => setMobileMenuOpen(true)}
-            className="sm:hidden p-2 text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
-            aria-label={t('nav.openMenu')}
-          >
-            <Menu className="w-6 h-6" />
-          </button>
         </div>
       </header>
-
-      {/* Mobile Menu Panel */}
-      {mobileMenuOpen && (
-        <>
-          {/* Backdrop */}
-          <div
-            className="fixed inset-0 bg-stone-900/50 z-[60] sm:hidden"
-            onClick={() => setMobileMenuOpen(false)}
-            aria-hidden="true"
-          />
-
-          {/* Panel */}
-          <div className="fixed top-0 right-0 bottom-0 w-64 bg-white dark:bg-stone-800 z-[70] sm:hidden shadow-2xl animate-in slide-in-from-right duration-300">
-            <div className="flex flex-col h-full">
-              {/* Header */}
-              <div className="flex items-center justify-between p-4 border-b border-stone-200 dark:border-stone-700">
-                <span className="text-lg font-semibold text-stone-900 dark:text-stone-100">Menu</span>
-                <button
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="p-2 text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                  aria-label={t('nav.close')}
-                >
-                  <X className="w-6 h-6" />
-                </button>
-              </div>
-
-              {/* Menu Items */}
-              <nav className="flex-1 overflow-y-auto p-4">
-                <div className="space-y-1">
-                  {/* Back / Start Over */}
-                  {(appState === AppState.MODE_SELECT || appState === AppState.STRUCTURE_ASSESSMENT || appState === AppState.DESIGN_OPTIONS || appState === AppState.LOOKBOOK || appState === AppState.RESULTS) && (
-                    <button
-                      onClick={() => { resetApp(); setMobileMenuOpen(false); }}
-                      className="w-full flex items-center gap-3 px-4 py-3 text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-700 transition-colors"
-                    >
-                      <ArrowLeft className="w-5 h-5" />
-                      <span>{(t as any)('app.button.new')}</span>
-                    </button>
-                  )}
-
-                  {/* Discover */}
-                  <button
-                      onClick={() => { setAppState(AppState.DISCOVER); setMobileMenuOpen(false); }}
-                      className="w-full flex items-center gap-3 px-4 py-3 text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-700 transition-colors"
-                    >
-                      <Palette className="w-5 h-5" />
-                      <span>{(t as any)('app.button.discover')}</span>
-                    </button>
-
-                  {/* My Rooms */}
-                  <button
-                      onClick={() => { setAppState(AppState.ROOMS); setMobileMenuOpen(false); }}
-                      className="w-full flex items-center gap-3 px-4 py-3 text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-700 transition-colors"
-                    >
-                      <Home className="w-5 h-5" />
-                      <span>{(t as any)('app.button.rooms')}</span>
-                    </button>
-
-                  {/* Projects */}
-                  <button
-                      onClick={() => {
-                        if (!canCreateProject(userTier)) {
-                          setShowUpgradePrompt('project');
-                          setMobileMenuOpen(false);
-                          return;
-                        }
-                        setAppState(AppState.PROJECTS);
-                        setMobileMenuOpen(false);
-                      }}
-                      className="w-full flex items-center gap-3 px-4 py-3 text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-700 transition-colors"
-                    >
-                      <FolderOpen className="w-5 h-5" />
-                      <span>{(t as any)('app.button.projects')}</span>
-                    </button>
-
-                  {/* Save Room */}
-                  {appState === AppState.RESULTS && designAnalysis && selectedDesignIndex !== null && uploadedImage && (
-                    <button
-                      onClick={() => { handleSaveRoom(); setMobileMenuOpen(false); }}
-                      className={`w-full flex items-center gap-3 px-4 py-3 transition-colors ${
-                        currentRoomId
-                          ? 'text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-700'
-                          : 'text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/20'
-                      }`}
-                    >
-                      <Home className="w-5 h-5" />
-                      <span>{currentRoomId ? (t as any)('app.button.saved') : (t as any)('app.button.save')}</span>
-                    </button>
-                  )}
-
-                  {/* Divider */}
-                  <div className="my-3 border-t border-stone-200 dark:border-stone-700" />
-
-                  {/* Settings row — same alignment as nav items */}
-                  <div className="flex items-center gap-3 px-4 py-3 text-stone-700 dark:text-stone-300">
-                    <LanguageSwitcher />
-                  </div>
-                  <div className="flex items-center gap-3 px-4 py-3 text-stone-700 dark:text-stone-300">
-                    <ThemeToggle />
-                  </div>
-                  <div className="flex items-center gap-3 px-4 py-3 text-stone-700 dark:text-stone-300">
-                    <NetworkStatus showIndicator={true} />
-                  </div>
-
-                  {/* Divider */}
-                  <div className="my-3 border-t border-stone-200 dark:border-stone-700" />
-
-                  {/* User menu — full width */}
-                  <div className="px-4 py-3">
-                    <UserMenu onOpenPricing={() => { setShowPricing(true); setMobileMenuOpen(false); }} onOpenAuth={() => { setShowAuthGate(true); setMobileMenuOpen(false); }} />
-                  </div>
-                </div>
-              </nav>
-            </div>
-          </div>
-        </>
-      )}
 
       {/* Rate Limit Toast */}
       {rateLimitMessage && (
@@ -1372,7 +1248,7 @@ function AppContent() {
               <span dangerouslySetInnerHTML={{ __html: (t as any)('app.hero.title') }} />
             </h1>
             <p className="text-sm sm:text-base text-stone-600 dark:text-stone-400 text-center max-w-xl mb-4 leading-relaxed" style={{ textWrap: 'balance' }}>
-              <span dangerouslySetInnerHTML={{ __html: (t as any)('app.hero.description') }} />
+              {(t as any)('app.hero.description')}
             </p>
 
             {/* Free tier nudge */}
@@ -1598,7 +1474,7 @@ function AppContent() {
                   <button 
                     onClick={handleRetry}
                     className="bg-emerald-600 text-white px-6 py-3 hover:bg-emerald-700 transition-colors flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 dark:focus:ring-offset-stone-900"
-                    aria-label={t('app.retryAnalysis')}
+                    aria-label="Try analyzing the image again"
                   >
                     <RefreshCw className="w-4 h-4" aria-hidden="true" />
                     {(t as any)('app.button.tryAgain')}
@@ -1607,7 +1483,7 @@ function AppContent() {
                 <button
                   onClick={resetApp}
                   className="bg-stone-100 dark:bg-stone-700 text-stone-700 dark:text-stone-200 px-6 py-3 hover:bg-stone-200 dark:hover:bg-stone-600 transition-colors focus:outline-none focus:ring-2 focus:ring-stone-500 focus:ring-offset-2 dark:focus:ring-offset-stone-900"
-                  aria-label={t('app.goHome')}
+                  aria-label="Go back to home and start fresh"
                 >
                   {(t as any)('app.button.startFresh')}
                 </button>
