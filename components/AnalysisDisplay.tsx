@@ -175,8 +175,8 @@ export const AnalysisDisplay: React.FC<AnalysisDisplayProps> = ({
                 <ComparisonSlider
                   beforeImage={originalImage}
                   afterImage={`data:image/png;base64,${visualizationImage}`}
-                  beforeLabel="Original"
-                  afterLabel="Organized"
+                  beforeLabel={t('analysis.original')}
+                  afterLabel={t('analysis.organized')}
                   className="border border-zinc-700"
                   enableZoom
                 />

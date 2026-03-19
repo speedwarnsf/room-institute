@@ -28,8 +28,8 @@ export const UploadZone: React.FC<UploadZoneProps> = ({ onImageSelected, isAnaly
   const hintText = isAnalyzing
     ? 'Analysis in progress. Upload is disabled.'
     : isDragOver
-      ? 'Release to upload your room photo.'
-      : 'Drag and drop a room photo, or press Enter to browse.';
+      ? t('upload.releaseToUpload')
+      : t('upload.dragOrBrowse');
 
   /**
    * Validate and process an uploaded file
@@ -39,21 +39,21 @@ export const UploadZone: React.FC<UploadZoneProps> = ({ onImageSelected, isAnaly
     
     // Validate file type
     if (!ACCEPTED_TYPES.includes(file.type)) {
-      setError('Please upload a JPG, PNG, WebP, or HEIC image.');
+      setError(t('upload.invalidFileType'));
       return;
     }
     
     // Validate file size (max 10MB)
     const maxSize = 10 * 1024 * 1024;
     if (file.size > maxSize) {
-      setError('Image must be smaller than 10MB.');
+      setError(t('upload.fileTooLarge'));
       return;
     }
     
     // Read and preview the file
     const reader = new FileReader();
     reader.onerror = () => {
-      setError('Failed to read the image file.');
+      setError(t('upload.readFailed'));
     };
     reader.onloadend = () => {
       setPreview(reader.result as string);
@@ -248,7 +248,7 @@ export const UploadZone: React.FC<UploadZoneProps> = ({ onImageSelected, isAnaly
                 <Loader2 className="w-10 h-10 text-emerald-500 relative z-10 animate-spin" />
               </div>
               <p className="mt-4 text-emerald-500 font-mono text-[10px] tracking-widest uppercase">
-                Focusing...
+                {t('upload.focusing')}
               </p>
             </div>
           )}
@@ -265,7 +265,7 @@ export const UploadZone: React.FC<UploadZoneProps> = ({ onImageSelected, isAnaly
                 <button 
                   onClick={clearImage}
                   className="bg-red-600/90 text-white p-3 transform hover:scale-110 transition-transform hover:bg-red-500 shadow-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black/40"
-                  aria-label="Remove uploaded image"
+                  aria-label={t('upload.removeImage')}
                 >
                   <X className="w-6 h-6" />
                 </button>

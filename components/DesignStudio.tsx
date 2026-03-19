@@ -487,7 +487,7 @@ function StudioIterate({
               onKeyDown={(e) => { if (e.key === 'Enter' && customPrompt.trim()) { onIterate(customPrompt); setCustomPrompt(''); } }}
               placeholder={(t as any)('studio.describePlaceholder')}
               disabled={isIterating}
-              aria-label="Custom iteration prompt"
+              aria-label={(t as any)('studio.customPrompt')}
               className="flex-1 bg-transparent border-b border-neutral-800 px-1 py-3 text-sm text-neutral-200 placeholder-neutral-700 focus:outline-none focus:border-neutral-500 focus:ring-0 transition-colors disabled:opacity-40"
               style={{ fontFamily: tp.body }}
             />
@@ -674,7 +674,7 @@ export function DesignStudio({ entry, onBack, onIterate, sourceImage }: DesignSt
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="w-10 h-10 bg-black/50 backdrop-blur-xl border border-white/10 flex items-center justify-center hover:bg-black/70 transition-colors focus:outline-none focus:ring-2 focus:ring-white/50"
-            aria-label="Back to lookbook"
+            aria-label={(t as any)('studio.backToLookbook')}
           >
             <ArrowLeft size={18} className="text-white" />
           </motion.button>
@@ -684,7 +684,7 @@ export function DesignStudio({ entry, onBack, onIterate, sourceImage }: DesignSt
               onClick={handleShare}
               disabled={sharing}
               className="w-10 h-10 bg-black/50 backdrop-blur-xl border border-white/10 flex items-center justify-center hover:bg-black/70 transition-colors"
-              aria-label="Share design"
+              aria-label={(t as any)('studio.shareDesign')}
             >
               <SoIcon name="share" size={18} style={{ filter: 'brightness(0) invert(1)' }} />
             </button>

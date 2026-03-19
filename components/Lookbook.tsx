@@ -255,7 +255,7 @@ const LookbookCard = memo(function LookbookCard({
         </AnimatePresence>
 
         {/* Rating buttons */}
-        <div className="flex gap-1 pt-1" role="group" aria-label="Rate this design">
+        <div className="flex gap-1 pt-1" role="group" aria-label={(t as any)('lookbook.rateDesign')}>
           {RATINGS.map(r => (
             <button
               key={r.value}
@@ -665,7 +665,7 @@ export function Lookbook({ entries, onRate, onSelectForIteration, onGenerateMore
       </div>
 
       {/* Filter tabs */}
-      <div className="flex gap-2 justify-center" role="tablist" aria-label="Filter designs">
+      <div className="flex gap-2 justify-center" role="tablist" aria-label={(t as any)('lookbook.filterDesigns')}>
         {tabs.map(tab => (
           <button
             key={tab.key}
@@ -727,10 +727,10 @@ export function Lookbook({ entries, onRate, onSelectForIteration, onGenerateMore
           className="bg-gradient-to-br from-amber-50 to-yellow-50 dark:from-emerald-950/20 dark:to-yellow-900/10 border border-amber-200/50 dark:border-emerald-600/30 p-5 space-y-3"
         >
           <h3 className="text-sm font-semibold text-emerald-700 dark:text-emerald-200">
-            Go deeper on your favorites
+            {(t as any)('lookbook.goDeeperTitle')}
           </h3>
           <p className="text-xs text-emerald-500 dark:text-emerald-300/70">
-            Tap "Go Deeper" on any card, then explore iteration branches:
+            {(t as any)('lookbook.goDeeperInstructions')}
           </p>
           <div className="flex flex-wrap gap-2">
             {ITERATION_BRANCHES.map(({ icon: Icon, label }) => (
@@ -747,7 +747,7 @@ export function Lookbook({ entries, onRate, onSelectForIteration, onGenerateMore
         layout
         className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 lg:gap-6"
         role="feed"
-        aria-label="Design lookbook cards"
+        aria-label={(t as any)('lookbook.designCards')}
       >
         <AnimatePresence mode="popLayout">
           {sortedEntries.map(entry => (

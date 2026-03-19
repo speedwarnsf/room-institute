@@ -82,7 +82,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
         role="log"
         aria-live="polite"
         aria-atomic="false"
-        aria-label="Chat messages"
+        aria-label={t('chat.messagesLabel')}
       >
         {/* Empty State */}
         {messages.length === 0 && !isTyping && (
@@ -141,7 +141,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
           <div 
             className="flex justify-start w-full"
             role="status"
-            aria-label="Room is typing"
+            aria-label={t('chat.typing')}
           >
             <div className="bg-stone-100 dark:bg-stone-700-none p-4 flex items-center gap-2">
               <Loader2 
@@ -187,7 +187,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
             type="submit"
             disabled={!input.trim() || isTyping}
             className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-emerald-600 text-white hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 dark:focus:ring-offset-stone-800"
-            aria-label="Send message"
+            aria-label={t('chat.sendLabel')}
           >
             <Send className="w-4 h-4" aria-hidden="true" />
           </button>
