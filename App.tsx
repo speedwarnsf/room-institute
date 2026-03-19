@@ -1239,7 +1239,7 @@ function AppContent() {
           />
 
           {/* Panel */}
-          <div className="fixed top-0 right-0 bottom-0 w-56 bg-white dark:bg-stone-800 z-[70] sm:hidden shadow-2xl animate-in slide-in-from-right duration-300">
+          <div className="fixed top-0 right-0 bottom-0 w-64 bg-white dark:bg-stone-800 z-[70] sm:hidden shadow-2xl animate-in slide-in-from-right duration-300">
             <div className="flex flex-col h-full">
               {/* Header */}
               <div className="flex items-center justify-between p-4 border-b border-stone-200 dark:border-stone-700">
@@ -1268,30 +1268,25 @@ function AppContent() {
                   )}
 
                   {/* Discover */}
-                  {(appState === AppState.HOME || appState === AppState.RESULTS || appState === AppState.MODE_SELECT || appState === AppState.LOOKBOOK) && (
-                    <button
+                  <button
                       onClick={() => { setAppState(AppState.DISCOVER); setMobileMenuOpen(false); }}
                       className="w-full flex items-center gap-3 px-4 py-3 text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-700 transition-colors"
                     >
                       <Palette className="w-5 h-5" />
                       <span>{(t as any)('app.button.discover')}</span>
                     </button>
-                  )}
 
                   {/* My Rooms */}
-                  {(appState === AppState.HOME || appState === AppState.RESULTS || appState === AppState.MODE_SELECT || appState === AppState.LOOKBOOK) && (
-                    <button
+                  <button
                       onClick={() => { setAppState(AppState.ROOMS); setMobileMenuOpen(false); }}
                       className="w-full flex items-center gap-3 px-4 py-3 text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-700 transition-colors"
                     >
                       <Home className="w-5 h-5" />
                       <span>{(t as any)('app.button.rooms')}</span>
                     </button>
-                  )}
 
                   {/* Projects */}
-                  {(appState === AppState.HOME || appState === AppState.ROOMS || appState === AppState.RESULTS) && (
-                    <button
+                  <button
                       onClick={() => {
                         if (!canCreateProject(userTier)) {
                           setShowUpgradePrompt('project');
@@ -1306,7 +1301,6 @@ function AppContent() {
                       <FolderOpen className="w-5 h-5" />
                       <span>{(t as any)('app.button.projects')}</span>
                     </button>
-                  )}
 
                   {/* Save Room */}
                   {appState === AppState.RESULTS && designAnalysis && selectedDesignIndex !== null && uploadedImage && (
