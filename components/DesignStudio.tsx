@@ -365,7 +365,7 @@ function StudioBrief({
       {/* ── Product Recommendations ── */}
       {option.products && option.products.length > 0 && (
         <RevealSection>
-          <ProductShelf products={option.products} title="The Edit" />
+          <ProductShelf products={option.products} title={(t as any)('studio.theEdit')} />
         </RevealSection>
       )}
 
@@ -485,7 +485,7 @@ function StudioIterate({
               value={customPrompt}
               onChange={(e) => setCustomPrompt(e.target.value)}
               onKeyDown={(e) => { if (e.key === 'Enter' && customPrompt.trim()) { onIterate(customPrompt); setCustomPrompt(''); } }}
-              placeholder="Or describe your own variation…"
+              placeholder={(t as any)('studio.describePlaceholder')}
               disabled={isIterating}
               aria-label="Custom iteration prompt"
               className="flex-1 bg-transparent border-b border-neutral-800 px-1 py-3 text-sm text-neutral-200 placeholder-neutral-700 focus:outline-none focus:border-neutral-500 focus:ring-0 transition-colors disabled:opacity-40"

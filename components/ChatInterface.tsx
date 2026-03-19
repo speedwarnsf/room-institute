@@ -148,7 +148,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
                 className="w-4 h-4 animate-spin text-stone-400 dark:text-stone-500" 
                 aria-hidden="true" 
               />
-              <span className="text-xs text-stone-500 dark:text-stone-400">Thinking...</span>
+              <span className="text-xs text-stone-500 dark:text-stone-400">{(t as any)('chat.thinking')}</span>
             </div>
           </div>
         )}
@@ -164,7 +164,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
       >
         <div className="relative">
           <label htmlFor="chat-input" className="sr-only">
-            Type your message
+            {(t as any)('chat.typeMessage')}
           </label>
           <input
             id="chat-input"
@@ -173,7 +173,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Ask a follow-up question..."
+            placeholder={(t as any)('chat.askFollowUp')}
             disabled={isTyping}
             className="w-full pl-4 pr-12 py-3 border border-stone-200 dark:border-stone-600 bg-white dark:bg-stone-700 focus:border-emerald-500 dark:focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100 dark:focus:ring-emerald-900/50 outline-none transition-all text-stone-700 dark:text-stone-100 placeholder-stone-400 dark:placeholder-stone-500 disabled:bg-stone-50 dark:disabled:bg-stone-800 disabled:cursor-not-allowed"
             aria-describedby={isTyping ? "typing-status" : undefined}

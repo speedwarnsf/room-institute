@@ -167,7 +167,7 @@ const LookbookCard = memo(function LookbookCard({
       <button
         onClick={(e) => { e.stopPropagation(); onShare(entry); }}
         className="absolute top-3 right-3 z-20 w-8 h-8 bg-black/40 hover:bg-black/60 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-        title="Share"
+        title={(t as any)('lookbook.share')}
       >
         {isSharing ? <Loader2 className="w-4 h-4 animate-spin" /> : <SoIcon name="share" size={16} style={{ filter: 'brightness(0) invert(1)' }} />}
       </button>
@@ -466,7 +466,7 @@ function FullScreenCard({
           {/* Product Recommendations */}
           {entry.option.products && entry.option.products.length > 0 && (
             <div className="border-t border-stone-200 dark:border-stone-700 pt-5 mt-2">
-              <ProductShelf products={entry.option.products} title="Get This Look" light />
+              <ProductShelf products={entry.option.products} title={(t as any)('lookbook.getThisLook')} light />
             </div>
           )}
 
@@ -494,7 +494,7 @@ function FullScreenCard({
               onClick={() => onDownload(entry)}
               disabled={isDownloading}
               className="flex-1 py-2.5 text-sm font-medium border border-stone-200 dark:border-stone-600 text-stone-700 dark:text-stone-200 hover:bg-stone-50 dark:hover:bg-stone-700/50 transition-colors flex items-center justify-center gap-2"
-              title="Save Image"
+              title={(t as any)('lookbook.saveImage')}
             >
               {isDownloading ? <Loader2 className="w-4 h-4 animate-spin" /> : <SoIcon name="save" size={16} />}
               Save Image
@@ -503,7 +503,7 @@ function FullScreenCard({
               onClick={() => onShare(entry)}
               disabled={isSharing}
               className="flex-1 py-2.5 text-sm font-medium border border-stone-200 dark:border-stone-600 text-stone-700 dark:text-stone-200 hover:bg-stone-50 dark:hover:bg-stone-700/50 transition-colors flex items-center justify-center gap-2"
-              title="Share"
+              title={(t as any)('lookbook.share')}
             >
               {isSharing ? <Loader2 className="w-4 h-4 animate-spin" /> : <SoIcon name="share" size={16} />}
               Share

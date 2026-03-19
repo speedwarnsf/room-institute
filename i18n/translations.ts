@@ -557,6 +557,16 @@ const translations = {
     // NetworkStatus.tsx
     'network.offline': 'Offline',
     'network.featureRequiresConnection': 'This feature requires an internet connection',
+    'studio.theEdit': 'The Edit',
+    'studio.describePlaceholder': 'Or describe your own variation…',
+    'lookbook.share': 'Share',
+    'lookbook.getThisLook': 'Get This Look',
+    'lookbook.saveImage': 'Save Image',
+    'mood.boardName': 'Board name',
+    'rooms.searchRooms': 'Search rooms...',
+    'rooms.roomName': 'Room name...',
+    'common.confirm': 'Confirm',
+    'common.cancel': 'Cancel',
   },
 
   fr: {
@@ -1054,6 +1064,16 @@ const translations = {
 
     'trending.title': 'Styles tendance',
     'trending.exploreAll': 'Tout explorer',
+    'studio.theEdit': 'La Sélection',
+    'studio.describePlaceholder': 'Ou décrivez votre propre variation…',
+    'lookbook.share': 'Partager',
+    'lookbook.getThisLook': 'Obtenir ce look',
+    'lookbook.saveImage': 'Enregistrer l\'image',
+    'mood.boardName': 'Nom du tableau',
+    'rooms.searchRooms': 'Rechercher des pièces...',
+    'rooms.roomName': 'Nom de la pièce...',
+    'common.confirm': 'Confirmer',
+    'common.cancel': 'Annuler',
   },
 
   de: {
@@ -1510,6 +1530,16 @@ const translations = {
     'user.rooms': 'Räume',
     'user.upgradeToPro': 'Auf Pro upgraden',
     'user.signOut': 'Abmelden',
+    'studio.theEdit': 'Die Auswahl',
+    'studio.describePlaceholder': 'Oder beschreiben Sie Ihre eigene Variante…',
+    'lookbook.share': 'Teilen',
+    'lookbook.getThisLook': 'Diesen Look erhalten',
+    'lookbook.saveImage': 'Bild speichern',
+    'mood.boardName': 'Board-Name',
+    'rooms.searchRooms': 'Räume suchen...',
+    'rooms.roomName': 'Raumname...',
+    'common.confirm': 'Bestätigen',
+    'common.cancel': 'Abbrechen',
   },
 
   es: {
@@ -1966,6 +1996,16 @@ const translations = {
     'user.rooms': 'Habitaciones',
     'user.upgradeToPro': 'Actualizar a Pro',
     'user.signOut': 'Cerrar sesión',
+    'studio.theEdit': 'La Selección',
+    'studio.describePlaceholder': 'O describe tu propia variación…',
+    'lookbook.share': 'Compartir',
+    'lookbook.getThisLook': 'Obtener este look',
+    'lookbook.saveImage': 'Guardar imagen',
+    'mood.boardName': 'Nombre del tablero',
+    'rooms.searchRooms': 'Buscar habitaciones...',
+    'rooms.roomName': 'Nombre de la habitación...',
+    'common.confirm': 'Confirmar',
+    'common.cancel': 'Cancelar',
   },
 
   zh: {
@@ -2422,6 +2462,16 @@ const translations = {
     'user.rooms': '房间',
     'user.upgradeToPro': '升级到Pro',
     'user.signOut': '登出',
+    'studio.theEdit': '精选',
+    'studio.describePlaceholder': '或描述你自己的变化…',
+    'lookbook.share': '分享',
+    'lookbook.getThisLook': '获取此造型',
+    'lookbook.saveImage': '保存图片',
+    'mood.boardName': '画板名称',
+    'rooms.searchRooms': '搜索房间...',
+    'rooms.roomName': '房间名称...',
+    'common.confirm': '确认',
+    'common.cancel': '取消',
   },
 
   pt: {
@@ -2878,6 +2928,16 @@ const translations = {
     'user.rooms': 'Cômodos',
     'user.upgradeToPro': 'Atualizar para Pro',
     'user.signOut': 'Sair',
+    'studio.theEdit': 'A Seleção',
+    'studio.describePlaceholder': 'Ou descreva sua própria variação…',
+    'lookbook.share': 'Compartilhar',
+    'lookbook.getThisLook': 'Obter este visual',
+    'lookbook.saveImage': 'Salvar imagem',
+    'mood.boardName': 'Nome do quadro',
+    'rooms.searchRooms': 'Buscar cômodos...',
+    'rooms.roomName': 'Nome do cômodo...',
+    'common.confirm': 'Confirmar',
+    'common.cancel': 'Cancelar',
   },
 } as const;
 

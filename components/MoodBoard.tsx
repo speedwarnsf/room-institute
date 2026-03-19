@@ -164,7 +164,7 @@ export function MoodBoard({ onSelectImages, compact = false }: MoodBoardProps) {
                 value={newName}
                 onChange={(e) => setNewName(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleCreate()}
-                placeholder="Board name"
+                placeholder={(t as any)('mood.boardName')}
                 className="w-full px-2 py-1.5 text-sm bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-600 text-stone-800 dark:text-stone-200 focus:outline-none focus:ring-1 focus:ring-emerald-500"
                 autoFocus
               />

@@ -594,7 +594,7 @@ const ProjectDetail: React.FC<{
                 onChange={e => setNewItemRoomId(e.target.value)}
                 className="px-3 py-2 bg-white dark:bg-stone-700 border border-stone-200 dark:border-stone-600 text-stone-800 dark:text-stone-100 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
               >
-                <option value="">General</option>
+                <option value="">{(t as any)('project.general')}</option>
                 {projectRooms.map(r => (
                   <option key={r.id} value={r.id}>{r.name}</option>
                 ))}

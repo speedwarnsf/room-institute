@@ -225,7 +225,7 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({
       <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
       <input
         type="text"
-        placeholder="Search rooms..."
+        placeholder={(t as any)('rooms.searchRooms')}
         value={searchQuery}
         onChange={e => onSearchChange(e.target.value)}
         className="w-full pl-10 pr-4 py-2.5 border border-stone-200 dark:border-stone-600 bg-white dark:bg-stone-700 text-stone-800 dark:text-stone-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-sm"
@@ -363,10 +363,10 @@ const RoomCard: React.FC<RoomCardProps> = ({
       <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
         {isConfirmingDelete ? (
           <>
-            <button onClick={onDelete} className="p-1.5 bg-red-500 text-white shadow-sm hover:bg-red-600" title="Confirm">
+            <button onClick={onDelete} className="p-1.5 bg-red-500 text-white shadow-sm hover:bg-red-600" title={(t as any)('common.confirm')}>
               <Check className="w-3.5 h-3.5" />
             </button>
-            <button onClick={onCancelDelete} className="p-1.5 bg-white dark:bg-stone-600 shadow-sm hover:bg-stone-100" title="Cancel">
+            <button onClick={onCancelDelete} className="p-1.5 bg-white dark:bg-stone-600 shadow-sm hover:bg-stone-100" title={(t as any)('common.cancel')}>
               <X className="w-3.5 h-3.5 text-stone-600 dark:text-stone-300" />
             </button>
           </>
