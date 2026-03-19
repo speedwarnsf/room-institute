@@ -17,6 +17,7 @@ import {
   addBudgetItem, toggleBudgetItemPurchased, deleteBudgetItem,
 } from '../services/projectStorage';
 import { getRooms } from '../services/houseRoomStorage';
+import { useI18n } from '../i18n/I18nContext';
 
 interface ProjectManagerProps {
   onBack: () => void;
@@ -24,6 +25,7 @@ interface ProjectManagerProps {
 }
 
 export const ProjectManager: React.FC<ProjectManagerProps> = ({ onBack, onOpenRoom }) => {
+  const { t } = useI18n();
   const [projects, setProjects] = useState<Project[]>([]);
   const [rooms, setRooms] = useState<Room[]>([]);
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
@@ -94,7 +96,7 @@ export const ProjectManager: React.FC<ProjectManagerProps> = ({ onBack, onOpenRo
           <h3 className="text-sm font-semibold text-stone-700 dark:text-stone-300 uppercase tracking-wide">Create Project</h3>
           <input
             type="text"
-            placeholder="Project name (e.g., Kitchen + Living Room Renovation)"
+            placeholder={t('project.namePlaceholder')}
             value={newName}
             onChange={e => setNewName(e.target.value)}
             className="w-full px-3 py-2 bg-stone-50 dark:bg-stone-700 border border-stone-200 dark:border-stone-600 text-stone-800 dark:text-stone-100 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
@@ -102,7 +104,7 @@ export const ProjectManager: React.FC<ProjectManagerProps> = ({ onBack, onOpenRo
             onKeyDown={e => { if (e.key === 'Enter') handleCreate(); }}
           />
           <textarea
-            placeholder="Description (optional)"
+            placeholder={t('project.descPlaceholder')}
             value={newDesc}
             onChange={e => setNewDesc(e.target.value)}
             rows={2}
@@ -452,7 +454,7 @@ const ProjectDetail: React.FC<{
                       <button
                         onClick={() => handleRemoveRoom(room.id)}
                         className="p-1.5 text-stone-400 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"
-                        title="Remove from project"
+                        title={t('project.removeFromProject')}
                       >
                         <Unlink className="w-4 h-4" />
                       </button>
@@ -477,7 +479,7 @@ const ProjectDetail: React.FC<{
               <textarea
                 value={styleDesc}
                 onChange={e => setStyleDesc(e.target.value)}
-                placeholder="e.g., Warm minimalism with natural materials, muted earth tones, and brass accents throughout"
+                placeholder={(t as any)('project.styleDirectionPlaceholder')}
                 rows={3}
                 className="w-full px-3 py-2 bg-stone-50 dark:bg-stone-700 border border-stone-200 dark:border-stone-600 text-stone-800 dark:text-stone-100 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"
               />
@@ -488,7 +490,7 @@ const ProjectDetail: React.FC<{
                 type="text"
                 value={stylePalette}
                 onChange={e => setStylePalette(e.target.value)}
-                placeholder="#8B7355, #D4C5A9, #2C2C2C, #F5F0EB, #B8860B"
+                placeholder={(t as any)('project.palettePlaceholder')}
                 className="w-full px-3 py-2 bg-stone-50 dark:bg-stone-700 border border-stone-200 dark:border-stone-600 text-stone-800 dark:text-stone-100 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
               {stylePalette && (
@@ -505,7 +507,7 @@ const ProjectDetail: React.FC<{
                 type="text"
                 value={styleMaterials}
                 onChange={e => setStyleMaterials(e.target.value)}
-                placeholder="white oak, brushed brass, limewashed plaster, bouclé"
+                placeholder={(t as any)('project.materialsPlaceholder')}
                 className="w-full px-3 py-2 bg-stone-50 dark:bg-stone-700 border border-stone-200 dark:border-stone-600 text-stone-800 dark:text-stone-100 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
             </div>
@@ -525,7 +527,7 @@ const ProjectDetail: React.FC<{
           <textarea
             value={notes}
             onChange={e => setNotes(e.target.value)}
-            placeholder="Project notes, inspiration links, contractor info, timeline..."
+            placeholder={(t as any)('project.notesPlaceholder')}
             rows={10}
             className="w-full px-3 py-2 bg-stone-50 dark:bg-stone-700 border border-stone-200 dark:border-stone-600 text-stone-800 dark:text-stone-100 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"
           />
@@ -552,7 +554,7 @@ const ProjectDetail: React.FC<{
                   value={budgetTotal}
                   onChange={e => setBudgetTotal(e.target.value)}
                   onBlur={handleSaveBudgetTotal}
-                  placeholder="0"
+                  placeholder={(t as any)('project.budgetPlaceholder')}
                   className="flex-1 px-3 py-2 bg-stone-50 dark:bg-stone-700 border border-stone-200 dark:border-stone-600 text-stone-800 dark:text-stone-100 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 />
               </div>
@@ -579,14 +581,14 @@ const ProjectDetail: React.FC<{
                 type="text"
                 value={newItemDesc}
                 onChange={e => setNewItemDesc(e.target.value)}
-                placeholder="Description"
+                placeholder={(t as any)('project.expenseDescPlaceholder')}
                 className="flex-1 min-w-[150px] px-3 py-2 bg-white dark:bg-stone-700 border border-stone-200 dark:border-stone-600 text-stone-800 dark:text-stone-100 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
               <input
                 type="number"
                 value={newItemAmount}
                 onChange={e => setNewItemAmount(e.target.value)}
-                placeholder="$0"
+                placeholder={(t as any)('project.expenseAmountPlaceholder')}
                 className="w-24 px-3 py-2 bg-white dark:bg-stone-700 border border-stone-200 dark:border-stone-600 text-stone-800 dark:text-stone-100 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
               <select

@@ -372,10 +372,10 @@ const RoomCard: React.FC<RoomCardProps> = ({
           </>
         ) : (
           <>
-            <button onClick={onStartEdit} className="p-1.5 bg-white/90 dark:bg-stone-600/90 shadow-sm hover:bg-white" title="Rename">
+            <button onClick={onStartEdit} className="p-1.5 bg-white/90 dark:bg-stone-600/90 shadow-sm hover:bg-white" title={t('common.rename')}>
               <Edit2 className="w-3.5 h-3.5 text-stone-600 dark:text-stone-300" />
             </button>
-            <button onClick={onConfirmDelete} className="p-1.5 bg-white/90 dark:bg-stone-600/90 shadow-sm hover:bg-red-50" title="Delete">
+            <button onClick={onConfirmDelete} className="p-1.5 bg-white/90 dark:bg-stone-600/90 shadow-sm hover:bg-red-50" title={t('common.delete')}>
               <Trash2 className="w-3.5 h-3.5 text-stone-600 dark:text-stone-300" />
             </button>
           </>

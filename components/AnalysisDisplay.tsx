@@ -234,7 +234,7 @@ export const AnalysisDisplay: React.FC<AnalysisDisplayProps> = ({
                     <button 
                       onClick={onRetryVisualization}
                       className="px-4 py-2 bg-zinc-700 hover:bg-zinc-600 text-white text-sm font-medium transition-colors flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-zinc-900"
-                      aria-label="Try generating visualization again"
+                      aria-label={t('analysis.retryViz')}
                     >
                       <RefreshCw className="w-4 h-4" aria-hidden="true" />
                       Try Again
@@ -255,7 +255,7 @@ export const AnalysisDisplay: React.FC<AnalysisDisplayProps> = ({
                   <button 
                     onClick={onVisualize}
                     className="group relative px-6 py-3 bg-purple-600 hover:bg-purple-500 text-white font-semibold transition-all shadow-[0_0_20px_-5px_rgba(147,51,234,0.5)] hover:shadow-[0_0_25px_-5px_rgba(147,51,234,0.7)] flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-zinc-900"
-                    aria-label="Generate AI visualization of organized room"
+                    aria-label={t('analysis.generateViz')}
                   >
                     <Sparkles 
                       className="w-4 h-4 group-hover:animate-pulse" 
@@ -285,7 +285,7 @@ export const AnalysisDisplay: React.FC<AnalysisDisplayProps> = ({
           
           <ul 
             className="grid grid-cols-1 md:grid-cols-2 gap-4 list-none p-0 m-0"
-            aria-label="Recommended organization products"
+            aria-label={t('analysis.recommendedProducts')}
           >
             {products.map((product, idx) => (
               <li key={idx}>

@@ -5,6 +5,7 @@
 import { useState } from 'react';
 import { useAuth } from './AuthProvider';
 import { X, Mail, Chrome, LogIn } from 'lucide-react';
+import { useI18n } from '../i18n/I18nContext';
 
 interface AuthGateProps {
   onClose: () => void;
@@ -12,6 +13,7 @@ interface AuthGateProps {
 }
 
 export function AuthGate({ onClose, message }: AuthGateProps) {
+  const { t } = useI18n();
   const { signInGoogle, signInApple, signInMagic, signInPassword } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -44,7 +46,7 @@ export function AuthGate({ onClose, message }: AuthGateProps) {
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-stone-400 hover:text-stone-200 transition-colors"
-          aria-label="Close"
+          aria-label={t('common.close')}
         >
           <X className="w-5 h-5" />
         </button>
@@ -66,7 +68,7 @@ export function AuthGate({ onClose, message }: AuthGateProps) {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="your@email.com"
+                placeholder={(t as any)('auth.emailPlaceholder')}
                 className="w-full px-4 py-3 bg-stone-800 border border-stone-600 text-white placeholder-stone-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
               />
               <input
@@ -79,7 +81,7 @@ export function AuthGate({ onClose, message }: AuthGateProps) {
                   catch (err: any) { setError(err.message || 'Login failed'); }
                   finally { setLoading(false); }
                 })()}
-                placeholder="Password"
+                placeholder={t('auth.password')}
                 className="w-full px-4 py-3 bg-stone-800 border border-stone-600 text-white placeholder-stone-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
               />
               <button
@@ -149,7 +151,7 @@ export function AuthGate({ onClose, message }: AuthGateProps) {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleMagicLink()}
-                placeholder="your@email.com"
+                placeholder={(t as any)('auth.emailPlaceholder')}
                 className="w-full px-4 py-3 bg-stone-800 border border-stone-600 text-white placeholder-stone-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
               />
               <button

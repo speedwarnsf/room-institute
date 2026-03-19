@@ -1101,7 +1101,7 @@ function AppContent() {
           <button 
             onClick={resetApp}
             className="flex items-center gap-2 hover:opacity-80 transition-opacity focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 dark:focus:ring-offset-stone-800 p-1 flex-shrink-0"
-            aria-label="Room - Return to home"
+            aria-label={(t as any)('nav.returnHome')}
           >
             <img src="/room-logo-dark.png" alt="Room" style={{ height: 28 }} className="dark:hidden" /><img src="/room-logo.png" alt="Room" style={{ height: 28 }} className="hidden dark:block" />
           </button>
@@ -1127,7 +1127,7 @@ function AppContent() {
               <button 
                 onClick={resetApp}
                 className="text-sm text-stone-600 dark:text-stone-400 hover:text-emerald-600 dark:hover:text-emerald-400 flex items-center gap-1 font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 dark:focus:ring-offset-stone-800 px-2 sm:px-3 py-2 whitespace-nowrap"
-                aria-label="Start over with a new image"
+                aria-label={(t as any)('nav.startOver')}
               >
                 <ArrowLeft className="w-4 h-4" aria-hidden="true" />
                 <span className="hidden sm:inline">{(t as any)('app.button.new')}</span>
@@ -1139,7 +1139,7 @@ function AppContent() {
               <button
                 onClick={() => setAppState(AppState.DISCOVER)}
                 className="p-2 text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
-                title="Discover inspiration"
+                aria-label={(t as any)('nav.discover')}
               >
                 <Palette className="w-4 h-4" />
                 <span className="hidden sm:inline">{(t as any)('app.button.discover')}</span>
@@ -1151,7 +1151,7 @@ function AppContent() {
               <button
                 onClick={() => setAppState(AppState.ROOMS)}
                 className="p-2 text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
-                title="My Rooms"
+                aria-label={(t as any)('nav.myRooms')}
               >
                 <Home className="w-4 h-4" />
                 <span className="hidden sm:inline">{(t as any)('app.button.rooms')}</span>
@@ -1169,7 +1169,7 @@ function AppContent() {
                   setAppState(AppState.PROJECTS);
                 }}
                 className="p-2 text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
-                title="Projects"
+                aria-label={(t as any)('nav.projects')}
               >
                 <FolderOpen className="w-4 h-4" />
                 <span className="hidden sm:inline">{(t as any)('app.button.projects')}</span>
@@ -1185,7 +1185,7 @@ function AppContent() {
                     ? 'bg-stone-100 dark:bg-stone-700 text-stone-600 dark:text-stone-300 hover:bg-stone-200'
                     : 'bg-emerald-100 text-emerald-700 hover:bg-emerald-200'
                 }`}
-                title={currentRoomId ? 'Update Room' : 'Save Room'}
+                aria-label={currentRoomId ? (t as any)('nav.updateRoom') : (t as any)('nav.saveRoom')}
               >
                 <Home className="w-4 h-4" />
                 <span className="hidden sm:inline">{currentRoomId ? (t as any)('app.button.saved') : (t as any)('app.button.save')}</span>
@@ -1474,7 +1474,7 @@ function AppContent() {
                   <button 
                     onClick={handleRetry}
                     className="bg-emerald-600 text-white px-6 py-3 hover:bg-emerald-700 transition-colors flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 dark:focus:ring-offset-stone-900"
-                    aria-label="Try analyzing the image again"
+                    aria-label={(t as any)('app.retryAnalysis')}
                   >
                     <RefreshCw className="w-4 h-4" aria-hidden="true" />
                     {(t as any)('app.button.tryAgain')}
@@ -1483,7 +1483,7 @@ function AppContent() {
                 <button
                   onClick={resetApp}
                   className="bg-stone-100 dark:bg-stone-700 text-stone-700 dark:text-stone-200 px-6 py-3 hover:bg-stone-200 dark:hover:bg-stone-600 transition-colors focus:outline-none focus:ring-2 focus:ring-stone-500 focus:ring-offset-2 dark:focus:ring-offset-stone-900"
-                  aria-label="Go back to home and start fresh"
+                  aria-label={(t as any)('app.goHome')}
                 >
                   {(t as any)('app.button.startFresh')}
                 </button>

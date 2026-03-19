@@ -138,7 +138,7 @@ export class ErrorBoundary extends Component<Props, State> {
             {/* Error Message */}
             <div className="space-y-2">
               <h1 className="text-2xl font-bold text-stone-900 dark:text-stone-100">
-                {isQuotaExceeded ? 'Storage Full' : 'Something Went Wrong'}
+                {isQuotaExceeded ? getTranslation('error.storageFullTitle') : getTranslation('error.somethingWentWrong')}
               </h1>
               <p className="text-stone-600 dark:text-stone-400">
                 {isQuotaExceeded ? (
@@ -210,11 +210,11 @@ export class ErrorBoundary extends Component<Props, State> {
             {/* Helpful Tips */}
             {!isQuotaExceeded && (
               <div className="text-sm text-stone-500 dark:text-stone-400">
-                <p>If the problem persists:</p>
+                <p>{getTranslation('error.persistsIntro')}</p>
                 <ul className="mt-1 space-y-1">
-                  <li>• Try refreshing your browser</li>
-                  <li>• Check your internet connection</li>
-                  <li>• Clear your browser cache</li>
+                  <li>• {getTranslation('error.tipRefresh')}</li>
+                  <li>• {getTranslation('error.tipInternet')}</li>
+                  <li>• {getTranslation('error.tipCache')}</li>
                 </ul>
               </div>
             )}

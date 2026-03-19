@@ -1,4 +1,3 @@
-  const { t } = useI18n();
 import { useState, useRef, useMemo, useCallback, useEffect } from 'react';
 import { motion, useScroll, useTransform, useInView, AnimatePresence } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
@@ -668,7 +667,7 @@ export function DesignStudio({ entry, onBack, onIterate, sourceImage }: DesignSt
         )}
 
         {/* Fixed Navigation */}
-        <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-8 py-3 sm:py-4" role="navigation" aria-label="Design studio controls">
+        <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-8 py-3 sm:py-4" role="navigation" aria-label={(t as any)('studio.controls')}>
           <motion.button
             onClick={onBack}
             whileHover={{ scale: 1.05 }}

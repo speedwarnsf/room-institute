@@ -45,7 +45,7 @@ export const SaveToRoomPicker: React.FC<SaveToRoomPickerProps> = ({ entry, sourc
   }, [newName, sourceImage, entry, onSaved]);
 
   return (
-    <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={onClose} role="dialog" aria-modal="true" aria-label="Save design to room" onKeyDown={(e) => { if (e.key === 'Escape') onClose(); }}>
+    <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={onClose} role="dialog" aria-modal="true" aria-label={t('rooms.saveDesignToRoom')} onKeyDown={(e) => { if (e.key === 'Escape') onClose(); }}>
       <div
         className="bg-white dark:bg-stone-800 shadow-2xl w-full max-w-sm overflow-hidden"
         onClick={e => e.stopPropagation()}
