@@ -57,7 +57,7 @@ import { generateShoppingList, shoppingListFromProducts } from './services/shopp
 type Chat = any;
 import { ModeSelect, type DesignPreferences } from './components/ModeSelect';
 import { DESIGN_STYLES, ROOM_FUNCTIONS } from './components/PreferencesPanel';
-import { LayoutGrid, ArrowLeft, AlertCircle, RefreshCw, WifiOff, Clock, Home, Camera, Palette, Wand2, FolderOpen, TrendingUp } from 'lucide-react';
+import { LayoutGrid, ArrowLeft, AlertCircle, RefreshCw, WifiOff, Clock, Home, Camera, Palette, Wand2, FolderOpen, TrendingUp, Menu, X } from 'lucide-react';
 
 /**
  * Animated counter for social proof — shows total designs generated
@@ -145,6 +145,9 @@ function AppContent() {
   const [showUpgradePrompt, setShowUpgradePrompt] = useState<string | null>(null);
   const [showPricing, setShowPricing] = useState(false);
   const [showAuthGate, setShowAuthGate] = useState(false);
+
+  // Mobile menu state
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Network and accessibility hooks
   const networkStatus = useNetworkStatus();
@@ -1094,44 +1097,40 @@ function AppContent() {
   return (
     <div className="min-h-screen bg-stone-50 dark:bg-stone-900 flex flex-col font-sans transition-colors duration-300">
       {/* Header */}
-      <header 
+      <header
         className={`bg-white dark:bg-stone-800 border-b border-stone-200 dark:border-stone-700 sticky top-0 z-50 transition-colors duration-300 ${appState === AppState.DESIGN_STUDIO ? 'hidden' : ''}`}
         role="banner"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <button 
+          {/* Logo */}
+          <button
             onClick={resetApp}
             className="flex items-center gap-2 hover:opacity-80 transition-opacity focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 dark:focus:ring-offset-stone-800 p-1 flex-shrink-0"
             aria-label={t('nav.returnHome')}
           >
             <img src="/room-logo-dark.png" alt="Room" style={{ height: 28 }} className="dark:hidden" /><img src="/room-logo.png" alt="Room" style={{ height: 28 }} className="hidden dark:block" />
           </button>
-          
-          <div className="flex items-center gap-1.5 sm:gap-3 flex-shrink min-w-0">
+
+          {/* Desktop Navigation (sm and above) */}
+          <div className="hidden sm:flex items-center gap-1.5 sm:gap-3 flex-shrink min-w-0">
             {/* Network Status - desktop only */}
-            <span className="hidden sm:inline-flex">
-              <NetworkStatus showIndicator={true} />
-            </span>
+            <NetworkStatus showIndicator={true} />
 
-            {/* Language Switcher — hide on mobile */}
-            <span className="hidden sm:inline-flex">
-              <LanguageSwitcher />
-            </span>
+            {/* Language Switcher */}
+            <LanguageSwitcher />
 
-            {/* Theme Toggle — hide on mobile */}
-            <span className="hidden sm:inline-flex">
-              <ThemeToggle />
-            </span>
-            
+            {/* Theme Toggle */}
+            <ThemeToggle />
+
             {/* Back / Start Over — shown in sub-flows */}
             {(appState === AppState.MODE_SELECT || appState === AppState.STRUCTURE_ASSESSMENT || appState === AppState.DESIGN_OPTIONS || appState === AppState.LOOKBOOK || appState === AppState.RESULTS) && (
-              <button 
+              <button
                 onClick={resetApp}
                 className="text-sm text-stone-600 dark:text-stone-400 hover:text-emerald-600 dark:hover:text-emerald-400 flex items-center gap-1 font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 dark:focus:ring-offset-stone-800 px-2 sm:px-3 py-2 whitespace-nowrap"
                 aria-label={t('nav.startOver')}
               >
                 <ArrowLeft className="w-4 h-4" aria-hidden="true" />
-                <span className="hidden sm:inline">{(t as any)('app.button.new')}</span>
+                <span>{(t as any)('app.button.new')}</span>
               </button>
             )}
 
@@ -1140,10 +1139,10 @@ function AppContent() {
               <button
                 onClick={() => setAppState(AppState.DISCOVER)}
                 className="p-2 text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
-                title="Discover inspiration"
+                title={t('nav.discover')}
               >
                 <Palette className="w-4 h-4" />
-                <span className="hidden sm:inline">{(t as any)('app.button.discover')}</span>
+                <span className="hidden lg:inline ml-1">{(t as any)('app.button.discover')}</span>
               </button>
             )}
 
@@ -1152,10 +1151,10 @@ function AppContent() {
               <button
                 onClick={() => setAppState(AppState.ROOMS)}
                 className="p-2 text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
-                title="My Rooms"
+                title={t('nav.myRooms')}
               >
                 <Home className="w-4 h-4" />
-                <span className="hidden sm:inline">{(t as any)('app.button.rooms')}</span>
+                <span className="hidden lg:inline ml-1">{(t as any)('app.button.rooms')}</span>
               </button>
             )}
 
@@ -1170,10 +1169,10 @@ function AppContent() {
                   setAppState(AppState.PROJECTS);
                 }}
                 className="p-2 text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
-                title="Projects"
+                title={t('nav.projects')}
               >
                 <FolderOpen className="w-4 h-4" />
-                <span className="hidden sm:inline">{(t as any)('app.button.projects')}</span>
+                <span className="hidden lg:inline ml-1">{(t as any)('app.button.projects')}</span>
               </button>
             )}
 
@@ -1189,27 +1188,25 @@ function AppContent() {
                 title={currentRoomId ? 'Update Room' : 'Save Room'}
               >
                 <Home className="w-4 h-4" />
-                <span className="hidden sm:inline">{currentRoomId ? (t as any)('app.button.saved') : (t as any)('app.button.save')}</span>
+                <span className="hidden lg:inline">{currentRoomId ? (t as any)('app.button.saved') : (t as any)('app.button.save')}</span>
               </button>
             )}
 
-            {/* Session Manager + Share — results only, desktop-prioritized */}
+            {/* Session Manager + Share — results only */}
             {appState === AppState.RESULTS && (
               <>
-                <span className="hidden sm:inline-flex">
-                  <Suspense fallback={null}>
-                    <SessionManager
-                      currentSessionId={currentSessionId}
-                      onLoadSession={handleLoadSession}
-                      onSaveSession={handleSaveSession}
-                      hasUnsavedChanges={!!analysis}
-                    />
-                  </Suspense>
-                </span>
+                <Suspense fallback={null}>
+                  <SessionManager
+                    currentSessionId={currentSessionId}
+                    onLoadSession={handleLoadSession}
+                    onSaveSession={handleSaveSession}
+                    hasUnsavedChanges={!!analysis}
+                  />
+                </Suspense>
                 {analysis && (
                   <Suspense fallback={null}>
-                    <ShareButton 
-                      analysis={analysis.rawText} 
+                    <ShareButton
+                      analysis={analysis.rawText}
                       roomType="room"
                     />
                   </Suspense>
@@ -1219,8 +1216,141 @@ function AppContent() {
 
             <UserMenu onOpenPricing={() => setShowPricing(true)} onOpenAuth={() => setShowAuthGate(true)} />
           </div>
+
+          {/* Mobile Hamburger Menu Button (below sm) */}
+          <button
+            onClick={() => setMobileMenuOpen(true)}
+            className="sm:hidden p-2 text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+            aria-label="Open menu"
+          >
+            <Menu className="w-6 h-6" />
+          </button>
         </div>
       </header>
+
+      {/* Mobile Menu Panel */}
+      {mobileMenuOpen && (
+        <>
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 bg-stone-900/50 z-[60] sm:hidden"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-hidden="true"
+          />
+
+          {/* Panel */}
+          <div className="fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-white dark:bg-stone-800 z-[70] sm:hidden shadow-2xl animate-in slide-in-from-right duration-300">
+            <div className="flex flex-col h-full">
+              {/* Header */}
+              <div className="flex items-center justify-between p-4 border-b border-stone-200 dark:border-stone-700">
+                <span className="text-lg font-semibold text-stone-900 dark:text-stone-100">Menu</span>
+                <button
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="p-2 text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  aria-label={t('nav.close')}
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+
+              {/* Menu Items */}
+              <nav className="flex-1 overflow-y-auto p-4">
+                <div className="space-y-1">
+                  {/* Back / Start Over */}
+                  {(appState === AppState.MODE_SELECT || appState === AppState.STRUCTURE_ASSESSMENT || appState === AppState.DESIGN_OPTIONS || appState === AppState.LOOKBOOK || appState === AppState.RESULTS) && (
+                    <button
+                      onClick={() => { resetApp(); setMobileMenuOpen(false); }}
+                      className="w-full flex items-center gap-3 px-4 py-3 text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-700 transition-colors"
+                    >
+                      <ArrowLeft className="w-5 h-5" />
+                      <span>{(t as any)('app.button.new')}</span>
+                    </button>
+                  )}
+
+                  {/* Discover */}
+                  {(appState === AppState.HOME || appState === AppState.RESULTS || appState === AppState.MODE_SELECT || appState === AppState.LOOKBOOK) && (
+                    <button
+                      onClick={() => { setAppState(AppState.DISCOVER); setMobileMenuOpen(false); }}
+                      className="w-full flex items-center gap-3 px-4 py-3 text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-700 transition-colors"
+                    >
+                      <Palette className="w-5 h-5" />
+                      <span>{(t as any)('app.button.discover')}</span>
+                    </button>
+                  )}
+
+                  {/* My Rooms */}
+                  {(appState === AppState.HOME || appState === AppState.RESULTS || appState === AppState.MODE_SELECT || appState === AppState.LOOKBOOK) && (
+                    <button
+                      onClick={() => { setAppState(AppState.ROOMS); setMobileMenuOpen(false); }}
+                      className="w-full flex items-center gap-3 px-4 py-3 text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-700 transition-colors"
+                    >
+                      <Home className="w-5 h-5" />
+                      <span>{(t as any)('app.button.rooms')}</span>
+                    </button>
+                  )}
+
+                  {/* Projects */}
+                  {(appState === AppState.HOME || appState === AppState.ROOMS || appState === AppState.RESULTS) && (
+                    <button
+                      onClick={() => {
+                        if (!canCreateProject(userTier)) {
+                          setShowUpgradePrompt('project');
+                          setMobileMenuOpen(false);
+                          return;
+                        }
+                        setAppState(AppState.PROJECTS);
+                        setMobileMenuOpen(false);
+                      }}
+                      className="w-full flex items-center gap-3 px-4 py-3 text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-700 transition-colors"
+                    >
+                      <FolderOpen className="w-5 h-5" />
+                      <span>{(t as any)('app.button.projects')}</span>
+                    </button>
+                  )}
+
+                  {/* Save Room */}
+                  {appState === AppState.RESULTS && designAnalysis && selectedDesignIndex !== null && uploadedImage && (
+                    <button
+                      onClick={() => { handleSaveRoom(); setMobileMenuOpen(false); }}
+                      className={`w-full flex items-center gap-3 px-4 py-3 transition-colors ${
+                        currentRoomId
+                          ? 'text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-700'
+                          : 'text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/20'
+                      }`}
+                    >
+                      <Home className="w-5 h-5" />
+                      <span>{currentRoomId ? (t as any)('app.button.saved') : (t as any)('app.button.save')}</span>
+                    </button>
+                  )}
+
+                  {/* Divider */}
+                  <div className="my-4 border-t border-stone-200 dark:border-stone-700" />
+
+                  {/* Language Switcher */}
+                  <div className="px-4 py-2">
+                    <LanguageSwitcher />
+                  </div>
+
+                  {/* Theme Toggle */}
+                  <div className="px-4 py-2">
+                    <ThemeToggle />
+                  </div>
+
+                  {/* Network Status */}
+                  <div className="px-4 py-2">
+                    <NetworkStatus showIndicator={true} />
+                  </div>
+
+                  {/* User Pro Badge / Menu at bottom */}
+                  <div className="mt-4 px-4">
+                    <UserMenu onOpenPricing={() => { setShowPricing(true); setMobileMenuOpen(false); }} onOpenAuth={() => { setShowAuthGate(true); setMobileMenuOpen(false); }} />
+                  </div>
+                </div>
+              </nav>
+            </div>
+          </div>
+        </>
+      )}
 
       {/* Rate Limit Toast */}
       {rateLimitMessage && (

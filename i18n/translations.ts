@@ -38,7 +38,10 @@ const translations = {
     'nav.home': 'Home',
     'nav.back': 'Back',
     'nav.close': 'Close',
-    
+    'nav.discover': 'Discover inspiration',
+    'nav.myRooms': 'My Rooms',
+    'nav.projects': 'Projects',
+
     // Listing experience
     'listing.swipe': 'Swipe to explore design possibilities',
     'listing.swipeUp': 'Swipe up for the full spread',
@@ -607,7 +610,10 @@ const translations = {
     'nav.home': 'Accueil',
     'nav.back': 'Retour',
     'nav.close': 'Fermer',
-    
+    'nav.discover': 'Découvrir l\'inspiration',
+    'nav.myRooms': 'Mes Pièces',
+    'nav.projects': 'Projets',
+
     'listing.swipe': 'Glissez pour explorer les possibilités de design',
     'listing.swipeUp': 'Glissez vers le haut pour le dossier complet',
     'listing.asListed': 'Tel quel',
@@ -1148,7 +1154,10 @@ const translations = {
     'nav.home': 'Startseite',
     'nav.back': 'Zurück',
     'nav.close': 'Schließen',
-    
+    'nav.discover': 'Inspiration entdecken',
+    'nav.myRooms': 'Meine Räume',
+    'nav.projects': 'Projekte',
+
     'listing.swipe': 'Wischen Sie, um Designmöglichkeiten zu entdecken',
     'listing.swipeUp': 'Nach oben wischen für das vollständige Dossier',
     'listing.beds': 'Zi',
@@ -1648,7 +1657,10 @@ const translations = {
     'nav.home': 'Inicio',
     'nav.back': 'Volver',
     'nav.close': 'Cerrar',
-    
+    'nav.discover': 'Descubrir inspiración',
+    'nav.myRooms': 'Mis Habitaciones',
+    'nav.projects': 'Proyectos',
+
     'listing.swipe': 'Desliza para explorar posibilidades de diseño',
     'listing.swipeUp': 'Desliza hacia arriba para ver el artículo completo',
     'listing.beds': 'hab',
@@ -2148,7 +2160,10 @@ const translations = {
     'nav.home': '首页',
     'nav.back': '返回',
     'nav.close': '关闭',
-    
+    'nav.discover': '发现灵感',
+    'nav.myRooms': '我的房间',
+    'nav.projects': '项目',
+
     'listing.swipe': '滑动探索设计方案',
     'listing.swipeUp': '向上滑动查看完整内容',
     'listing.beds': '卧',
@@ -2648,7 +2663,10 @@ const translations = {
     'nav.home': 'Início',
     'nav.back': 'Voltar',
     'nav.close': 'Fechar',
-    
+    'nav.discover': 'Descobrir inspiração',
+    'nav.myRooms': 'Meus Cômodos',
+    'nav.projects': 'Projetos',
+
     'listing.swipe': 'Deslize para explorar possibilidades de design',
     'listing.swipeUp': 'Deslize para cima para ver o artigo completo',
     'listing.beds': 'quartos',
