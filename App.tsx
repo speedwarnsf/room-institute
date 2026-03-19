@@ -1240,10 +1240,10 @@ function AppContent() {
         {appState === AppState.HOME && (
           <div className="flex flex-col items-center justify-center min-h-[60vh] animate-in fade-in slide-in-from-bottom-4 duration-700">
             <h1 className="text-4xl md:text-5xl font-bold text-stone-900 dark:text-stone-100 text-center mb-6 font-serif">
-              See what your room could be.
+              Reimagine your room.
             </h1>
             <p className="text-lg text-stone-600 dark:text-stone-400 text-center max-w-xl mb-4 leading-relaxed" style={{ textWrap: 'balance' }}>
-              Upload a photo. Get five bold design directions grounded in real design theory — not style labels, not guesswork. Your room, reimagined by an AI that reads the space before it proposes a single piece of furniture.
+              Upload or shoot a room photo. Our AI analysis interprets the space and returns 3 bold design directions grounded in academic design theory — not just labels and guesswork. Then go deeper into the designs that inspire you.
             </p>
 
             {/* Free tier nudge */}
