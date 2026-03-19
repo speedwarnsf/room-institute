@@ -66,7 +66,7 @@ function DesignCounter() {
   const { t } = useI18n();
   const [count, setCount] = useState(0);
   // Seed: 14,847 designs + a slow trickle based on time
-  const target = 14847 + Math.floor((Date.now() - 1739500000000) / 180000);
+  const target = 12645;
 
   useEffect(() => {
     const duration = 1800;
@@ -1379,7 +1379,7 @@ function AppContent() {
               <span dangerouslySetInnerHTML={{ __html: (t as any)('app.hero.title') }} />
             </h1>
             <p className="text-sm sm:text-base text-stone-600 dark:text-stone-400 text-center max-w-xl mb-4 leading-relaxed" style={{ textWrap: 'balance' }}>
-              {(t as any)('app.hero.description')}
+              <span dangerouslySetInnerHTML={{ __html: (t as any)('app.hero.description') }} />
             </p>
 
             {/* Free tier nudge */}
