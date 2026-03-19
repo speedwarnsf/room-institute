@@ -1275,11 +1275,10 @@ function AppContent() {
             )}
             <TrendingStyles onOpenDiscover={() => setAppState(AppState.DISCOVER)} />
 
-            <div className="mt-16 grid grid-cols-3 gap-6 sm:gap-10 text-center max-w-3xl">
+            <div className="mt-16 grid grid-cols-2 gap-10 sm:gap-16 text-center max-w-md">
               {[
                 { icon: Camera, title: 'Snap', desc: 'Photo of your room', color: 'text-emerald-500' },
-                { icon: Palette, title: 'Choose', desc: 'Clean or redesign', color: 'text-violet-500' },
-                { icon: Wand2, title: 'Transform', desc: 'Your personalized plan', color: 'text-amber-500' },
+                { icon: Wand2, title: 'Transform', desc: '5 design directions', color: 'text-amber-500' },
               ].map(({ icon: Icon, title, desc, color }) => (
                 <div key={title} className="flex flex-col items-center gap-3">
                   <div className="w-12 h-12 bg-stone-100 dark:bg-stone-800 flex items-center justify-center">
