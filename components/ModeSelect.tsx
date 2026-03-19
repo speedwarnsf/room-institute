@@ -1,6 +1,7 @@
 import { useState, lazy, Suspense } from 'react';
 import { Palette, Crown } from 'lucide-react';
 import { useAuth } from './AuthProvider';
+import { useI18n } from '../i18n/I18nContext';
 import { PreferencesPanel, type DesignStyleId, type RoomFunctionId } from './PreferencesPanel';
 import { ROOM_PRESETS, type RoomPreset } from '../services/roomPresets';
 import type { FlowMode } from '../types';
@@ -19,6 +20,7 @@ interface ModeSelectProps {
 }
 
 export function ModeSelect({ onSelectMode, uploadedImage }: ModeSelectProps) {
+  const { t } = useI18n();
   const { userTier } = useAuth();
   const remaining = userTier.generationsLimit - userTier.generationsUsed;
   const [selectedStyle, setSelectedStyle] = useState<DesignStyleId>(null);
@@ -51,10 +53,10 @@ export function ModeSelect({ onSelectMode, uploadedImage }: ModeSelectProps) {
       )}
 
       <h2 className="text-3xl md:text-4xl font-bold text-stone-900 dark:text-stone-100 text-center mb-3 font-serif" style={{ textWrap: 'balance' }}>
-        Set your preferences
+        {(t as any)('mode.setPreferences')}
       </h2>
       <p className="text-stone-500 dark:text-stone-400 text-center mb-4 max-w-md" style={{ textWrap: 'balance' }}>
-        Choose a style and room type, or let us surprise you
+        {(t as any)('mode.chooseStyle')}
       </p>
 
       {/* Usage indicator */}
@@ -109,10 +111,10 @@ export function ModeSelect({ onSelectMode, uploadedImage }: ModeSelectProps) {
             </div>
           </div>
           <h3 className="text-2xl font-bold text-stone-900 dark:text-stone-100 font-serif mb-2">
-            Design My Space
+            {(t as any)('mode.designMySpace')}
           </h3>
           <p className="text-sm text-stone-500 dark:text-stone-400 leading-relaxed">
-            3 bold design directions grounded in design theory
+            {(t as any)('mode.designDescription')}
           </p>
         </button>
       </div>

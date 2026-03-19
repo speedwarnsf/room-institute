@@ -1,6 +1,8 @@
+  const { t } = useI18n();
 import { useState, useCallback, useMemo } from 'react';
 import { Lock, Unlock, ChevronRight, Pin } from 'lucide-react';
 import type { StructureElement, StructureChoices, KeepMode } from '../types';
+import { useI18n } from '../i18n/I18nContext';
 
 interface StructureAssessmentProps {
   /** Detected structural elements */

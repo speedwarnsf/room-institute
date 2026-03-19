@@ -3,6 +3,7 @@
  */
 
 import { X, Sparkles, Zap, Layers, Palette, Home, Download } from 'lucide-react';
+import { useI18n } from '../i18n/I18nContext';
 
 interface UpgradePromptProps {
   message: string;
@@ -20,6 +21,7 @@ const PRO_PERKS = [
 ];
 
 export function UpgradePrompt({ message, onUpgrade, onDismiss, onSignIn }: UpgradePromptProps) {
+  const { t } = useI18n();
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
       <div className="relative w-full max-w-sm bg-stone-900 border border-stone-700 p-8 shadow-2xl text-center">

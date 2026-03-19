@@ -2,6 +2,7 @@
  * My Rooms Gallery — portfolio-style grid of saved design projects
  */
 
+  const { t } = useI18n();
 import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import {
   X, Trash2, Check, Edit2, Clock, Palette, Star,
@@ -13,6 +14,7 @@ import {
 } from '../services/houseRoomStorage';
 import { Room, LookbookEntry } from '../types';
 import { LazyImage } from './LazyImage';
+import { useI18n } from '../i18n/I18nContext';
 
 // ============================================================================
 // TYPES

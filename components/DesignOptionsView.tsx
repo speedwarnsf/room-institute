@@ -1,3 +1,4 @@
+  const { t } = useI18n();
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { 
@@ -6,6 +7,7 @@ import {
   Compass, Ruler
 } from 'lucide-react';
 import { DesignOption, DesignFramework } from '../types';
+import { useI18n } from '../i18n/I18nContext';
 
 interface DesignOptionsViewProps {
   /** The 5-framework room reading markdown */

@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback, KeyboardEvent } from 'react';
 import { Send, Bot, User, Loader2, AlertCircle } from 'lucide-react';
+import { useI18n } from '../i18n/I18nContext';
 import { ChatMessage } from '../types';
 import ReactMarkdown from 'react-markdown';
 
@@ -20,6 +21,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
   onSendMessage, 
   isTyping 
 }) => {
+  const { t } = useI18n();
   const [input, setInput] = useState('');
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -85,7 +87,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
         {/* Empty State */}
         {messages.length === 0 && !isTyping && (
           <div className="text-center text-stone-400 dark:text-stone-500 mt-10" aria-hidden="true">
-            <p>Ask me anything about organizing your room!</p>
+            <p>{(t as any)('chat.askAnything')}</p>
             <div className="mt-4 space-y-2 text-sm">
               <p className="italic">"Where should I put the shoes?"</p>
               <p className="italic">"Suggest a color for the bins."</p>

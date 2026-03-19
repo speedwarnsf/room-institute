@@ -1,6 +1,8 @@
+  const { t } = useI18n();
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { Plus, X, Image as ImageIcon, FolderOpen, Trash2 } from 'lucide-react';
 import { MoodBoard as MoodBoardType, MoodBoardImage, saveMoodBoard, loadMoodBoards, deleteMoodBoard, createThumbnail } from '../services/moodBoardStorage';
+import { useI18n } from '../i18n/I18nContext';
 
 interface MoodBoardProps {
   onSelectImages?: (images: MoodBoardImage[]) => void;

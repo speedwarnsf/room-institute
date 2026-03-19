@@ -1,3 +1,4 @@
+  const { t } = useI18n();
 import { useState, useRef, useMemo, useCallback, useEffect } from 'react';
 import { motion, useScroll, useTransform, useInView, AnimatePresence } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
@@ -13,6 +14,7 @@ import { inferTypeMood, getTypePalette, loadStudioFonts } from '../services/stud
 import { generateShoppingList } from '../services/shoppingListGenerator';
 import type { LookbookEntry, TypeMood, ShoppingListData } from '../types';
 import type { TypePalette } from '../services/studioTypography';
+import { useI18n } from '../i18n/I18nContext';
 
 interface DesignStudioProps {
   entry: LookbookEntry;

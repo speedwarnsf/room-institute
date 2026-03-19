@@ -1,3 +1,4 @@
+  const { t } = useI18n();
 import { useState, useCallback, useMemo, useRef, memo } from 'react';
 import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
 import { Loader2, ChevronDown, ChevronUp, Home, Palette, Sun, Layers, Lightbulb, Crown } from 'lucide-react';
@@ -13,6 +14,7 @@ import { GoldBurstEffect, NeverAgainEffect } from './RatingEffects';
 import { TasteRadarChart } from './TasteRadarChart';
 import { calculateTasteProfile, saveTasteProfile } from '../services/tasteProfile';
 import type { LookbookEntry, DesignRating } from '../types';
+import { useI18n } from '../i18n/I18nContext';
 
 interface LookbookProps {
   entries: LookbookEntry[];

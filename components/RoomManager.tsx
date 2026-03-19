@@ -3,6 +3,7 @@
  * Dark theme, consistent with the rest of the Room UI.
  */
 
+  const { t } = useI18n();
 import React, { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Home, Plus, Trash2, ArrowLeft, Star, Check, X, Palette, Clock, Calendar } from 'lucide-react';
@@ -13,6 +14,7 @@ import {
   updateRoom,
 } from '../services/houseRoomStorage';
 import { loadAllVisualizationImages } from '../services/lookbookStorage';
+import { useI18n } from '../i18n/I18nContext';
 
 interface RoomManagerProps {
   onAddRoom: () => void;

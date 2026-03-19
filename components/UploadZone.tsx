@@ -1,5 +1,6 @@
 import React, { useState, useRef, useCallback, DragEvent, ChangeEvent } from 'react';
 import { Upload, X, Loader2, Aperture, Camera } from 'lucide-react';
+import { useI18n } from '../i18n/I18nContext';
 
 interface UploadZoneProps {
   /** Callback when an image file is selected */
@@ -16,6 +17,7 @@ const ACCEPTED_EXTENSIONS = '.jpg,.jpeg,.png,.webp,.heic,.heif';
  * Drag-and-drop image upload component with camera lens aesthetic
  */
 export const UploadZone: React.FC<UploadZoneProps> = ({ onImageSelected, isAnalyzing }) => {
+  const { t } = useI18n();
   const [preview, setPreview] = useState<string | null>(null);
   const [isDragOver, setIsDragOver] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -303,7 +305,7 @@ export const UploadZone: React.FC<UploadZoneProps> = ({ onImageSelected, isAnaly
       {!preview && !isAnalyzing && (
         <p className="mt-6 text-sm text-stone-400 dark:text-stone-500 flex items-center gap-2 md:hidden">
           <Camera className="w-4 h-4" aria-hidden="true" />
-          <span>Tap to take or upload a photo</span>
+          <span>{(t as any)('upload.tapToPhoto')}</span>
         </p>
       )}
     </div>

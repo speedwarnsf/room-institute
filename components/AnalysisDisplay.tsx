@@ -1,3 +1,4 @@
+  const { t } = useI18n();
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { 
@@ -15,6 +16,7 @@ import {
 import { ProductSuggestion, ShoppingListData } from '../types';
 import { ComparisonSlider } from './ComparisonSlider';
 import { ShoppingList } from './ShoppingList';
+import { useI18n } from '../i18n/I18nContext';
 
 interface AnalysisDisplayProps {
   /** Markdown-formatted analysis text */
