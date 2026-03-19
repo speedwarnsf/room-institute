@@ -104,4 +104,13 @@ export function useI18n() {
   return ctx;
 }
 
+/**
+ * Get translation outside of React context (for class components)
+ */
+export function getTranslation(key: keyof Translations): string {
+  const locale = (localStorage.getItem('room-institute-locale') || 'en') as SupportedLocale;
+  const dict = translations[locale] || translations.en;
+  return (dict as any)[key] || (translations.en as any)[key] || key;
+}
+
 export default I18nProvider;

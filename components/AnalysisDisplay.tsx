@@ -75,7 +75,7 @@ export const AnalysisDisplay: React.FC<AnalysisDisplayProps> = ({
         <div className="flex items-center gap-2 mb-6 border-b border-stone-100 dark:border-stone-700 pb-4">
           <Sparkles className="w-6 h-6 text-emerald-500 dark:text-emerald-400" aria-hidden="true" />
           <h2 id="analysis-heading" className="text-2xl font-bold text-stone-800 dark:text-stone-100 m-0">
-            Your Organization Plan
+            {t('analysis.planHeading')}
           </h2>
         </div>
         
@@ -132,9 +132,9 @@ export const AnalysisDisplay: React.FC<AnalysisDisplayProps> = ({
             <Eye className="w-6 h-6 text-purple-400" aria-hidden="true" />
             <div>
               <h3 id="visualization-heading" className="text-lg font-bold text-white">
-                Visualize Your Potential
+                {t('analysis.visualizeHeading')}
               </h3>
-              <p className="text-xs text-zinc-400">AI-generated preview of your organized space</p>
+              <p className="text-xs text-zinc-400">{t('analysis.visualizeDesc')}</p>
             </div>
           </div>
           
@@ -148,7 +148,7 @@ export const AnalysisDisplay: React.FC<AnalysisDisplayProps> = ({
                     ? 'bg-purple-600 text-white' 
                     : 'bg-zinc-700 text-zinc-300 hover:bg-zinc-600'}`}
                 aria-pressed={showComparison}
-                aria-label={showComparison ? 'Show single view' : 'Show before/after comparison'}
+                aria-label={showComparison ? t('analysis.showSingle') : t('analysis.showComparison')}
               >
                 {showComparison ? (
                   <>
@@ -175,13 +175,13 @@ export const AnalysisDisplay: React.FC<AnalysisDisplayProps> = ({
                 <ComparisonSlider
                   beforeImage={originalImage}
                   afterImage={`data:image/png;base64,${visualizationImage}`}
-                  beforeLabel="Original"
-                  afterLabel="Organized"
+                  beforeLabel={t('analysis.original')}
+                  afterLabel={t('analysis.organized')}
                   className="border border-zinc-700"
                   enableZoom
                 />
                 <p className="text-center text-xs text-zinc-500">
-                  Drag the slider to compare before and after
+                  {t('analysis.dragSlider')}
                 </p>
               </div>
             ) : (
@@ -196,7 +196,7 @@ export const AnalysisDisplay: React.FC<AnalysisDisplayProps> = ({
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
                   <span className="text-xs font-mono text-purple-300 uppercase tracking-widest">
-                    AI Generated Preview
+                    {t('analysis.aiPreview')}
                   </span>
                 </div>
               </div>
@@ -215,9 +215,9 @@ export const AnalysisDisplay: React.FC<AnalysisDisplayProps> = ({
                     className="w-10 h-10 text-purple-500 animate-spin mb-4" 
                     aria-hidden="true" 
                   />
-                  <p className="text-zinc-300 font-medium">Dreaming up your new room...</p>
+                  <p className="text-zinc-300 font-medium">{t('analysis.dreamingUp')}</p>
                   <p className="text-zinc-500 text-sm mt-2">
-                    Applying organization rules & lighting adjustments
+                    {t('analysis.applyingRules')}
                   </p>
                 </div>
               ) : visualizationError ? (
@@ -226,7 +226,7 @@ export const AnalysisDisplay: React.FC<AnalysisDisplayProps> = ({
                   <div className="bg-red-500/20 p-3 mb-4">
                     <AlertTriangle className="w-8 h-8 text-red-400" aria-hidden="true" />
                   </div>
-                  <p className="text-zinc-300 font-medium mb-2">Visualization Failed</p>
+                  <p className="text-zinc-300 font-medium mb-2">{t('analysis.vizFailed')}</p>
                   <p className="text-zinc-500 text-sm mb-6 max-w-md">
                     {visualizationError}
                   </p>
@@ -234,10 +234,10 @@ export const AnalysisDisplay: React.FC<AnalysisDisplayProps> = ({
                     <button 
                       onClick={onRetryVisualization}
                       className="px-4 py-2 bg-zinc-700 hover:bg-zinc-600 text-white text-sm font-medium transition-colors flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-zinc-900"
-                      aria-label="Try generating visualization again"
+                      aria-label={t('analysis.tryAgainLabel')}
                     >
                       <RefreshCw className="w-4 h-4" aria-hidden="true" />
-                      Try Again
+                      {t('analysis.tryAgain')}
                     </button>
                   )}
                 </div>
@@ -249,19 +249,18 @@ export const AnalysisDisplay: React.FC<AnalysisDisplayProps> = ({
                     aria-hidden="true" 
                   />
                   <p className="text-zinc-300 mb-6 max-w-md mx-auto">
-                    Want to see what this room could look like after following the plan? 
-                    Tap the button below to generate a realistic preview.
+                    {t('analysis.seeWhatLooksLike')}
                   </p>
                   <button 
                     onClick={onVisualize}
                     className="group relative px-6 py-3 bg-purple-600 hover:bg-purple-500 text-white font-semibold transition-all shadow-[0_0_20px_-5px_rgba(147,51,234,0.5)] hover:shadow-[0_0_25px_-5px_rgba(147,51,234,0.7)] flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 focus:ring-offset-zinc-900"
-                    aria-label="Generate AI visualization of organized room"
+                    aria-label={t('analysis.generateVizLabel')}
                   >
-                    <Sparkles 
-                      className="w-4 h-4 group-hover:animate-pulse" 
-                      aria-hidden="true" 
+                    <Sparkles
+                      className="w-4 h-4 group-hover:animate-pulse"
+                      aria-hidden="true"
                     />
-                    Generate Visualization
+                    {t('analysis.generateViz')}
                   </button>
                 </div>
               )}
@@ -279,13 +278,13 @@ export const AnalysisDisplay: React.FC<AnalysisDisplayProps> = ({
           <div className="flex items-center gap-2 mb-6">
             <ShoppingBag className="w-6 h-6 text-orange-500 dark:text-orange-400" aria-hidden="true" />
             <h2 id="products-heading" className="text-2xl font-bold text-stone-800 dark:text-stone-100 m-0">
-              Shop the Look
+              {t('analysis.shopLook')}
             </h2>
           </div>
           
           <ul 
             className="grid grid-cols-1 md:grid-cols-2 gap-4 list-none p-0 m-0"
-            aria-label="Recommended organization products"
+            aria-label={t('analysis.productsLabel')}
           >
             {products.map((product, idx) => (
               <li key={idx}>
@@ -294,7 +293,7 @@ export const AnalysisDisplay: React.FC<AnalysisDisplayProps> = ({
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex flex-col justify-between p-5 border border-stone-200 dark:border-stone-600 hover:border-orange-200 dark:hover:border-orange-700 hover:shadow-md transition-all group bg-stone-50/50 dark:bg-stone-700/50 hover:bg-white dark:hover:bg-stone-700 h-full focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 dark:focus:ring-offset-stone-800"
-                  aria-label={`${product.name} - ${product.reason}. Opens Amazon search in new tab.`}
+                  aria-label={t('analysis.productLabel', { name: product.name, reason: product.reason })}
                 >
                   <div>
                     <div className="flex justify-between items-start mb-2">
@@ -309,7 +308,7 @@ export const AnalysisDisplay: React.FC<AnalysisDisplayProps> = ({
                     <p className="text-sm text-stone-600 dark:text-stone-300 mb-4">{product.reason}</p>
                   </div>
                   <div className="mt-auto pt-3 border-t border-stone-200/60 dark:border-stone-600/60 flex items-center text-xs font-bold text-orange-600 dark:text-orange-400 uppercase tracking-wider">
-                    Find on Amazon →
+                    {t('analysis.findAmazon')}
                   </div>
                 </a>
               </li>
@@ -317,7 +316,7 @@ export const AnalysisDisplay: React.FC<AnalysisDisplayProps> = ({
           </ul>
           
           <p className="mt-4 text-center text-xs text-stone-400 dark:text-stone-500 italic">
-            *As an Amazon Associate we earn from qualifying purchases.
+            {t('analysis.amazonDisclaimer')}
           </p>
         </section>
       )}

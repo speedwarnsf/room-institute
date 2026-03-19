@@ -28,8 +28,9 @@ export function TrendingStyles({ onOpenDiscover }: TrendingStylesProps) {
         </button>
       </div>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {trending.map(({ style, description, imageId }) => {
+        {trending.map(({ style, descriptionKey, imageId }) => {
           const image = getImageById(imageId);
+          const styleKey = `style.${style.toLowerCase().replace(/\s+/g, '')}` as any;
           return (
             <button
               key={style}
@@ -48,10 +49,10 @@ export function TrendingStyles({ onOpenDiscover }: TrendingStylesProps) {
               )}
               <div className="p-3">
                 <h3 className="text-sm font-bold text-stone-800 dark:text-stone-200 mb-1">
-                  {style}
+                  {(t as any)(styleKey)}
                 </h3>
                 <p className="text-xs text-stone-500 dark:text-stone-400 leading-relaxed line-clamp-2">
-                  {description}
+                  {(t as any)(descriptionKey)}
                 </p>
               </div>
             </button>

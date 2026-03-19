@@ -124,7 +124,7 @@ const LookbookCard = memo(function LookbookCard({
       onDragEnd={handleDragEnd}
       onClick={() => { if (dragDistRef.current < 5) onExpand(entry); dragDistRef.current = 0; }}
       role="article"
-      aria-label={`Design: ${entry.option.name}${entry.rating ? `, rated ${entry.rating}` : ''}`}
+      aria-label={t('lookbook.designLabel', { name: entry.option.name, rating: entry.rating ? `, ${t('lookbook.rated')} ${entry.rating}` : '' })}
       tabIndex={0}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onExpand(entry); }
@@ -255,7 +255,7 @@ const LookbookCard = memo(function LookbookCard({
         </AnimatePresence>
 
         {/* Rating buttons */}
-        <div className="flex gap-1 pt-1" role="group" aria-label="Rate this design">
+        <div className="flex gap-1 pt-1" role="group" aria-label={t('lookbook.rateLabel')}>
           {RATINGS.map(r => (
             <button
               key={r.value}
@@ -266,7 +266,7 @@ const LookbookCard = memo(function LookbookCard({
                   : 'hover:bg-stone-50 dark:hover:bg-stone-700/50'
               }`}
               title={r.label}
-              aria-label={`Rate as ${r.label}`}
+              aria-label={t('lookbook.rateAsLabel', { label: r.label })}
               aria-pressed={entry.rating === r.value}
             >
               <SoIcon name={r.icon as any} size={22} />
@@ -334,7 +334,7 @@ function FullScreenCard({
       onClick={onClose}
       role="dialog"
       aria-modal="true"
-      aria-label={`Design detail: ${entry.option.name}`}
+      aria-label={t('lookbook.detailLabel', { name: entry.option.name })}
       onKeyDown={(e) => { if (e.key === 'Escape') onClose(); }}
     >
       <motion.div
@@ -665,7 +665,7 @@ export function Lookbook({ entries, onRate, onSelectForIteration, onGenerateMore
       </div>
 
       {/* Filter tabs */}
-      <div className="flex gap-2 justify-center" role="tablist" aria-label="Filter designs">
+      <div className="flex gap-2 justify-center" role="tablist" aria-label={t('lookbook.filterLabel')}>
         {tabs.map(tab => (
           <button
             key={tab.key}
@@ -747,7 +747,7 @@ export function Lookbook({ entries, onRate, onSelectForIteration, onGenerateMore
         layout
         className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 lg:gap-6"
         role="feed"
-        aria-label="Design lookbook cards"
+        aria-label={t('lookbook.cardsLabel')}
       >
         <AnimatePresence mode="popLayout">
           {sortedEntries.map(entry => (

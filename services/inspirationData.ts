@@ -148,11 +148,11 @@ export const DESIGN_TIPS: DesignTip[] = [
 /**
  * Get trending styles — returns styles with highest engagement / seasonal relevance
  */
-export function getTrendingStyles(): { style: DesignStyle; description: string; imageId: string }[] {
+export function getTrendingStyles(): { style: DesignStyle; descriptionKey: string; imageId: string }[] {
   return [
-    { style: 'Mediterranean', description: 'Warm terracotta, arched doorways, and sun-washed textures are surging in popularity', imageId: 'med-1' },
-    { style: 'Mid-Century', description: 'Timeless organic shapes and warm woods continue to dominate modern interiors', imageId: 'mid-1' },
-    { style: 'Industrial', description: 'Raw materials and open spaces — the urban aesthetic that keeps evolving', imageId: 'ind-1' },
+    { style: 'Mediterranean', descriptionKey: 'trending.mediterraneanDesc', imageId: 'med-1' },
+    { style: 'Mid-Century', descriptionKey: 'trending.midcenturyDesc', imageId: 'mid-1' },
+    { style: 'Industrial', descriptionKey: 'trending.industrialDesc', imageId: 'ind-1' },
   ];
 }
 

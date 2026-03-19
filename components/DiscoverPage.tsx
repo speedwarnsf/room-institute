@@ -15,6 +15,7 @@ interface DiscoverPageProps {
 }
 
 export default function DiscoverPage({ onBack, onShowUpgrade }: DiscoverPageProps) {
+  const { t } = useI18n();
   const { userTier } = useAuth();
   const [activeStyle, setActiveStyle] = useState<DesignStyle | 'all'>('all');
   const [savedIds, setSavedIds] = useState<Set<string>>(new Set());
@@ -85,22 +86,22 @@ export default function DiscoverPage({ onBack, onShowUpgrade }: DiscoverPageProp
         <button
           onClick={onBack}
           className="p-2 text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200 transition-colors"
-          aria-label="Back to home"
+          aria-label={t('discover.backToHome')}
         >
           <ArrowLeft className="w-5 h-5" />
         </button>
         <div>
           <h1 className="text-3xl font-serif font-bold text-stone-900 dark:text-stone-100">
-            Discover
+            {t('discover.title')}
           </h1>
           <p className="text-sm text-stone-500 dark:text-stone-400 mt-1">
-            Curated interior design inspiration
+            {t('discover.subtitle')}
           </p>
         </div>
       </div>
 
       {/* Style filter tabs */}
-      <div className="-mx-4 px-4 flex gap-2 overflow-x-auto pb-2 mb-8 scrollbar-hide" role="tablist" aria-label="Filter by style">
+      <div className="-mx-4 px-4 flex gap-2 overflow-x-auto pb-2 mb-8 scrollbar-hide" role="tablist" aria-label={t('discover.filterByStyle')}>
         <button
           role="tab"
           aria-selected={activeStyle === 'all'}
@@ -111,7 +112,7 @@ export default function DiscoverPage({ onBack, onShowUpgrade }: DiscoverPageProp
               : 'bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-700'
           }`}
         >
-          All Styles
+          {t('discover.allStyles')}
         </button>
         {DESIGN_STYLES.map(style => (
           <button
@@ -160,8 +161,8 @@ export default function DiscoverPage({ onBack, onShowUpgrade }: DiscoverPageProp
                     ? 'bg-emerald-600 text-white'
                     : 'bg-white/80 dark:bg-stone-900/80 text-stone-600 dark:text-stone-300 opacity-0 group-hover:opacity-100'
                 }`}
-                aria-label={savedIds.has(image.id) ? 'Remove from mood board' : 'Save to mood board'}
-                title={savedIds.has(image.id) ? 'Saved to mood board' : 'Save to mood board'}
+                aria-label={savedIds.has(image.id) ? t('discover.removeFromBoard') : t('discover.saveToBoard')}
+                title={savedIds.has(image.id) ? t('discover.savedToBoard') : t('discover.saveToBoard')}
               >
                 {savedIds.has(image.id) ? (
                   <BookmarkCheck className="w-4 h-4" />
@@ -205,11 +206,11 @@ export default function DiscoverPage({ onBack, onShowUpgrade }: DiscoverPageProp
         <div className="flex items-center gap-3 mb-6">
           <Lightbulb className="w-5 h-5 text-emerald-400" />
           <h2 className="text-2xl font-serif font-bold text-stone-900 dark:text-stone-100">
-            Design Principles
+            {t('discover.designPrinciples')}
           </h2>
         </div>
         <p className="text-stone-500 dark:text-stone-400 mb-8 max-w-2xl">
-          Foundational concepts that professionals use to create cohesive, intentional spaces.
+          {t('discover.designPrinciplesDesc')}
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {DESIGN_TIPS.map((tip: DesignTip) => (

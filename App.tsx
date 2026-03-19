@@ -234,7 +234,7 @@ function AppContent() {
       if (error instanceof GeminiApiError) {
         setError(buildAppError(error.code, error.message, error.isRetryable));
       } else {
-        setError(buildAppError('STRUCTURE_DETECTION_FAILED', 'Failed to analyze room structure', true));
+        setError(buildAppError('STRUCTURE_DETECTION_FAILED', t('error.structureDetectionFailed'), true));
       }
       setAppState(AppState.ERROR);
     } finally {
@@ -360,7 +360,7 @@ function AppContent() {
       if (error instanceof GeminiApiError) {
         setError(buildAppError(error.code, error.message, error.isRetryable));
       } else {
-        setError(buildAppError('DESIGN_GENERATION_FAILED', 'Failed to generate design options', true));
+        setError(buildAppError('DESIGN_GENERATION_FAILED', t('error.designGenerationFailed'), true));
       }
       setAppState(AppState.ERROR);
     } finally {
@@ -387,7 +387,7 @@ function AppContent() {
     if (!networkStatus.isOnline) {
       setError(buildAppError('NETWORK_OFFLINE'));
       setAppState(AppState.ERROR);
-      announce('Upload failed: No internet connection', 'assertive');
+      announce(t('app.error.noInternet'), 'assertive');
       playSound('error');
       return;
     }
@@ -395,7 +395,7 @@ function AppContent() {
     // Check rate limit before processing
     if (!rateLimiter.tryConsume()) {
       const waitTime = rateLimiter.formatWaitTime();
-      setRateLimitMessage(`Too many requests. Please wait ${waitTime}.`);
+      setRateLimitMessage(t('app.error.rateLimit').replace('{time}', waitTime));
       setTimeout(() => setRateLimitMessage(null), 5000);
       playSound('error');
       return;
@@ -412,17 +412,17 @@ function AppContent() {
       announce('Starting image analysis', 'polite');
 
       const validation = await validateImageFile(file);
-      
+
       if (!validation.canProceed) {
         setError(buildAppError(
           'VALIDATION_FAILED',
-          validation.error || 'Invalid image file',
+          validation.error || t('app.error.invalidImage'),
           true,
           validation.suggestion
         ));
         setAppState(AppState.ERROR);
         analytics.track('image_rejected', { reason: validation.error });
-        announce(`Upload failed: ${validation.error}`, 'assertive');
+        announce(validation.error || t('app.error.invalidImage'), 'assertive');
         playSound('error');
         setIsAnalyzing(false);
         return;
@@ -455,12 +455,12 @@ function AppContent() {
       reader.onerror = () => {
         setError(buildAppError(
           'FILE_READ_ERROR',
-          'Failed to read the image file. Please try a different image.',
+          t('app.error.readFailed'),
           true
         ));
         setAppState(AppState.ERROR);
         setIsAnalyzing(false);
-        announce('Failed to read image file', 'assertive');
+        announce(t('app.error.readFailed'), 'assertive');
         playSound('error');
         analytics.track('analysis_failed', { stage: 'file_read', error: 'FILE_READ_ERROR' });
       };
@@ -491,7 +491,7 @@ function AppContent() {
           console.error('Image processing error:', readError);
           setError(buildAppError('UNKNOWN', 'An unexpected error occurred. Please try again.', true));
           setAppState(AppState.ERROR);
-          announce('Failed to process image', 'assertive');
+          announce(t('error.processingFailed'), 'assertive');
           playSound('error');
         } finally {
           setIsAnalyzing(false);
@@ -502,7 +502,7 @@ function AppContent() {
       reader.readAsDataURL(processedFile);
     } catch (err) {
       console.error('File handling error:', err);
-      setError(buildAppError('PROCESSING_ERROR', 'Failed to process the image. Please try again.', true));
+      setError(buildAppError('PROCESSING_ERROR', t('error.processingRetry'), true));
       setIsAnalyzing(false);
       setAppState(AppState.ERROR);
     }
@@ -534,7 +534,7 @@ function AppContent() {
     // Check rate limit
     if (!rateLimiter.tryConsume()) {
       const waitTime = rateLimiter.formatWaitTime();
-      setVisualizationError(`Rate limit exceeded. Please wait ${waitTime}.`);
+      setVisualizationError(t('app.error.rateLimitWait').replace('{time}', waitTime));
       return;
     }
     
@@ -553,7 +553,7 @@ function AppContent() {
       if (err instanceof GeminiApiError) {
         setVisualizationError(getErrorMessage(err.code).description ?? err.message);
       } else {
-        setVisualizationError('Failed to generate visualization. Please try again.');
+        setVisualizationError(t('error.visualizationFailed'));
       }
     } finally {
       setIsVisualizing(false);
@@ -597,7 +597,7 @@ function AppContent() {
       const errorMsg: ChatMessage = {
         id: Date.now().toString(),
         role: 'model',
-        text: `Rate limit exceeded. Please wait ${waitTime} before sending another message.`,
+        text: t('app.error.rateLimitChat').replace('{time}', waitTime),
         timestamp: Date.now(),
         isError: true
       };
@@ -988,7 +988,7 @@ function AppContent() {
       });
       if (apiError instanceof GeminiApiError) {
         if (apiError.code === 'RATE_LIMIT' && apiError.retryAfterSeconds) {
-          setRateLimitMessage(`Too many requests. Try again in ${apiError.retryAfterSeconds} seconds.`);
+          setRateLimitMessage(t('app.error.tooManyRequests').replace('{seconds}', String(apiError.retryAfterSeconds)));
           // Auto-countdown
           let remaining = apiError.retryAfterSeconds;
           const interval = setInterval(() => {
@@ -997,7 +997,7 @@ function AppContent() {
               clearInterval(interval);
               setRateLimitMessage(null);
             } else {
-              setRateLimitMessage(`Too many requests. Try again in ${remaining} seconds.`);
+              setRateLimitMessage(t('app.error.tooManyRequests').replace('{seconds}', String(remaining)));
             }
           }, 1000);
           setAppState(AppState.MODE_SELECT);
@@ -1009,7 +1009,8 @@ function AppContent() {
         setError(buildAppError('UNKNOWN', 'An unexpected error occurred. Please try again.', true));
         setAppState(AppState.ERROR);
       }
-      announce(`Analysis failed: ${apiError instanceof Error ? apiError.message : 'Unknown error'}`, 'assertive');
+      const errorMessage = apiError instanceof Error ? apiError.message : 'Unknown error';
+      announce(t('app.error.analysisFailed').replace('{message}', errorMessage), 'assertive');
       playSound('error');
     } finally {
       setIsAnalyzing(false);
@@ -1101,7 +1102,7 @@ function AppContent() {
           <button 
             onClick={resetApp}
             className="flex items-center gap-2 hover:opacity-80 transition-opacity focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 dark:focus:ring-offset-stone-800 p-1 flex-shrink-0"
-            aria-label="Room - Return to home"
+            aria-label={t('nav.returnHome')}
           >
             <img src="/room-logo-dark.png" alt="Room" style={{ height: 28 }} className="dark:hidden" /><img src="/room-logo.png" alt="Room" style={{ height: 28 }} className="hidden dark:block" />
           </button>
@@ -1127,7 +1128,7 @@ function AppContent() {
               <button 
                 onClick={resetApp}
                 className="text-sm text-stone-600 dark:text-stone-400 hover:text-emerald-600 dark:hover:text-emerald-400 flex items-center gap-1 font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 dark:focus:ring-offset-stone-800 px-2 sm:px-3 py-2 whitespace-nowrap"
-                aria-label="Start over with a new image"
+                aria-label={t('nav.startOver')}
               >
                 <ArrowLeft className="w-4 h-4" aria-hidden="true" />
                 <span className="hidden sm:inline">{(t as any)('app.button.new')}</span>
@@ -1474,7 +1475,7 @@ function AppContent() {
                   <button 
                     onClick={handleRetry}
                     className="bg-emerald-600 text-white px-6 py-3 hover:bg-emerald-700 transition-colors flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 dark:focus:ring-offset-stone-900"
-                    aria-label="Try analyzing the image again"
+                    aria-label={t('app.retryAnalysis')}
                   >
                     <RefreshCw className="w-4 h-4" aria-hidden="true" />
                     {(t as any)('app.button.tryAgain')}
@@ -1483,7 +1484,7 @@ function AppContent() {
                 <button
                   onClick={resetApp}
                   className="bg-stone-100 dark:bg-stone-700 text-stone-700 dark:text-stone-200 px-6 py-3 hover:bg-stone-200 dark:hover:bg-stone-600 transition-colors focus:outline-none focus:ring-2 focus:ring-stone-500 focus:ring-offset-2 dark:focus:ring-offset-stone-900"
-                  aria-label="Go back to home and start fresh"
+                  aria-label={t('app.goHome')}
                 >
                   {(t as any)('app.button.startFresh')}
                 </button>
