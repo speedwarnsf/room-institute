@@ -136,7 +136,7 @@ export const ShoppingList: React.FC<ShoppingListProps> = ({ shoppingList, sessio
         <button
           onClick={handleCopyList}
           className="flex items-center gap-1.5 px-3 py-1.5 text-sm border border-stone-200 dark:border-stone-600 hover:bg-stone-50 dark:hover:bg-stone-700 transition-colors text-stone-600 dark:text-stone-300"
-          aria-label={t('products.copyListLabel')}
+          aria-label="Copy shopping list to clipboard"
         >
           {copied ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
           {copied ? t('products.copied') : t('products.copyList')}

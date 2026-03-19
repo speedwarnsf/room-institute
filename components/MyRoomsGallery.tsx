@@ -2,6 +2,7 @@
  * My Rooms Gallery — portfolio-style grid of saved design projects
  */
 
+  const { t } = useI18n();
 import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import {
   X, Trash2, Check, Edit2, Clock, Palette, Star,
@@ -31,7 +32,6 @@ interface MyRoomsGalleryProps {
 // ============================================================================
 
 export const MyRoomsGallery: React.FC<MyRoomsGalleryProps> = ({ isOpen, onClose, onLoadRoom }) => {
-  const { t } = useI18n();
   const [rooms, setRooms] = useState<Room[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRoomId, setSelectedRoomId] = useState<string | null>(null);
@@ -178,7 +178,6 @@ export const MyRoomsGallery: React.FC<MyRoomsGalleryProps> = ({ isOpen, onClose,
               onConfirmDelete={setConfirmDeleteId}
               onDelete={handleDelete}
               loading={loading}
-              t={t}
             />
           )}
         </div>
@@ -213,13 +212,12 @@ interface GalleryGridProps {
   onConfirmDelete: (id: string | null) => void;
   onDelete: (id: string) => void;
   loading: boolean;
-  t: (key: string) => string;
 }
 
 const GalleryGrid: React.FC<GalleryGridProps> = ({
   rooms, searchQuery, onSearchChange, onSelectRoom,
   editingId, editName, onStartEdit, onSaveEdit, onCancelEdit, onEditNameChange,
-  confirmDeleteId, onConfirmDelete, onDelete, loading, t
+  confirmDeleteId, onConfirmDelete, onDelete, loading
 }) => (
   <div className="p-6">
     {/* Search */}
@@ -266,7 +264,6 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({
             onConfirmDelete={() => onConfirmDelete(room.id)}
             onCancelDelete={() => onConfirmDelete(null)}
             onDelete={() => onDelete(room.id)}
-            t={t}
           />
         ))}
       </div>
@@ -291,13 +288,12 @@ interface RoomCardProps {
   onConfirmDelete: () => void;
   onCancelDelete: () => void;
   onDelete: () => void;
-  t: (key: string) => string;
 }
 
 const RoomCard: React.FC<RoomCardProps> = ({
   room, onSelect,
   isEditing, editName, onStartEdit, onSaveEdit, onCancelEdit, onEditNameChange,
-  isConfirmingDelete, onConfirmDelete, onCancelDelete, onDelete, t
+  isConfirmingDelete, onConfirmDelete, onCancelDelete, onDelete
 }) => {
   const formatDate = (ts: number) =>
     new Date(ts).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
@@ -376,10 +372,10 @@ const RoomCard: React.FC<RoomCardProps> = ({
           </>
         ) : (
           <>
-            <button onClick={onStartEdit} className="p-1.5 bg-white/90 dark:bg-stone-600/90 shadow-sm hover:bg-white" title={t('common.rename')}>
+            <button onClick={onStartEdit} className="p-1.5 bg-white/90 dark:bg-stone-600/90 shadow-sm hover:bg-white" title="Rename">
               <Edit2 className="w-3.5 h-3.5 text-stone-600 dark:text-stone-300" />
             </button>
-            <button onClick={onConfirmDelete} className="p-1.5 bg-white/90 dark:bg-stone-600/90 shadow-sm hover:bg-red-50" title={t('common.delete')}>
+            <button onClick={onConfirmDelete} className="p-1.5 bg-white/90 dark:bg-stone-600/90 shadow-sm hover:bg-red-50" title="Delete">
               <Trash2 className="w-3.5 h-3.5 text-stone-600 dark:text-stone-300" />
             </button>
           </>

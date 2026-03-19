@@ -185,7 +185,7 @@ export function ComparisonSlider({
       onTouchStart={handleTouchStart}
       onWheel={enableZoom ? handleWheel : undefined}
       role="slider"
-      aria-label={t('design.compareImages')}
+      aria-label="Compare before and after images"
       aria-describedby={instructionId}
       aria-orientation="horizontal"
       aria-valuemin={0}

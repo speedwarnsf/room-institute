@@ -4,6 +4,7 @@
  * NO border-radius. NO emojis.
  */
 
+  const { t } = useI18n();
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { Download, FileText, Image, Share2, ChevronDown, Loader2, Lock } from 'lucide-react';
 import { useAuth } from './AuthProvider';
@@ -27,7 +28,6 @@ interface DesignExportMenuProps {
 type ExportAction = 'image' | 'before-after' | 'pdf' | 'instagram' | 'pinterest';
 
 export function DesignExportMenu({ entry, sourceImage, compact = false, className = '' }: DesignExportMenuProps) {
-  const { t } = useI18n();
   const { userTier } = useAuth();
   const isPro = userTier.tier === 'pro';
   const [open, setOpen] = useState(false);
@@ -90,7 +90,7 @@ export function DesignExportMenu({ entry, sourceImage, compact = false, classNam
           onClick={() => hasImage && run('image')}
           disabled={!hasImage || loading === 'image'}
           className="h-10 px-4 bg-black/50 backdrop-blur-xl border border-white/10 flex items-center justify-center gap-2 hover:bg-black/70 transition-colors text-xs uppercase tracking-widest text-neutral-300 disabled:opacity-40"
-          aria-label={t('export.downloadImage')}
+          aria-label="Download design image"
         >
           {loading === 'image' ? <Loader2 size={16} className="animate-spin" /> : <Download size={16} />}
           <span className="hidden sm:inline">Image</span>
@@ -100,7 +100,7 @@ export function DesignExportMenu({ entry, sourceImage, compact = false, classNam
           onClick={() => run('pdf')}
           disabled={loading === 'pdf'}
           className="h-10 px-4 bg-black/50 backdrop-blur-xl border border-white/10 flex items-center justify-center gap-2 hover:bg-black/70 transition-colors text-xs uppercase tracking-widest text-neutral-300 disabled:opacity-40"
-          aria-label={t('export.downloadPdf')}
+          aria-label="Download PDF report"
         >
           {loading === 'pdf' ? <Loader2 size={16} className="animate-spin" /> : <FileText size={16} />}
           <span className="hidden sm:inline">PDF</span>
@@ -109,7 +109,7 @@ export function DesignExportMenu({ entry, sourceImage, compact = false, classNam
           <button
             onClick={() => setOpen(!open)}
             className="h-10 px-3 bg-black/50 backdrop-blur-xl border border-white/10 flex items-center justify-center gap-1 hover:bg-black/70 transition-colors text-xs uppercase tracking-widest text-neutral-300"
-            aria-label={t('export.moreOptions')}
+            aria-label="More export options"
             aria-expanded={open}
           >
             <Share2 size={16} />
@@ -142,7 +142,7 @@ export function DesignExportMenu({ entry, sourceImage, compact = false, classNam
       <button
         onClick={() => setOpen(!open)}
         className="flex items-center gap-2 px-5 py-3 border border-neutral-700 text-sm text-neutral-300 hover:bg-neutral-900 hover:border-neutral-500 transition-all"
-        aria-label={t('export.options')}
+        aria-label="Export and download options"
         aria-expanded={open}
         aria-haspopup="menu"
       >

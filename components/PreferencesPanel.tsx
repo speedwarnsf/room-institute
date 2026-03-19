@@ -56,7 +56,7 @@ export function PreferencesPanel({
           id="style-picker-grid"
           className="grid grid-cols-2 sm:grid-cols-3 gap-2"
           role="radiogroup"
-          aria-label={t('prefs.designStyleLabel')}
+          aria-label="Design style"
         >
           <button
             onClick={() => onStyleChange(null)}
@@ -101,7 +101,7 @@ export function PreferencesPanel({
           id="room-picker-grid"
           className="grid grid-cols-2 sm:grid-cols-3 gap-2"
           role="radiogroup"
-          aria-label={t('prefs.roomTypeLabel')}
+          aria-label="Room type"
         >
           <button
             onClick={() => onRoomChange(null)}

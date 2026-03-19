@@ -5,7 +5,6 @@
 import { Component, ReactNode } from 'react';
 import { AlertTriangle, RefreshCw, Home, Bug } from 'lucide-react';
 import { analytics } from '../services/analytics';
-import { getTranslation } from '../i18n/I18nContext';
 
 interface Props {
   children: ReactNode;
@@ -139,10 +138,14 @@ export class ErrorBoundary extends Component<Props, State> {
             {/* Error Message */}
             <div className="space-y-2">
               <h1 className="text-2xl font-bold text-stone-900 dark:text-stone-100">
-                {isQuotaExceeded ? getTranslation('error.storageFullTitle') : getTranslation('error.somethingWentWrong')}
+                {isQuotaExceeded ? 'Storage Full' : 'Something Went Wrong'}
               </h1>
               <p className="text-stone-600 dark:text-stone-400">
-                {isQuotaExceeded ? getTranslation('error.storageFullDesc') : getTranslation('error.unexpectedError')}
+                {isQuotaExceeded ? (
+                  'Your browser storage is full. Try clearing some data or using a different device.'
+                ) : (
+                  'The app encountered an unexpected error. Our team has been notified.'
+                )}
               </p>
             </div>
 
@@ -150,7 +153,7 @@ export class ErrorBoundary extends Component<Props, State> {
             {process.env.NODE_ENV === 'development' && this.state.error && (
               <div className="bg-stone-100 dark:bg-stone-800 p-4 text-left">
                 <h3 className="font-medium text-stone-900 dark:text-stone-100 mb-2">
-                  {getTranslation('error.errorDetails')}
+                  Error Details
                 </h3>
                 <p className="text-sm text-stone-600 dark:text-stone-400 font-mono break-all">
                   {this.state.error.message}
@@ -171,7 +174,7 @@ export class ErrorBoundary extends Component<Props, State> {
                   className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 dark:focus:ring-offset-stone-900 flex items-center justify-center gap-2"
                 >
                   <RefreshCw className="w-4 h-4" />
-                  {getTranslation('error.tryAgainCount').replace('{count}', String(this.maxRetries - this.state.retryCount))}
+                  Try Again ({this.maxRetries - this.state.retryCount} left)
                 </button>
               )}
 
@@ -207,11 +210,11 @@ export class ErrorBoundary extends Component<Props, State> {
             {/* Helpful Tips */}
             {!isQuotaExceeded && (
               <div className="text-sm text-stone-500 dark:text-stone-400">
-                <p>{getTranslation('error.persistsIntro')}</p>
+                <p>If the problem persists:</p>
                 <ul className="mt-1 space-y-1">
-                  <li>• {getTranslation('error.tipRefresh')}</li>
-                  <li>• {getTranslation('error.tipInternet')}</li>
-                  <li>• {getTranslation('error.tipCache')}</li>
+                  <li>• Try refreshing your browser</li>
+                  <li>• Check your internet connection</li>
+                  <li>• Clear your browser cache</li>
                 </ul>
               </div>
             )}

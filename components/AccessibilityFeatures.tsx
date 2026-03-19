@@ -4,7 +4,6 @@
  */
 import { useState, useEffect, useCallback, createContext, useContext } from 'react';
 import { EyeOff, Volume2, VolumeX, Focus } from 'lucide-react';
-import { useI18n } from '../i18n/I18nContext';
 
 // Accessibility context for global settings
 interface AccessibilitySettings {
@@ -168,7 +167,6 @@ export function AccessibilityProvider({ children }: { children: React.ReactNode 
 
 // Accessibility toolbar component
 export function AccessibilityToolbar() {
-  const { t } = useI18n();
   const { settings, updateSetting, announce, playSound } = useAccessibility();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -189,7 +187,7 @@ export function AccessibilityToolbar() {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="a11y-circle bg-stone-800 text-white p-2 shadow-lg hover:bg-stone-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-        aria-label={t('a11y.settings')}
+        aria-label="Accessibility settings"
         aria-expanded={isOpen}
       >
         <Focus className="w-5 h-5" />
@@ -197,13 +195,13 @@ export function AccessibilityToolbar() {
 
       {/* Toolbar panel */}
       {isOpen && (
-        <div
+        <div 
           className="mb-2 absolute bottom-full left-0 bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-600 shadow-xl p-4 w-64"
           role="dialog"
-          aria-label={t('a11y.settingsTitle')}
+          aria-label="Accessibility Settings"
         >
           <h3 className="font-semibold mb-3 text-stone-900 dark:text-stone-100">
-            {t('a11y.settingsTitle')}
+            Accessibility Settings
           </h3>
           
           <div className="space-y-3">

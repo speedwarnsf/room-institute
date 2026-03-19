@@ -2,6 +2,7 @@
  * SaveToRoomPicker — modal picker to save a LookbookEntry to an existing or new room.
  */
 
+  const { t } = useI18n();
 import React, { useState, useEffect, useCallback } from 'react';
 import { X, Plus, Home, Check } from 'lucide-react';
 import { Room, LookbookEntry } from '../types';
@@ -17,7 +18,6 @@ interface SaveToRoomPickerProps {
 }
 
 export const SaveToRoomPicker: React.FC<SaveToRoomPickerProps> = ({ entry, sourceImage, onClose, onSaved }) => {
-  const { t } = useI18n();
   const [rooms, setRooms] = useState<Room[]>([]);
   const [isCreating, setIsCreating] = useState(false);
   const [newName, setNewName] = useState('');
@@ -45,7 +45,7 @@ export const SaveToRoomPicker: React.FC<SaveToRoomPickerProps> = ({ entry, sourc
   }, [newName, sourceImage, entry, onSaved]);
 
   return (
-    <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={onClose} role="dialog" aria-modal="true" aria-label={t('rooms.saveToRoom')} onKeyDown={(e) => { if (e.key === 'Escape') onClose(); }}>
+    <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={onClose} role="dialog" aria-modal="true" aria-label="Save design to room" onKeyDown={(e) => { if (e.key === 'Escape') onClose(); }}>
       <div
         className="bg-white dark:bg-stone-800 shadow-2xl w-full max-w-sm overflow-hidden"
         onClick={e => e.stopPropagation()}

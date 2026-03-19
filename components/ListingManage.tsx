@@ -556,7 +556,7 @@ export function ListingManage() {
                         onClick={() => regenerateRoom(room.id)}
                         disabled={regeneratingRoomId === room.id}
                         className="p-2 bg-stone-800 text-stone-300 hover:bg-stone-700 transition-colors disabled:opacity-50"
-                        title={t('rooms.regenerateAll')}
+                        title="Regenerate all designs"
                       >
                         {regeneratingRoomId === room.id ? (
                           <Loader2 className="w-4 h-4 animate-spin" />
@@ -567,7 +567,7 @@ export function ListingManage() {
                       <button
                         onClick={() => removeRoom(room.id)}
                         className="p-2 bg-stone-800 text-red-400 hover:bg-stone-700 transition-colors"
-                        title={t('rooms.removeRoom')}
+                        title="Remove room"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -612,7 +612,7 @@ export function ListingManage() {
                                 className={`absolute top-2 right-2 p-2 ${
                                   state.isHero ? 'bg-emerald-500 text-stone-900' : 'bg-stone-900/80 text-stone-400'
                                 } hover:bg-emerald-500 hover:text-stone-900 transition-colors`}
-                                title={t('rooms.setHero')}
+                                title="Set as hero image"
                               >
                                 <Star className="w-4 h-4" fill={state.isHero ? 'currentColor' : 'none'} />
                               </button>

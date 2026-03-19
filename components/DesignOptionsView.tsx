@@ -57,7 +57,6 @@ export const DesignOptionsView: React.FC<DesignOptionsViewProps> = ({
   onSelectDesign,
   isGeneratingVisuals
 }) => {
-  const { t } = useI18n();
   const [showReading, setShowReading] = useState(false);
 
   return (
@@ -72,10 +71,10 @@ export const DesignOptionsView: React.FC<DesignOptionsViewProps> = ({
             <Eye className="w-6 h-6 text-emerald-500" aria-hidden="true" />
             <div className="text-left">
               <h2 className="text-xl font-bold text-stone-800 dark:text-stone-100 font-serif">
-                {t('designOptions.roomAnalysis')}
+                Room Analysis
               </h2>
               <p className="text-sm text-stone-500 dark:text-stone-400">
-                {t('designOptions.roomAnalysisDesc')}
+                Your space through 5 design theory lenses
               </p>
             </div>
           </div>
@@ -95,10 +94,10 @@ export const DesignOptionsView: React.FC<DesignOptionsViewProps> = ({
       {/* Header */}
       <div className="text-center">
         <h2 className="text-3xl md:text-4xl font-bold text-stone-900 dark:text-stone-100 font-serif mb-3">
-          {t('designOptions.threeDesigns')}
+          3 Design Directions
         </h2>
         <p className="text-stone-500 dark:text-stone-400 max-w-lg mx-auto">
-          {t('designOptions.threeDesignsDesc')}
+          Each vision is grounded in academic design theory. Pick the one that speaks to you.
         </p>
       </div>
 
@@ -132,12 +131,11 @@ const cardAccents = [
 ];
 
 const DesignCard: React.FC<DesignCardProps> = ({ option, index, onSelect, isGeneratingVisual }) => {
-  const { t } = useI18n();
   return (
     <button
       onClick={onSelect}
       className={`group relative text-left bg-gradient-to-br ${cardAccents[index]} bg-white dark:bg-stone-800 shadow-sm border border-stone-200 dark:border-stone-700 p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 dark:focus:ring-offset-stone-900`}
-      aria-label={t('designCard.selectDesign', { name: option.name })}
+      aria-label={`Select ${option.name} design`}
     >
       {/* Visualization preview */}
       <div className="w-full h-40 mb-5 overflow-hidden bg-stone-100 dark:bg-stone-700 flex items-center justify-center">
@@ -150,12 +148,12 @@ const DesignCard: React.FC<DesignCardProps> = ({ option, index, onSelect, isGene
         ) : isGeneratingVisual ? (
           <div className="flex flex-col items-center gap-2">
             <Loader2 className="w-6 h-6 text-stone-400 animate-spin" />
-            <span className="text-xs text-stone-400">{t('designCard.generating')}</span>
+            <span className="text-xs text-stone-400">Generating…</span>
           </div>
         ) : (
           <div className="flex flex-col items-center gap-2">
             <Sparkles className="w-8 h-8 text-stone-300 dark:text-stone-500" />
-            <span className="text-xs text-stone-400 dark:text-stone-500">{t('designCard.aiPreview')}</span>
+            <span className="text-xs text-stone-400 dark:text-stone-500">AI Preview</span>
           </div>
         )}
       </div>
@@ -179,7 +177,7 @@ const DesignCard: React.FC<DesignCardProps> = ({ option, index, onSelect, isGene
             className="w-7 h-7 border-2 border-white dark:border-stone-600 shadow-sm"
             style={{ backgroundColor: hex }}
             title={hex}
-            aria-label={t('designCard.colorLabel', { hex })}
+            aria-label={`Color ${hex}`}
           />
         ))}
       </div>
@@ -212,7 +210,7 @@ const DesignCard: React.FC<DesignCardProps> = ({ option, index, onSelect, isGene
 
       {/* CTA */}
       <div className="flex items-center gap-1 text-sm font-semibold text-emerald-600 dark:text-emerald-400 group-hover:gap-2 transition-all">
-        {t('designCard.exploreDesign')}
+        Explore This Design
         <ChevronRight className="w-4 h-4" aria-hidden="true" />
       </div>
     </button>
@@ -238,7 +236,6 @@ export const DesignDetailView: React.FC<DesignDetailViewProps> = ({
   isVisualizing,
   originalImage
 }) => {
-  const { t } = useI18n();
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
       {/* Back button */}
@@ -246,7 +243,7 @@ export const DesignDetailView: React.FC<DesignDetailViewProps> = ({
         onClick={onBack}
         className="flex items-center gap-2 text-stone-600 dark:text-stone-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500 px-2 py-1"
       >
-        <ArrowLeft className="w-4 h-4" /> {t('designDetail.backToDesigns')}
+        <ArrowLeft className="w-4 h-4" /> Back to 3 Designs
       </button>
 
       {/* Hero */}
@@ -264,14 +261,14 @@ export const DesignDetailView: React.FC<DesignDetailViewProps> = ({
               {isVisualizing ? (
                 <>
                   <Loader2 className="w-10 h-10 text-purple-500 animate-spin" />
-                  <p className="text-stone-500 dark:text-stone-400 text-sm">{t('designDetail.generatingViz')}</p>
+                  <p className="text-stone-500 dark:text-stone-400 text-sm">Generating visualization…</p>
                 </>
               ) : (
                 <button
                   onClick={onVisualize}
                   className="px-6 py-3 bg-purple-600 hover:bg-purple-500 text-white font-semibold transition-all shadow-[0_0_20px_-5px_rgba(147,51,234,0.5)] flex items-center gap-2"
                 >
-                  <Sparkles className="w-4 h-4" /> {t('designDetail.generateViz')}
+                  <Sparkles className="w-4 h-4" /> Generate Visualization
                 </button>
               )}
             </div>

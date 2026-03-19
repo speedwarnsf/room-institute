@@ -39,21 +39,21 @@ export const UploadZone: React.FC<UploadZoneProps> = ({ onImageSelected, isAnaly
     
     // Validate file type
     if (!ACCEPTED_TYPES.includes(file.type)) {
-      setError(t('app.error.invalidFileType'));
+      setError('Please upload a JPG, PNG, WebP, or HEIC image.');
       return;
     }
     
     // Validate file size (max 10MB)
     const maxSize = 10 * 1024 * 1024;
     if (file.size > maxSize) {
-      setError(t('app.error.fileTooLarge'));
+      setError('Image must be smaller than 10MB.');
       return;
     }
     
     // Read and preview the file
     const reader = new FileReader();
     reader.onerror = () => {
-      setError(t('app.error.readFailed'));
+      setError('Failed to read the image file.');
     };
     reader.onloadend = () => {
       setPreview(reader.result as string);
@@ -265,7 +265,7 @@ export const UploadZone: React.FC<UploadZoneProps> = ({ onImageSelected, isAnaly
                 <button 
                   onClick={clearImage}
                   className="bg-red-600/90 text-white p-3 transform hover:scale-110 transition-transform hover:bg-red-500 shadow-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black/40"
-                  aria-label={t('upload.removeImage')}
+                  aria-label="Remove uploaded image"
                 >
                   <X className="w-6 h-6" />
                 </button>
