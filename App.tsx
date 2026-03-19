@@ -1318,25 +1318,24 @@ function AppContent() {
                   )}
 
                   {/* Divider */}
-                  <div className="my-4 border-t border-stone-200 dark:border-stone-700" />
+                  <div className="my-3 border-t border-stone-200 dark:border-stone-700" />
 
-                  {/* Language Switcher */}
-                  <div className="px-4 py-2">
+                  {/* Settings row — same alignment as nav items */}
+                  <div className="flex items-center gap-3 px-4 py-3 text-stone-700 dark:text-stone-300">
                     <LanguageSwitcher />
                   </div>
-
-                  {/* Theme Toggle */}
-                  <div className="px-4 py-2">
+                  <div className="flex items-center gap-3 px-4 py-3 text-stone-700 dark:text-stone-300">
                     <ThemeToggle />
                   </div>
-
-                  {/* Network Status */}
-                  <div className="px-4 py-2">
+                  <div className="flex items-center gap-3 px-4 py-3 text-stone-700 dark:text-stone-300">
                     <NetworkStatus showIndicator={true} />
                   </div>
 
-                  {/* User Pro Badge / Menu at bottom */}
-                  <div className="mt-4 px-4">
+                  {/* Divider */}
+                  <div className="my-3 border-t border-stone-200 dark:border-stone-700" />
+
+                  {/* User menu — full width */}
+                  <div className="px-4 py-3">
                     <UserMenu onOpenPricing={() => { setShowPricing(true); setMobileMenuOpen(false); }} onOpenAuth={() => { setShowAuthGate(true); setMobileMenuOpen(false); }} />
                   </div>
                 </div>
