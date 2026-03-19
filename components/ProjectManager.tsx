@@ -17,6 +17,7 @@ import {
   addBudgetItem, toggleBudgetItemPurchased, deleteBudgetItem,
 } from '../services/projectStorage';
 import { getRooms } from '../services/houseRoomStorage';
+import { useI18n } from '../i18n/I18nContext';
 
 interface ProjectManagerProps {
   onBack: () => void;
@@ -24,6 +25,7 @@ interface ProjectManagerProps {
 }
 
 export const ProjectManager: React.FC<ProjectManagerProps> = ({ onBack, onOpenRoom }) => {
+  const { t } = useI18n();
   const [projects, setProjects] = useState<Project[]>([]);
   const [rooms, setRooms] = useState<Room[]>([]);
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
@@ -94,7 +96,7 @@ export const ProjectManager: React.FC<ProjectManagerProps> = ({ onBack, onOpenRo
           <h3 className="text-sm font-semibold text-stone-700 dark:text-stone-300 uppercase tracking-wide">Create Project</h3>
           <input
             type="text"
-            placeholder="Project name (e.g., Kitchen + Living Room Renovation)"
+            placeholder={t('project.namePrompt')}
             value={newName}
             onChange={e => setNewName(e.target.value)}
             className="w-full px-3 py-2 bg-stone-50 dark:bg-stone-700 border border-stone-200 dark:border-stone-600 text-stone-800 dark:text-stone-100 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
@@ -102,7 +104,7 @@ export const ProjectManager: React.FC<ProjectManagerProps> = ({ onBack, onOpenRo
             onKeyDown={e => { if (e.key === 'Enter') handleCreate(); }}
           />
           <textarea
-            placeholder="Description (optional)"
+            placeholder={t('project.descriptionOptional')}
             value={newDesc}
             onChange={e => setNewDesc(e.target.value)}
             rows={2}
@@ -452,7 +454,7 @@ const ProjectDetail: React.FC<{
                       <button
                         onClick={() => handleRemoveRoom(room.id)}
                         className="p-1.5 text-stone-400 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"
-                        title="Remove from project"
+                        title={t('project.removeFromProject')}
                       >
                         <Unlink className="w-4 h-4" />
                       </button>
@@ -525,7 +527,7 @@ const ProjectDetail: React.FC<{
           <textarea
             value={notes}
             onChange={e => setNotes(e.target.value)}
-            placeholder="Project notes, inspiration links, contractor info, timeline..."
+            placeholder={t('project.notesPlaceholder')}
             rows={10}
             className="w-full px-3 py-2 bg-stone-50 dark:bg-stone-700 border border-stone-200 dark:border-stone-600 text-stone-800 dark:text-stone-100 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"
           />
@@ -579,7 +581,7 @@ const ProjectDetail: React.FC<{
                 type="text"
                 value={newItemDesc}
                 onChange={e => setNewItemDesc(e.target.value)}
-                placeholder="Description"
+                placeholder={t('project.description')}
                 className="flex-1 min-w-[150px] px-3 py-2 bg-white dark:bg-stone-700 border border-stone-200 dark:border-stone-600 text-stone-800 dark:text-stone-100 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
               <input

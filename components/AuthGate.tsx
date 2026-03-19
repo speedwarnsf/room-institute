@@ -44,7 +44,7 @@ export function AuthGate({ onClose, message }: AuthGateProps) {
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-stone-400 hover:text-stone-200 transition-colors"
-          aria-label="Close"
+          aria-label={t('common.close')}
         >
           <X className="w-5 h-5" />
         </button>
@@ -79,7 +79,7 @@ export function AuthGate({ onClose, message }: AuthGateProps) {
                   catch (err: any) { setError(err.message || 'Login failed'); }
                   finally { setLoading(false); }
                 })()}
-                placeholder="Password"
+                placeholder={t('auth.password')}
                 className="w-full px-4 py-3 bg-stone-800 border border-stone-600 text-white placeholder-stone-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
               />
               <button

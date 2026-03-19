@@ -22,6 +22,7 @@ interface NetworkStatusProps {
 }
 
 export function NetworkStatus({ onNetworkChange, showIndicator = true, className = '' }: NetworkStatusProps) {
+  const { t } = useI18n();
   const [status, setStatus] = useState<NetworkStatus>({
     isOnline: navigator.onLine,
     isSlowConnection: false,
@@ -148,17 +149,17 @@ export function NetworkStatus({ onNetworkChange, showIndicator = true, className
         {status.isOnline ? (
           <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400">
             {status.isSlowConnection ? (
-              <div className="flex items-center gap-1" title="Slow connection detected">
+              <div className="flex items-center gap-1" title={t('network.slowConnection')}>
                 <Wifi className="w-4 h-4" />
                 <div className="w-1 h-1 bg-orange-500 animate-pulse" />
               </div>
             ) : (
-              <Wifi className="w-4 h-4" aria-label="Connected" />
+              <Wifi className="w-4 h-4" aria-label={t('network.connected')} />
             )}
           </div>
         ) : (
           <div className="flex items-center gap-2 text-red-500 dark:text-red-400">
-            <WifiOff className="w-4 h-4" aria-label="Offline" />
+            <WifiOff className="w-4 h-4" aria-label={t('network.offline')} />
           </div>
         )}
       </div>

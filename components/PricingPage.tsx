@@ -149,7 +149,7 @@ export function PricingPage({ onClose, onNeedAuth }: PricingPageProps) {
         <button
           onClick={onClose}
           className="absolute -top-2 -right-2 z-10 w-8 h-8 bg-stone-800 border border-stone-600 flex items-center justify-center text-stone-400 hover:text-white transition-colors"
-          aria-label="Close pricing"
+          aria-label={t('pricing.close')}
         >
           <X className="w-4 h-4" />
         </button>

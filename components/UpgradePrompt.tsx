@@ -28,7 +28,7 @@ export function UpgradePrompt({ message, onUpgrade, onDismiss, onSignIn }: Upgra
         <button
           onClick={onDismiss}
           className="absolute top-4 right-4 text-stone-400 hover:text-stone-200 transition-colors"
-          aria-label="Dismiss"
+          aria-label={t('common.dismiss')}
         >
           <X className="w-5 h-5" />
         </button>

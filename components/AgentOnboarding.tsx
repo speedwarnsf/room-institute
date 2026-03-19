@@ -271,8 +271,8 @@ export default function AgentOnboarding() {
       {/* Header */}
       <div className="border-b border-stone-800">
         <div className="max-w-2xl mx-auto px-6 py-6">
-          <Link to="/" className="text-emerald-500 hover:text-emerald-400 transition-colors">
-            Room
+          <Link to="/" className="hover:opacity-80 transition-opacity">
+            <img src="/room-logo.png" alt="Room" style={{ height: 24 }} />
           </Link>
           <h1
             className="text-3xl md:text-4xl font-bold text-stone-100 mt-4"

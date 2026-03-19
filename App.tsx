@@ -1221,7 +1221,7 @@ function AppContent() {
           <button
             onClick={() => setMobileMenuOpen(true)}
             className="sm:hidden p-2 text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
-            aria-label="Open menu"
+            aria-label={t('nav.openMenu')}
           >
             <Menu className="w-6 h-6" />
           </button>

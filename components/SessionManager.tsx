@@ -5,14 +5,14 @@
  */
 
 import { useState, useCallback, useMemo } from 'react';
-import { 
-  Save, 
-  FolderOpen, 
-  Trash2, 
-  Download, 
-  Upload, 
-  Search, 
-  Clock, 
+import {
+  Save,
+  FolderOpen,
+  Trash2,
+  Download,
+  Upload,
+  Search,
+  Clock,
   MessageSquare,
   X,
   Check,
@@ -30,6 +30,7 @@ import {
   searchSessions,
   getStorageInfo
 } from '../services/sessionStorage';
+import { useI18n } from '../i18n/I18nContext';
 
 // ============================================================================
 // TYPES
@@ -56,6 +57,7 @@ export function SessionManager({
   onSaveSession,
   hasUnsavedChanges = false
 }: SessionManagerProps) {
+  const { t } = useI18n();
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -156,10 +158,10 @@ export function SessionManager({
         <button
           onClick={onSaveSession}
           className={`flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2
-            ${hasUnsavedChanges 
-              ? 'bg-emerald-100 text-emerald-700 hover:bg-emerald-200' 
+            ${hasUnsavedChanges
+              ? 'bg-emerald-100 text-emerald-700 hover:bg-emerald-200'
               : 'bg-stone-100 text-stone-600 hover:bg-stone-200'}`}
-          title="Save Session"
+          title={t('session.save')}
         >
           <Save className="w-4 h-4" />
           <span className="hidden sm:inline">Save</span>
@@ -168,7 +170,7 @@ export function SessionManager({
         <button
           onClick={handleOpen}
           className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium bg-stone-100 text-stone-600 hover:bg-stone-200 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
-          title="Open Sessions"
+          title={t('session.openSessions')}
         >
           <FolderOpen className="w-4 h-4" />
           <span className="hidden sm:inline">Sessions</span>
@@ -202,7 +204,7 @@ export function SessionManager({
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
                 <input
                   type="text"
-                  placeholder="Search sessions..."
+                  placeholder={t('session.searchPlaceholder')}
                   value={searchQuery}
                   onChange={e => setSearchQuery(e.target.value)}
                   className="w-full pl-10 pr-4 py-2 border border-stone-200 dark:border-stone-600 bg-white dark:bg-stone-700 text-stone-800 dark:text-stone-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-sm"
@@ -305,14 +307,14 @@ export function SessionManager({
                             <button
                               onClick={() => handleDelete(session.id)}
                               className="p-2 bg-red-100 hover:bg-red-200 text-red-600"
-                              title="Confirm delete"
+                              title={t('common.confirmDelete')}
                             >
                               <Check className="w-4 h-4" />
                             </button>
                             <button
                               onClick={() => setConfirmDeleteId(null)}
                               className="p-2 bg-stone-100 hover:bg-stone-200"
-                              title="Cancel"
+                              title={t('common.cancel')}
                             >
                               <X className="w-4 h-4" />
                             </button>
@@ -322,28 +324,28 @@ export function SessionManager({
                             <button
                               onClick={() => handleLoad(session.id)}
                               className="p-2 bg-emerald-100 hover:bg-emerald-200 text-emerald-600"
-                              title="Open session"
+                              title={t('session.openSession')}
                             >
                               <FolderOpen className="w-4 h-4" />
                             </button>
                             <button
                               onClick={() => handleStartRename(session)}
                               className="p-2 hover:bg-stone-200"
-                              title="Rename"
+                              title={t('common.rename')}
                             >
                               <Edit2 className="w-4 h-4 text-stone-500" />
                             </button>
                             <button
                               onClick={() => handleExport(session.id)}
                               className="p-2 hover:bg-stone-200"
-                              title="Export"
+                              title={t('common.export')}
                             >
                               <Download className="w-4 h-4 text-stone-500" />
                             </button>
                             <button
                               onClick={() => setConfirmDeleteId(session.id)}
                               className="p-2 hover:bg-red-100"
-                              title="Delete"
+                              title={t('common.delete')}
                             >
                               <Trash2 className="w-4 h-4 text-stone-500" />
                             </button>

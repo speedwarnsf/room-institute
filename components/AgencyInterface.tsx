@@ -216,10 +216,8 @@ export function AgencyInterface() {
                   style={{ width: 256, height: 256 }}
                 >
                   <div className="text-center">
-                    <p className="text-emerald-500 text-[10px] tracking-widest uppercase mb-1" style={{ fontFamily: 'Nunito, sans-serif' }}>
-                      Room
-                    </p>
-                    <p className="text-stone-300 text-xs font-medium">Living Room</p>
+                    <img src="/room-logo.png" alt="Room" style={{ height: 16 }} className="mx-auto mb-1" />
+                    <p className="text-stone-300 text-xs font-medium">{t('room.livingRoom')}</p>
                   </div>
 
                   {/* QR placeholder */}

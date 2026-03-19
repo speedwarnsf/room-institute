@@ -41,6 +41,18 @@ const translations = {
     'nav.discover': 'Discover inspiration',
     'nav.myRooms': 'My Rooms',
     'nav.projects': 'Projects',
+    'nav.openMenu': 'Open menu',
+    'nav.changeLanguage': 'Change language',
+
+    // Common
+    'common.close': 'Close',
+    'common.rename': 'Rename',
+    'common.delete': 'Delete',
+    'common.confirmDelete': 'Confirm delete',
+    'common.dismiss': 'Dismiss',
+
+    // Auth
+    'auth.password': 'Password',
 
     // Listing experience
     'listing.swipe': 'Swipe to explore design possibilities',
@@ -221,11 +233,56 @@ const translations = {
     'products.asPurchased': 'as purchased',
     'products.shopButton': 'Shop',
     'products.shopFor': 'Shop for',
+    'products.copyListLabel': 'Copy shopping list to clipboard',
 
     // Share
     'share.sharedDesign': 'Shared Design',
     'share.designYourRoom': 'Design Your Room',
     'share.createdWith': 'Created with Room — AI-powered interior design',
+    'share.design': 'Share design',
+
+    // Design
+    'design.compareImages': 'Compare before and after images',
+    'design.addNote': 'Add a note...',
+
+    // Export
+    'export.downloadImage': 'Download design image',
+    'export.downloadPdf': 'Download PDF report',
+    'export.moreOptions': 'More export options',
+    'export.options': 'Export and download options',
+
+    // Rooms
+    'rooms.regenerateAll': 'Regenerate all designs',
+    'rooms.removeRoom': 'Remove room',
+    'rooms.setHero': 'Set as hero image',
+    'rooms.saveToRoom': 'Save design to room',
+
+    // Network
+    'network.slowConnection': 'Slow connection detected',
+    'network.connected': 'Connected',
+    'network.offline': 'Offline',
+
+    // Preferences
+    'prefs.designStyleLabel': 'Design style',
+    'prefs.roomTypeLabel': 'Room type',
+
+    // Project
+    'project.namePrompt': 'Project name...',
+    'project.descriptionOptional': 'Description (optional)',
+    'project.removeFromProject': 'Remove from project',
+    'project.notesPlaceholder': 'Project notes...',
+    'project.description': 'Description',
+
+    // Session
+    'session.save': 'Save Session',
+    'session.searchPlaceholder': 'Search sessions...',
+
+    // Taste Profile
+    'taste.profile': 'Taste Profile',
+
+    // Accessibility
+    'a11y.settings': 'Accessibility settings',
+    'a11y.settingsTitle': 'Accessibility Settings',
 
     // Footer
     'footer.poweredBy': 'Powered by Room Institute',
@@ -313,6 +370,7 @@ const translations = {
     'pricing.free.savedRoom': '1 saved room',
     'pricing.free.noStudio': 'No Design Studio access',
     'pricing.free.noExport': 'No PDF export',
+    'pricing.close': 'Close pricing',
 
     // NotFound
     'notFound.404': '404',
@@ -488,6 +546,12 @@ const translations = {
     'upload.previewAlt': 'Preview of uploaded room',
     'upload.removeImage': 'Remove uploaded image',
     'nav.returnHome': 'Return to home',
+    'session.openSessions': 'Open Sessions',
+    'session.openSession': 'Open session',
+    'common.cancel': 'Cancel',
+    'common.rename': 'Rename',
+    'common.export': 'Export',
+    'common.delete': 'Delete',
     'nav.startOver': 'Start over with a new image',
     'app.retryAnalysis': 'Try analyzing the image again',
     'app.goHome': 'Go back to home',
@@ -1040,6 +1104,12 @@ const translations = {
     'upload.previewAlt': 'Aperçu de la pièce téléchargée',
     'upload.removeImage': 'Supprimer l\'image téléchargée',
     'nav.returnHome': 'Retour à l\'accueil',
+    'session.openSessions': 'Ouvrir les sessions',
+    'session.openSession': 'Ouvrir la session',
+    'common.cancel': 'Annuler',
+    'common.rename': 'Renommer',
+    'common.export': 'Exporter',
+    'common.delete': 'Supprimer',
     'nav.startOver': 'Recommencer avec une nouvelle image',
     'app.retryAnalysis': 'Réessayer l\'analyse',
     'app.goHome': 'Retourner à l\'accueil',
@@ -1579,6 +1649,12 @@ const translations = {
     'upload.previewAlt': 'Vorschau des hochgeladenen Raums',
     'upload.removeImage': 'Hochgeladenes Bild entfernen',
     'nav.returnHome': 'Zurück zur Startseite',
+    'session.openSessions': 'Sitzungen öffnen',
+    'session.openSession': 'Sitzung öffnen',
+    'common.cancel': 'Abbrechen',
+    'common.rename': 'Umbenennen',
+    'common.export': 'Exportieren',
+    'common.delete': 'Löschen',
     'nav.startOver': 'Mit neuem Bild beginnen',
     'app.retryAnalysis': 'Analyse erneut versuchen',
     'app.goHome': 'Zurück zur Startseite',
@@ -2082,6 +2158,12 @@ const translations = {
     'upload.previewAlt': 'Vista previa de habitación subida',
     'upload.removeImage': 'Eliminar imagen subida',
     'nav.returnHome': 'Volver al inicio',
+    'session.openSessions': 'Abrir sesiones',
+    'session.openSession': 'Abrir sesión',
+    'common.cancel': 'Cancelar',
+    'common.rename': 'Renombrar',
+    'common.export': 'Exportar',
+    'common.delete': 'Eliminar',
     'nav.startOver': 'Comenzar con nueva imagen',
     'app.retryAnalysis': 'Reintentar análisis',
     'app.goHome': 'Volver al inicio',
@@ -2585,6 +2667,12 @@ const translations = {
     'upload.previewAlt': '上传房间的预览',
     'upload.removeImage': '移除上传的图像',
     'nav.returnHome': '返回首页',
+    'session.openSessions': '打开会话',
+    'session.openSession': '打开会话',
+    'common.cancel': '取消',
+    'common.rename': '重命名',
+    'common.export': '导出',
+    'common.delete': '删除',
     'nav.startOver': '使用新图片重新开始',
     'app.retryAnalysis': '重新分析',
     'app.goHome': '返回首页',
@@ -3088,6 +3176,12 @@ const translations = {
     'upload.previewAlt': 'Pré-visualização do cômodo enviado',
     'upload.removeImage': 'Remover imagem enviada',
     'nav.returnHome': 'Voltar ao início',
+    'session.openSessions': 'Abrir sessões',
+    'session.openSession': 'Abrir sessão',
+    'common.cancel': 'Cancelar',
+    'common.rename': 'Renomear',
+    'common.export': 'Exportar',
+    'common.delete': 'Excluir',
     'nav.startOver': 'Começar com nova imagem',
     'app.retryAnalysis': 'Tentar análise novamente',
     'app.goHome': 'Voltar ao início',

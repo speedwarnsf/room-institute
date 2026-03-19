@@ -8,7 +8,7 @@ import { LOCALE_NAMES, type SupportedLocale } from '../i18n/translations';
  * Designed to sit in the header bar of buyer-facing pages
  */
 export function LanguageSwitcher() {
-  const { locale, setLocale } = useI18n();
+  const { t, locale, setLocale } = useI18n();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -32,7 +32,7 @@ export function LanguageSwitcher() {
       <button
         onClick={() => setOpen(!open)}
         className="flex items-center gap-1.5 text-stone-400 hover:text-stone-200 transition-colors p-1"
-        aria-label="Change language"
+        aria-label={t('nav.changeLanguage')}
       >
         <Globe className="w-4 h-4" />
         <span className="text-[10px] uppercase tracking-wider">{locale}</span>
