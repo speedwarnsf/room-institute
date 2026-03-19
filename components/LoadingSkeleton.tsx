@@ -1,4 +1,5 @@
 import React from 'react';
+import { useI18n } from '../i18n/I18nContext';
 
 interface SkeletonProps {
   /** CSS class names to apply */
@@ -26,11 +27,12 @@ export const Skeleton: React.FC<SkeletonProps> = ({
  * Loading skeleton for the analysis display
  */
 export const AnalysisSkeleton: React.FC = () => {
+  const { t } = useI18n();
   return (
-    <div 
+    <div
       className="space-y-8"
       role="status"
-      aria-label="Loading analysis results"
+      aria-label={(t as any)('loading.analysisResults')}
     >
       {/* Analysis Card Skeleton */}
       <div className="bg-white shadow-sm border border-stone-100 p-6 md:p-8">
@@ -102,8 +104,8 @@ export const AnalysisSkeleton: React.FC = () => {
           ))}
         </div>
       </div>
-      
-      <span className="sr-only">Loading analysis, please wait...</span>
+
+      <span className="sr-only">{(t as any)('loading.analysisPleaseWait')}</span>
     </div>
   );
 };
@@ -112,11 +114,12 @@ export const AnalysisSkeleton: React.FC = () => {
  * Loading skeleton for the chat interface
  */
 export const ChatSkeleton: React.FC = () => {
+  const { t } = useI18n();
   return (
-    <div 
+    <div
       className="flex flex-col h-[600px] bg-white shadow-sm border border-stone-100 overflow-hidden"
       role="status"
-      aria-label="Loading chat interface"
+      aria-label={(t as any)('loading.chatInterface')}
     >
       {/* Header */}
       <div className="p-4 border-b border-stone-100 bg-emerald-50/50 flex items-center gap-2">
@@ -138,8 +141,8 @@ export const ChatSkeleton: React.FC = () => {
       <div className="p-4 border-t border-stone-100">
         <Skeleton className="w-full h-12" />
       </div>
-      
-      <span className="sr-only">Loading chat, please wait...</span>
+
+      <span className="sr-only">{(t as any)('loading.chatPleaseWait')}</span>
     </div>
   );
 };

@@ -1,7 +1,9 @@
 import { useTheme } from './ThemeContext';
 import { Sun, Moon, Monitor } from 'lucide-react';
+import { useI18n } from '../i18n/I18nContext';
 
 export function ThemeToggle() {
+  const { t } = useI18n();
   const { theme, toggleTheme } = useTheme();
 
   const getIcon = () => {
@@ -18,11 +20,11 @@ export function ThemeToggle() {
   const getLabel = () => {
     switch (theme) {
       case 'light':
-        return 'Light mode';
+        return (t as any)('theme.lightMode');
       case 'dark':
-        return 'Dark mode';
+        return (t as any)('theme.darkMode');
       case 'system':
-        return 'System theme';
+        return (t as any)('theme.systemTheme');
     }
   };
 
@@ -30,7 +32,7 @@ export function ThemeToggle() {
     <button
       onClick={toggleTheme}
       className="p-2 text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
-      aria-label={`Current: ${getLabel()}. Click to change.`}
+      aria-label={(t as any)('theme.currentClickToChange').replace('{mode}', getLabel())}
       title={getLabel()}
     >
       {getIcon()}

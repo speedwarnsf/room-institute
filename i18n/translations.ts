@@ -525,6 +525,38 @@ const translations = {
     'user.rooms': 'Rooms',
     'user.upgradeToPro': 'Upgrade to Pro',
     'user.signOut': 'Sign out',
+
+    // LoadingSkeleton.tsx
+    'loading.analysisResults': 'Loading analysis results',
+    'loading.analysisPleaseWait': 'Loading analysis, please wait...',
+    'loading.chatInterface': 'Loading chat interface',
+    'loading.chatPleaseWait': 'Loading chat, please wait...',
+
+    // RegenerateTweaks.tsx
+    'tweaks.regenerateWith': 'Regenerate with Tweaks',
+    'tweaks.keepAdjust': 'Keep "{designName}" but adjust one parameter',
+    'tweaks.lighter': 'Lighter',
+    'tweaks.darker': 'Darker',
+    'tweaks.moreMinimal': 'More Minimal',
+    'tweaks.moreLayered': 'More Layered',
+    'tweaks.warmerTones': 'Warmer Tones',
+    'tweaks.coolerTones': 'Cooler Tones',
+    'tweaks.customPlaceholder': 'Or describe your own tweak...',
+    'tweaks.go': 'Go',
+
+    // ThemeToggle.tsx
+    'theme.lightMode': 'Light mode',
+    'theme.darkMode': 'Dark mode',
+    'theme.systemTheme': 'System theme',
+    'theme.currentClickToChange': 'Current: {mode}. Click to change.',
+
+    // TrendingStyles.tsx
+    'trending.title': 'Trending Styles',
+    'trending.exploreAll': 'Explore all',
+
+    // NetworkStatus.tsx
+    'network.offline': 'Offline',
+    'network.featureRequiresConnection': 'This feature requires an internet connection',
   },
 
   fr: {
@@ -998,6 +1030,30 @@ const translations = {
     'user.rooms': 'Pièces',
     'user.upgradeToPro': 'Passer à Pro',
     'user.signOut': 'Se déconnecter',
+
+    'loading.analysisResults': 'Chargement des résultats d\'analyse',
+    'loading.analysisPleaseWait': 'Chargement de l\'analyse, veuillez patienter...',
+    'loading.chatInterface': 'Chargement de l\'interface de chat',
+    'loading.chatPleaseWait': 'Chargement du chat, veuillez patienter...',
+
+    'tweaks.regenerateWith': 'Régénérer avec des ajustements',
+    'tweaks.keepAdjust': 'Conserver "{designName}" mais ajuster un paramètre',
+    'tweaks.lighter': 'Plus clair',
+    'tweaks.darker': 'Plus foncé',
+    'tweaks.moreMinimal': 'Plus minimaliste',
+    'tweaks.moreLayered': 'Plus stratifié',
+    'tweaks.warmerTones': 'Tons plus chauds',
+    'tweaks.coolerTones': 'Tons plus froids',
+    'tweaks.customPlaceholder': 'Ou décrivez votre propre ajustement...',
+    'tweaks.go': 'Aller',
+
+    'theme.lightMode': 'Mode clair',
+    'theme.darkMode': 'Mode sombre',
+    'theme.systemTheme': 'Thème système',
+    'theme.currentClickToChange': 'Actuel : {mode}. Cliquez pour changer.',
+
+    'trending.title': 'Styles tendance',
+    'trending.exploreAll': 'Tout explorer',
   },
 
   de: {

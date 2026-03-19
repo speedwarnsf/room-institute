@@ -3,25 +3,27 @@
  */
 import { ArrowRight } from 'lucide-react';
 import { getTrendingStyles, getImageById } from '../services/inspirationData';
+import { useI18n } from '../i18n/I18nContext';
 
 interface TrendingStylesProps {
   onOpenDiscover: () => void;
 }
 
 export function TrendingStyles({ onOpenDiscover }: TrendingStylesProps) {
+  const { t } = useI18n();
   const trending = getTrendingStyles();
 
   return (
     <section className="w-full max-w-5xl mx-auto mt-20 mb-8">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-xl font-serif font-bold text-stone-800 dark:text-stone-200">
-          Trending Styles
+          {(t as any)('trending.title')}
         </h2>
         <button
           onClick={onOpenDiscover}
           className="flex items-center gap-1.5 text-sm font-medium text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors"
         >
-          Explore all
+          {(t as any)('trending.exploreAll')}
           <ArrowRight className="w-4 h-4" />
         </button>
       </div>

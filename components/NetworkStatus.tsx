@@ -5,6 +5,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Wifi, WifiOff, AlertCircle, CheckCircle, CloudOff } from 'lucide-react';
 import { analytics } from '../services/analytics';
+import { useI18n } from '../i18n/I18nContext';
 
 interface NetworkStatus {
   isOnline: boolean;
@@ -296,20 +297,21 @@ export function useNetworkStatus() {
 // Higher-order component for offline-aware components
 export function withOfflineSupport<P extends object>(
   Component: React.ComponentType<P>,
-  offlineMessage = "This feature requires an internet connection"
+  customOfflineMessage?: string
 ) {
   return function OfflineAwareComponent(props: P) {
     const { isOnline } = useNetworkStatus();
+    const { t } = useI18n();
 
     if (!isOnline) {
       return (
         <div className="flex flex-col items-center justify-center py-8 text-center">
           <CloudOff className="w-12 h-12 text-stone-400 dark:text-stone-500 mb-4" />
           <h3 className="text-lg font-medium text-stone-700 dark:text-stone-300 mb-2">
-            Offline
+            {(t as any)('network.offline')}
           </h3>
           <p className="text-stone-500 dark:text-stone-400 max-w-md">
-            {offlineMessage}
+            {customOfflineMessage || (t as any)('network.featureRequiresConnection')}
           </p>
         </div>
       );

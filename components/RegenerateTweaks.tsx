@@ -1,20 +1,21 @@
 import { useState, useCallback } from 'react';
 import { Loader2, Sun, Moon, Minus, Plus, Paintbrush, Thermometer } from 'lucide-react';
+import { useI18n } from '../i18n/I18nContext';
 
 export interface TweakOption {
   id: string;
-  label: string;
+  labelKey: string;
   prompt: string;
   icon: React.ReactNode;
 }
 
 const TWEAKS: TweakOption[] = [
-  { id: 'lighter', label: 'Lighter', prompt: 'Make the overall design lighter and more airy, with brighter tones', icon: <Sun className="w-4 h-4" /> },
-  { id: 'darker', label: 'Darker', prompt: 'Make the design darker and moodier, with deeper tones', icon: <Moon className="w-4 h-4" /> },
-  { id: 'minimal', label: 'More Minimal', prompt: 'Simplify the design, remove visual clutter, keep only essential elements', icon: <Minus className="w-4 h-4" /> },
-  { id: 'layered', label: 'More Layered', prompt: 'Add more texture, layers, and visual richness to the design', icon: <Plus className="w-4 h-4" /> },
-  { id: 'warmer', label: 'Warmer Tones', prompt: 'Shift the color palette warmer — more amber, terracotta, warm wood', icon: <Thermometer className="w-4 h-4" /> },
-  { id: 'cooler', label: 'Cooler Tones', prompt: 'Shift the color palette cooler — more blue, grey, cool green', icon: <Paintbrush className="w-4 h-4" /> },
+  { id: 'lighter', labelKey: 'tweaks.lighter', prompt: 'Make the overall design lighter and more airy, with brighter tones', icon: <Sun className="w-4 h-4" /> },
+  { id: 'darker', labelKey: 'tweaks.darker', prompt: 'Make the design darker and moodier, with deeper tones', icon: <Moon className="w-4 h-4" /> },
+  { id: 'minimal', labelKey: 'tweaks.moreMinimal', prompt: 'Simplify the design, remove visual clutter, keep only essential elements', icon: <Minus className="w-4 h-4" /> },
+  { id: 'layered', labelKey: 'tweaks.moreLayered', prompt: 'Add more texture, layers, and visual richness to the design', icon: <Plus className="w-4 h-4" /> },
+  { id: 'warmer', labelKey: 'tweaks.warmerTones', prompt: 'Shift the color palette warmer — more amber, terracotta, warm wood', icon: <Thermometer className="w-4 h-4" /> },
+  { id: 'cooler', labelKey: 'tweaks.coolerTones', prompt: 'Shift the color palette cooler — more blue, grey, cool green', icon: <Paintbrush className="w-4 h-4" /> },
 ];
 
 interface RegenerateTweaksProps {
@@ -24,6 +25,7 @@ interface RegenerateTweaksProps {
 }
 
 export function RegenerateTweaks({ onTweak, designName, className = '' }: RegenerateTweaksProps) {
+  const { t } = useI18n();
   const [activeTweak, setActiveTweak] = useState<string | null>(null);
   const [customTweak, setCustomTweak] = useState('');
 
@@ -52,10 +54,10 @@ export function RegenerateTweaks({ onTweak, designName, className = '' }: Regene
     <div className={`space-y-4 ${className}`}>
       <div>
         <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-500 dark:text-stone-400 mb-1">
-          Regenerate with Tweaks
+          {(t as any)('tweaks.regenerateWith')}
         </h4>
         <p className="text-xs text-stone-400 dark:text-stone-500">
-          Keep "{designName}" but adjust one parameter
+          {(t as any)('tweaks.keepAdjust').replace('{designName}', designName)}
         </p>
       </div>
 
@@ -78,7 +80,7 @@ export function RegenerateTweaks({ onTweak, designName, className = '' }: Regene
             ) : (
               tweak.icon
             )}
-            {tweak.label}
+            {(t as any)(tweak.labelKey)}
           </button>
         ))}
       </div>
@@ -90,7 +92,7 @@ export function RegenerateTweaks({ onTweak, designName, className = '' }: Regene
           value={customTweak}
           onChange={(e) => setCustomTweak(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleCustomTweak()}
-          placeholder="Or describe your own tweak..."
+          placeholder={(t as any)('tweaks.customPlaceholder')}
           disabled={!!activeTweak}
           className="flex-1 px-3 py-2 text-sm bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 text-stone-800 dark:text-stone-200 placeholder-stone-400 dark:placeholder-stone-600 focus:outline-none focus:ring-1 focus:ring-emerald-500 disabled:opacity-50"
         />
@@ -99,7 +101,7 @@ export function RegenerateTweaks({ onTweak, designName, className = '' }: Regene
           disabled={!customTweak.trim() || !!activeTweak}
           className="px-4 py-2 text-sm font-medium bg-emerald-600 text-white hover:bg-emerald-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
         >
-          {activeTweak === 'custom' ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Go'}
+          {activeTweak === 'custom' ? <Loader2 className="w-4 h-4 animate-spin" /> : (t as any)('tweaks.go')}
         </button>
       </div>
     </div>
