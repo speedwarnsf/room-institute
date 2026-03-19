@@ -12,7 +12,7 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-const STORAGE_KEY = 'zenspace-theme';
+const STORAGE_KEY = 'room-institute-theme';
 
 function getSystemTheme(): ResolvedTheme {
   if (typeof window !== 'undefined') {

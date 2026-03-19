@@ -64,7 +64,7 @@ export function onAuthStateChange(callback: (user: User | null, session: Session
  * Get or create an anonymous ID for free-tier tracking (no account needed)
  */
 export function getAnonymousId(): string {
-  const key = 'zenspace-anonymous-id';
+  const key = 'room-institute-anonymous-id';
   let id = localStorage.getItem(key);
   if (!id) {
     id = `anon-${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;

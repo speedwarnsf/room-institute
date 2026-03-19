@@ -1,5 +1,5 @@
 /**
- * Performance Monitoring Utilities for ZenSpace
+ * Performance Monitoring Utilities for Room
  * 
  * Provides tools for measuring and tracking performance metrics including:
  * - Image compression timing

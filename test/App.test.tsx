@@ -1,5 +1,5 @@
 /**
- * ZenSpace - App Component Tests
+ * Room - App Component Tests
  */
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';

@@ -86,7 +86,7 @@ export async function incrementUsage(userId: string, type: 'generation' | 'itera
  */
 export async function getFreeUsage(): Promise<number> {
   // First check localStorage (works offline, instant)
-  const local = localStorage.getItem('zenspace-free-generations');
+  const local = localStorage.getItem('room-institute-free-generations');
   const localCount = local ? parseInt(local, 10) : 0;
 
   // Try to sync with Supabase
@@ -102,7 +102,7 @@ export async function getFreeUsage(): Promise<number> {
       const serverCount = data.generations;
       // Use the higher of local vs server (in case of sync issues)
       const best = Math.max(localCount, serverCount);
-      localStorage.setItem('zenspace-free-generations', String(best));
+      localStorage.setItem('room-institute-free-generations', String(best));
       return best;
     }
   } catch {
@@ -117,8 +117,8 @@ export async function getFreeUsage(): Promise<number> {
  */
 export async function incrementFreeUsage(): Promise<void> {
   // Always update localStorage (works offline)
-  const current = parseInt(localStorage.getItem('zenspace-free-generations') || '0', 10);
-  localStorage.setItem('zenspace-free-generations', String(current + 1));
+  const current = parseInt(localStorage.getItem('room-institute-free-generations') || '0', 10);
+  localStorage.setItem('room-institute-free-generations', String(current + 1));
 
   // Try to sync with Supabase
   try {

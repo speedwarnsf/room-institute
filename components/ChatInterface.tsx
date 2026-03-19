@@ -70,7 +70,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
       <header className="p-4 border-b border-stone-100 dark:border-stone-700 bg-emerald-50/50 dark:bg-emerald-900/20 flex items-center gap-2">
         <Bot className="w-5 h-5 text-emerald-600 dark:text-emerald-400" aria-hidden="true" />
         <h3 id="chat-heading" className="font-semibold text-stone-800 dark:text-stone-100">
-          Chat with ZenSpace AI
+          Chat with Room AI
         </h3>
       </header>
 
@@ -99,7 +99,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
           <article
             key={msg.id}
             className={`flex w-full ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
-            aria-label={`${msg.role === 'user' ? 'You' : 'ZenSpace'} said at ${formatTime(msg.timestamp)}`}
+            aria-label={`${msg.role === 'user' ? 'You' : 'Room'} said at ${formatTime(msg.timestamp)}`}
           >
             <div
               className={`
@@ -121,7 +121,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
                 ) : (
                   <Bot className="w-3 h-3" aria-hidden="true" />
                 )}
-                <span>{msg.role === 'user' ? 'You' : 'ZenSpace'}</span>
+                <span>{msg.role === 'user' ? 'You' : 'Room'}</span>
               </div>
               
               {/* Message Content */}
@@ -139,7 +139,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
           <div 
             className="flex justify-start w-full"
             role="status"
-            aria-label="ZenSpace is typing"
+            aria-label="Room is typing"
           >
             <div className="bg-stone-100 dark:bg-stone-700-none p-4 flex items-center gap-2">
               <Loader2 
@@ -178,7 +178,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
           />
           {isTyping && (
             <span id="typing-status" className="sr-only">
-              Please wait, ZenSpace is responding
+              Please wait, Room is responding
             </span>
           )}
           <button

@@ -160,7 +160,7 @@ export function getTasteSummary(profile: TasteProfile): { tendencies: string[]; 
   return { tendencies: [...new Set(tendencies)].slice(0, 4), avoidances: [...new Set(avoidances)].slice(0, 3) };
 }
 
-const TASTE_KEY = 'zenspace-taste-profile';
+const TASTE_KEY = 'room-institute-taste-profile';
 
 export function saveTasteProfile(profile: TasteProfile): void {
   try {

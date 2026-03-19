@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
     return {
-      // Root base path for standalone deployment at zenspace-two.vercel.app
+      // Root base path for standalone deployment at room-institute-two.vercel.app
       base: '/',
       server: {
         port: 3000,

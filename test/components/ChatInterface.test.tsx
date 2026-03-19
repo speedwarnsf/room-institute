@@ -65,7 +65,7 @@ describe('ChatInterface', () => {
     );
     
     expect(screen.getByText('I recommend using a bookshelf.')).toBeInTheDocument();
-    expect(screen.getByText('ZenSpace')).toBeInTheDocument();
+    expect(screen.getByText('Room')).toBeInTheDocument();
   });
 
   it('shows typing indicator when AI is responding', () => {
@@ -78,7 +78,7 @@ describe('ChatInterface', () => {
     );
     
     expect(screen.getByText('Thinking...')).toBeInTheDocument();
-    expect(screen.getByRole('status')).toHaveAttribute('aria-label', 'ZenSpace is typing');
+    expect(screen.getByRole('status')).toHaveAttribute('aria-label', 'Room is typing');
   });
 
   it('renders error messages with proper styling', () => {

@@ -1,5 +1,5 @@
 /**
- * ZenSpace - UploadZone Component Tests
+ * Room - UploadZone Component Tests
  */
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';

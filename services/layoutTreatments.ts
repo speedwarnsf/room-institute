@@ -1,5 +1,5 @@
 /**
- * Layout Treatment System for ZenSpace Design Studio
+ * Layout Treatment System for Room Design Studio
  *
  * Maps design tone/palette/mood to editorial presentation styles.
  * Each treatment defines typography, color, and layout parameters

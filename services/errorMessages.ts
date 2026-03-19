@@ -1,5 +1,5 @@
 /**
- * User-friendly error messages for ZenSpace
+ * User-friendly error messages for Room
  * 
  * This module provides consistent, helpful error messages with:
  * - Clear explanations of what went wrong
@@ -80,7 +80,7 @@ const errorMessages: Record<string, UserErrorMessage> = {
   NETWORK_OFFLINE: {
     title: 'You\'re Offline',
     description: 'Your device appears to be disconnected from the internet.',
-    suggestion: 'Reconnect to the internet and try again. ZenSpace needs an internet connection to analyze images.',
+    suggestion: 'Reconnect to the internet and try again. Room needs an internet connection to analyze images.',
     severity: ErrorSeverity.ERROR,
     category: ErrorCategory.NETWORK,
     isRetryable: true,

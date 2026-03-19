@@ -7,7 +7,7 @@
 import { Project, ProjectBudget, ProjectBudgetItem, ProjectStyleGuide } from '../types';
 import { supabase, getCurrentUser } from './auth';
 
-const PROJECTS_KEY = 'zenspace-projects';
+const PROJECTS_KEY = 'room-institute-projects';
 const MAX_PROJECTS = 20;
 
 // ============================================================================

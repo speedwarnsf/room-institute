@@ -1,5 +1,5 @@
 /**
- * Retry Utilities for ZenSpace
+ * Retry Utilities for Room
  * 
  * Provides robust retry logic for API calls and other operations
  */

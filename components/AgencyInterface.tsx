@@ -217,7 +217,7 @@ export function AgencyInterface() {
                 >
                   <div className="text-center">
                     <p className="text-emerald-500 text-[10px] tracking-widest uppercase mb-1" style={{ fontFamily: 'Nunito, sans-serif' }}>
-                      ZenSpace
+                      Room
                     </p>
                     <p className="text-stone-300 text-xs font-medium">Living Room</p>
                   </div>
@@ -338,7 +338,7 @@ export function AgencyInterface() {
               {t('agency.deployNote')}
             </p>
             <a
-              href="mailto:dustin@zenspace.design"
+              href="mailto:dustin@room.institute"
               className="inline-block px-10 py-4 bg-emerald-500 text-stone-900 font-bold hover:bg-emerald-400 transition-colors text-sm tracking-wide uppercase"
             >
               {t('agency.startConversation')}

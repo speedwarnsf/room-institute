@@ -1,5 +1,5 @@
 /**
- * Advanced Accessibility Features for ZenSpace
+ * Advanced Accessibility Features for Room
  * WCAG 2.1 AA compliant features and enhancements
  */
 import { useState, useEffect, useCallback, createContext, useContext } from 'react';
@@ -38,7 +38,7 @@ export function useAccessibility() {
 export function AccessibilityProvider({ children }: { children: React.ReactNode }) {
   const [settings, setSettings] = useState<AccessibilitySettings>(() => {
     // Initialize from localStorage and system preferences
-    const saved = localStorage.getItem('zenspace-accessibility');
+    const saved = localStorage.getItem('room-institute-accessibility');
     const defaults = {
       reducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
       highContrast: window.matchMedia('(prefers-contrast: high)').matches,
@@ -110,7 +110,7 @@ export function AccessibilityProvider({ children }: { children: React.ReactNode 
   const updateSetting = useCallback((key: keyof AccessibilitySettings, value: boolean) => {
     setSettings(prev => {
       const newSettings = { ...prev, [key]: value };
-      localStorage.setItem('zenspace-accessibility', JSON.stringify(newSettings));
+      localStorage.setItem('room-institute-accessibility', JSON.stringify(newSettings));
       return newSettings;
     });
   }, []);

@@ -1,6 +1,6 @@
 import { AgentProfile } from '../types';
 
-const STORAGE_KEY = 'zenspace_agent_profile';
+const STORAGE_KEY = 'room-institute_agent_profile';
 
 /**
  * Save agent profile to localStorage

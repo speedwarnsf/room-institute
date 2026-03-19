@@ -158,7 +158,7 @@ export function PricingPage({ onClose, onNeedAuth }: PricingPageProps) {
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 mb-4">
             <Sparkles className="w-4 h-4 text-emerald-400" />
-            <span className="text-emerald-400 text-sm font-medium">ZenSpace Pro</span>
+            <span className="text-emerald-400 text-sm font-medium">Room Pro</span>
           </div>
           <h2 style={{ fontFamily: "'Playfair Display', serif" }} className="text-3xl sm:text-4xl font-bold text-white mb-3">
             {t('pricing.transformEveryRoom')}

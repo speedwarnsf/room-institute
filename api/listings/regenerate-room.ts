@@ -250,7 +250,7 @@ ${locale !== 'en' ? `\nLANGUAGE: Write ALL text in ${LOCALE_LANGUAGE_MAP[locale]
 }
 
 // ============================================================================
-// DESIGN GENERATOR (Full ZenSpace engine)
+// DESIGN GENERATOR (Full Room engine)
 // ============================================================================
 async function generateDesignsForRoom(
   photoUrl: string,
@@ -553,7 +553,7 @@ async function uploadThumbnail(
 // ============================================================================
 export default async function handler(req: any, res: any) {
   // CORS
-  const allowedOrigins = ['https://zenspace.design', 'https://zenspace-two.vercel.app', 'http://localhost:3000'];
+  const allowedOrigins = ['https://room.institute', 'https://room-institute-two.vercel.app', 'http://localhost:3000'];
   const origin = req.headers.origin || '';
   if (allowedOrigins.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);

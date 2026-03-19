@@ -1,5 +1,5 @@
 /**
- * Edge Case Handlers for ZenSpace
+ * Edge Case Handlers for Room
  * Robust handling of unusual scenarios and edge cases
  */
 import { compressImage } from './imageCompression';

@@ -60,7 +60,7 @@ export const AnalysisDisplay: React.FC<AnalysisDisplayProps> = ({
    * Generate an Amazon affiliate search link
    */
   const generateAmazonLink = (term: string): string => {
-    return `https://www.amazon.com/s?k=${encodeURIComponent(term)}&tag=zenspace-20`;
+    return `https://www.amazon.com/s?k=${encodeURIComponent(term)}&tag=room-institute-20`;
   };
 
   return (

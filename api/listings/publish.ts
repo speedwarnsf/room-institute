@@ -50,7 +50,7 @@ interface QRCodeResult {
 // ============================================================================
 // QR CODE GENERATOR
 // ============================================================================
-const BASE_URL = 'https://zenspace.design';
+const BASE_URL = 'https://room.institute';
 
 async function generateQRCodesForListing(
   listingId: string,
@@ -133,7 +133,7 @@ async function generateQRCodesForListing(
 // ============================================================================
 export default async function handler(req: any, res: any) {
   // CORS
-  const allowedOrigins = ['https://zenspace.design', 'https://zenspace-two.vercel.app', 'http://localhost:3000'];
+  const allowedOrigins = ['https://room.institute', 'https://room-institute-two.vercel.app', 'http://localhost:3000'];
   const origin = req.headers.origin || '';
   if (allowedOrigins.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);

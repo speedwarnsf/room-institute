@@ -1,5 +1,5 @@
 /**
- * Analytics and Telemetry Hooks for ZenSpace
+ * Analytics and Telemetry Hooks for Room
  * 
  * This module provides hooks for analytics/telemetry without implementing
  * any actual service. It's designed for easy integration with services like:

@@ -156,9 +156,9 @@ export function ListingPage() {
           </div>
           <div className="flex items-center gap-4">
             <LanguageSwitcher />
-            <div className="text-emerald-500 text-sm font-medium tracking-wide" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
-              {t('listingPage.poweredByZenSpace')}
-            </div>
+            <a href="https://room.institute" className="hover:opacity-80 transition-opacity">
+              <img src="/room-logo.png" alt="Room" style={{ height: 20 }} />
+            </a>
           </div>
         </div>
       </div>

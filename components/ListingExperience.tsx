@@ -512,8 +512,8 @@ export function ListingExperience() {
         )}
         <div className="flex items-center gap-3">
           <LanguageSwitcher />
-          <a href="https://zenspace.design" className="text-emerald-500 text-xs font-medium tracking-wide hover:text-emerald-400 transition-colors flex items-center" style={{ height: 32 }}>
-            ZenSpace
+          <a href="https://room.institute" className="hover:opacity-80 transition-opacity flex items-center" style={{ height: 32 }}>
+            <img src="/room-logo.png" alt="Room" style={{ height: 20 }} />
           </a>
         </div>
       </div>
@@ -564,7 +564,7 @@ export function ListingExperience() {
       </div>
 
       <footer className="py-6 text-center">
-        <a href="https://zenspace.design" target="_blank" rel="noopener noreferrer" className="text-stone-700 hover:text-stone-500 text-[10px] transition-colors" data-no-smooth>
+        <a href="https://room.institute" target="_blank" rel="noopener noreferrer" className="text-stone-700 hover:text-stone-500 text-[10px] transition-colors" data-no-smooth>
           {t('footer.poweredBy')}
         </a>
       </footer>

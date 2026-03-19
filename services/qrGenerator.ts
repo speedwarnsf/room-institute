@@ -7,7 +7,7 @@
 import QRCode from 'qrcode';
 import { supabaseAdmin } from './supabaseAdmin';
 
-const BASE_URL = 'https://zenspace.design';
+const BASE_URL = 'https://room.institute';
 
 interface QRCodeResult {
   houseQR: string;

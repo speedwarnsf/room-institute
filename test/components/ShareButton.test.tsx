@@ -104,9 +104,9 @@ describe('ShareButton', () => {
         expect(mockClipboardWriteText).toHaveBeenCalled();
       });
       
-      // Falls back to zenspace.design when supabase insert fails
+      // Falls back to room.institute when supabase insert fails
       const copiedText = mockClipboardWriteText.mock.calls[0]?.[0] as string;
-      expect(copiedText).toContain('zenspace.design');
+      expect(copiedText).toContain('room.institute');
     });
 
     it('opens Twitter share in new window', async () => {
@@ -234,8 +234,8 @@ describe('ShareButton', () => {
       
       expect(mockShare).toHaveBeenCalledWith(
         expect.objectContaining({
-          title: 'My ZenSpace Room Analysis',
-          url: expect.stringContaining('zenspace.design'),
+          title: 'My Room Room Analysis',
+          url: expect.stringContaining('room.institute'),
         })
       );
     });

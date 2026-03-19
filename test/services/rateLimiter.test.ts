@@ -175,12 +175,12 @@ describe('RateLimiter', () => {
       const calls = mockLocalStorage.setItem.mock.calls;
       const lastCall = calls[calls.length - 1];
       expect(lastCall).toBeDefined();
-      expect(lastCall![0]).toBe('zenspace_rate_limit');
+      expect(lastCall![0]).toBe('room-institute_rate_limit');
     });
 
     it('loads state from localStorage', () => {
       // Pre-populate localStorage
-      mockLocalStorage.setItem('zenspace_rate_limit', JSON.stringify({
+      mockLocalStorage.setItem('room-institute_rate_limit', JSON.stringify({
         tokens: 2,
         lastRefill: Date.now(),
       }));
@@ -191,7 +191,7 @@ describe('RateLimiter', () => {
     });
 
     it('handles corrupted localStorage gracefully', () => {
-      mockLocalStorage.setItem('zenspace_rate_limit', 'not valid json');
+      mockLocalStorage.setItem('room-institute_rate_limit', 'not valid json');
       
       // Should not throw
       const limiter = new RateLimiter({ maxTokens: 5 });
@@ -199,7 +199,7 @@ describe('RateLimiter', () => {
     });
 
     it('handles missing localStorage data gracefully', () => {
-      mockLocalStorage.setItem('zenspace_rate_limit', JSON.stringify({}));
+      mockLocalStorage.setItem('room-institute_rate_limit', JSON.stringify({}));
       
       const limiter = new RateLimiter({ maxTokens: 5 });
       expect(limiter.getTokens()).toBe(5);

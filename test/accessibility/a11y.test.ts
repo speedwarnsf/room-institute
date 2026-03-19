@@ -1,5 +1,5 @@
 /**
- * Accessibility Tests for ZenSpace
+ * Accessibility Tests for Room
  * 
  * Tests for WCAG 2.1 compliance including:
  * - Screen reader compatibility
@@ -279,7 +279,7 @@ describe('Accessibility Audit', () => {
       });
 
       it('no animations cause seizures (flash < 3 per second)', () => {
-        const flashRate = 0; // ZenSpace has no flashing content
+        const flashRate = 0; // Room has no flashing content
         expect(flashRate).toBeLessThan(3);
       });
     });

@@ -18,7 +18,7 @@ export interface RateLimitState {
   isLimited?: boolean;         // Optional: whether rate limit is active
 }
 
-const STORAGE_KEY = 'zenspace_rate_limit';
+const STORAGE_KEY = 'room-institute_rate_limit';
 
 // Default config: 10 requests per minute with burst of 5
 const DEFAULT_CONFIG: RateLimitConfig = {

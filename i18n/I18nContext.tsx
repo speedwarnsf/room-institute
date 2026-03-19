@@ -23,7 +23,7 @@ function detectLocale(): SupportedLocale {
   }
 
   // 2. Check localStorage
-  const stored = localStorage.getItem('zenspace-locale');
+  const stored = localStorage.getItem('room-institute-locale');
   if (stored && stored in translations) {
     return stored as SupportedLocale;
   }
@@ -57,7 +57,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
 
   const setLocale = useCallback((newLocale: SupportedLocale) => {
     setLocaleState(newLocale);
-    localStorage.setItem('zenspace-locale', newLocale);
+    localStorage.setItem('room-institute-locale', newLocale);
     // Update URL param without reload
     const url = new URL(window.location.href);
     if (newLocale === 'en') {

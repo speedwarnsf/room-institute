@@ -1,5 +1,5 @@
 /**
- * Session Storage Service for ZenSpace
+ * Session Storage Service for Room
  * 
  * Enables saving and loading analysis sessions to localStorage/IndexedDB
  * for later reference and continuation.
@@ -48,8 +48,8 @@ export interface SessionMetadata {
 // CONSTANTS
 // ============================================================================
 
-const STORAGE_KEY = 'zenspace_sessions';
-const METADATA_KEY = 'zenspace_session_metadata';
+const STORAGE_KEY = 'room-institute_sessions';
+const METADATA_KEY = 'room-institute_session_metadata';
 const MAX_SESSIONS = 20;
 const THUMBNAIL_SIZE = 150;
 const THUMBNAIL_QUALITY = 0.7;

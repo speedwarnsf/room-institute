@@ -193,9 +193,9 @@ export default function DesignSpread({ design, listingAddress, roomLabel, onBack
           </button>
           <div className="flex items-center gap-4">
             <LanguageSwitcher />
-            <span className="text-emerald-500 text-sm tracking-wide" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
-              ZenSpace
-            </span>
+            <a href="https://room.institute" className="hover:opacity-80 transition-opacity">
+              <img src="/room-logo.png" alt="Room" style={{ height: 20 }} />
+            </a>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 /**
- * Edge Case Tests for ZenSpace
+ * Edge Case Tests for Room
  * 
  * Tests for malformed images, network failures, quota exceeded, and other edge cases
  */

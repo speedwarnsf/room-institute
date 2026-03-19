@@ -100,7 +100,7 @@ function PitchBuilder({
 
   const prospectTypes = [
     { value: 'design_firm', label: 'Design Firm', desc: 'Interior designers seeking homebuyer engagement data' },
-    { value: 'agency', label: 'Real Estate Agency', desc: 'Brokerages looking to adopt ZenSpace for their agents' },
+    { value: 'agency', label: 'Real Estate Agency', desc: 'Brokerages looking to adopt Room for their agents' },
     { value: 'investor', label: 'Investor', desc: 'VCs or angels evaluating market traction' },
     { value: 'custom', label: 'Custom', desc: 'Custom pitch for any prospect' },
   ];
@@ -592,7 +592,7 @@ export function AdminDashboard() {
         <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-stone-100" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
-              ZenSpace Command Center
+              Room Command Center
             </h1>
             <p className="text-stone-500 text-xs mt-1">Platform intelligence and market operations</p>
           </div>
@@ -656,7 +656,7 @@ export function AdminDashboard() {
             className="flex items-center gap-1.5 px-3 py-1.5 bg-stone-800 hover:bg-stone-700 text-stone-300 text-xs transition-colors flex-shrink-0"
           >
             <Palette className="w-3 h-3" />
-            ZenSpace Camera
+            Room Camera
           </a>
         </div>
       </div>

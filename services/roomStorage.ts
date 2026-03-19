@@ -1,5 +1,5 @@
 /**
- * Room Storage Service for ZenSpace
+ * Room Storage Service for Room
  * 
  * Enhanced storage that treats each room as a project with multiple designs,
  * a chosen design, and purchase progress tracking.
@@ -77,7 +77,7 @@ export interface RoomMetadata {
 // CONSTANTS
 // ============================================================================
 
-const ROOMS_KEY = 'zenspace_rooms';
+const ROOMS_KEY = 'room-institute_rooms';
 const MAX_ROOMS = 20;
 
 // ============================================================================

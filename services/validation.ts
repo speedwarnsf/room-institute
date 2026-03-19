@@ -1,5 +1,5 @@
 /**
- * Input Validation Utilities for ZenSpace
+ * Input Validation Utilities for Room
  * 
  * Provides comprehensive validation for user inputs including:
  * - File validation (type, size, dimensions)

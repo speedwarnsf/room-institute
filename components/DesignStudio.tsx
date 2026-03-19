@@ -537,7 +537,7 @@ async function generatePDF(entry: LookbookEntry) {
     format: [pdfWidth, Math.min(pdfHeight, 297 * 3)],
   });
   pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
-  pdf.save(`${entry.option.name.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}-zenspace.pdf`);
+  pdf.save(`${entry.option.name.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}-room-institute.pdf`);
 }
 
 function saveVisualization(entry: LookbookEntry) {

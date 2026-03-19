@@ -72,8 +72,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       mode: 'subscription',
       payment_method_types: ['card'],
       line_items: [{ price: PRICE_IDS[planType], quantity: 1 }],
-      success_url: `${req.headers.origin || 'https://zenspace.app'}?checkout=success`,
-      cancel_url: `${req.headers.origin || 'https://zenspace.app'}?checkout=cancel`,
+      success_url: `${req.headers.origin || 'https://room-institute.app'}?checkout=success`,
+      cancel_url: `${req.headers.origin || 'https://room-institute.app'}?checkout=cancel`,
       metadata: {
         supabase_user_id: user.id,
         plan_type: planType,

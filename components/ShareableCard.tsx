@@ -190,9 +190,9 @@ export function ShareableCard({ entry, onReady }: ShareableCardProps) {
               fontFamily: 'system-ui, sans-serif',
             }}
           >
-            zenspace.design
+            room.institute
           </span>
-          <span style={{ fontSize: 16, color: '#44403c' }}>{t('share.createdWith').replace('Created with ZenSpace — ', '')}</span>
+          <span style={{ fontSize: 16, color: '#44403c' }}>{t('share.createdWith').replace('Created with Room — ', '')}</span>
         </div>
       </div>
     </div>

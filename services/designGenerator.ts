@@ -1,6 +1,6 @@
 /**
  * Design generator service
- * Wraps the existing ZenSpace generation pipeline for listing rooms
+ * Wraps the existing Room generation pipeline for listing rooms
  */
 
 import { generateDesignOptions, generateDesignVisualization } from './geminiService';
@@ -35,7 +35,7 @@ export interface ListingContext {
 
 /**
  * Generate design directions for a room in a listing
- * Uses the existing ZenSpace prompt system
+ * Uses the existing Room prompt system
  */
 export async function generateDesignsForRoom(
   photoUrl: string,

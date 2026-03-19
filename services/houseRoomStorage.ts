@@ -9,9 +9,9 @@
 import { Room, House, LookbookEntry } from '../types';
 import { supabase, getCurrentUser } from './auth';
 
-const HOUSE_KEY = 'zenspace-house';
+const HOUSE_KEY = 'room-institute-house';
 const THUMBNAIL_MAX = 200;
-const MIGRATED_KEY = 'zenspace-rooms-migrated';
+const MIGRATED_KEY = 'room-institute-rooms-migrated';
 
 // ============================================================================
 // HELPERS

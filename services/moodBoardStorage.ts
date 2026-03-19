@@ -18,7 +18,7 @@ export interface MoodBoard {
   updatedAt: number;
 }
 
-const DB_NAME = 'zenspace-moodboards';
+const DB_NAME = 'room-institute-moodboards';
 const DB_VERSION = 1;
 const STORE_NAME = 'boards';
 

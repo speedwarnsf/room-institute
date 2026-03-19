@@ -1,5 +1,5 @@
 /**
- * Image compression utilities for ZenSpace
+ * Image compression utilities for Room
  * Compresses images before upload to reduce API payload and improve performance
  */
 

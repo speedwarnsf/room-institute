@@ -18,7 +18,7 @@ import { ShoppingProduct, ProductCategory, ShoppingListData } from '../types';
 import { trackProductClick } from '../services/affiliateTracking';
 import { useI18n } from '../i18n/I18nContext';
 
-const PURCHASED_KEY = 'zenspace_purchased';
+const PURCHASED_KEY = 'room-institute_purchased';
 
 const getCategoryIcon = (cat: ProductCategory): React.ReactNode => {
   switch (cat) {

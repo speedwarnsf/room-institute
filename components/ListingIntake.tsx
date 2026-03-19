@@ -66,7 +66,7 @@ export function ListingIntake() {
       <header className="border-b border-stone-800 bg-stone-950">
         <div className="max-w-4xl mx-auto px-6 py-6">
           <a href="/" className="text-emerald-500 text-2xl font-bold" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
-            ZenSpace
+            Room
           </a>
           <p className="text-stone-400 mt-2">{t('intake.tagline')}</p>
         </div>

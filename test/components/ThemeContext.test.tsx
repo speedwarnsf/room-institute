@@ -103,7 +103,7 @@ describe('ThemeContext', () => {
       fireEvent.click(screen.getByText('Set Dark'));
       
       expect(screen.getByTestId('theme')).toHaveTextContent('dark');
-      expect(localStorageMock.setItem).toHaveBeenCalledWith('zenspace-theme', 'dark');
+      expect(localStorageMock.setItem).toHaveBeenCalledWith('room-institute-theme', 'dark');
     });
 
     it('toggles theme in correct order: light -> dark -> system -> light', async () => {
@@ -218,7 +218,7 @@ describe('ThemeContext', () => {
       render(<TestComponent />, { wrapper });
       fireEvent.click(screen.getByText('Set Dark'));
       
-      expect(localStorageMock.setItem).toHaveBeenCalledWith('zenspace-theme', 'dark');
+      expect(localStorageMock.setItem).toHaveBeenCalledWith('room-institute-theme', 'dark');
     });
   });
 });

@@ -48,14 +48,14 @@ export function ShareButton({
     const lines = analysis.split('\n').filter(line => line.trim().length > 0);
     const summaryLine = lines.find(line => 
       !line.startsWith('#') && !line.startsWith('**') && line.length > 50
-    ) || `I just organized my ${roomType} with ZenSpace`;
+    ) || `I just organized my ${roomType} with Room`;
     return summaryLine.length > 200 ? summaryLine.substring(0, 197) + '...' : summaryLine;
   }, [analysis, roomType, designName, designMood]);
 
   const generateShareText = useCallback((url?: string): string => {
     const summary = generateSummary();
-    const link = url || 'https://zenspace.design';
-    return `${summary}\n\nDesigned with ZenSpace: ${link}`;
+    const link = url || 'https://room.institute';
+    return `${summary}\n\nDesigned with Room: ${link}`;
   }, [generateSummary]);
 
   // Create a public share link via Supabase
@@ -80,14 +80,14 @@ export function ShareButton({
       
       if (error) {
         console.warn('Failed to create share link, using fallback:', error);
-        return 'https://zenspace.design';
+        return 'https://room.institute';
       }
       
-      const url = `https://zenspace.design/share/${shareId}`;
+      const url = `https://room.institute/share/${shareId}`;
       setShareUrl(url);
       return url;
     } catch {
-      return 'https://zenspace.design';
+      return 'https://room.institute';
     } finally {
       setIsCreatingLink(false);
     }
@@ -102,7 +102,7 @@ export function ShareButton({
     try {
       const url = await createShareLink();
       await navigator.share({
-        title: designName ? `${designName} -- ZenSpace Design` : 'My ZenSpace Room Analysis',
+        title: designName ? `${designName} -- Room Design` : 'My Room Room Analysis',
         text: generateShareText(url),
         url,
       });
@@ -133,7 +133,7 @@ export function ShareButton({
 
   const handleTwitterShare = useCallback(async () => {
     const url = await createShareLink();
-    const text = encodeURIComponent(generateSummary() + ' #ZenSpace #InteriorDesign');
+    const text = encodeURIComponent(generateSummary() + ' #Room #InteriorDesign');
     const encodedUrl = encodeURIComponent(url);
     window.open(`https://twitter.com/intent/tweet?text=${text}&url=${encodedUrl}`, '_blank', 'width=600,height=400');
     onShare?.();

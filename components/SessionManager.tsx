@@ -1,5 +1,5 @@
 /**
- * Session Manager Component for ZenSpace
+ * Session Manager Component for Room
  * 
  * UI for saving, loading, and managing analysis sessions
  */
@@ -114,7 +114,7 @@ export function SessionManager({
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `zenspace-session-${id}.json`;
+      a.download = `room-institute-session-${id}.json`;
       a.click();
       URL.revokeObjectURL(url);
     }

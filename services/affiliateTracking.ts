@@ -12,7 +12,7 @@ interface ClickEvent {
   sessionId: string;
 }
 
-const STORAGE_KEY = 'zenspace_affiliate_clicks';
+const STORAGE_KEY = 'room-institute_affiliate_clicks';
 
 function getClicks(): ClickEvent[] {
   try {

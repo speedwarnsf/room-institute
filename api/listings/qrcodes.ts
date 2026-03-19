@@ -4,7 +4,7 @@ import QRCode from 'qrcode';
 
 const SUPABASE_URL = 'https://vqkoxfenyjomillmxawh.supabase.co';
 const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY || '';
-const BASE_URL = 'https://zenspace.design';
+const BASE_URL = 'https://room.institute';
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY, {
   auth: { persistSession: false },

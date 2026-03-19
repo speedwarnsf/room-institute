@@ -206,7 +206,7 @@ export const UploadZone: React.FC<UploadZoneProps> = ({ onImageSelected, isAnaly
                 fill="transparent" 
               />
               <text className="text-[5px] font-bold fill-zinc-400 uppercase tracking-[0.3em]">
-                <textPath href="#textPath" startOffset="0%">ZenSpace Planar</textPath>
+                <textPath href="#textPath" startOffset="0%">Room Planar</textPath>
                 <textPath href="#textPath" startOffset="50%">T* 1:2.8 f=80mm</textPath>
               </text>
             </svg>

@@ -61,7 +61,7 @@ function slugify(name: string): string {
   return name.replace(/[^a-zA-Z0-9]+/g, '-').toLowerCase();
 }
 
-/** Draw a diagonal "ZenSpace" watermark across the canvas */
+/** Draw a diagonal "Room" watermark across the canvas */
 function applyWatermark(ctx: CanvasRenderingContext2D, w: number, h: number) {
   ctx.save();
   ctx.globalAlpha = 0.13;
@@ -75,7 +75,7 @@ function applyWatermark(ctx: CanvasRenderingContext2D, w: number, h: number) {
   const step = fontSize * 2.5;
   for (let y = -h; y < h * 2; y += step) {
     for (let x = -w; x < w * 2; x += step * 2.5) {
-      ctx.fillText('ZenSpace', x - w / 2, y - h / 2);
+      ctx.fillText('Room', x - w / 2, y - h / 2);
     }
   }
   ctx.restore();
@@ -105,7 +105,7 @@ export async function downloadDesignImage(
   if (!isPro) applyWatermark(ctx, w, h);
 
   const blob = await canvasToBlob(canvas, 'image/png');
-  downloadBlob(blob, `${slugify(option.name)}-zenspace${isPro ? '' : '-preview'}.png`);
+  downloadBlob(blob, `${slugify(option.name)}-room-institute${isPro ? '' : '-preview'}.png`);
 }
 
 /* ═══════════════════════════════════════════════════
@@ -193,7 +193,7 @@ export async function downloadDesignReport(
   };
 
   // Title
-  addText('ZenSpace Design Report', 22, [255, 255, 255], true);
+  addText('Room Design Report', 22, [255, 255, 255], true);
   y += 2;
   addText(option.name, 16, [200, 200, 200], true);
   y += 4;
@@ -278,7 +278,7 @@ export async function downloadDesignReport(
       pdf.setFontSize(40);
       pdf.setTextColor(255, 255, 255);
       pdf.setGState?.(new (pdf as any).GState({ opacity: 0.08 }));
-      pdf.text('ZenSpace Preview', pw / 2, 150, { align: 'center', angle: 30 });
+      pdf.text('Room Preview', pw / 2, 150, { align: 'center', angle: 30 });
     }
   }
 
@@ -388,7 +388,7 @@ export async function downloadSocialTemplate({
   ctx.font = `600 ${brandSize}px sans-serif`;
   ctx.fillStyle = '#525252';
   ctx.textAlign = 'right';
-  ctx.fillText('ZenSpace', dims.w - pad, dims.h - pad);
+  ctx.fillText('Room', dims.w - pad, dims.h - pad);
 
   if (!isPro) applyWatermark(ctx, dims.w, dims.h);
 

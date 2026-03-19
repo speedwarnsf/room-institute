@@ -1,6 +1,6 @@
 /**
  * RoomManager — browse saved rooms and their per-room design history timeline.
- * Dark theme, consistent with the rest of the ZenSpace UI.
+ * Dark theme, consistent with the rest of the Room UI.
  */
 
 import React, { useState, useCallback, useEffect } from 'react';

@@ -1,7 +1,7 @@
 import { LookbookEntry } from '../types';
 
-const LOOKBOOK_KEY = 'zenspace-lookbook';
-const DB_NAME = 'zenspace-lookbook-db';
+const LOOKBOOK_KEY = 'room-institute-lookbook';
+const DB_NAME = 'room-institute-lookbook-db';
 const DB_VERSION = 1;
 const IMAGE_STORE = 'visualization-images';
 const ROOM_IMAGE_KEY = '__room_image__';

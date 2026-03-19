@@ -272,7 +272,7 @@ export default function AgentOnboarding() {
       <div className="border-b border-stone-800">
         <div className="max-w-2xl mx-auto px-6 py-6">
           <Link to="/" className="text-emerald-500 hover:text-emerald-400 transition-colors">
-            ZenSpace
+            Room
           </Link>
           <h1
             className="text-3xl md:text-4xl font-bold text-stone-100 mt-4"

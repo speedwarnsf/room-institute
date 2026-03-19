@@ -85,15 +85,15 @@ describe('ThemeToggle', () => {
       
       // Light -> Dark
       fireEvent.click(button);
-      expect(localStorageMock.setItem).toHaveBeenCalledWith('zenspace-theme', 'dark');
+      expect(localStorageMock.setItem).toHaveBeenCalledWith('room-institute-theme', 'dark');
       
       // Dark -> System
       fireEvent.click(button);
-      expect(localStorageMock.setItem).toHaveBeenCalledWith('zenspace-theme', 'system');
+      expect(localStorageMock.setItem).toHaveBeenCalledWith('room-institute-theme', 'system');
       
       // System -> Light
       fireEvent.click(button);
-      expect(localStorageMock.setItem).toHaveBeenCalledWith('zenspace-theme', 'light');
+      expect(localStorageMock.setItem).toHaveBeenCalledWith('room-institute-theme', 'light');
     });
   });
 

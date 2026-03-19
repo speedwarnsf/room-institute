@@ -1,5 +1,5 @@
 /**
- * ZenSpace Interaction Tracking — Privacy-first, no PII
+ * Room Interaction Tracking — Privacy-first, no PII
  *
  * - No cookies, no localStorage persistence
  * - Session token is random per page load (not persistent across visits)

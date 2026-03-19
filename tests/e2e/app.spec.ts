@@ -1,13 +1,13 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('ZenSpace App', () => {
+test.describe('Room App', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
   });
 
   test.describe('Home Page', () => {
     test('should display the app title', async ({ page }) => {
-      await expect(page.locator('text=ZenSpace')).toBeVisible();
+      await expect(page.locator('text=Room')).toBeVisible();
     });
 
     test('should show the main heading', async ({ page }) => {
@@ -50,7 +50,7 @@ test.describe('ZenSpace App', () => {
 
   test.describe('Header', () => {
     test('should have clickable logo that resets app', async ({ page }) => {
-      const logo = page.locator('button[aria-label*="ZenSpace"]');
+      const logo = page.locator('button[aria-label*="Room"]');
       await expect(logo).toBeVisible();
     });
 
@@ -137,7 +137,7 @@ test.describe('ZenSpace App', () => {
   });
 });
 
-test.describe('ZenSpace Touch Interactions', () => {
+test.describe('Room Touch Interactions', () => {
   test.use({ hasTouch: true });
 
   test('upload zone should respond to touch', async ({ page }) => {

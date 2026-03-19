@@ -1,5 +1,5 @@
 /**
- * Enhanced AI Prompts for ZenSpace
+ * Enhanced AI Prompts for Room
  * Optimized prompts for better room analysis and visualization
  */
 
@@ -25,7 +25,7 @@ export function createAnalysisPrompt(context: PromptContext = {}): string {
     residents = 'single'
   } = context;
 
-  return `You are ZenSpace AI, an expert professional organizer and interior designer. Analyze this ${roomType} image and provide practical, confidence-building guidance.
+  return `You are Room AI, an expert professional organizer and interior designer. Analyze this ${roomType} image and provide practical, confidence-building guidance.
 
 **CONTEXT TO USE:**
 - Living situation: ${residents}
@@ -363,7 +363,7 @@ Generate an image that shows how this space would look after implementing the or
  * Chat context prompt for follow-up conversations
  */
 export function createChatContextPrompt(analysisContent: string): string {
-  return `You are ZenSpace AI, continuing a conversation about organizing this specific room. 
+  return `You are Room AI, continuing a conversation about organizing this specific room. 
 
 **PREVIOUS ANALYSIS:**
 ${analysisContent}

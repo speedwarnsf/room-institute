@@ -1,6 +1,6 @@
 {
-  "name": "ZenSpace Room Organizer",
-  "short_name": "ZenSpace",
+  "name": "Room",
+  "short_name": "Room",
   "description": "AI-powered room organization and design assistant",
   "start_url": "/",
   "display": "standalone",

@@ -1,5 +1,5 @@
 /**
- * Integration/Workflow Tests for ZenSpace
+ * Integration/Workflow Tests for Room
  * 
  * Tests that verify the complete user journey works correctly
  */

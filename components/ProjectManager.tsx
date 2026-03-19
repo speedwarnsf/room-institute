@@ -469,7 +469,7 @@ const ProjectDetail: React.FC<{
       {activeTab === 'style' && (
         <div className="space-y-4">
           <p className="text-sm text-stone-500 dark:text-stone-400">
-            Define a shared style direction. When generating new designs for rooms in this project, ZenSpace will reference this guide for consistency.
+            Define a shared style direction. When generating new designs for rooms in this project, Room will reference this guide for consistency.
           </p>
           <div className="space-y-3">
             <div>

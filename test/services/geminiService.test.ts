@@ -1,5 +1,5 @@
 /**
- * ZenSpace - Gemini Service Tests
+ * Room - Gemini Service Tests
  * 
  * Tests for the AI service layer - unit tests with isolated logic
  */

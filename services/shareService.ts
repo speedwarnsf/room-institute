@@ -72,12 +72,12 @@ export async function captureShareableCard(
 }
 
 export async function shareCard(blob: Blob, designName: string): Promise<void> {
-  const file = new File([blob], `${designName.toLowerCase().replace(/\s+/g, '-')}-zenspace.png`, { type: 'image/png' });
+  const file = new File([blob], `${designName.toLowerCase().replace(/\s+/g, '-')}-room-institute.png`, { type: 'image/png' });
 
   if (navigator.share && navigator.canShare?.({ files: [file] })) {
     await navigator.share({
-      title: `${designName} — ZenSpace Design`,
-      text: `Check out this design concept from ZenSpace`,
+      title: `${designName} — Room Design`,
+      text: `Check out this design concept from Room`,
       files: [file],
     });
     return;
@@ -87,7 +87,7 @@ export async function shareCard(blob: Blob, designName: string): Promise<void> {
 }
 
 export async function downloadCard(blob: Blob, designName: string): Promise<void> {
-  const filename = `${designName.toLowerCase().replace(/\s+/g, '-')}-zenspace.png`;
+  const filename = `${designName.toLowerCase().replace(/\s+/g, '-')}-room-institute.png`;
   const file = new File([blob], filename, { type: 'image/png' });
 
   // On mobile, use Web Share API so users get the native share sheet
