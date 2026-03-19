@@ -1239,7 +1239,7 @@ function AppContent() {
           />
 
           {/* Panel */}
-          <div className="fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-white dark:bg-stone-800 z-[70] sm:hidden shadow-2xl animate-in slide-in-from-right duration-300">
+          <div className="fixed top-0 right-0 bottom-0 w-56 bg-white dark:bg-stone-800 z-[70] sm:hidden shadow-2xl animate-in slide-in-from-right duration-300">
             <div className="flex flex-col h-full">
               {/* Header */}
               <div className="flex items-center justify-between p-4 border-b border-stone-200 dark:border-stone-700">
