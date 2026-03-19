@@ -73,7 +73,7 @@ export function ShareableCard({ entry, onReady }: ShareableCardProps) {
               letterSpacing: 8,
             }}
           >
-            ZENSPACE
+            ROOM
           </div>
         )}
       </div>
