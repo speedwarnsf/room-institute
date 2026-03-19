@@ -1243,7 +1243,7 @@ function AppContent() {
               Reimagine your room.
             </h1>
             <p className="text-lg text-stone-600 dark:text-stone-400 text-center max-w-xl mb-4 leading-relaxed" style={{ textWrap: 'balance' }}>
-              Our AI interprets your shared pic — the space, its light, its framework, its potential — and generates 3 unique design directions grounded in academic design theory. Then you go even deeper into the ones that inspire you.
+              Our AI interprets your shared pic — the space, its light, its framework, its potential — and generates 3 unique design directions grounded in design theory. Then you go even deeper into the ones that inspire you.
             </p>
 
             {/* Free tier nudge */}
