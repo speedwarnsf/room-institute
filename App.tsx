@@ -1243,7 +1243,7 @@ function AppContent() {
               Reimagine your room.
             </h1>
             <p className="text-lg text-stone-600 dark:text-stone-400 text-center max-w-xl mb-4 leading-relaxed" style={{ textWrap: 'balance' }}>
-              Upload or shoot a room photo. Our AI analysis interprets the space and returns 3 bold design directions grounded in academic design theory — not just labels and guesswork. Then go deeper into the designs that inspire you.
+              Snap a room pic… our AI interprets the space — its light, its framework, its potential — and we generate 3 unique design directions grounded in real design theory. Then you go deeper into the ones that inspire you.
             </p>
 
             {/* Free tier nudge */}
