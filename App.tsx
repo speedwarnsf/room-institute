@@ -7,6 +7,7 @@ import { AnalysisLoading } from './components/EnhancedLoadingSkeleton';
 import { AccessibilityProvider, AccessibilityToolbar, SkipNavigation, useAccessibility } from './components/AccessibilityFeatures';
 import { AuthProvider, useAuth } from './components/AuthProvider';
 import { UserMenu } from './components/UserMenu';
+import { MobileMenu } from './components/MobileMenu';
 import { LanguageSwitcher } from './components/LanguageSwitcher';
 import { useI18n } from './i18n/I18nContext';
 import { canGenerate, canIterate, canAccessStudio, canSaveRoom, canExport, canCreateProject, canSaveToMoodBoard, getGateMessage } from './services/gating';
@@ -1106,19 +1107,20 @@ function AppContent() {
             <img src="/room-logo-dark.png" alt="Room" style={{ height: 28 }} className="dark:hidden" /><img src="/room-logo.png" alt="Room" style={{ height: 28 }} className="hidden dark:block" />
           </button>
           
-          <div className="flex items-center gap-1.5 sm:gap-3 flex-shrink min-w-0">
-            {/* Network Status - desktop only */}
-            <span className="hidden sm:inline-flex">
+          {/* Desktop nav — hidden on mobile */}
+          <div className="hidden sm:flex items-center gap-1.5 sm:gap-3 flex-shrink min-w-0">
+            {/* Network Status */}
+            <span className="inline-flex">
               <NetworkStatus showIndicator={true} />
             </span>
 
             {/* Language Switcher — hide on mobile */}
-            <span className="hidden sm:inline-flex">
+            <span className="inline-flex">
               <LanguageSwitcher />
             </span>
 
             {/* Theme Toggle — hide on mobile */}
-            <span className="hidden sm:inline-flex">
+            <span className="inline-flex">
               <ThemeToggle />
             </span>
             
@@ -1130,7 +1132,7 @@ function AppContent() {
                 aria-label={(t as any)('nav.startOver')}
               >
                 <ArrowLeft className="w-4 h-4" aria-hidden="true" />
-                <span className="hidden sm:inline">{(t as any)('app.button.new')}</span>
+                <span>{(t as any)('app.button.new')}</span>
               </button>
             )}
 
@@ -1142,7 +1144,7 @@ function AppContent() {
                 aria-label={(t as any)('nav.discover')}
               >
                 <Palette className="w-4 h-4" />
-                <span className="hidden sm:inline">{(t as any)('app.button.discover')}</span>
+                <span>{(t as any)('app.button.discover')}</span>
               </button>
             )}
 
@@ -1154,7 +1156,7 @@ function AppContent() {
                 aria-label={(t as any)('nav.myRooms')}
               >
                 <Home className="w-4 h-4" />
-                <span className="hidden sm:inline">{(t as any)('app.button.rooms')}</span>
+                <span>{(t as any)('app.button.rooms')}</span>
               </button>
             )}
 
@@ -1172,7 +1174,7 @@ function AppContent() {
                 aria-label={(t as any)('nav.projects')}
               >
                 <FolderOpen className="w-4 h-4" />
-                <span className="hidden sm:inline">{(t as any)('app.button.projects')}</span>
+                <span>{(t as any)('app.button.projects')}</span>
               </button>
             )}
 
@@ -1188,14 +1190,14 @@ function AppContent() {
                 aria-label={currentRoomId ? (t as any)('nav.updateRoom') : (t as any)('nav.saveRoom')}
               >
                 <Home className="w-4 h-4" />
-                <span className="hidden sm:inline">{currentRoomId ? (t as any)('app.button.saved') : (t as any)('app.button.save')}</span>
+                <span>{currentRoomId ? (t as any)('app.button.saved') : (t as any)('app.button.save')}</span>
               </button>
             )}
 
             {/* Session Manager + Share — results only, desktop-prioritized */}
             {appState === AppState.RESULTS && (
               <>
-                <span className="hidden sm:inline-flex">
+                <span className="inline-flex">
                   <Suspense fallback={null}>
                     <SessionManager
                       currentSessionId={currentSessionId}
@@ -1218,6 +1220,20 @@ function AppContent() {
 
             <UserMenu onOpenPricing={() => setShowPricing(true)} onOpenAuth={() => setShowAuthGate(true)} />
           </div>
+
+          {/* Mobile hamburger menu */}
+          <MobileMenu
+            onNavigate={(target) => setAppState(target as any)}
+            onReset={resetApp}
+            showBack={appState === AppState.MODE_SELECT || appState === AppState.STRUCTURE_ASSESSMENT || appState === AppState.DESIGN_OPTIONS || appState === AppState.LOOKBOOK || appState === AppState.RESULTS}
+            showSave={appState === AppState.RESULTS && !!designAnalysis && selectedDesignIndex !== null && !!uploadedImage}
+            isSaved={!!currentRoomId}
+            onSave={handleSaveRoom}
+            onOpenPricing={() => setShowPricing(true)}
+            onOpenAuth={() => setShowAuthGate(true)}
+            canProject={canCreateProject(userTier)}
+            onUpgradeProject={() => setShowUpgradePrompt('project')}
+          />
         </div>
       </header>
 

@@ -38,6 +38,7 @@ const translations = {
     'nav.home': 'Home',
     'nav.back': 'Back',
     'nav.close': 'Close',
+    'nav.openMenu': 'Open menu',
     
     // Listing experience
     'listing.swipe': 'Swipe to explore design possibilities',
@@ -655,6 +656,7 @@ const translations = {
     'nav.home': 'Accueil',
     'nav.back': 'Retour',
     'nav.close': 'Fermer',
+    'nav.openMenu': 'Ouvrir le menu',
     
     'listing.swipe': 'Glissez pour explorer les possibilités de design',
     'listing.swipeUp': 'Glissez vers le haut pour le dossier complet',
@@ -1247,6 +1249,7 @@ const translations = {
     'nav.home': 'Startseite',
     'nav.back': 'Zurück',
     'nav.close': 'Schließen',
+    'nav.openMenu': 'Menü öffnen',
     
     'listing.swipe': 'Wischen Sie, um Designmöglichkeiten zu entdecken',
     'listing.swipeUp': 'Nach oben wischen für das vollständige Dossier',
@@ -1822,6 +1825,7 @@ const translations = {
     'nav.home': 'Inicio',
     'nav.back': 'Volver',
     'nav.close': 'Cerrar',
+    'nav.openMenu': 'Abrir menú',
     
     'listing.swipe': 'Desliza para explorar posibilidades de diseño',
     'listing.swipeUp': 'Desliza hacia arriba para ver el artículo completo',
@@ -2397,6 +2401,7 @@ const translations = {
     'nav.home': '首页',
     'nav.back': '返回',
     'nav.close': '关闭',
+    'nav.openMenu': '打开菜单',
     
     'listing.swipe': '滑动探索设计方案',
     'listing.swipeUp': '向上滑动查看完整内容',
@@ -2972,6 +2977,7 @@ const translations = {
     'nav.home': 'Início',
     'nav.back': 'Voltar',
     'nav.close': 'Fechar',
+    'nav.openMenu': 'Abrir menu',
     
     'listing.swipe': 'Deslize para explorar possibilidades de design',
     'listing.swipeUp': 'Deslize para cima para ver o artigo completo',
