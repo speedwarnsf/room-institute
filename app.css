@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+/* Use class-based dark mode (was darkMode: 'class' in v3 config) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Custom theme configuration (migrated from CDN tailwind.config) */
+@theme {
+  --color-stone-850: #201e1c;
+  --color-stone-950: #0c0a09;
+}
+
+/* ZenSpace design rules: NO rounded corners EXCEPT the camera lens, text-wrap: balance on headings */
+*,
+*::before,
+*::after {
+  border-radius: 0 !important;
+}
+/* Camera lens, loading icons, and accessibility button must stay circular */
+.lens-circle,
+.lens-circle *,
+.lens-circle *::before,
+.lens-circle *::after,
+.a11y-circle,
+.loading-circle,
+.loading-circle *,
+.loading-circle *::before,
+.loading-circle *::after {
+  border-radius: 50% !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+/* Accessibility toggle classes (set via AccessibilityFeatures component) */
+.reduce-motion * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+.high-contrast {
+  filter: contrast(150%);
+}
+
+.large-text {
+  font-size: 120% !important;
+  line-height: 1.6 !important;
+}
+
+.focus-visible *:focus-visible {
+  outline: 3px solid #3b82f6 !important;
+  outline-offset: 2px !important;
+}

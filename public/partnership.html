@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>ZenSpace &mdash; Design Intelligence</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --stone-50: #fafaf9;
+    --stone-100: #f5f5f4;
+    --stone-200: #e7e5e4;
+    --stone-300: #d6d3d1;
+    --stone-400: #a8a29e;
+    --stone-500: #78716c;
+    --stone-600: #57534e;
+    --stone-700: #44403c;
+    --stone-800: #292524;
+    --stone-900: #1c1917;
+    --gold: #b8860b;
+    --gold-light: #d4a843;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', -apple-system, sans-serif;
+  }
+
+  html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--stone-900);
+    color: var(--stone-200);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* === HERO === */
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 1.5rem;
+    position: relative;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 80%, rgba(184,134,11,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--stone-50);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--stone-400);
+    max-width: 32ch;
+    line-height: 1.7;
+  }
+
+  .scroll-hint {
+    margin-top: 3rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--stone-600);
+    animation: pulse 2s ease infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  /* === SECTIONS === */
+  section {
+    padding: 4rem 1.5rem;
+    border-top: 1px solid var(--stone-800);
+  }
+
+  .section-label {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+    font-weight: 400;
+    color: var(--stone-50);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  h3 {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--stone-100);
+    margin-bottom: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--stone-300);
+    margin-bottom: 1.25rem;
+    max-width: 65ch;
+  }
+
+  .highlight {
+    color: var(--stone-100);
+    font-weight: 400;
+  }
+
+  /* === FRAMEWORK CARDS === */
+  .frameworks {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin: 2rem 0;
+  }
+
+  .fw-card {
+    border: 1px solid var(--stone-800);
+    padding: 1.5rem;
+    background: rgba(255,255,255,0.02);
+  }
+
+  .fw-card .fw-num {
+    font-family: var(--serif);
+    font-size: 2rem;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .fw-card .fw-title {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--stone-100);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+  }
+
+  .fw-card p {
+    font-size: 0.85rem;
+    margin-bottom: 0;
+    color: var(--stone-400);
+  }
+
+  /* === PIPELINE === */
+  .pipeline-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 2rem 0;
+  }
+
+  .pipe-step {
+    display: flex;
+    gap: 1rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--stone-800);
+  }
+
+  .pipe-step:last-child { border-bottom: none; }
+
+  .pipe-num {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    color: var(--gold);
+    flex-shrink: 0;
+    width: 2rem;
+  }
+
+  .pipe-text .pipe-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--stone-100);
+    margin-bottom: 0.25rem;
+  }
+
+  .pipe-text p {
+    font-size: 0.8rem;
+    color: var(--stone-400);
+    margin-bottom: 0;
+  }
+
+  /* === STATS === */
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin: 2rem 0;
+  }
+
+  .stat {
+    text-align: center;
+    padding: 1.25rem 0.5rem;
+    border: 1px solid var(--stone-800);
+  }
+
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 2rem;
+    color: var(--gold-light);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--stone-500);
+  }
+
+  /* === PARTNERSHIP === */
+  .partner-block {
+    background: linear-gradient(135deg, rgba(184,134,11,0.08) 0%, transparent 60%);
+    border: 1px solid rgba(184,134,11,0.2);
+    padding: 2rem 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .partner-block h3 {
+    margin-top: 0;
+    color: var(--gold-light);
+  }
+
+  /* === QUOTE === */
+  blockquote {
+    border-left: 2px solid var(--gold);
+    padding-left: 1.25rem;
+    margin: 2rem 0;
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--stone-300);
+    line-height: 1.6;
+  }
+
+  /* === FOOTER === */
+  .footer {
+    padding: 3rem 1.5rem;
+    border-top: 1px solid var(--stone-800);
+    text-align: center;
+  }
+
+  .footer p {
+    font-size: 0.75rem;
+    color: var(--stone-600);
+    margin: 0 auto;
+  }
+
+  /* === SHOWCASE === */
+  .showcase {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  .showcase-item {
+    border-left: 2px solid var(--gold);
+    padding: 1.25rem 1.25rem;
+    background: rgba(255,255,255,0.015);
+  }
+
+  .showcase-label {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+  }
+
+  .showcase-item p {
+    font-size: 0.85rem;
+    margin-bottom: 0;
+    color: var(--stone-300);
+  }
+
+  .showcase-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin: 2rem 0;
+  }
+
+  .showcase-img-wrap {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .showcase-img-wrap img {
+    width: 100%;
+    display: block;
+  }
+
+  .showcase-img-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--stone-200);
+  }
+
+  .showcase-img-label span {
+    color: var(--gold-light);
+  }
+
+  @media (min-width: 640px) {
+    .showcase-grid { grid-template-columns: 1fr 1fr; }
+    .showcase-grid .original { grid-column: 1 / -1; }
+  }
+
+  /* === DESKTOP === */
+  @media (min-width: 640px) {
+    .hero, section { padding-left: 3rem; padding-right: 3rem; }
+    .stats { grid-template-columns: repeat(4, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">ZenSpace Design Intelligence</div>
+  <h1>Where academic<br>design theory meets<br><em>real estate</em></h1>
+  <p class="hero-sub">An AI-powered platform that transforms listing photos into interactive design experiences &mdash; grounded in five research-backed frameworks, not aesthetic guesswork.</p>
+  <div class="scroll-hint">&darr; Scroll to explore</div>
+</div>
+
+<!-- THE PROBLEM -->
+<section>
+  <div class="section-label">The Problem</div>
+  <h2>Virtual staging is a commodity. Design intelligence is not.</h2>
+  <p>There are dozens of AI staging tools. They all do the same thing: pick a style label &mdash; "modern," "farmhouse," "minimalist" &mdash; and fill a room with generic furniture. <span class="highlight">None of them understand why a space works.</span></p>
+  <p>ZenSpace doesn't start with style labels. It starts with <span class="highlight">spatial analysis grounded in design theory</span> &mdash; reading the room's bones, light, proportions, and character before proposing a single piece of furniture.</p>
+</section>
+
+<!-- FIVE FRAMEWORKS -->
+<section>
+  <div class="section-label">The Foundation</div>
+  <h2>Five frameworks. Two decades of research.</h2>
+  <p>Every ZenSpace design is generated through the lens of five academic design frameworks, drawn from a research corpus spanning architectural theory, environmental psychology, and universal design principles.</p>
+
+  <div class="frameworks">
+    <div class="fw-card">
+      <div class="fw-num">1</div>
+      <div class="fw-title">Aesthetic Order &amp; Simplicity</div>
+      <p>Architectural integrity over superficial decoration. Harmony, balance, proportion. Sacrifice the showy for the essential. Rooted in Wharton &amp; Codman's foundational principles.</p>
+    </div>
+    <div class="fw-card">
+      <div class="fw-num">2</div>
+      <div class="fw-title">Human-Centric &amp; Functional</div>
+      <p>Anthropometry, ergonomics, proxemics. Designing for how bodies actually move through space &mdash; clearance for the 95th percentile, reach for the 5th. Respecting intimate, personal, and social distance zones.</p>
+    </div>
+    <div class="fw-card">
+      <div class="fw-num">3</div>
+      <div class="fw-title">Universal &amp; Inclusive Design</div>
+      <p>The seven principles. Equitable use, perceptible information, low physical effort. Contrast and lighting that define edges. Space that works for everyone, not just the ideal case.</p>
+    </div>
+    <div class="fw-card">
+      <div class="fw-num">4</div>
+      <div class="fw-title">Biophilic &amp; Regenerative</div>
+      <p>Light pools over flat illumination. Organic forms to soften and reduce stress. Prospect and refuge &mdash; balancing openness with enclosure. Materials aligned with circularity.</p>
+    </div>
+    <div class="fw-card">
+      <div class="fw-num">5</div>
+      <div class="fw-title">Phenomenological Principles</div>
+      <p>Genius Loci &mdash; the spirit of place. Preserving identity, orientation, light quality, structural bones. Multi-sensory awareness: acoustics, texture, haptics. Never applying generic templates that erase context.</p>
+    </div>
+  </div>
+
+  <p>These aren't marketing labels. They're the same frameworks taught in graduate design programs. <span class="highlight">Each design direction ZenSpace generates uses 2-3 of these frameworks</span>, creating proposals that are intellectually defensible, not just visually pleasant.</p>
+</section>
+
+<!-- DESIGN HISTORY -->
+<section>
+  <div class="section-label">The Lineage</div>
+  <h2>Design theory has a 130-year problem.</h2>
+  <p>In 1897, Edith Wharton and Ogden Codman published <em>The Decoration of Houses</em> &mdash; the first serious argument that interior design should follow architectural principles, not fashionable whims. Their thesis: <span class="highlight">a room should be designed from the walls inward, not the furniture outward.</span></p>
+  <p>A century later, we have AI tools that do exactly what Wharton warned against &mdash; picking furniture from a style catalogue and dropping it into a room with no regard for proportion, light, or spatial logic.</p>
+  <p>ZenSpace was built to close that gap. Every design direction begins with a <span class="highlight">spatial reading</span> &mdash; understanding the room's bones before proposing a single object. The same methodology taught in graduate design programs, executed at machine speed.</p>
+
+  <h3>From rhetoric to rooms</h3>
+  <p>The builder of ZenSpace, Dustin York, studied Communication Design at NSCAD University under Hanno Ehses and Peter Brooks &mdash; pioneers of applying <span class="highlight">rhetorical theory to visual communication</span>. The same framework that analyzes how a poster persuades can analyze how a room communicates: what it says about the people who live there, what it invites, what it discourages.</p>
+  <p>This isn't a novel application. It's a <span class="highlight">natural extension</span> of a 2,500-year-old tradition &mdash; from Aristotle's modes of persuasion to the spatial rhetoric of a well-designed home.</p>
+</section>
+
+<!-- BEFORE & AFTER SHOWCASE -->
+<section>
+  <div class="section-label">The Work</div>
+  <h2>Same room. Three directions. Each defensible.</h2>
+  <p>Every room receives three genuinely distinct design proposals. Not three shades of the same idea &mdash; three different framework-driven interpretations of what the space could become.</p>
+
+  <div class="showcase-grid">
+    <div class="showcase-img-wrap original">
+      <img src="/showcase/original.jpg" alt="Original listing photo — Gramercy Towers living room" loading="lazy">
+      <div class="showcase-img-label"><span>Original</span> &mdash; Listing photo as-is</div>
+    </div>
+    <div class="showcase-img-wrap">
+      <img src="/showcase/direction-charcoal.jpg" alt="ZenSpace Direction — Dramatic charcoal" loading="lazy">
+      <div class="showcase-img-label"><span>Direction 1</span> &mdash; Dramatic &amp; masculine</div>
+    </div>
+    <div class="showcase-img-wrap">
+      <img src="/showcase/direction-contemporary.jpg" alt="ZenSpace Direction — Warm contemporary" loading="lazy">
+      <div class="showcase-img-label"><span>Direction 2</span> &mdash; Warm contemporary</div>
+    </div>
+    <div class="showcase-img-wrap">
+      <img src="/showcase/direction-biophilic.jpg" alt="ZenSpace Direction — Biophilic natural" loading="lazy">
+      <div class="showcase-img-label"><span>Direction 3</span> &mdash; Biophilic &amp; organic</div>
+    </div>
+    <div class="showcase-img-wrap">
+      <img src="/showcase/direction-pink.jpg" alt="ZenSpace Direction — Bold maximalist" loading="lazy">
+      <div class="showcase-img-label"><span>Direction 4</span> &mdash; Bold maximalist</div>
+    </div>
+    <div class="showcase-img-wrap">
+      <img src="/showcase/direction-navy.jpg" alt="ZenSpace Direction — Navy monochrome" loading="lazy">
+      <div class="showcase-img-label"><span>Direction 5</span> &mdash; Navy monochrome</div>
+    </div>
+  </div>
+
+  <p>Five directions from one room. Each a defensible design position, not a random variation. <span class="highlight">A trained designer could articulate why each works &mdash; that's the point.</span></p>
+
+  <div class="showcase">
+    <div class="showcase-item">
+      <div class="showcase-label">The range matters</div>
+      <p>A listing with one staged look appeals to one type of buyer. Five distinct directions &mdash; from warm and approachable to bold and committed &mdash; means five different buyer personas can see themselves in the same space. <span class="highlight">That's more offers, faster.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section>
+  <div class="section-label">The Experience</div>
+  <h2>From listing photo to interactive design &mdash; in minutes.</h2>
+
+  <div class="pipeline-steps">
+    <div class="pipe-step">
+      <div class="pipe-num">1</div>
+      <div class="pipe-text">
+        <div class="pipe-title">Spatial Analysis</div>
+        <p>AI reads the room through the five frameworks. Identifies structural elements, light quality, proportions, existing character.</p>
+      </div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-num">2</div>
+      <div class="pipe-text">
+        <div class="pipe-title">Three Distinct Directions</div>
+        <p>Generates three genuinely different design proposals &mdash; not three variations of the same idea. Each grounded in different framework combinations.</p>
+      </div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-num">3</div>
+      <div class="pipe-text">
+        <div class="pipe-title">Visual Rendering</div>
+        <p>Each direction is rendered as a photorealistic visualization, preserving the room's architecture while transforming the interior.</p>
+      </div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-num">4</div>
+      <div class="pipe-text">
+        <div class="pipe-title">Buyer Interaction</div>
+        <p>Buyers scan a QR code at the property, explore designs on their phone, toggle what to keep vs. change, and imagine the space as their own.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REAL ESTATE VISION -->
+<section>
+  <div class="section-label">The Vision</div>
+  <h2>Every listing becomes an experience.</h2>
+  <p>A listing URL goes in. An interactive design experience comes out. <span class="highlight">No agent effort required.</span> The pipeline auto-generates per-room QR codes that can be placed throughout the property during open houses.</p>
+  <p>Buyers don't just look at staged photos someone else chose. They <span class="highlight">reimagine the space in their own style</span> while standing in the room. That emotional investment drives offers.</p>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-num">73%</div>
+      <div class="stat-label">Faster sales with staging</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">87%</div>
+      <div class="stat-label">More views on staged listings</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">5</div>
+      <div class="stat-label">Design frameworks</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Unique directions per room</div>
+    </div>
+  </div>
+
+  <blockquote>The buyer who redesigns the kitchen on their phone while standing in it is the buyer who calls their agent Monday morning.</blockquote>
+</section>
+
+<!-- THE DATA -->
+<section>
+  <div class="section-label">The Intelligence</div>
+  <h2>Design preference data that doesn't exist anywhere else.</h2>
+  <p>Every interaction generates anonymized insight: which rooms buyers engage with most, what styles they choose, what they keep versus change, how long they spend.</p>
+  <p><span class="highlight">No one else has this data.</span> Zillow knows what people search for. Redfin knows what people click. ZenSpace knows what people <em>want to do with the space</em>.</p>
+
+  <h3>What this means for designers</h3>
+  <p>Imagine knowing, before your first client meeting, that buyers in Pacific Heights overwhelmingly prefer warm organic palettes in kitchens but stark minimalism in bathrooms. That they keep hardwood 4:1 over replacing it. That open shelving gets removed in 70% of redesigns.</p>
+  <p>This is <span class="highlight">market intelligence for design professionals</span> &mdash; derived from actual buyer behavior, not surveys or trend forecasts.</p>
+</section>
+
+<!-- PARTNERSHIP -->
+<section>
+  <div class="section-label">The Partnership</div>
+  <h2>AI creates the appetite.<br>Designers fulfill it.</h2>
+  <p>ZenSpace is not a replacement for interior designers. It's the moment a buyer discovers they care about design &mdash; and realizes they need a professional to get it right.</p>
+
+  <div class="partner-block">
+    <h3>Exclusive Territory</h3>
+    <p>One premium design firm per market. When a buyer in your city hits the edge of what AI can do, <span class="highlight">your firm is the only name they see.</span></p>
+    <p>These aren't cold leads. They're property buyers who just spent 10 minutes actively designing their new home. They know what they want. They have the budget. They're ready.</p>
+  </div>
+
+  <h3>What the firm receives</h3>
+  <p><span class="highlight">Branded presence</span> on every listing in your territory &mdash; appearing at the moment of maximum design inspiration.</p>
+  <p><span class="highlight">Design preference data</span> for your market &mdash; anonymized buyer behavior that informs your practice.</p>
+  <p><span class="highlight">Pre-qualified leads</span> &mdash; people who are actively buying property and actively engaged in design decisions.</p>
+
+  <h3>The pilot</h3>
+  <p>50 Bay Area listings. 90 days. Full data visibility. <span class="highlight">Measure everything</span> &mdash; engagement, lead quality, conversion. No risk, pure signal.</p>
+</section>
+
+<!-- CROSS-PARTNERSHIP -->
+<section>
+  <div class="section-label">The Ecosystem</div>
+  <h2>Three industries. One flywheel.</h2>
+  <p>The most powerful partnerships create value in every direction. ZenSpace connects three industries that have never had a shared platform:</p>
+
+  <div class="frameworks">
+    <div class="fw-card">
+      <div class="fw-num">&rarr;</div>
+      <div class="fw-title">Real Estate Agents</div>
+      <p>Listings that stand out. Buyers who engage longer and connect emotionally. A tool that costs less than staging a single room and works across every listing simultaneously. <span class="highlight">They provide the properties and the access.</span></p>
+    </div>
+    <div class="fw-card">
+      <div class="fw-num">&rarr;</div>
+      <div class="fw-title">Design Professionals</div>
+      <p>A stream of pre-qualified clients who have already discovered they care about design. Market intelligence derived from actual buyer behavior, not trend reports. <span class="highlight">They provide credibility and fulfillment.</span></p>
+    </div>
+    <div class="fw-card">
+      <div class="fw-num">&rarr;</div>
+      <div class="fw-title">ZenSpace</div>
+      <p>The platform connecting both sides. Every open house introduces new consumers to the tool. Every design interaction generates data that makes the platform smarter. <span class="highlight">We provide the technology and the intelligence.</span></p>
+    </div>
+  </div>
+
+  <blockquote>The agent sells the home faster. The designer gets the client. The buyer gets the vision. Everyone wins &mdash; and none of them could do it alone.</blockquote>
+
+  <h3>Furniture &amp; retail integration</h3>
+  <p>Every design direction includes specific furniture and material suggestions. <span class="highlight">&ldquo;Shop this look&rdquo;</span> connects buyers directly to retailers &mdash; the moment they commit to a design is the moment they're most likely to purchase. Affiliate revenue flows silently through every listing, every interaction, forever.</p>
+
+  <h3>The data layer</h3>
+  <p>Anonymized, aggregate design preference data &mdash; by neighborhood, price bracket, room type, season. <span class="highlight">What buyers in Pacific Heights want in a kitchen is different from what buyers in the Marina want.</span> Staging companies, furniture retailers, and design firms all benefit from intelligence that currently doesn't exist anywhere.</p>
+</section>
+
+<!-- ABOUT -->
+<section>
+  <div class="section-label">The Builder</div>
+  <h2>Built by a designer, not a tech company.</h2>
+  <p>ZenSpace was created by <span class="highlight">Dustin York</span> &mdash; Communication Design (Honours), NSCAD University. Twenty years as Art Director at Better World Advertising, applying rhetorical design theory to campaigns for public health, social justice, and human rights.</p>
+  <p>The five frameworks aren't bolted-on marketing. They're the foundation &mdash; drawn from the same academic tradition that informs graduate-level design education. The AI is the delivery mechanism. The design intelligence is the product.</p>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p>Confidential &mdash; Not for distribution</p>
+</div>
+
+<script src="/typeset.min.js"></script>
+<script>
+  // Full typographic treatment
+  Typeset.all('p, h1, h2, h3, .showcase-label, .footer p');
+  // Multi-pass rag smoothing on body paragraphs
+  document.querySelectorAll('p').forEach(function(el) {
+    Typeset.smoothRag(el);
+  });
+  // Semantic heading breaks
+  document.querySelectorAll('h2, h3').forEach(function(el) {
+    Typeset.shapeRag(el);
+  });
+</script>
+
+</body>
+</html>

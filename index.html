@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#10b981" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="ZenSpace" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
+    <meta name="description" content="Upload a photo, get 3 theory-grounded design options with shopping lists. Powered by academic design frameworks." />
+    <title>ZenSpace — AI Interior Design Studio</title>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="ZenSpace — AI Interior Design Studio" />
+    <meta property="og:description" content="Upload a photo, get 3 theory-grounded design options with shopping lists. Powered by academic design frameworks." />
+    <meta property="og:image" content="https://zenspace.design/og-image.svg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="https://zenspace.design/" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ZenSpace — AI Interior Design Studio" />
+    <meta name="twitter:description" content="Upload a photo, get 3 theory-grounded design options with shopping lists. Powered by academic design frameworks." />
+    <meta name="twitter:image" content="https://zenspace.design/og-image.svg" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://zenspace.design/" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "ZenSpace",
+      "description": "AI-powered interior design studio. Upload a photo, get 3 theory-grounded design options with shopping lists.",
+      "url": "https://zenspace.design",
+      "applicationCategory": "DesignApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+    <!-- Tailwind CSS is now built via @tailwindcss/vite plugin -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&family=Nunito:wght@300;400;600;700&family=Cormorant+Garamond:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&family=Nunito:wght@300;400;600;700&family=Cormorant+Garamond:wght@400;600;700&display=swap"></noscript>
+    <style>
+      /* ═══════════════════════════════════════════════════════════
+         ZenSpace Design Tokens — The Single Source of Truth
+         ═══════════════════════════════════════════════════════════
+
+         BACKGROUNDS
+           --bg-page:       Light: stone-50  (#fafaf9)   Dark: stone-900  (#1c1917)
+           --bg-card:       Light: white     (#ffffff)   Dark: stone-800  (#292524)
+           --bg-elevated:   Light: stone-100 (#f5f5f4)   Dark: stone-700  (#44403c)
+
+         TEXT
+           --text-primary:  Light: stone-900 (#1c1917)   Dark: stone-100  (#f5f5f4)
+           --text-secondary:Light: stone-600 (#57534e)   Dark: stone-400  (#a8a29e)
+           --text-tertiary: Light: stone-400 (#a8a29e)   Dark: stone-500  (#78716c)
+
+         ACCENT (Emerald — the ZenSpace brand green)
+           --accent:        emerald-500  (#10b981)       — primary CTA, brand mark
+           --accent-hover:  emerald-600  (#059669)       — button hover (light), or emerald-400 on dark
+           --accent-subtle: emerald-50   (#ecfdf5)       Dark: emerald-900/20
+           --accent-text:   emerald-600  (#059669)       Dark: emerald-400 (#34d399)
+
+         BORDERS
+           --border:        Light: stone-200 (#e7e5e4)   Dark: stone-700  (#44403c)
+
+         INTERACTIVE STATES
+           --hover-bg:      Light: stone-100 (#f5f5f4)   Dark: stone-700  (#44403c)
+           --active-bg:     Light: stone-200 (#e7e5e4)   Dark: stone-600  (#57534e)
+           --disabled:      opacity-50
+
+         SEMANTIC
+           --error:         red-500 / red-400 (dark)
+           --warning:       amber-500 / amber-400 (dark)
+           --success:       emerald-500
+
+         SPECIAL SURFACES
+           --design-studio: neutral-950 (#0a0a0a) — immersive editorial layout
+           --upload-lens:   zinc-900 (#18181b) — camera lens aesthetic
+
+         FRAMEWORK BADGES (semantic color per design theory)
+           Aesthetic Order:   violet
+           Human-Centric:     blue
+           Universal Design:  teal
+           Biophilic:         emerald
+           Phenomenological:  amber
+
+         RATING ACCENTS
+           "The One":  yellow-400 (gold star)
+           "Good":     yellow-400/50
+
+         ═══════════════════════════════════════════════════════════ */
+
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-family: 'Playfair Display', serif;
+      }
+      
+      /* Hampton Interface Icons - color adaptation */
+      .so-icon {
+        filter: brightness(0) saturate(100%);
+      }
+      .dark .so-icon {
+        filter: brightness(0) saturate(100%) invert(1);
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #d6d3d1; 
+        border-radius: 0;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #a8a29e; 
+      }
+      
+      /* Dark mode scrollbar */
+      .dark ::-webkit-scrollbar-thumb {
+        background: #44403c;
+      }
+      .dark ::-webkit-scrollbar-thumb:hover {
+        background: #57534e;
+      }
+      
+      /* Safe area insets for notched phones */
+      body {
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+        padding-bottom: env(safe-area-inset-bottom);
+      }
+      
+      /* Touch feedback for interactive elements */
+      button, a, [role="button"] {
+        -webkit-tap-highlight-color: rgba(16, 185, 129, 0.2);
+        touch-action: manipulation;
+      }
+      
+      /* Prevent text selection on interactive elements */
+      button, [role="button"] {
+        -webkit-user-select: none;
+        user-select: none;
+      }
+      
+      /* Smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+      
+      /* Prevent overscroll bounce on iOS */
+      body {
+        overscroll-behavior: none;
+      }
+      
+      /* Better focus styles for mobile */
+      @media (hover: none) {
+        button:focus, a:focus {
+          outline: 2px solid #10b981;
+          outline-offset: 2px;
+        }
+      }
+      
+      /* Animations */
+      @keyframes fadeOut {
+        from { opacity: 1; }
+        to { opacity: 0; visibility: hidden; }
+      }
+      
+      @keyframes shimmer {
+        100% {
+          transform: translateX(100%);
+        }
+      }
+      
+      @keyframes breathe {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+      }
+      
+      .animate-fade-out {
+        animation: fadeOut 2s ease-out 2s forwards;
+      }
+      
+      /* Accessibility Features */
+      /* Reduced motion */
+      .reduce-motion *,
+      .reduce-motion *::before,
+      .reduce-motion *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+
+      /* High contrast mode */
+      .high-contrast {
+        filter: contrast(150%);
+      }
+      
+      .high-contrast img {
+        filter: contrast(120%);
+      }
+
+      /* Large text */
+      .large-text {
+        font-size: 120% !important;
+        line-height: 1.6 !important;
+      }
+      
+      .large-text button {
+        padding: 0.75rem 1.5rem !important;
+      }
+
+      /* Enhanced focus indicators */
+      .focus-visible *:focus-visible {
+        outline: 3px solid #3b82f6 !important;
+        outline-offset: 2px !important;
+        border-radius: 0;
+      }
+
+      /* Keyboard navigation indicators */
+      .keyboard-navigation button:focus,
+      .keyboard-navigation a:focus,
+      .keyboard-navigation input:focus,
+      .keyboard-navigation textarea:focus,
+      .keyboard-navigation select:focus {
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5) !important;
+        outline: 2px solid #3b82f6 !important;
+        outline-offset: 1px !important;
+      }
+
+      /* Screen reader only class */
+      .sr-only {
+        position: absolute !important;
+        width: 1px !important;
+        height: 1px !important;
+        padding: 0 !important;
+        margin: -1px !important;
+        overflow: hidden !important;
+        clip: rect(0, 0, 0, 0) !important;
+        white-space: nowrap !important;
+        border: 0 !important;
+      }
+      
+      .sr-only.focus:focus,
+      .sr-only:focus {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: auto !important;
+        height: auto !important;
+        clip: auto !important;
+        overflow: visible !important;
+        white-space: normal !important;
+        padding: 1rem !important;
+        background: #000 !important;
+        color: #fff !important;
+        z-index: 9999 !important;
+        text-decoration: none !important;
+      }
+
+      /* High contrast adjustments for dark mode */
+      @media (prefers-contrast: high) {
+        .dark {
+          --stone-50: #ffffff;
+          --stone-100: #f5f5f4;
+          --stone-900: #000000;
+          --stone-800: #1c1917;
+        }
+        
+        .dark button,
+        .dark a {
+          border: 1px solid currentColor;
+        }
+      }
+      
+      /* Reduced motion for users who prefer it */
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+      
+      /* High contrast mode detection */
+      @media (prefers-contrast: high) {
+        :root {
+          --border-width: 2px;
+        }
+        
+        button, input, select, textarea {
+          border-width: var(--border-width);
+        }
+      }
+      
+      /* Focus improvements for better visibility */
+      :focus-visible {
+        outline: 2px solid #3b82f6;
+        outline-offset: 2px;
+      }
+      
+      /* Better error state visibility */
+      [aria-invalid="true"] {
+        border-color: #dc2626 !important;
+      }
+      
+      /* Loading state accessibility */
+      [aria-busy="true"] {
+        cursor: wait;
+      }
+      
+      /* Better spacing for touch targets */
+      @media (pointer: coarse) {
+        button, a, [role="button"] {
+          min-height: 44px;
+          min-width: 44px;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-stone-50 dark:bg-stone-900 text-stone-900 dark:text-stone-100 antialiased transition-colors duration-300">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+    <!-- Skimlinks affiliate integration — activates when VITE_SKIMLINKS_PUBLISHER_ID is set -->
+    <script>
+      (function() {
+        var publisherId = '%VITE_SKIMLINKS_PUBLISHER_ID%';
+        if (publisherId && publisherId !== '' && !publisherId.includes('VITE_SKIMLINKS')) {
+          var s = document.createElement('script');
+          s.src = 'https://s.skimresources.com/js/' + publisherId + '.skimlinks.js';
+          s.async = true;
+          document.body.appendChild(s);
+        }
+      })();
+    </script>
+    <script>
+      // Unregister any existing service worker — causing image loading issues
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(registrations => {
+          registrations.forEach(r => r.unregister());
+        });
+        // Clear all caches left by old SW
+        if ('caches' in window) {
+          caches.keys().then(names => names.forEach(n => caches.delete(n)));
+        }
+      }
+    </script>
+  </body>
+</html>
