@@ -144,7 +144,7 @@ export class ErrorBoundary extends Component<Props, State> {
                 {isQuotaExceeded ? (
                   'Your browser storage is full. Try clearing some data or using a different device.'
                 ) : (
-                  'The app encountered an unexpected error. Our team has been notified.'
+                  getTranslation('error.unexpectedError')
                 )}
               </p>
             </div>
@@ -174,7 +174,7 @@ export class ErrorBoundary extends Component<Props, State> {
                   className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 dark:focus:ring-offset-stone-900 flex items-center justify-center gap-2"
                 >
                   <RefreshCw className="w-4 h-4" />
-                  Try Again ({this.maxRetries - this.state.retryCount} left)
+                  {getTranslation('error.tryAgainCount').replace('{count}', String(this.maxRetries - this.state.retryCount))}
                 </button>
               )}
 
