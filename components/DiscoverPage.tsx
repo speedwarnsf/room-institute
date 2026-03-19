@@ -1,3 +1,4 @@
+import { useI18n } from '../i18n/I18nContext';
 /**
  * Discover Page — curated design inspiration feed
  * Available to all users. Saving to mood board requires Pro.
