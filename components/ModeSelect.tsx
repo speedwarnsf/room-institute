@@ -1,5 +1,5 @@
 import { useState, lazy, Suspense } from 'react';
-import { Sparkles, Palette, Crown } from 'lucide-react';
+import { Palette, Crown } from 'lucide-react';
 import { useAuth } from './AuthProvider';
 import { PreferencesPanel, type DesignStyleId, type RoomFunctionId } from './PreferencesPanel';
 import { ROOM_PRESETS, type RoomPreset } from '../services/roomPresets';
@@ -51,10 +51,10 @@ export function ModeSelect({ onSelectMode, uploadedImage }: ModeSelectProps) {
       )}
 
       <h2 className="text-3xl md:text-4xl font-bold text-stone-900 dark:text-stone-100 text-center mb-3 font-serif" style={{ textWrap: 'balance' }}>
-        What would you like to do?
+        Set your preferences
       </h2>
       <p className="text-stone-500 dark:text-stone-400 text-center mb-4 max-w-md" style={{ textWrap: 'balance' }}>
-        Choose a path for your space
+        Choose a style and room type, or let us surprise you
       </p>
 
       {/* Usage indicator */}
@@ -98,46 +98,22 @@ export function ModeSelect({ onSelectMode, uploadedImage }: ModeSelectProps) {
         </Suspense>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-[1.4fr_1fr] gap-6 w-full max-w-2xl">
-        {/* Redesign My Space — Primary */}
+      <div className="w-full max-w-2xl">
         <button
           onClick={() => onSelectMode('redesign', preferences)}
-          className="group relative bg-white dark:bg-stone-800 border-2 border-violet-400 dark:border-violet-500 p-10 text-left transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/15 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 dark:focus:ring-offset-stone-900"
+          className="group relative w-full bg-white dark:bg-stone-800 border-2 border-emerald-400 dark:border-emerald-500 p-10 text-center transition-all duration-300 hover:shadow-xl hover:shadow-emerald-500/15 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 dark:focus:ring-offset-stone-900"
         >
-          <span className="absolute top-0 right-0 text-[10px] font-bold uppercase tracking-widest text-white bg-violet-600 px-3 py-1">
-            Recommended
-          </span>
-          <div className="bg-violet-100 dark:bg-violet-900/40 w-16 h-16 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
-            <Palette className="w-8 h-8 text-violet-600 dark:text-violet-400" />
+          <div className="flex items-center justify-center gap-4 mb-3">
+            <div className="bg-emerald-100 dark:bg-emerald-900/40 w-14 h-14 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <Palette className="w-7 h-7 text-emerald-600 dark:text-emerald-400" />
+            </div>
           </div>
-          <h3 className="text-2xl font-bold text-stone-900 dark:text-stone-100 font-serif mb-2" style={{ textWrap: 'balance' }}>
-            Redesign My Space
+          <h3 className="text-2xl font-bold text-stone-900 dark:text-stone-100 font-serif mb-2">
+            Design My Space
           </h3>
-          <p className="text-sm text-stone-500 dark:text-stone-400 leading-relaxed mb-3">
-            3 bold design directions grounded in design theory
+          <p className="text-sm text-stone-500 dark:text-stone-400 leading-relaxed">
+            5 bold design directions grounded in design theory
           </p>
-          <span className="inline-block text-xs font-medium text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-900/30 px-2 py-0.5">
-            Included free
-          </span>
-        </button>
-
-        {/* Clean My Space — Secondary */}
-        <button
-          onClick={() => onSelectMode('clean', preferences)}
-          className="group relative bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 hover:border-emerald-400 dark:hover:border-emerald-500 p-6 text-left transition-all duration-300 hover:shadow-md hover:shadow-emerald-500/10 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 dark:focus:ring-offset-stone-900"
-        >
-          <div className="bg-emerald-100 dark:bg-emerald-900/40 w-12 h-12 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-            <Sparkles className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
-          </div>
-          <h3 className="text-lg font-bold text-stone-900 dark:text-stone-100 font-serif mb-2" style={{ textWrap: 'balance' }}>
-            Clean My Space
-          </h3>
-          <p className="text-xs text-stone-500 dark:text-stone-400 leading-relaxed mb-3">
-            Decluttering plan and organization tips
-          </p>
-          <span className="inline-block text-xs font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-0.5">
-            Included free
-          </span>
         </button>
       </div>
 

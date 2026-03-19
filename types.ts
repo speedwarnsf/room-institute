@@ -151,7 +151,7 @@ export interface LookbookEntry {
   batchIndex: number;
 }
 
-export type FlowMode = 'clean' | 'redesign';
+export type FlowMode = 'redesign';
 
 /**
  * A saved room with its design history

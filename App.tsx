@@ -973,36 +973,9 @@ function AppContent() {
     setError(null);
 
     try {
-      if (mode === 'clean') {
-        setAnalysisStage('analyzing');
-        setAnalysisProgress(50);
-        analytics.trackAnalysisStart();
-        announce('Analyzing your space for decluttering...', 'polite');
-
-        const styleLabel = preferences?.style ? DESIGN_STYLES.find(s => s.id === preferences.style)?.label : undefined;
-        const roomLabel = preferences?.roomFunction ? ROOM_FUNCTIONS.find(r => r.id === preferences.roomFunction)?.label : undefined;
-        const result = await analyzeImage(uploadedImage.base64, uploadedImage.mimeType, { style: styleLabel, roomType: roomLabel });
-        setAnalysis(result);
-        const chat = createChatSession(result.rawText);
-        setChatSession(chat);
-        setAppState(AppState.RESULTS);
-        analytics.trackAnalysisComplete(1);
-        announce('Analysis complete! Here is your decluttering plan.', 'polite');
-        playSound('success');
-
-        // Track usage
-        incrementFreeUsage().catch(() => {});
-        refreshTier().catch(() => {});
-
-        if (result.products?.length) {
-          const sid = currentSessionId || `session-${Date.now()}`;
-          setShoppingList(shoppingListFromProducts(result.products, sid));
-        }
-      } else {
-        // Redesign flow - start with structure detection
-        handleStructureDetection();
-        return; // Exit early, continue with handleDesignGeneration after structure choices
-      }
+      // Design flow - start with structure detection
+      handleStructureDetection();
+      return; // Exit early, continue with handleDesignGeneration after structure choices
     } catch (apiError) {
       console.error('Analysis error:', apiError);
       analytics.track('analysis_failed', {
