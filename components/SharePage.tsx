@@ -79,7 +79,7 @@ export function SharePage({ shareId }: { shareId: string }) {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
           <a href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
             <LayoutGrid className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
-            <img src="/room-logo.png" alt="Room" style={{ height: 24 }} className="dark:brightness-100 brightness-0" />
+            <img src="/room-logo-dark.png" alt="Room" style={{ height: 24 }} className="dark:hidden" /><img src="/room-logo.png" alt="Room" style={{ height: 24 }} className="hidden dark:block" />
           </a>
           <div className="flex items-center gap-3">
             <LanguageSwitcher />

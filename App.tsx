@@ -1100,7 +1100,7 @@ function AppContent() {
             className="flex items-center gap-2 hover:opacity-80 transition-opacity focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 dark:focus:ring-offset-stone-800 p-1 flex-shrink-0"
             aria-label="Room - Return to home"
           >
-            <img src="/room-logo.png" alt="Room" style={{ height: 28 }} className="dark:brightness-100 brightness-0" />
+            <img src="/room-logo-dark.png" alt="Room" style={{ height: 28 }} className="dark:hidden" /><img src="/room-logo.png" alt="Room" style={{ height: 28 }} className="hidden dark:block" />
           </button>
           
           <div className="flex items-center gap-1.5 sm:gap-3 flex-shrink min-w-0">
