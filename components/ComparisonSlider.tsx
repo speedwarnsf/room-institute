@@ -1,5 +1,6 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, ZoomIn, ZoomOut, RotateCcw } from 'lucide-react';
+import { useI18n } from '../i18n/I18nContext';
 
 interface ComparisonSliderProps {
   beforeImage: string;
@@ -17,11 +18,16 @@ interface ComparisonSliderProps {
 export function ComparisonSlider({
   beforeImage,
   afterImage,
-  beforeLabel = 'Before',
-  afterLabel = 'After',
+  beforeLabel,
+  afterLabel,
   className = '',
   enableZoom = false,
 }: ComparisonSliderProps) {
+  const { t } = useI18n();
+  const defaultBeforeLabel = t('comparison.before');
+  const defaultAfterLabel = t('comparison.after');
+  const finalBeforeLabel = beforeLabel || defaultBeforeLabel;
+  const finalAfterLabel = afterLabel || defaultAfterLabel;
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
@@ -168,7 +174,7 @@ export function ComparisonSlider({
 
   const allLoaded = isLoaded.before && isLoaded.after;
   const instructionId = 'comparison-slider-instructions';
-  const valueText = `${Math.round(sliderPosition)}% ${beforeLabel} / ${Math.round(100 - sliderPosition)}% ${afterLabel}`;
+  const valueText = `${Math.round(sliderPosition)}% ${finalBeforeLabel} / ${Math.round(100 - sliderPosition)}% ${finalAfterLabel}`;
 
   return (
     <div
@@ -190,20 +196,20 @@ export function ComparisonSlider({
       onKeyDown={handleKeyDown}
     >
       <span id={instructionId} className="sr-only">
-        Use left and right arrow keys or drag to compare before and after images.
+        {t('comparison.instructions')}
       </span>
 
       {/* Loading state */}
       {!allLoaded && (
         <div className="absolute inset-0 flex items-center justify-center bg-stone-100 dark:bg-stone-800">
-          <div className="animate-pulse text-stone-500 dark:text-stone-400 text-sm">Loading comparison...</div>
+          <div className="animate-pulse text-stone-500 dark:text-stone-400 text-sm">{t('comparison.loadingComparison')}</div>
         </div>
       )}
 
       {/* After image (background) */}
       <img
         src={afterImage}
-        alt={afterLabel}
+        alt={finalAfterLabel}
         className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${allLoaded ? 'opacity-100' : 'opacity-0'}`}
         style={{
           transform: `scale(${zoom}) translate(${panOffset.x / zoom}px, ${panOffset.y / zoom}px)`,
@@ -221,7 +227,7 @@ export function ComparisonSlider({
       >
         <img
           src={beforeImage}
-          alt={beforeLabel}
+          alt={finalBeforeLabel}
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${allLoaded ? 'opacity-100' : 'opacity-0'}`}
           style={{ 
             width: containerRef.current ? containerRef.current.offsetWidth : '100%',
@@ -260,19 +266,19 @@ export function ComparisonSlider({
       {/* Labels */}
       {allLoaded && (
         <>
-          <div 
+          <div
             className={`absolute top-3 left-3 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider
               bg-black/50 text-white backdrop-blur-sm transition-opacity
               ${sliderPosition < 15 ? 'opacity-0' : 'opacity-100'}`}
           >
-            {beforeLabel}
+            {finalBeforeLabel}
           </div>
-          <div 
+          <div
             className={`absolute top-3 right-3 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider
               bg-black/50 text-white backdrop-blur-sm transition-opacity
               ${sliderPosition > 85 ? 'opacity-0' : 'opacity-100'}`}
           >
-            {afterLabel}
+            {finalAfterLabel}
           </div>
         </>
       )}
@@ -283,7 +289,7 @@ export function ComparisonSlider({
           <button
             onClick={(e) => { e.stopPropagation(); handleZoomIn(); }}
             className="w-8 h-8 bg-black/50 hover:bg-black/70 text-white flex items-center justify-center backdrop-blur-sm transition-colors"
-            aria-label="Zoom in"
+            aria-label={t('comparison.zoomIn')}
           >
             <ZoomIn className="w-4 h-4" />
           </button>
@@ -291,7 +297,7 @@ export function ComparisonSlider({
             onClick={(e) => { e.stopPropagation(); handleZoomOut(); }}
             disabled={zoom <= 1}
             className="w-8 h-8 bg-black/50 hover:bg-black/70 text-white flex items-center justify-center backdrop-blur-sm transition-colors disabled:opacity-40"
-            aria-label="Zoom out"
+            aria-label={t('comparison.zoomOut')}
           >
             <ZoomOut className="w-4 h-4" />
           </button>
@@ -299,7 +305,7 @@ export function ComparisonSlider({
             <button
               onClick={(e) => { e.stopPropagation(); handleResetZoom(); }}
               className="w-8 h-8 bg-black/50 hover:bg-black/70 text-white flex items-center justify-center backdrop-blur-sm transition-colors"
-              aria-label="Reset zoom"
+              aria-label={t('comparison.resetZoom')}
             >
               <RotateCcw className="w-4 h-4" />
             </button>
@@ -314,13 +320,13 @@ export function ComparisonSlider({
 
       {/* Instruction hint — fades after first interaction */}
       {allLoaded && !hasInteracted && (
-        <div 
+        <div
           className="absolute bottom-3 left-1/2 -translate-x-1/2 px-3 py-1.5
             bg-black/60 text-white text-xs backdrop-blur-sm flex items-center gap-2
             animate-pulse pointer-events-none"
         >
           <ChevronLeft size={12} />
-          <span>Drag to compare</span>
+          <span>{t('comparison.dragToCompare')}</span>
           <ChevronRight size={12} />
         </div>
       )}

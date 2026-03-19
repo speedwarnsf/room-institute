@@ -5,6 +5,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useAuth } from './AuthProvider';
 import { LogOut, Crown, User as UserIcon } from 'lucide-react';
+import { useI18n } from '../i18n/I18nContext';
 
 interface UserMenuProps {
   onOpenPricing: () => void;
@@ -13,6 +14,7 @@ interface UserMenuProps {
 
 export function UserMenu({ onOpenPricing, onOpenAuth }: UserMenuProps) {
   const { user, userTier, signOut } = useAuth();
+  const { t } = useI18n();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -37,7 +39,7 @@ export function UserMenu({ onOpenPricing, onOpenAuth }: UserMenuProps) {
             title={`${remaining} free design${remaining === 1 ? '' : 's'} remaining`}
           >
             <span className={remaining <= 1 ? 'text-emerald-400' : 'text-emerald-500'}>{remaining}</span>
-            <span>/ {userTier.generationsLimit} free</span>
+            <span>/ {userTier.generationsLimit} {t('user.free')}</span>
           </button>
         )}
         <button
@@ -46,7 +48,7 @@ export function UserMenu({ onOpenPricing, onOpenAuth }: UserMenuProps) {
             else onOpenPricing();
           }}
           className="fixed bottom-5 right-5 z-40 w-10 h-10 bg-stone-800/80 dark:bg-stone-700/80 backdrop-blur-sm border border-stone-600/50 flex items-center justify-center text-stone-400 hover:text-white hover:bg-stone-700 dark:hover:bg-stone-600 transition-all shadow-lg"
-          aria-label="Sign in"
+          aria-label={t('user.signIn')}
         >
           <UserIcon className="w-4 h-4" />
         </button>
@@ -72,7 +74,7 @@ export function UserMenu({ onOpenPricing, onOpenAuth }: UserMenuProps) {
         {userTier.tier === 'pro' && (
           <span className="flex items-center gap-1 px-1.5 py-0.5 text-emerald-500 text-xs font-medium">
             <Crown className="w-3 h-3" />
-            Pro
+            {t('user.pro')}
           </span>
         )}
         {avatarUrl ? (
@@ -93,7 +95,7 @@ export function UserMenu({ onOpenPricing, onOpenAuth }: UserMenuProps) {
           {/* Usage stats */}
           <div className="px-4 py-2 border-b border-stone-700 space-y-1.5">
             <div className="flex justify-between text-xs">
-              <span className="text-stone-400">Designs</span>
+              <span className="text-stone-400">{t('user.designs')}</span>
               <span className="text-stone-300">{userTier.generationsUsed} / {userTier.generationsLimit}</span>
             </div>
             <div className="w-full h-1 bg-stone-700">
@@ -105,11 +107,11 @@ export function UserMenu({ onOpenPricing, onOpenAuth }: UserMenuProps) {
             {userTier.tier === 'pro' && (
               <>
                 <div className="flex justify-between text-xs">
-                  <span className="text-stone-400">Iterations</span>
+                  <span className="text-stone-400">{t('user.iterations')}</span>
                   <span className="text-stone-300">{userTier.iterationsUsed} / {userTier.iterationsLimit}</span>
                 </div>
                 <div className="flex justify-between text-xs">
-                  <span className="text-stone-400">Rooms</span>
+                  <span className="text-stone-400">{t('user.rooms')}</span>
                   <span className="text-stone-300">{userTier.roomsUsed} / {userTier.roomsLimit}</span>
                 </div>
               </>
@@ -121,7 +123,7 @@ export function UserMenu({ onOpenPricing, onOpenAuth }: UserMenuProps) {
               className="w-full px-4 py-2 text-left text-sm text-emerald-400 hover:bg-stone-700 flex items-center gap-2 transition-colors"
             >
               <Crown className="w-4 h-4" />
-              Upgrade to Pro
+              {t('user.upgradeToPro')}
             </button>
           )}
           <button
@@ -129,7 +131,7 @@ export function UserMenu({ onOpenPricing, onOpenAuth }: UserMenuProps) {
             className="w-full px-4 py-2 text-left text-sm text-stone-300 hover:bg-stone-700 flex items-center gap-2 transition-colors"
           >
             <LogOut className="w-4 h-4" />
-            Sign out
+            {t('user.signOut')}
           </button>
         </div>
       )}

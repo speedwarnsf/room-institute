@@ -1238,12 +1238,12 @@ function AppContent() {
         
         {/* Home State */}
         {appState === AppState.HOME && (
-          <div className="flex flex-col items-center justify-center min-h-[60vh] animate-in fade-in slide-in-from-bottom-4 duration-700">
+          <div className="flex flex-col items-center justify-center min-h-[60vh] animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ paddingTop: 30 }}>
             <h1 className="text-4xl md:text-5xl font-bold text-stone-900 dark:text-stone-100 text-center mb-6 font-serif">
-              Reimagine your room.
+              Reimagine <em className="italic">your</em> rooms.
             </h1>
-            <p className="text-lg text-stone-600 dark:text-stone-400 text-center max-w-xl mb-4 leading-relaxed" style={{ textWrap: 'balance' }}>
-              Our AI interprets your shared pic — the space, its light, its framework, its potential — and generates 3 unique design directions grounded in design theory. Then you go even deeper into the ones that inspire you.
+            <p className="text-sm sm:text-base text-stone-600 dark:text-stone-400 text-center max-w-xl mb-4 leading-relaxed" style={{ textWrap: 'balance' }}>
+              Our AI interprets your space, its light, its framework, its potential — and generates 3 unique designs grounded in theory. Then you go even deeper into the ones that inspire you. Click the lens below to get started.
             </p>
 
             {/* Free tier nudge */}
@@ -1278,7 +1278,7 @@ function AppContent() {
             <div className="mt-16 grid grid-cols-2 gap-10 sm:gap-16 text-center max-w-md">
               {[
                 { icon: Camera, title: 'Snap', desc: 'Photo of your room', color: 'text-emerald-500' },
-                { icon: Wand2, title: 'Transform', desc: '5 design directions', color: 'text-amber-500' },
+                { icon: Wand2, title: 'Transform', desc: '3 design directions', color: 'text-amber-500' },
               ].map(({ icon: Icon, title, desc, color }) => (
                 <div key={title} className="flex flex-col items-center gap-3">
                   <div className="w-12 h-12 bg-stone-100 dark:bg-stone-800 flex items-center justify-center">

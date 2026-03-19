@@ -1,4 +1,5 @@
 import { Shuffle } from 'lucide-react';
+import { useI18n } from '../i18n/I18nContext';
 
 export const DESIGN_STYLES = [
   { id: 'minimalist-scandinavian', label: 'Minimalist / Scandinavian' },
@@ -42,12 +43,14 @@ export function PreferencesPanel({
   onStyleChange,
   onRoomChange,
 }: PreferencesPanelProps) {
+  const { t } = useI18n();
+
   return (
     <div className="w-full max-w-2xl space-y-8 animate-in fade-in duration-500">
       {/* Style Picker — always visible */}
       <div>
         <h3 className="text-xs font-bold text-stone-400 dark:text-stone-500 uppercase tracking-[0.2em] mb-3">
-          Design Style
+          {t('prefs.designStyle')}
         </h3>
         <div
           id="style-picker-grid"
@@ -66,7 +69,7 @@ export function PreferencesPanel({
             aria-checked={selectedStyle === null}
           >
             <Shuffle className="w-3.5 h-3.5 flex-shrink-0" />
-            Surprise Me
+            {t('prefs.surpriseMe')}
           </button>
           {DESIGN_STYLES.map(style => (
             <button
@@ -92,7 +95,7 @@ export function PreferencesPanel({
       {/* Room Function Selector — always visible */}
       <div>
         <h3 className="text-xs font-bold text-stone-400 dark:text-stone-500 uppercase tracking-[0.2em] mb-3">
-          Room Type
+          {t('prefs.roomType')}
         </h3>
         <div
           id="room-picker-grid"
@@ -111,7 +114,7 @@ export function PreferencesPanel({
             aria-checked={selectedRoom === null}
           >
             <Shuffle className="w-3.5 h-3.5 flex-shrink-0" />
-            Auto-Detect
+            {t('prefs.autoDetect')}
           </button>
           {ROOM_FUNCTIONS.map(room => (
             <button

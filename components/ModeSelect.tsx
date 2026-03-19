@@ -112,7 +112,7 @@ export function ModeSelect({ onSelectMode, uploadedImage }: ModeSelectProps) {
             Design My Space
           </h3>
           <p className="text-sm text-stone-500 dark:text-stone-400 leading-relaxed">
-            5 bold design directions grounded in design theory
+            3 bold design directions grounded in design theory
           </p>
         </button>
       </div>
