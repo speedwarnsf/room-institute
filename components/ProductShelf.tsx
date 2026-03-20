@@ -33,7 +33,7 @@ function ProductCard({ product }: { product: ProductRecommendation }) {
       <div className="flex items-center justify-between pt-1 border-t border-neutral-800">
         <span className="text-xs font-medium text-neutral-300">{product.priceRange}</span>
         <a
-          href={getProductUrl(product.name, product.brand, product.category)}
+          href={getProductUrl(product.searchQuery || product.name, product.brand, product.category)}
           target="_blank"
           rel="noopener noreferrer"
           className="text-[10px] uppercase tracking-widest text-neutral-400 hover:text-neutral-200 transition-colors"
@@ -93,7 +93,7 @@ export function ProductShelf({ products, title, light = false }: ProductShelfPro
               <div className="flex items-center justify-between pt-1 border-t border-stone-200 dark:border-stone-600">
                 <span className="text-xs font-medium text-stone-700 dark:text-stone-300">{product.priceRange}</span>
                 <a
-                  href={getProductUrl(product.name, product.brand, product.category)}
+                  href={getProductUrl(product.searchQuery || product.name, product.brand, product.category)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[10px] uppercase tracking-widest text-stone-400 hover:text-emerald-500 transition-colors"
