@@ -73,7 +73,7 @@ export function ShareableCard({ entry, onReady }: ShareableCardProps) {
               letterSpacing: 8,
             }}
           >
-            ROOM
+            <img src="/room-logo.png" alt="Room" style={{ height: 16 }} />
           </div>
         )}
       </div>

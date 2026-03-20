@@ -4,6 +4,7 @@
  */
 import { ReactNode, useEffect, useState } from 'react';
 import { Camera, Brain, Image, Sparkles } from 'lucide-react';
+import { useI18n } from '../i18n/I18nContext';
 
 interface LoadingSkeletonProps {
   variant?: 'card' | 'text' | 'image' | 'button' | 'chat' | 'analysis';
@@ -157,17 +158,18 @@ interface AnalysisLoadingProps {
   className?: string;
 }
 
-const STAGE_TIPS = [
-  'Our AI examines spatial relationships, light quality, and existing design elements',
-  'Each design direction is grounded in academic design theory frameworks',
-  'Visualization uses reference-guided image generation for photorealistic results',
-  'Color palettes are derived from proven design harmony principles',
-];
-
 export function AnalysisLoading({ stage, progress = 0, className = '' }: AnalysisLoadingProps) {
+  const { t } = useI18n();
   const [dots, setDots] = useState('');
   const [tipIndex, setTipIndex] = useState(0);
   const [elapsed, setElapsed] = useState(0);
+
+  const STAGE_TIPS = [
+    t('loading.tip1'),
+    t('loading.tip2'),
+    t('loading.tip3'),
+    t('loading.tip4'),
+  ];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -196,53 +198,53 @@ export function AnalysisLoading({ stage, progress = 0, className = '' }: Analysi
   const stageConfig = {
     uploading: {
       icon: Camera,
-      message: 'Uploading image',
-      detail: 'Preparing your photo for analysis',
+      message: t('loading.uploadingImage'),
+      detail: t('loading.uploadingDetail'),
       color: 'text-blue-500',
       bgColor: 'bg-blue-50 dark:bg-blue-900/30',
       gradientFrom: 'from-blue-400',
       gradientTo: 'to-blue-500',
-      estimate: '~5 seconds',
+      estimate: t('loading.estimate5'),
     },
     processing: {
       icon: Image,
-      message: 'Processing image',
-      detail: 'Optimizing resolution and color data',
+      message: t('loading.processingImage'),
+      detail: t('loading.processingDetail'),
       color: 'text-purple-500',
       bgColor: 'bg-purple-50 dark:bg-purple-900/30',
       gradientFrom: 'from-purple-400',
       gradientTo: 'to-purple-500',
-      estimate: '~10 seconds',
+      estimate: t('loading.estimate10'),
     },
     analyzing: {
       icon: Brain,
-      message: 'Analyzing your space',
-      detail: 'Reading room through 5 design theory frameworks',
+      message: t('loading.analyzingSpace'),
+      detail: t('loading.analyzingDetail'),
       color: 'text-emerald-500',
       bgColor: 'bg-emerald-50 dark:bg-emerald-900/30',
       gradientFrom: 'from-emerald-400',
       gradientTo: 'to-emerald-500',
-      estimate: '~30 seconds',
+      estimate: t('loading.estimate30'),
     },
     generating: {
       icon: Sparkles,
-      message: 'Generating design concepts',
-      detail: 'Creating 3 unique design directions',
+      message: t('loading.generatingConcepts'),
+      detail: t('loading.generatingDetail'),
       color: 'text-emerald-400',
       bgColor: 'bg-amber-50 dark:bg-emerald-950/30',
       gradientFrom: 'from-emerald-300',
       gradientTo: 'to-emerald-400',
-      estimate: '~45 seconds',
+      estimate: t('loading.estimate45'),
     },
     visualizing: {
       icon: Sparkles,
-      message: 'Rendering your designs',
-      detail: 'Generating photorealistic previews for each concept',
+      message: t('loading.renderingDesigns'),
+      detail: t('loading.renderingDetail'),
       color: 'text-emerald-400',
       bgColor: 'bg-amber-50 dark:bg-emerald-950/30',
       gradientFrom: 'from-emerald-300',
       gradientTo: 'to-emerald-400',
-      estimate: '~60 seconds',
+      estimate: t('loading.estimate60'),
     },
   };
 
@@ -256,7 +258,7 @@ export function AnalysisLoading({ stage, progress = 0, className = '' }: Analysi
 
   // Stage progression indicators
   const stages = ['uploading', 'processing', 'analyzing', 'visualizing'] as const;
-  const stageLabels = ['Upload', 'Process', 'Analyze', 'Render'];
+  const stageLabels = [t('loading.labelUpload'), t('loading.labelProcess'), t('loading.labelAnalyze'), t('loading.labelRender')];
   const currentStageIndex = stages.indexOf(stage as any);
 
   return (
@@ -323,7 +325,7 @@ export function AnalysisLoading({ stage, progress = 0, className = '' }: Analysi
               {Math.round(progress)}%
             </p>
             <p className="text-xs text-stone-400 dark:text-stone-500">
-              {formatTime(elapsed)} elapsed
+              {formatTime(elapsed)} {t('loading.elapsed')}
             </p>
           </div>
         </div>
@@ -331,15 +333,15 @@ export function AnalysisLoading({ stage, progress = 0, className = '' }: Analysi
 
       {/* Estimated time */}
       <p className="text-xs text-stone-400 dark:text-stone-500">
-        Estimated: {config.estimate}
+        {t('loading.estimated')}: {config.estimate}
       </p>
 
       {/* Slow response notice */}
       {elapsed > 120 && (
         <div className="max-w-sm mx-auto bg-amber-50 dark:bg-emerald-950/20 border border-amber-200 dark:border-emerald-700 px-4 py-3 animate-in fade-in duration-500">
-          <p className="text-xs text-emerald-600 dark:text-emerald-200 font-medium mb-1">Taking longer than usual</p>
+          <p className="text-xs text-emerald-600 dark:text-emerald-200 font-medium mb-1">{t('loading.takingLonger')}</p>
           <p className="text-xs text-emerald-500 dark:text-emerald-300 leading-relaxed">
-            The AI is working through a complex analysis. This can happen with detailed rooms or high server load. Hang tight.
+            {t('loading.takingLongerDetail')}
           </p>
         </div>
       )}

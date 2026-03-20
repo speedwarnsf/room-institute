@@ -45,6 +45,17 @@ export function PreferencesPanel({
 }: PreferencesPanelProps) {
   const { t } = useI18n();
 
+  // Translate labels
+  const styleLabels = DESIGN_STYLES.map(s => ({
+    id: s.id,
+    label: t(`prefs.style.${s.id}` as any)
+  }));
+
+  const roomLabels = ROOM_FUNCTIONS.map(r => ({
+    id: r.id,
+    label: t(`prefs.room.${r.id}` as any)
+  }));
+
   return (
     <div className="w-full max-w-2xl space-y-8 animate-in fade-in duration-500">
       {/* Style Picker — always visible */}
@@ -71,7 +82,7 @@ export function PreferencesPanel({
             <Shuffle className="w-3.5 h-3.5 flex-shrink-0" />
             {t('prefs.surpriseMe')}
           </button>
-          {DESIGN_STYLES.map(style => (
+          {styleLabels.map(style => (
             <button
               key={style.id}
               onClick={() => onStyleChange(style.id)}
@@ -116,7 +127,7 @@ export function PreferencesPanel({
             <Shuffle className="w-3.5 h-3.5 flex-shrink-0" />
             {t('prefs.autoDetect')}
           </button>
-          {ROOM_FUNCTIONS.map(room => (
+          {roomLabels.map(room => (
             <button
               key={room.id}
               onClick={() => onRoomChange(room.id)}

@@ -184,7 +184,7 @@ export class ErrorBoundary extends Component<Props, State> {
                 className="bg-stone-600 hover:bg-stone-700 text-white px-6 py-3 font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-stone-500 focus:ring-offset-2 dark:focus:ring-offset-stone-900 flex items-center justify-center gap-2"
               >
                 <Home className="w-4 h-4" />
-                Go Home
+                {getTranslation('error.goHome')}
               </button>
 
               <button
@@ -192,7 +192,7 @@ export class ErrorBoundary extends Component<Props, State> {
                 className="bg-stone-200 hover:bg-stone-300 dark:bg-stone-700 dark:hover:bg-stone-600 text-stone-700 dark:text-stone-200 px-6 py-3 font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-stone-500 focus:ring-offset-2 dark:focus:ring-offset-stone-900 flex items-center justify-center gap-2"
               >
                 <RefreshCw className="w-4 h-4" />
-                Reload Page
+                {getTranslation('error.reloadPage')}
               </button>
             </div>
 

@@ -215,7 +215,7 @@ function StudioBrief({
           className="text-[10px] uppercase tracking-[0.25em] text-neutral-600 mb-6"
           style={{ fontFamily: tp.body }}
         >
-          Color Story
+          {t('studio.colorStory')}
         </h2>
         <div className="h-16 sm:h-20 overflow-hidden relative">
           <div
@@ -249,7 +249,7 @@ function StudioBrief({
           className="text-[10px] uppercase tracking-[0.25em] text-neutral-600 mb-10"
           style={{ fontFamily: tp.body }}
         >
-          Interventions
+          {t('studio.interventions')}
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {option.keyChanges.map((change, i) => (
@@ -282,7 +282,7 @@ function StudioBrief({
             className="text-[10px] uppercase tracking-[0.25em] text-neutral-600 mb-8"
             style={{ fontFamily: tp.body }}
           >
-            Materials
+            {t('studio.materials')}
           </h2>
           <div className="flex flex-wrap gap-3">
             {materials.map((mat) => (
@@ -305,7 +305,7 @@ function StudioBrief({
             className="text-[10px] uppercase tracking-[0.25em] text-neutral-600 mb-12"
             style={{ fontFamily: tp.body }}
           >
-            The Plan
+            {t('studio.thePlan')}
           </h2>
           <div
             className={`max-w-4xl ${tp.layoutDensity === 'sparse' ? '' : 'lg:columns-2 lg:gap-12'}`}
@@ -366,7 +366,7 @@ function StudioBrief({
       {/* ── Product Recommendations ── */}
       {option.products && option.products.length > 0 && (
         <RevealSection>
-          <ProductShelf products={option.products} title={(t as any)('studio.theEdit')} />
+          <ProductShelf products={option.products} title={t('studio.theEdit')} />
         </RevealSection>
       )}
 
@@ -398,12 +398,6 @@ function StudioBrief({
    StudioIterate — Paired iteration controls
    ═══════════════════════════════════════════════════ */
 
-const ITERATION_PAIRS: { left: string; right: string; leftIcon: string; rightIcon: string }[] = [
-  { left: 'Warmer', right: 'Cooler', leftIcon: 'like', rightIcon: 'filter' },
-  { left: 'More minimal', right: 'More layered', leftIcon: 'shrink-content', rightIcon: 'expand-content' },
-  { left: 'Show at night', right: 'Show at golden hour', leftIcon: 'eye', rightIcon: 'stars' },
-  { left: 'Bolder color', right: 'More restrained', leftIcon: 'love', rightIcon: 'filter' },
-];
 
 function StudioIterate({
   tp,
@@ -419,6 +413,13 @@ function StudioIterate({
   const { t } = useI18n();
   const [customPrompt, setCustomPrompt] = useState('');
 
+  const ITERATION_PAIRS: { left: string; right: string; leftIcon: string; rightIcon: string }[] = [
+    { left: t('studio.warmer'), right: t('studio.cooler'), leftIcon: 'like', rightIcon: 'filter' },
+    { left: t('studio.moreMinimal'), right: t('studio.moreLayered'), leftIcon: 'shrink-content', rightIcon: 'expand-content' },
+    { left: t('studio.showNight'), right: t('studio.showGolden'), leftIcon: 'eye', rightIcon: 'stars' },
+    { left: t('studio.bolderColor'), right: t('studio.moreRestrained'), leftIcon: 'love', rightIcon: 'filter' },
+  ];
+
   return (
     <div className="max-w-5xl mx-auto px-6 sm:px-12 lg:px-20 pb-16 sm:pb-24">
       <RevealSection>
@@ -427,10 +428,10 @@ function StudioIterate({
             className="text-[10px] uppercase tracking-[0.25em] text-neutral-600 mb-2"
             style={{ fontFamily: tp.body }}
           >
-            Iterate
+            {t('studio.iterate')}
           </h2>
           <p className="text-sm text-neutral-500 mb-10 italic" style={{ fontFamily: tp.body }}>
-            This direction, but…
+            {t('studio.thisDirectionBut')}
           </p>
 
           {/* Paired sliders */}
@@ -456,7 +457,7 @@ function StudioIterate({
                   )}
                   {left}
                 </button>
-                <span className="text-neutral-700 text-xs text-center hidden sm:block">or</span>
+                <span className="text-neutral-700 text-xs text-center hidden sm:block">{t('studio.or')}</span>
                 <button
                   disabled={isIterating}
                   onClick={() => onIterate(right)}
@@ -487,9 +488,9 @@ function StudioIterate({
               value={customPrompt}
               onChange={(e) => setCustomPrompt(e.target.value)}
               onKeyDown={(e) => { if (e.key === 'Enter' && customPrompt.trim()) { onIterate(customPrompt); setCustomPrompt(''); } }}
-              placeholder={(t as any)('studio.describePlaceholder')}
+              placeholder={t('studio.describePlaceholder')}
               disabled={isIterating}
-              aria-label={(t as any)('studio.customPrompt')}
+              aria-label={t('studio.customPrompt')}
               className="flex-1 bg-transparent border-b border-neutral-800 px-1 py-3 text-sm text-neutral-200 placeholder-neutral-700 focus:outline-none focus:border-neutral-500 focus:ring-0 transition-colors disabled:opacity-40"
               style={{ fontFamily: tp.body }}
             />
@@ -502,7 +503,7 @@ function StudioIterate({
               {isIterating && activeLabel === customPrompt ? (
                 <Loader2 size={16} className="animate-spin" />
               ) : (
-                'Generate'
+                t('studio.generate')
               )}
             </button>
           </div>
@@ -671,13 +672,13 @@ export function DesignStudio({ entry, onBack, onIterate, sourceImage }: DesignSt
         )}
 
         {/* Fixed Navigation */}
-        <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-8 py-3 sm:py-4" role="navigation" aria-label={(t as any)('studio.controls')}>
+        <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-8 py-3 sm:py-4" role="navigation" aria-label={t('studio.controls')}>
           <motion.button
             onClick={onBack}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="w-10 h-10 bg-black/50 backdrop-blur-xl border border-white/10 flex items-center justify-center hover:bg-black/70 transition-colors focus:outline-none focus:ring-2 focus:ring-white/50"
-            aria-label={(t as any)('studio.backToLookbook')}
+            aria-label={t('studio.backToLookbook')}
           >
             <ArrowLeft size={18} className="text-white" />
           </motion.button>
@@ -687,7 +688,7 @@ export function DesignStudio({ entry, onBack, onIterate, sourceImage }: DesignSt
               onClick={handleShare}
               disabled={sharing}
               className="w-10 h-10 bg-black/50 backdrop-blur-xl border border-white/10 flex items-center justify-center hover:bg-black/70 transition-colors"
-              aria-label={(t as any)('studio.shareDesign')}
+              aria-label={t('studio.shareDesign')}
             >
               <SoIcon name="share" size={18} style={{ filter: 'brightness(0) invert(1)' }} />
             </button>
@@ -773,10 +774,10 @@ export function DesignStudio({ entry, onBack, onIterate, sourceImage }: DesignSt
                 className="text-[10px] uppercase tracking-[0.25em] text-neutral-600 mb-2"
                 style={{ fontFamily: tp.body }}
               >
-                Shop This Look
+                {t('studio.shopThisLook')}
               </h2>
               <p className="text-sm text-neutral-500 mb-8 italic" style={{ fontFamily: tp.body }}>
-                Everything you need to bring this design to life
+                {t('studio.shopDescription')}
               </p>
 
               {shoppingList ? (
@@ -795,7 +796,7 @@ export function DesignStudio({ entry, onBack, onIterate, sourceImage }: DesignSt
                   ) : (
                     <ShoppingCart size={18} />
                   )}
-                  {shoppingListLoading ? 'Generating shopping list…' : 'Generate Shopping List'}
+                  {shoppingListLoading ? t('studio.generatingList') : t('studio.generateList')}
                 </button>
               )}
             </div>
@@ -814,7 +815,7 @@ export function DesignStudio({ entry, onBack, onIterate, sourceImage }: DesignSt
                 style={{ fontFamily: tp.body }}
               >
                 <SoIcon name="share" size={16} style={{ filter: 'brightness(0) invert(0.7)' }} />
-                {sharing ? 'Sharing…' : 'Share This Design'}
+                {sharing ? t('studio.sharing') : t('studio.shareDesign')}
               </button>
             </div>
           </RevealSection>

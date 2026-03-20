@@ -12,19 +12,6 @@ interface StructureAssessmentProps {
   disabled?: boolean;
 }
 
-/** Category labels for grouping */
-const CATEGORY_LABELS = {
-  structural: 'Structural Elements',
-  fixture: 'Fixtures & Built-ins', 
-  moveable: 'Moveable Elements'
-} as const;
-
-/** Category descriptions */
-const CATEGORY_DESCRIPTIONS = {
-  structural: 'Permanent architectural features — automatically preserved in exact position',
-  fixture: 'Semi-permanent installations you can choose to keep or change',
-  moveable: 'Items that can be easily rearranged or replaced'
-} as const;
 
 /** Get default keep mode for an element */
 const getDefaultKeepMode = (element: StructureElement): KeepMode => {
@@ -50,6 +37,8 @@ export const StructureAssessment: React.FC<StructureAssessmentProps> = ({
   onContinue,
   disabled = false
 }) => {
+  const { t } = useI18n();
+
   // Initialize choices based on category and keepByDefault values
   const [keepChoices, setKeepChoices] = useState<Record<string, KeepMode>>(() => {
     const initial: Record<string, KeepMode> = {};
@@ -117,16 +106,27 @@ export const StructureAssessment: React.FC<StructureAssessmentProps> = ({
     return { fixed, flexible, toChange };
   }, [elements, keepChoices]);
 
+  const categoryLabels: Record<string, string> = {
+    structural: t('structure.structural'),
+    fixture: t('structure.fixtures'),
+    moveable: t('structure.moveable')
+  };
+
+  const categoryDescriptions: Record<string, string> = {
+    structural: t('structure.structuralDesc'),
+    fixture: t('structure.fixturesDesc'),
+    moveable: t('structure.moveableDesc')
+  };
+
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
       {/* Header */}
       <div className="text-center mb-8">
         <h2 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-3">
-          Structure Assessment
+          {t('structure.title')}
         </h2>
         <p className="text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
-          Before generating designs, choose which elements to keep as-is versus open to changes. 
-          This helps create more targeted recommendations for your space.
+          {t('structure.description')}
         </p>
       </div>
 
@@ -140,10 +140,10 @@ export const StructureAssessment: React.FC<StructureAssessmentProps> = ({
             <div key={category} className="bg-white dark:bg-neutral-800  border border-neutral-200 dark:border-neutral-700">
               <div className="p-6 border-b border-neutral-200 dark:border-neutral-700">
                 <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-1">
-                  {CATEGORY_LABELS[category]}
+                  {categoryLabels[category]}
                 </h3>
                 <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                  {CATEGORY_DESCRIPTIONS[category]}
+                  {categoryDescriptions[category]}
                 </p>
               </div>
               
@@ -163,8 +163,8 @@ export const StructureAssessment: React.FC<StructureAssessmentProps> = ({
                           borderClass: 'border-blue-200 dark:border-blue-800',
                           textClass: 'text-blue-700 dark:text-blue-300',
                           badgeClass: 'bg-blue-200 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
-                          label: 'Keep in Place',
-                          description: 'Fixed position'
+                          label: t('structure.keepInPlace'),
+                          description: t('structure.fixedPosition')
                         };
                       case 'keep':
                         return {
@@ -173,8 +173,8 @@ export const StructureAssessment: React.FC<StructureAssessmentProps> = ({
                           borderClass: 'border-emerald-200 dark:border-emerald-800',
                           textClass: 'text-emerald-700 dark:text-emerald-300',
                           badgeClass: 'bg-emerald-200 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200',
-                          label: 'Keep',
-                          description: 'Include but can move'
+                          label: t('structure.keep'),
+                          description: t('structure.canMove')
                         };
                       case 'change':
                       default:
@@ -184,8 +184,8 @@ export const StructureAssessment: React.FC<StructureAssessmentProps> = ({
                           borderClass: 'border-amber-200 dark:border-emerald-700',
                           textClass: 'text-emerald-600 dark:text-emerald-200',
                           badgeClass: 'bg-amber-200 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-200',
-                          label: 'Change',
-                          description: 'Open to changes'
+                          label: t('structure.change'),
+                          description: t('structure.openToChanges')
                         };
                     }
                   })();
@@ -214,7 +214,7 @@ export const StructureAssessment: React.FC<StructureAssessmentProps> = ({
                         <div>
                           <div className="font-medium text-neutral-900 dark:text-neutral-100">
                             {element.name}
-                            {isStructural && <span className="ml-2 text-xs text-neutral-500 dark:text-neutral-400">(automatic)</span>}
+                            {isStructural && <span className="ml-2 text-xs text-neutral-500 dark:text-neutral-400">({t('structure.automatic')})</span>}
                           </div>
                           <div className={`text-sm ${textClass}`}>
                             {description}
@@ -236,24 +236,24 @@ export const StructureAssessment: React.FC<StructureAssessmentProps> = ({
 
       {/* Summary */}
       <div className="bg-neutral-100 dark:bg-neutral-800 p-6 mb-8">
-        <h4 className="font-medium text-neutral-900 dark:text-neutral-100 mb-2">Summary</h4>
+        <h4 className="font-medium text-neutral-900 dark:text-neutral-100 mb-2">{t('structure.summary')}</h4>
         <div className="flex flex-wrap gap-6 text-sm">
           <div className="flex items-center gap-2">
             <Pin className="w-4 h-4 text-blue-600 dark:text-blue-400" />
             <span className="text-blue-700 dark:text-blue-300">
-              {summary.fixed} fixed in place
+              {summary.fixed} {t('structure.fixedInPlace')}
             </span>
           </div>
           <div className="flex items-center gap-2">
             <Lock className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
             <span className="text-emerald-700 dark:text-emerald-300">
-              {summary.flexible} kept but flexible
+              {summary.flexible} {t('structure.keptFlexible')}
             </span>
           </div>
           <div className="flex items-center gap-2">
             <Unlock className="w-4 h-4 text-emerald-500 dark:text-emerald-300" />
             <span className="text-emerald-600 dark:text-emerald-200">
-              {summary.toChange} open to change
+              {summary.toChange} {t('structure.openToChange')}
             </span>
           </div>
         </div>
@@ -265,9 +265,9 @@ export const StructureAssessment: React.FC<StructureAssessmentProps> = ({
           onClick={handleContinue}
           disabled={disabled}
           className="inline-flex items-center gap-2 px-8 py-3 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900  font-medium hover:bg-neutral-800 dark:hover:bg-neutral-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
-          aria-label={`Continue to designs with ${summary.fixed} elements fixed, ${summary.flexible} flexible, and ${summary.toChange} open to change`}
+          aria-label={`${t('structure.continueWith')} ${summary.fixed} ${t('structure.elementsFixed')}, ${summary.flexible} ${t('structure.flexible')}, ${t('structure.and')} ${summary.toChange} ${t('structure.openToChange')}`}
         >
-          Continue to Designs
+          {t('structure.continue')}
           <ChevronRight className="w-5 h-5" />
         </button>
       </div>

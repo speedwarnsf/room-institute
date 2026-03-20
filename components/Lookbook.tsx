@@ -185,11 +185,11 @@ const LookbookCard = memo(function LookbookCard({
             />
             {/* AI disclaimer badge */}
             <div className="absolute top-2 left-2 bg-black/50 text-white text-[10px] px-2 py-1 backdrop-blur-sm">
-              AI visualization
+              {t('lookbook.aiViz')}
             </div>
             {/* Hover overlay with quick info */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none flex items-end p-3">
-              <span className="text-white text-xs font-medium tracking-wide uppercase">Tap to explore</span>
+              <span className="text-white text-xs font-medium tracking-wide uppercase">{t('lookbook.tapToExplore')}</span>
             </div>
           </>
         ) : (
@@ -237,7 +237,7 @@ const LookbookCard = memo(function LookbookCard({
           className="flex items-center gap-1 text-xs text-stone-400 hover:text-stone-600 dark:hover:text-stone-300 transition-colors"
         >
           {expanded ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
-          {expanded ? 'Less' : 'Key changes'}
+          {expanded ? t('lookbook.less') : t('lookbook.keyChanges')}
         </button>
         <AnimatePresence>
           {expanded && (
@@ -280,7 +280,7 @@ const LookbookCard = memo(function LookbookCard({
           className="w-full py-1.5 text-xs font-medium text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-colors flex items-center justify-center gap-1"
         >
           <Home className="w-3 h-3" />
-          Save to Room
+          {t('lookbook.saveToRoom')}
         </button>
 
         {/* Go Deeper button for good+ */}
@@ -292,7 +292,7 @@ const LookbookCard = memo(function LookbookCard({
             className="w-full py-2 text-sm font-medium bg-emerald-600 hover:bg-emerald-700 text-white transition-colors flex items-center justify-center gap-2"
           >
             <Crown className="w-3.5 h-3.5" />
-            Go Deeper
+            {t('lookbook.goDeeper')}
           </motion.button>
         )}
       </div>
@@ -321,6 +321,7 @@ function FullScreenCard({
   isDownloading: boolean;
   onSaveToRoom: (entry: LookbookEntry) => void;
 }) {
+  const { t } = useI18n();
   const isGood = entry.rating === 'good';
   const isTheOne = entry.rating === 'the-one';
 
@@ -429,7 +430,7 @@ function FullScreenCard({
 
           {/* Key Changes */}
           <div>
-            <h4 className="text-sm font-semibold text-stone-700 dark:text-stone-200 mb-2">Key Changes</h4>
+            <h4 className="text-sm font-semibold text-stone-700 dark:text-stone-200 mb-2">{t('lookbook.keyChanges')}</h4>
             <ul className="space-y-3">
               {entry.option.keyChanges.map((change, i) => (
                 <li key={i} className="text-sm text-stone-600 dark:text-stone-400 flex items-start gap-2">
@@ -494,19 +495,19 @@ function FullScreenCard({
               onClick={() => onDownload(entry)}
               disabled={isDownloading}
               className="flex-1 py-2.5 text-sm font-medium border border-stone-200 dark:border-stone-600 text-stone-700 dark:text-stone-200 hover:bg-stone-50 dark:hover:bg-stone-700/50 transition-colors flex items-center justify-center gap-2"
-              title={(t as any)('lookbook.saveImage')}
+              title={t('lookbook.saveImage')}
             >
               {isDownloading ? <Loader2 className="w-4 h-4 animate-spin" /> : <SoIcon name="save" size={16} />}
-              Save Image
+              {t('lookbook.saveImage')}
             </button>
             <button
               onClick={() => onShare(entry)}
               disabled={isSharing}
               className="flex-1 py-2.5 text-sm font-medium border border-stone-200 dark:border-stone-600 text-stone-700 dark:text-stone-200 hover:bg-stone-50 dark:hover:bg-stone-700/50 transition-colors flex items-center justify-center gap-2"
-              title={(t as any)('lookbook.share')}
+              title={t('lookbook.share')}
             >
               {isSharing ? <Loader2 className="w-4 h-4 animate-spin" /> : <SoIcon name="share" size={16} />}
-              Share
+              {t('lookbook.share')}
             </button>
           </div>
 
@@ -516,7 +517,7 @@ function FullScreenCard({
             className="w-full py-2.5 text-sm font-medium border border-emerald-200 dark:border-emerald-700 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-colors flex items-center justify-center gap-2"
           >
             <Home className="w-4 h-4" />
-            Save to Room
+            {t('lookbook.saveToRoom')}
           </button>
 
           {/* Go Deeper */}
@@ -526,7 +527,7 @@ function FullScreenCard({
               className="w-full py-3 text-sm font-medium bg-emerald-600 hover:bg-emerald-700 text-white transition-colors flex items-center justify-center gap-2"
             >
               <SoIcon name="eye" size={16} style={{ filter: 'brightness(0) invert(1)' }} />
-              Go Deeper →
+              {t('lookbook.goDeeper')} →
             </button>
           )}
         </div>
@@ -636,11 +637,11 @@ export function Lookbook({ entries, onRate, onSelectForIteration, onGenerateMore
       {/* Header */}
       <div className="text-center space-y-2">
         <h2 style={{ fontFamily: "'Playfair Display', serif" }} className="text-2xl sm:text-3xl font-bold text-stone-800 dark:text-stone-100">
-          Your Lookbook
+          {t('lookbook.yourLookbook')}
         </h2>
         <p className="text-stone-500 dark:text-stone-400 text-xs sm:text-sm">
-          <span className="sm:hidden">Tap to explore, swipe to rate</span>
-          <span className="hidden sm:inline">Swipe right to love, left to dismiss — or tap to rate</span>
+          <span className="sm:hidden">{t('lookbook.tapSwipe')}</span>
+          <span className="hidden sm:inline">{t('lookbook.swipeInstructions')}</span>
         </p>
       </div>
 
@@ -654,20 +655,24 @@ export function Lookbook({ entries, onRate, onSelectForIteration, onGenerateMore
           {isGenerating ? (
             <>
               <Loader2 className="w-5 h-5 animate-spin" />
-              Generating…
+              {t('lookbook.generating')}
             </>
           ) : (
             <>
               <SoIcon name="add-circle" size={20} style={{ filter: 'brightness(0) invert(1)' }} />
-              Generate More Designs
+              {t('lookbook.generateMore')}
             </>
           )}
         </button>
       </div>
 
       {/* Filter tabs */}
-      <div className="flex gap-2 justify-center" role="tablist" aria-label="Filter designs">
-        {tabs.map(tab => (
+      <div className="flex gap-2 justify-center" role="tablist" aria-label={t('lookbook.filterLabel')}>
+        {[
+          { key: 'all' as const, label: t('lookbook.filterAll'), count: counts.all },
+          { key: 'good' as const, label: t('lookbook.filterGood'), count: counts.good, icon: 'love' as const },
+          { key: 'hidden' as const, label: t('lookbook.filterHidden'), count: counts.hidden, icon: 'eye-off' as const },
+        ].map(tab => (
           <button
             key={tab.key}
             role="tab"
