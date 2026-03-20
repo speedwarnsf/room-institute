@@ -350,6 +350,13 @@ export function PricingPage({ onClose, onNeedAuth }: PricingPageProps) {
           >
             {t('pricing.continueFree')}
           </button>
+          <br />
+          <button
+            onClick={onNeedAuth}
+            className="text-emerald-400 hover:text-emerald-300 text-sm font-medium transition-colors"
+          >
+            {t('pricing.alreadyMember')}
+          </button>
         </div>
 
         {/* Fine print */}
