@@ -376,6 +376,34 @@ export function ListingExperience() {
     return () => { stopTimer(); };
   }, [listingId]);
 
+  // SEO: dynamic title, meta, and Schema.org structured data
+  useEffect(() => {
+    if (!listing) return;
+    const agentName = listing.agent?.name;
+    document.title = `${listing.address} — Reimagined${agentName ? ` | Listed by ${agentName}` : ''} | Room`;
+
+    // Update meta description
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (!metaDesc) { metaDesc = document.createElement('meta'); metaDesc.setAttribute('name', 'description'); document.head.appendChild(metaDesc); }
+    metaDesc.setAttribute('content', `Explore AI-generated design possibilities for ${listing.address}, ${listing.city}, ${listing.state}. ${listing.beds} bed, ${listing.baths} bath.`);
+
+    // Inject Schema.org
+    let schemaScript = document.getElementById('listing-schema');
+    if (!schemaScript) { schemaScript = document.createElement('script'); schemaScript.id = 'listing-schema'; schemaScript.setAttribute('type', 'application/ld+json'); document.head.appendChild(schemaScript); }
+    schemaScript.textContent = JSON.stringify({
+      '@context': 'https://schema.org', '@type': 'RealEstateListing',
+      name: listing.address, description: listing.description,
+      url: `https://room.institute/listing/${listing.id}`,
+      image: listing.heroImage?.startsWith('http') ? listing.heroImage : `https://room.institute${listing.heroImage}`,
+      address: { '@type': 'PostalAddress', streetAddress: listing.address, addressLocality: listing.city, addressRegion: listing.state, postalCode: listing.zip, addressCountry: 'US' },
+      ...(listing.price ? { offers: { '@type': 'Offer', price: listing.price, priceCurrency: 'USD' } } : {}),
+      numberOfBedrooms: listing.beds, numberOfBathroomsTotal: listing.baths,
+      ...(agentName ? { broker: { '@type': 'RealEstateAgent', name: agentName, worksFor: listing.agent?.brokerage ? { '@type': 'Organization', name: listing.agent.brokerage } : undefined } } : {}),
+    });
+
+    return () => { document.title = 'Room — AI Interior Design'; };
+  }, [listing]);
+
   useEffect(() => {
     const link = document.createElement('link');
     link.href = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Nunito:wght@300;400;600;700&display=swap';

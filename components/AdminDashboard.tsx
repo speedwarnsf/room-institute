@@ -847,6 +847,63 @@ export function AdminDashboard() {
                 </div>
               )}
             </div>
+
+            {/* Per-Listing Engagement */}
+            <div className="border border-stone-800 bg-stone-900 p-5">
+              <div className="text-xs text-stone-500 uppercase tracking-wide mb-4">Listing Performance</div>
+              {(() => {
+                // Group events by listing
+                const byListing: Record<string, { views: number; designs: number; goDeeper: number; timeMs: number; timeCount: number; spreads: number; products: number }> = {};
+                for (const e of recentEvents) {
+                  const lid = e.listing_id || 'unknown';
+                  if (!byListing[lid]) byListing[lid] = { views: 0, designs: 0, goDeeper: 0, timeMs: 0, timeCount: 0, spreads: 0, products: 0 };
+                  if (e.event_type === 'page_view') byListing[lid].views++;
+                  if (e.event_type === 'design_expanded' || e.event_type === 'design_viewed') byListing[lid].designs++;
+                  if (e.event_type === 'go_deeper_tapped') byListing[lid].goDeeper++;
+                  if (e.event_type === 'spread_loaded') byListing[lid].spreads++;
+                  if (e.event_type === 'partner_clicked' || e.event_type === 'room_cta_clicked') byListing[lid].products++;
+                  if (e.event_type === 'time_on_page' && e.duration_ms) { byListing[lid].timeMs += e.duration_ms; byListing[lid].timeCount++; }
+                }
+                const entries = Object.entries(byListing).filter(([id]) => id !== 'unknown').sort((a, b) => b[1].views - a[1].views);
+                if (entries.length === 0) return <p className="text-stone-600 text-sm">No listing data yet</p>;
+                return (
+                  <div className="space-y-3">
+                    {entries.map(([lid, stats]) => (
+                      <div key={lid} className="border border-stone-800 p-4">
+                        <div className="flex items-center justify-between mb-3">
+                          <a href={`/listing/${lid}`} className="text-emerald-500 hover:text-emerald-400 text-sm font-mono transition-colors" target="_blank" rel="noopener">{lid}</a>
+                          <a href={`/listing/${lid}/manage`} className="text-stone-600 hover:text-stone-400 text-[10px] uppercase tracking-wider transition-colors">Manage</a>
+                        </div>
+                        <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 text-center">
+                          <div>
+                            <div className="text-xl font-bold text-stone-200" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>{stats.views}</div>
+                            <div className="text-[10px] text-stone-500 uppercase">Views</div>
+                          </div>
+                          <div>
+                            <div className="text-xl font-bold text-stone-200" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>{stats.designs}</div>
+                            <div className="text-[10px] text-stone-500 uppercase">Design Taps</div>
+                          </div>
+                          <div>
+                            <div className="text-xl font-bold text-stone-200" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>{stats.goDeeper}</div>
+                            <div className="text-[10px] text-stone-500 uppercase">Go Deeper</div>
+                          </div>
+                          <div>
+                            <div className="text-xl font-bold text-stone-200" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>{stats.spreads}</div>
+                            <div className="text-[10px] text-stone-500 uppercase">Spreads</div>
+                          </div>
+                          <div>
+                            <div className="text-xl font-bold text-stone-200" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                              {stats.timeCount > 0 ? `${Math.round(stats.timeMs / stats.timeCount / 1000)}s` : '--'}
+                            </div>
+                            <div className="text-[10px] text-stone-500 uppercase">Avg Time</div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                );
+              })()}
+            </div>
           </div>
         )}
 
