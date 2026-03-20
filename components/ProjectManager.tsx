@@ -46,13 +46,17 @@ export const ProjectManager: React.FC<ProjectManagerProps> = ({ onBack, onOpenRo
 
   const handleCreate = useCallback(async () => {
     if (!newName.trim()) return;
-    const project = createProject(newName.trim(), newDesc.trim() || undefined);
-    await saveProject(project);
-    setNewName('');
-    setNewDesc('');
-    setShowNewForm(false);
-    await refresh();
-    setSelectedProjectId(project.id);
+    try {
+      const project = createProject(newName.trim(), newDesc.trim() || undefined);
+      await saveProject(project);
+      setNewName('');
+      setNewDesc('');
+      setShowNewForm(false);
+      await refresh();
+      setSelectedProjectId(project.id);
+    } catch (err) {
+      console.error('Failed to create project:', err);
+    }
   }, [newName, newDesc, refresh]);
 
   const handleDelete = useCallback(async (id: string) => {

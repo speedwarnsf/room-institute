@@ -90,7 +90,13 @@ export async function getProjects(): Promise<Project[]> {
       .is('github_repo', null)
       .order('updated_at', { ascending: false });
     if (!error && data) {
-      return data.map(rowToProject);
+      // Merge Supabase projects with localStorage (in case Supabase save failed)
+      const supabaseProjects = data.map(rowToProject);
+      const localProjects = loadProjectsLocal();
+      // Deduplicate by ID, preferring Supabase version
+      const ids = new Set(supabaseProjects.map(p => p.id));
+      const merged = [...supabaseProjects, ...localProjects.filter(p => !ids.has(p.id))];
+      return merged.sort((a, b) => b.updatedAt - a.updatedAt);
     }
     console.warn('projectStorage: Supabase getProjects failed, falling back', error);
   }
