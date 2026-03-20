@@ -96,7 +96,7 @@ export function TasteRadarChart({ profile, size = 280, className = '' }: TasteRa
   }, []);
 
   return (
-    <div className={`space-y-4 ${className}`} role="region" aria-label="Taste Profile">
+    <div className={`space-y-4 ${className}`} role="region" aria-label={t('taste.profile')}>
       <div className="flex items-center justify-between">
         <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-stone-500 dark:text-stone-400">
           Your Taste Profile

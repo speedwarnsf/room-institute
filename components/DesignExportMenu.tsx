@@ -89,7 +89,7 @@ export function DesignExportMenu({ entry, sourceImage, compact = false, classNam
           onClick={() => hasImage && run('image')}
           disabled={!hasImage || loading === 'image'}
           className="h-10 px-4 bg-black/50 backdrop-blur-xl border border-white/10 flex items-center justify-center gap-2 hover:bg-black/70 transition-colors text-xs uppercase tracking-widest text-neutral-300 disabled:opacity-40"
-          aria-label="Download design image"
+          aria-label={t('export.downloadImage')}
         >
           {loading === 'image' ? <Loader2 size={16} className="animate-spin" /> : <Download size={16} />}
           <span className="hidden sm:inline">Image</span>
@@ -99,7 +99,7 @@ export function DesignExportMenu({ entry, sourceImage, compact = false, classNam
           onClick={() => run('pdf')}
           disabled={loading === 'pdf'}
           className="h-10 px-4 bg-black/50 backdrop-blur-xl border border-white/10 flex items-center justify-center gap-2 hover:bg-black/70 transition-colors text-xs uppercase tracking-widest text-neutral-300 disabled:opacity-40"
-          aria-label="Download PDF report"
+          aria-label={t('export.downloadPDF')}
         >
           {loading === 'pdf' ? <Loader2 size={16} className="animate-spin" /> : <FileText size={16} />}
           <span className="hidden sm:inline">PDF</span>
@@ -108,7 +108,7 @@ export function DesignExportMenu({ entry, sourceImage, compact = false, classNam
           <button
             onClick={() => setOpen(!open)}
             className="h-10 px-3 bg-black/50 backdrop-blur-xl border border-white/10 flex items-center justify-center gap-1 hover:bg-black/70 transition-colors text-xs uppercase tracking-widest text-neutral-300"
-            aria-label="More export options"
+            aria-label={t('export.moreOptions')}
             aria-expanded={open}
           >
             <Share2 size={16} />
@@ -141,7 +141,7 @@ export function DesignExportMenu({ entry, sourceImage, compact = false, classNam
       <button
         onClick={() => setOpen(!open)}
         className="flex items-center gap-2 px-5 py-3 border border-neutral-700 text-sm text-neutral-300 hover:bg-neutral-900 hover:border-neutral-500 transition-all"
-        aria-label="Export and download options"
+        aria-label={t('export.exportAndDownload')}
         aria-expanded={open}
         aria-haspopup="menu"
       >

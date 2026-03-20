@@ -255,7 +255,7 @@ const LookbookCard = memo(function LookbookCard({
         </AnimatePresence>
 
         {/* Rating buttons */}
-        <div className="flex gap-1 pt-1" role="group" aria-label="Rate this design">
+        <div className="flex gap-1 pt-1" role="group" aria-label={(t as any)('lookbook.rateDesign')}>
           {RATINGS.map(r => (
             <button
               key={r.value}
@@ -753,7 +753,7 @@ export function Lookbook({ entries, onRate, onSelectForIteration, onGenerateMore
         layout
         className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 lg:gap-6"
         role="feed"
-        aria-label="Design lookbook cards"
+        aria-label={(t as any)('lookbook.designCards')}
       >
         <AnimatePresence mode="popLayout">
           {sortedEntries.map(entry => (

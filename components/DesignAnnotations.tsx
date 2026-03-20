@@ -1,5 +1,6 @@
 import { useState, useCallback, useRef } from 'react';
 import { X, MessageSquare, Trash2 } from 'lucide-react';
+import { useI18n } from '../i18n/I18nContext';
 
 export interface Annotation {
   id: string;
@@ -22,6 +23,7 @@ export function DesignAnnotations({
   onAnnotationsChange,
   className = '',
 }: DesignAnnotationsProps) {
+  const { t } = useI18n();
   const [isAnnotating, setIsAnnotating] = useState(false);
   const [pendingPoint, setPendingPoint] = useState<{ x: number; y: number } | null>(null);
   const [noteText, setNoteText] = useState('');
@@ -165,7 +167,7 @@ export function DesignAnnotations({
                 value={noteText}
                 onChange={(e) => setNoteText(e.target.value)}
                 onKeyDown={(e) => { if (e.key === 'Enter') handleAddAnnotation(); if (e.key === 'Escape') setPendingPoint(null); }}
-                placeholder="Add a note..."
+                placeholder={t('annotations.addNote')}
                 className="w-full px-2 py-1.5 text-sm bg-transparent border border-stone-200 dark:border-stone-600 text-stone-800 dark:text-stone-200 focus:outline-none focus:ring-1 focus:ring-emerald-500"
               />
               <div className="flex gap-1 mt-2">
