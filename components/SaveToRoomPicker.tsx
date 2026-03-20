@@ -17,6 +17,7 @@ interface SaveToRoomPickerProps {
 }
 
 export const SaveToRoomPicker: React.FC<SaveToRoomPickerProps> = ({ entry, sourceImage, onClose, onSaved }) => {
+  const { t } = useI18n();
   const [rooms, setRooms] = useState<Room[]>([]);
   const [isCreating, setIsCreating] = useState(false);
   const [newName, setNewName] = useState('');

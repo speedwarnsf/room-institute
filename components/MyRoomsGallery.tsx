@@ -31,6 +31,7 @@ interface MyRoomsGalleryProps {
 // ============================================================================
 
 export const MyRoomsGallery: React.FC<MyRoomsGalleryProps> = ({ isOpen, onClose, onLoadRoom }) => {
+  const { t } = useI18n();
   const [rooms, setRooms] = useState<Room[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRoomId, setSelectedRoomId] = useState<string | null>(null);

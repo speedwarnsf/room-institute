@@ -4,6 +4,7 @@ import { getProductUrl } from '../services/affiliateLinks';
 import { useI18n } from '../i18n/I18nContext';
 
 function ProductCard({ product }: { product: ProductRecommendation }) {
+  const { t } = useI18n();
 
   const categoryKey = `category.${product.category}` as const;
   const categoryLabel = t(categoryKey as any);

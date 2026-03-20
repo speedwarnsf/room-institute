@@ -9,6 +9,7 @@ interface MoodBoardProps {
 }
 
 export function MoodBoard({ onSelectImages, compact = false }: MoodBoardProps) {
+  const { t } = useI18n();
   const [boards, setBoards] = useState<MoodBoardType[]>([]);
   const [activeBoard, setActiveBoard] = useState<MoodBoardType | null>(null);
   const [isOpen, setIsOpen] = useState(false);

@@ -5,6 +5,7 @@ import GlobalTypeset from './GlobalTypeset';
 import { useI18n } from '../i18n/I18nContext';
 
 export function ListingIntake() {
+  const { t } = useI18n();
   const navigate = useNavigate();
   const [url, setUrl] = useState('');
   const [agentName, setAgentName] = useState('');

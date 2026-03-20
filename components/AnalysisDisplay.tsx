@@ -55,6 +55,7 @@ export const AnalysisDisplay: React.FC<AnalysisDisplayProps> = ({
   shoppingList,
   sessionId,
 }) => {
+  const { t } = useI18n();
   const [showComparison, setShowComparison] = useState(false);
   const canShowComparison = !!visualizationImage && !!originalImage && !visualizationError;
   /**

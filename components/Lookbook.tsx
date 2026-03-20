@@ -1,3 +1,4 @@
+  const { t } = useI18n();
 import { useState, useCallback, useMemo, useRef, memo } from 'react';
 import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
 import { Loader2, ChevronDown, ChevronUp, Home, Palette, Sun, Layers, Lightbulb, Crown } from 'lucide-react';
@@ -63,6 +64,7 @@ const LookbookCard = memo(function LookbookCard({
   isSharing: boolean;
   onSaveToRoom: (entry: LookbookEntry) => void;
 }) {
+  const { t } = useI18n();
   const [expanded, setExpanded] = useState(false);
   const [showGoldBurst, setShowGoldBurst] = useState(false);
   const [showNeverEffect, setShowNeverEffect] = useState(false);
@@ -254,7 +256,7 @@ const LookbookCard = memo(function LookbookCard({
         </AnimatePresence>
 
         {/* Rating buttons */}
-        <div className="flex gap-1 pt-1" role="group" aria-label={(t as any)('lookbook.rateDesign')}>
+        <div className="flex gap-1 pt-1" role="group" aria-label="Rate this design">
           {RATINGS.map(r => (
             <button
               key={r.value}
@@ -542,6 +544,7 @@ const ITERATION_BRANCHES = [
 ];
 
 export function Lookbook({ entries, onRate, onSelectForIteration, onGenerateMore, isGenerating, uploadedImageUrl }: LookbookProps) {
+  const { t } = useI18n();
   const [filter, setFilter] = useState<FilterTab>('all');
   const [expandedEntry, setExpandedEntry] = useState<LookbookEntry | null>(null);
   const [sharingEntryId, setSharingEntryId] = useState<string | null>(null);
@@ -664,7 +667,7 @@ export function Lookbook({ entries, onRate, onSelectForIteration, onGenerateMore
       </div>
 
       {/* Filter tabs */}
-      <div className="flex gap-2 justify-center" role="tablist" aria-label={(t as any)('lookbook.filterDesigns')}>
+      <div className="flex gap-2 justify-center" role="tablist" aria-label="Filter designs">
         {tabs.map(tab => (
           <button
             key={tab.key}
@@ -726,10 +729,10 @@ export function Lookbook({ entries, onRate, onSelectForIteration, onGenerateMore
           className="bg-gradient-to-br from-amber-50 to-yellow-50 dark:from-emerald-950/20 dark:to-yellow-900/10 border border-amber-200/50 dark:border-emerald-600/30 p-5 space-y-3"
         >
           <h3 className="text-sm font-semibold text-emerald-700 dark:text-emerald-200">
-            {(t as any)('lookbook.goDeeperTitle')}
+            Go deeper on your favorites
           </h3>
           <p className="text-xs text-emerald-500 dark:text-emerald-300/70">
-            {(t as any)('lookbook.goDeeperInstructions')}
+            Tap "Go Deeper" on any card, then explore iteration branches:
           </p>
           <div className="flex flex-wrap gap-2">
             {ITERATION_BRANCHES.map(({ icon: Icon, label }) => (
@@ -746,7 +749,7 @@ export function Lookbook({ entries, onRate, onSelectForIteration, onGenerateMore
         layout
         className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 lg:gap-6"
         role="feed"
-        aria-label={(t as any)('lookbook.designCards')}
+        aria-label="Design lookbook cards"
       >
         <AnimatePresence mode="popLayout">
           {sortedEntries.map(entry => (
