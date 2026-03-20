@@ -17,6 +17,7 @@ import {
 import { ShoppingProduct, ProductCategory, ShoppingListData } from '../types';
 import { trackProductClick } from '../services/affiliateTracking';
 import { useI18n } from '../i18n/I18nContext';
+import { getProductUrl } from '../services/affiliateLinks';
 
 const PURCHASED_KEY = 'room-institute_purchased';
 
@@ -228,7 +229,7 @@ export const ShoppingList: React.FC<ShoppingListProps> = ({ shoppingList, sessio
 
                           {/* Buy button */}
                           <a
-                            href={`https://www.google.com/search?q=${encodeURIComponent(item.searchTerm)}&tbm=shop`}
+                            href={getProductUrl(item.name, undefined, item.category)}
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={() => handleBuyClick(item)}

@@ -188,7 +188,7 @@ export default function DiscoverPage({ onBack, onShowUpgrade }: DiscoverPageProp
                 </span>
               </div>
               <p className="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
-                {image.alt}
+                {(t as any)(`discover.img.${image.id}`) || image.alt}
               </p>
               <div className="flex gap-1.5 mt-2 flex-wrap">
                 {image.tags.map(tag => (
@@ -226,10 +226,10 @@ export default function DiscoverPage({ onBack, onShowUpgrade }: DiscoverPageProp
               >
                 <div className="flex-1 min-w-0">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-stone-400 dark:text-stone-500">
-                    {tip.category}
+                    {(t as any)(`discover.tipCategory.${tip.category.replace(/\s+/g, '')}`) || tip.category}
                   </span>
                   <h3 className="text-base font-bold text-stone-800 dark:text-stone-200 mt-1">
-                    {tip.title}
+                    {(t as any)(`discover.tip.${tip.id}.title`) || tip.title}
                   </h3>
                 </div>
                 {expandedTipId === tip.id ? (
@@ -240,7 +240,7 @@ export default function DiscoverPage({ onBack, onShowUpgrade }: DiscoverPageProp
               </button>
               {expandedTipId === tip.id && (
                 <p className="text-sm text-stone-600 dark:text-stone-400 mt-3 leading-relaxed animate-in fade-in duration-200">
-                  {tip.body}
+                  {(t as any)(`discover.tip.${tip.id}.body`) || tip.body}
                 </p>
               )}
             </div>

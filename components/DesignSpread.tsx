@@ -125,7 +125,18 @@ export default function DesignSpread({ design, listingAddress, roomLabel, onBack
     fetch('/api/designs/spread', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ designId: design.id, locale }),
+      body: JSON.stringify({
+        designId: design.id,
+        locale,
+        // Pass design data for seed/demo listings that aren't in DB
+        designData: {
+          name: design.name,
+          description: design.description,
+          frameworks: design.frameworks,
+          palette: design.palette,
+          products: design.products,
+        },
+      }),
     })
       .then(res => {
         if (!res.ok) throw new Error('Failed to generate spread');

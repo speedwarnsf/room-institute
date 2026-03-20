@@ -61,8 +61,7 @@ RESPONSE FORMAT (STRICT JSON, NO MARKDOWN FENCES):
       "price_high": 150,
       "quantity": 1,
       "design_theory_justification": "Biophilic design: natural materials and warm, varied lighting reduce stress (light pools vs uniform flat lighting)",
-      "search_term": "rattan floor lamp warm light",
-      "retailer_url": "https://www.westelm.com/search/results.html?words=rattan+floor+lamp"
+      "search_term": "rattan floor lamp warm light"
     }
   ]
 }
@@ -70,8 +69,7 @@ RESPONSE FORMAT (STRICT JSON, NO MARKDOWN FENCES):
 RULES:
 - 8-15 items total, spread across at least 4 categories
 - price_low and price_high in USD (realistic retail prices)
-- search_term: 3-6 word search query
-- retailer_url: link to a REAL product search page on a major retailer. Rotate across: westelm.com, cb2.com, anthropologie.com, wayfair.com, ikea.com, crateandbarrel.com, serenaandlily.com, article.com, potterybarn.com. Match the retailer to the product's price point and style
+- search_term: 3-6 word search query that would find this product on a retailer site
 - design_theory_justification: reference specific framework principles
 - Be room-specific based on the analysis
 
@@ -120,7 +118,7 @@ Return ONLY the JSON object.`;
           low: Math.max(1, Math.round(item.price_low || 10)),
           high: Math.max(2, Math.round(item.price_high || 50)),
         },
-        affiliateUrl: (item as any).retailer_url || `https://www.google.com/search?q=${encodeURIComponent(item.search_term || item.name)}`,
+        affiliateUrl: `https://www.google.com/search?q=${encodeURIComponent(item.search_term || item.name)}&tbm=shop`,
         searchTerm: (item.search_term || item.name).slice(0, 60),
         quantity: Math.max(1, Math.min(10, item.quantity || 1)),
         designTheoryJustification: (item.design_theory_justification || 'Supports the overall design direction').slice(0, 300),

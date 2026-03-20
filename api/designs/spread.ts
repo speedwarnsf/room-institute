@@ -48,20 +48,37 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { designId, locale = 'en' } = req.body;
+  const { designId, locale = 'en', designData: clientDesignData } = req.body;
   if (!designId) {
     return res.status(400).json({ error: 'designId required' });
   }
 
   try {
-    // 1. Fetch the design
-    const { data: design, error: designErr } = await supabase
+    // 1. Fetch the design from DB
+    const { data: dbDesign, error: designErr } = await supabase
       .from('listing_designs')
       .select('id, name, description, image_url, frameworks, design_seed, room_reading, style_analysis, spread_data')
       .eq('id', designId)
       .single();
 
-    if (designErr || !design) {
+    // Fall back to client-provided design data (for seed/demo listings)
+    const design = dbDesign || (clientDesignData ? {
+      id: designId,
+      name: clientDesignData.name || '',
+      description: clientDesignData.description || '',
+      frameworks: clientDesignData.frameworks || [],
+      design_seed: {
+        mood: clientDesignData.mood || '',
+        palette: clientDesignData.palette || [],
+        keyChanges: clientDesignData.keyChanges || [],
+        fullPlan: clientDesignData.fullPlan || '',
+        products: clientDesignData.products || [],
+      },
+      room_reading: clientDesignData.roomReading || '',
+      spread_data: null,
+    } : null);
+
+    if (!design) {
       return res.status(404).json({ error: 'Design not found' });
     }
 
