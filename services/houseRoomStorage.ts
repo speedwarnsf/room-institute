@@ -124,6 +124,7 @@ async function roomToRow(room: Room, userId: string) {
     id: room.id,
     user_id: userId,
     name: room.name,
+    source_image: room.sourceImage || null,
     source_image_thumb: room.sourceImageThumb || null,
     designs: await stripDesignsForDb(room.designs, room.id),
     created_at: new Date(room.createdAt).toISOString(),
@@ -135,6 +136,7 @@ function rowToRoom(row: any): Room {
   return {
     id: row.id,
     name: row.name,
+    sourceImage: row.source_image || undefined,
     sourceImageThumb: row.source_image_thumb || undefined,
     designs: row.designs || [],
     createdAt: new Date(row.created_at).getTime(),
@@ -230,6 +232,19 @@ export async function saveRoom(room: Room): Promise<void> {
 
   const userId = await isLoggedIn();
   if (userId) {
+    // Upload source image to storage if it's base64
+    if (room.sourceImage && !room.sourceImage.startsWith('http')) {
+      try {
+        const { uploadVisualizationImage } = await import('./imageStorage');
+        const url = await uploadVisualizationImage(
+          room.sourceImage.replace(/^data:image\/\w+;base64,/, ''),
+          room.id,
+          'source'
+        );
+        if (url) room.sourceImage = url;
+      } catch {}
+    }
+
     const { error } = await supabase
       .from('rooms')
       .upsert(await roomToRow(room, userId), { onConflict: 'id' });
