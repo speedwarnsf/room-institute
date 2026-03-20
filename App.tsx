@@ -719,13 +719,13 @@ function AppContent() {
           };
         } else {
           // Create new room if existing not found
-          room = createRoom(`Room — ${new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`, uploadedImage.dataUrl);
+          room = createRoom(`${(t as any)('room.defaultName')} ${new Date().toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}`, uploadedImage.dataUrl);
           room.designs = lookbookEntries;
           room.selectedDesignId = selectedEntry.id;
         }
       } else {
         // Create new room
-        room = createRoom(`Room — ${new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`, uploadedImage.dataUrl);
+        room = createRoom(`${(t as any)('room.defaultName')} ${new Date().toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}`, uploadedImage.dataUrl);
         room.designs = lookbookEntries;
         room.selectedDesignId = selectedEntry.id;
       }

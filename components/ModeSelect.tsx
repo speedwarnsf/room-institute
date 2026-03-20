@@ -63,8 +63,8 @@ export function ModeSelect({ onSelectMode, uploadedImage }: ModeSelectProps) {
       {userTier.tier === 'free' && (
         <p className="text-xs text-stone-400 dark:text-stone-500 mb-8">
           {remaining > 0
-            ? `${remaining} free design${remaining === 1 ? '' : 's'} remaining`
-            : 'No free designs remaining — upgrade to continue'}
+            ? (t as any)('mode.freeRemaining').replace('{count}', String(remaining)).replace('{plural}', remaining === 1 ? '' : 's')
+            : (t as any)('mode.noFreeDesigns')}
         </p>
       )}
       {userTier.tier === 'pro' && (
