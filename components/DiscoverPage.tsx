@@ -54,7 +54,7 @@ export default function DiscoverPage({ onBack, onShowUpgrade }: DiscoverPageProp
         setSavedIds(prev => { const s = new Set(prev); s.delete(image.id); return s; });
         board.images = board.images.filter(img => img.id !== image.id);
         await saveMoodBoard(board);
-        setSaveStatus('Removed from mood board');
+        setSaveStatus(t('discover.removeFromBoard' as any));
       } else {
         const thumbnail = await createThumbnail(image.src, 200);
         board.images.push({
@@ -67,7 +67,7 @@ export default function DiscoverPage({ onBack, onShowUpgrade }: DiscoverPageProp
         board.updatedAt = Date.now();
         await saveMoodBoard(board);
         setSavedIds(prev => new Set(prev).add(image.id));
-        setSaveStatus('Saved to mood board');
+        setSaveStatus(t('discover.savedToBoard' as any));
       }
 
       setTimeout(() => setSaveStatus(null), 2000);
