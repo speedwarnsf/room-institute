@@ -195,12 +195,12 @@ export function ListingPage() {
               <div className="aspect-[16/10] overflow-hidden">
                 <img
                   src={room.thumbnail}
-                  alt={translateRoomLabel(room.label, t)}
+                  alt={translateRoomLabel(room.label, t as (key: string) => string)}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
               <div className="p-4">
-                <div className="text-stone-200 font-semibold mb-1">{translateRoomLabel(room.label, t)}</div>
+                <div className="text-stone-200 font-semibold mb-1">{translateRoomLabel(room.label, t as (key: string) => string)}</div>
                 <div className="text-emerald-500 text-xs">
                   {room.designs.length} {room.designs.length === 1 ? t('listingPage.designDirection') : t('listingPage.designDirections')}
                 </div>

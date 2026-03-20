@@ -176,7 +176,7 @@ export function RoomPage() {
             className="text-4xl md:text-5xl font-bold text-stone-100 mb-2"
             style={{ fontFamily: 'Cormorant Garamond, serif' }}
           >
-            {translateRoomLabel(room.label, t)}
+            {translateRoomLabel(room.label, t as (key: string) => string)}
           </h1>
           <p className="text-stone-400 text-lg">
             {listing.address}
@@ -191,7 +191,7 @@ export function RoomPage() {
           <div className="bg-stone-950 border border-stone-800 p-2">
             <img
               src={room.originalPhoto}
-              alt={`${translateRoomLabel(room.label, t)} - Original`}
+              alt={`${translateRoomLabel(room.label, t as (key: string) => string)} - Original`}
               className="w-full h-auto"
             />
           </div>
