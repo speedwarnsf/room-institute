@@ -1137,8 +1137,7 @@ function AppContent() {
             )}
 
             {/* Discover */}
-            {(appState === AppState.HOME || appState === AppState.RESULTS || appState === AppState.MODE_SELECT || appState === AppState.LOOKBOOK) && (
-              <button
+            <button
                 onClick={() => setAppState(AppState.DISCOVER)}
                 className="p-2 text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
                 aria-label={(t as any)('nav.discover')}
@@ -1146,11 +1145,9 @@ function AppContent() {
                 <Palette className="w-4 h-4" />
                 <span>{(t as any)('app.button.discover')}</span>
               </button>
-            )}
 
             {/* My Rooms */}
-            {(appState === AppState.HOME || appState === AppState.RESULTS || appState === AppState.MODE_SELECT || appState === AppState.LOOKBOOK) && (
-              <button
+            <button
                 onClick={() => setAppState(AppState.ROOMS)}
                 className="p-2 text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
                 aria-label={(t as any)('nav.myRooms')}
@@ -1158,11 +1155,9 @@ function AppContent() {
                 <Home className="w-4 h-4" />
                 <span>{(t as any)('app.button.rooms')}</span>
               </button>
-            )}
 
             {/* Projects */}
-            {(appState === AppState.HOME || appState === AppState.ROOMS || appState === AppState.RESULTS) && (
-              <button
+            <button
                 onClick={() => {
                   if (!canCreateProject(userTier)) {
                     setShowUpgradePrompt('project');
@@ -1176,7 +1171,6 @@ function AppContent() {
                 <FolderOpen className="w-4 h-4" />
                 <span>{(t as any)('app.button.projects')}</span>
               </button>
-            )}
 
             {/* Save Room — only on results with a design selected */}
             {appState === AppState.RESULTS && designAnalysis && selectedDesignIndex !== null && uploadedImage && (
