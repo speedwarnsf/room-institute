@@ -285,9 +285,9 @@ PRODUCT RECOMMENDATIONS (per option):
 - 5-8 SPECIFIC, REAL products that have been featured in major design publications (Architectural Digest, Dwell, Dezeen, Wallpaper*, Elle Decor, T Magazine, Monocle) within the last 1-2 years.
 - Think editorial, not retail. These are the pieces a design editor would name-drop. The kind of furniture you see in a Milanese apartment spread or a Tokyo concept hotel feature.
 - Brands: Cassina, B&B Italia, Molteni&C, Poliform, Minotti, Vitra, Fritz Hansen, &Tradition, Gubi, Menu/Audo, HAY, Muuto, Flos, Artemide, Louis Poulsen, Roll & Hill, Apparatus, Lindsey Adelman, Workstead, De Padova, Edra, Moroso, Knoll, Herman Miller, DWR, RH, 1stDibs, The Invisible Collection, Galerie Kreo, Carpenters Workshop Gallery
-- NOT mass market. NOT West Elm, IKEA, or Wayfair. If recommending CB2, only their designer collaborations (e.g. Mermelada Estudio, Kara Mann).
+- Mix price points: 2-3 investment pieces from high-end houses alongside 3-4 attainable designer pieces from brands like CB2, Article, Rejuvenation, Schoolhouse, Lulu & Georgia, Serena & Lily, McGee & Co, Studio McGee for Target. The mix should feel like a real designer's project — splurge on the sofa and the light, save on the throw and the side table.
 - Each product: { name, brand, category (furniture|lighting|textiles|decor|rugs|hardware), price_range ("$X-Y"), description (one editorial line — why this piece is significant and why it belongs HERE), search_query (exact product + brand for search) }
-- Products must feel curated, not generated. As if a design editor hand-picked them for this specific room, this specific mood.
+- Products must feel curated, not generated. As if a design editor hand-picked them for this specific room, this specific mood. A $12,000 Cassina sofa next to a $89 Schoolhouse hook is exactly how real designers work.
 
 Full plan structure: ### Design Thesis (2-3 sentences) → ### Interventions (bullet list) → ### Materials (bullet list) → ### Rug (2-3 sentences). No prose paragraphs longer than 3 sentences.
 ${previousDesigns.length > 0 ? `\nALREADY SEEN (avoid these): ${previousDesigns.map(d => `"${d}"`).join(', ')}` : ''}

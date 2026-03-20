@@ -52,7 +52,7 @@ Curate 8-15 specific, editorial-grade products across these categories: furnitur
 
 SOURCE FROM: Cassina, B&B Italia, Molteni&C, Poliform, Minotti, Vitra, Fritz Hansen, &Tradition, Gubi, Menu/Audo, HAY, Muuto, Flos, Artemide, Louis Poulsen, Roll & Hill, Apparatus, Lindsey Adelman, Knoll, Herman Miller, RH, 1stDibs, The Invisible Collection. For textiles: Dedar, Pierre Frey, Maharam, Kvadrat, de Le Cuona. For rugs: Fort Street Studio, CC-Tapis, Nanimarquina.
 
-NOT mass market. NOT generic descriptions. Each product should be a specific, named piece that a design editor would recognize.
+Mix high and attainable: 3-4 investment pieces from top houses alongside 4-5 accessible designer pieces (CB2, Article, Rejuvenation, Schoolhouse, Lulu & Georgia, Serena & Lily, McGee & Co). This is how real designers work — splurge on anchor pieces, save on accessories. Each product must be a specific, named piece.
 
 RESPONSE FORMAT (STRICT JSON, NO MARKDOWN FENCES):
 {
