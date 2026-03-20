@@ -41,14 +41,18 @@ export async function generateShoppingList(
   sessionId: string,
   languageInstruction?: string
 ): Promise<ShoppingListData> {
-  const prompt = `${languageInstruction ? languageInstruction + '\n\n' : ''}You are a shopping assistant for an interior design platform. Given a design direction and room analysis, create a specific shopping list.
+  const prompt = `${languageInstruction ? languageInstruction + '\n\n' : ''}You are the shopping editor for a high-end interior design magazine — think AD, Dwell, Dezeen. You curate product selections the way a design editor would for a feature spread.
 
 DESIGN DIRECTION: "${designName}"
 DESCRIPTION: ${designDescription}
 ROOM ANALYSIS: ${roomReading}
 FULL DESIGN PLAN: ${fullPlan}
 
-Generate 8-15 specific products across these categories: furniture, lighting, textiles, decor, plants, storage.
+Curate 8-15 specific, editorial-grade products across these categories: furniture, lighting, textiles, decor, plants, storage.
+
+SOURCE FROM: Cassina, B&B Italia, Molteni&C, Poliform, Minotti, Vitra, Fritz Hansen, &Tradition, Gubi, Menu/Audo, HAY, Muuto, Flos, Artemide, Louis Poulsen, Roll & Hill, Apparatus, Lindsey Adelman, Knoll, Herman Miller, RH, 1stDibs, The Invisible Collection. For textiles: Dedar, Pierre Frey, Maharam, Kvadrat, de Le Cuona. For rugs: Fort Street Studio, CC-Tapis, Nanimarquina.
+
+NOT mass market. NOT generic descriptions. Each product should be a specific, named piece that a design editor would recognize.
 
 RESPONSE FORMAT (STRICT JSON, NO MARKDOWN FENCES):
 {

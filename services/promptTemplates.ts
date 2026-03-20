@@ -282,10 +282,12 @@ NAMING RULES (CRITICAL):
 PER OPTION: name (2-3 punchy words — see rules above), mood (2-3 sentences), frameworks (2-3), palette (5 hex), key_changes (3-5 bullets — specific enough to act on, with material/finish details), full_plan (markdown with ### headings, bullet lists, 250-400 words), visualization_prompt (detailed, keep room geometry), products (5-8 REAL product recommendations).
 
 PRODUCT RECOMMENDATIONS (per option):
-- 5-8 SPECIFIC, REAL products — actual product names from actual brands. Not "minimalist oak table" — real items like "Noguchi Coffee Table" by Herman Miller or "Arco Floor Lamp" by Flos.
-- Brands to draw from: DWR, RH, Serena & Lily, Article, CB2, Rejuvenation, Schoolhouse, Lulu & Georgia, West Elm, Knoll, Fritz Hansen, Menu/Audo, HAY, Muuto, Tom Dixon, Flos, Artemide, 1stDibs
-- Each product: { name, brand, category (furniture|lighting|textiles|decor|rugs|hardware), price_range ("$X-Y"), description (one line — why it works HERE), search_query (e.g. "Herman Miller Noguchi Coffee Table") }
-- Products must relate to THIS specific design direction, not generic picks. Match the palette, materials, and mood.
+- 5-8 SPECIFIC, REAL products that have been featured in major design publications (Architectural Digest, Dwell, Dezeen, Wallpaper*, Elle Decor, T Magazine, Monocle) within the last 1-2 years.
+- Think editorial, not retail. These are the pieces a design editor would name-drop. The kind of furniture you see in a Milanese apartment spread or a Tokyo concept hotel feature.
+- Brands: Cassina, B&B Italia, Molteni&C, Poliform, Minotti, Vitra, Fritz Hansen, &Tradition, Gubi, Menu/Audo, HAY, Muuto, Flos, Artemide, Louis Poulsen, Roll & Hill, Apparatus, Lindsey Adelman, Workstead, De Padova, Edra, Moroso, Knoll, Herman Miller, DWR, RH, 1stDibs, The Invisible Collection, Galerie Kreo, Carpenters Workshop Gallery
+- NOT mass market. NOT West Elm, IKEA, or Wayfair. If recommending CB2, only their designer collaborations (e.g. Mermelada Estudio, Kara Mann).
+- Each product: { name, brand, category (furniture|lighting|textiles|decor|rugs|hardware), price_range ("$X-Y"), description (one editorial line — why this piece is significant and why it belongs HERE), search_query (exact product + brand for search) }
+- Products must feel curated, not generated. As if a design editor hand-picked them for this specific room, this specific mood.
 
 Full plan structure: ### Design Thesis (2-3 sentences) → ### Interventions (bullet list) → ### Materials (bullet list) → ### Rug (2-3 sentences). No prose paragraphs longer than 3 sentences.
 ${previousDesigns.length > 0 ? `\nALREADY SEEN (avoid these): ${previousDesigns.map(d => `"${d}"`).join(', ')}` : ''}
@@ -611,7 +613,7 @@ RULES:
 - Key changes: 3-5 specific, actionable bullets with material/finish details
 - Full plan: markdown with ### headings, 250-400 words
 - Visualization prompt: detailed, keep room geometry, describe the EVOLVED room
-- Products: 5-8 REAL products from real brands (DWR, RH, CB2, Article, West Elm, Flos, HAY, etc.)
+- Products: 5-8 editorial-grade products from high-end design brands (Cassina, B&B Italia, Flos, Fritz Hansen, Gubi, Apparatus, 1stDibs, The Invisible Collection) — the kind featured in AD/Dwell/Dezeen. Not mass market.
 - Frameworks: 2-3 from [Aesthetic Order, Human-Centric, Universal Design, Biophilic, Phenomenological]
 
 WRITING RULES: Short sentences. Punchy. One adjective per noun max. No banned words (embracing, evoking, channeling, curated, sophisticated, elevating).
