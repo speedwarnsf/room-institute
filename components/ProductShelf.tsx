@@ -53,6 +53,7 @@ interface ProductShelfProps {
 }
 
 export function ProductShelf({ products, title, light = false }: ProductShelfProps) {
+  const { t } = useI18n();
   const scrollRef = useRef<HTMLDivElement>(null);
 
   if (!products || products.length === 0) return null;

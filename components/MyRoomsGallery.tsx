@@ -295,6 +295,7 @@ const RoomCard: React.FC<RoomCardProps> = ({
   isEditing, editName, onStartEdit, onSaveEdit, onCancelEdit, onEditNameChange,
   isConfirmingDelete, onConfirmDelete, onCancelDelete, onDelete
 }) => {
+  const { t } = useI18n();
   const formatDate = (ts: number) =>
     new Date(ts).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 
