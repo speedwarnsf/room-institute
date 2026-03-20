@@ -1,13 +1,11 @@
 /**
- * Image Storage — upload visualization images to Supabase Storage
+ * Image Storage — upload visualization images via server-side API
+ * (which uses Supabase service role to bypass RLS on storage.objects)
  * Returns public URL for the uploaded image.
  */
-import { supabase } from './auth';
-
-const BUCKET = 'listing-designs';
 
 /**
- * Upload a base64 image to Supabase Storage and return the public URL.
+ * Upload a base64 image and return the public URL.
  * Returns null if upload fails (caller should handle gracefully).
  */
 export async function uploadVisualizationImage(
@@ -16,32 +14,61 @@ export async function uploadVisualizationImage(
   designId: string
 ): Promise<string | null> {
   try {
-    // Convert base64 to blob
-    const byteString = atob(base64Data);
-    const bytes = new Uint8Array(byteString.length);
-    for (let i = 0; i < byteString.length; i++) {
-      bytes[i] = byteString.charCodeAt(i);
-    }
-    const blob = new Blob([bytes], { type: 'image/png' });
-
     const path = `rooms/${roomId}/${designId}.png`;
 
-    const { error } = await supabase.storage
-      .from(BUCKET)
-      .upload(path, blob, {
+    const response = await fetch('/api/upload-image', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        base64: base64Data,
+        path,
         contentType: 'image/png',
-        upsert: true,
-      });
+      }),
+    });
 
-    if (error) {
-      console.warn('imageStorage: upload failed', error);
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({}));
+      console.warn('imageStorage: upload failed', response.status, err);
       return null;
     }
 
-    const { data } = supabase.storage.from(BUCKET).getPublicUrl(path);
-    return data.publicUrl;
+    const { url } = await response.json();
+    return url || null;
   } catch (err) {
     console.warn('imageStorage: upload error', err);
+    return null;
+  }
+}
+
+/**
+ * Upload a source image (the original room photo) to storage.
+ */
+export async function uploadSourceImage(
+  base64Data: string,
+  roomId: string
+): Promise<string | null> {
+  try {
+    const path = `rooms/${roomId}/source.png`;
+
+    const response = await fetch('/api/upload-image', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        base64: base64Data,
+        path,
+        contentType: 'image/png',
+      }),
+    });
+
+    if (!response.ok) {
+      console.warn('imageStorage: source upload failed', response.status);
+      return null;
+    }
+
+    const { url } = await response.json();
+    return url || null;
+  } catch (err) {
+    console.warn('imageStorage: source upload error', err);
     return null;
   }
 }
