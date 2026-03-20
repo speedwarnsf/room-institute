@@ -76,11 +76,11 @@ export function DesignExportMenu({ entry, sourceImage, compact = false, classNam
   const hasSource = !!sourceImage;
 
   const items: { action: ExportAction; label: string; icon: typeof Download; disabled: boolean; proOnly: boolean }[] = [
-    { action: 'image', label: 'Download Design', icon: Download, disabled: !hasImage, proOnly: false },
-    { action: 'before-after', label: 'Before / After', icon: Image, disabled: !hasImage || !hasSource, proOnly: false },
-    { action: 'pdf', label: 'Design Report (PDF)', icon: FileText, disabled: false, proOnly: false },
-    { action: 'instagram', label: 'Instagram Template', icon: Share2, disabled: !hasImage, proOnly: false },
-    { action: 'pinterest', label: 'Pinterest Template', icon: Share2, disabled: !hasImage, proOnly: false },
+    { action: 'image', label: t('export.downloadDesign' as any), icon: Download, disabled: !hasImage, proOnly: false },
+    { action: 'before-after', label: t('export.beforeAfter' as any), icon: Image, disabled: !hasImage || !hasSource, proOnly: false },
+    { action: 'pdf', label: t('export.designReport' as any), icon: FileText, disabled: false, proOnly: false },
+    { action: 'instagram', label: t('export.instagramTemplate' as any), icon: Share2, disabled: !hasImage, proOnly: false },
+    { action: 'pinterest', label: t('export.pinterestTemplate' as any), icon: Share2, disabled: !hasImage, proOnly: false },
   ];
 
   if (compact) {
