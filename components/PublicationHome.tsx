@@ -1,0 +1,294 @@
+/**
+ * PublicationHome — the magazine-style front door for room.institute
+ * 
+ * Shows featured luxury listings in an editorial grid.
+ * Replaces the upload tool as the homepage.
+ * The consumer design tool lives at /design.
+ */
+
+import { useEffect, useState, useMemo } from 'react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { supabase } from '../services/auth';
+import { useI18n } from '../i18n/I18nContext';
+import { LanguageSwitcher } from './LanguageSwitcher';
+
+interface PublicationListing {
+  id: string;
+  address: string;
+  city: string;
+  state: string;
+  zip: string;
+  price: number;
+  beds: number;
+  baths: number;
+  sqft: number;
+  neighborhood: string;
+  building_name: string | null;
+  description: string;
+  hero_image: string | null;
+  agent_name: string | null;
+  agent_brokerage: string | null;
+  display_order: number;
+  is_featured: boolean;
+  sold_date: string | null;
+  market: string;
+}
+
+function formatPrice(price: number): string {
+  if (price >= 10_000_000) return `$${(price / 1_000_000).toFixed(0)}M`;
+  if (price >= 1_000_000) return `$${(price / 1_000_000).toFixed(1)}M`;
+  return `$${price.toLocaleString()}`;
+}
+
+function ListingCard({ listing, index }: { listing: PublicationListing; index: number }) {
+  const isSold = !!listing.sold_date;
+  const isHero = index === 0;
+
+  return (
+    <Link
+      to={`/listing/${listing.id}`}
+      className={`group block relative overflow-hidden ${isHero ? 'col-span-full' : ''}`}
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: index * 0.05, duration: 0.5 }}
+        className={`relative ${isHero ? 'aspect-[21/9]' : 'aspect-[4/3]'} bg-stone-900 overflow-hidden`}
+      >
+        {/* Image */}
+        {listing.hero_image ? (
+          <img
+            src={listing.hero_image}
+            alt={listing.address}
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            loading={index < 4 ? 'eager' : 'lazy'}
+          />
+        ) : (
+          <div className="w-full h-full bg-gradient-to-br from-stone-800 to-stone-900 flex items-center justify-center">
+            <span className="text-stone-600 text-xs uppercase tracking-widest" style={{ fontFamily: 'Nunito, sans-serif' }}>
+              Coming Soon
+            </span>
+          </div>
+        )}
+
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+        {/* SOLD badge */}
+        {isSold && (
+          <div className="absolute top-4 left-4 bg-white text-stone-900 px-3 py-1.5 text-xs font-bold uppercase tracking-widest" style={{ fontFamily: 'Nunito, sans-serif' }}>
+            Sold {new Date(listing.sold_date!).toLocaleDateString(undefined, { month: 'short', year: 'numeric' })}
+          </div>
+        )}
+
+        {/* Content overlay */}
+        <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
+          {/* Neighborhood tag */}
+          <span className="text-emerald-400 text-[10px] uppercase tracking-[0.2em] block mb-2" style={{ fontFamily: 'Nunito, sans-serif' }}>
+            {listing.neighborhood || listing.city}
+          </span>
+
+          {/* Address */}
+          <h3
+            className={`text-white leading-tight mb-1.5 ${isHero ? 'text-3xl sm:text-4xl' : 'text-lg sm:text-xl'}`}
+            style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 400 }}
+          >
+            {listing.building_name || listing.address}
+          </h3>
+
+          {/* If building name, show address below */}
+          {listing.building_name && (
+            <p className="text-stone-400 text-xs mb-1.5" style={{ fontFamily: 'Nunito, sans-serif' }}>
+              {listing.address}
+            </p>
+          )}
+
+          {/* Price + details */}
+          <div className="flex items-center gap-3 text-stone-300">
+            <span className={`font-semibold ${isHero ? 'text-xl' : 'text-base'}`} style={{ fontFamily: 'Nunito, sans-serif' }}>
+              {formatPrice(listing.price)}
+            </span>
+            <span className="text-stone-500 text-xs" style={{ fontFamily: 'Nunito, sans-serif' }}>
+              {listing.beds > 0 ? `${listing.beds} bed` : ''}
+              {listing.baths > 0 ? ` · ${listing.baths} bath` : ''}
+              {listing.sqft > 0 ? ` · ${listing.sqft.toLocaleString()} sqft` : ''}
+            </span>
+          </div>
+
+          {/* Agent credit */}
+          {listing.agent_brokerage && (
+            <p className="text-stone-500 text-[10px] mt-2 uppercase tracking-wider" style={{ fontFamily: 'Nunito, sans-serif' }}>
+              {listing.agent_name ? `${listing.agent_name} · ` : ''}{listing.agent_brokerage}
+            </p>
+          )}
+        </div>
+      </motion.div>
+    </Link>
+  );
+}
+
+export default function PublicationHome() {
+  const { t } = useI18n();
+  const [listings, setListings] = useState<PublicationListing[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState<string>('all');
+
+  useEffect(() => {
+    supabase
+      .from('listings')
+      .select('id, address, city, state, zip, price, beds, baths, sqft, neighborhood, building_name, description, hero_image, agent_name, agent_brokerage, display_order, is_featured, sold_date, market')
+      .eq('status', 'ready')
+      .order('display_order', { ascending: true })
+      .then(({ data }) => {
+        setListings(data || []);
+        setLoading(false);
+      });
+  }, []);
+
+  // Extract unique cities for filter
+  const cities = useMemo(() => {
+    const unique = [...new Set(listings.map(l => l.city))].sort();
+    return unique;
+  }, [listings]);
+
+  const filtered = useMemo(() => {
+    if (filter === 'all') return listings;
+    if (filter === 'featured') return listings.filter(l => l.is_featured);
+    return listings.filter(l => l.city === filter);
+  }, [listings, filter]);
+
+  useEffect(() => {
+    document.title = 'Room Institute — Design Intelligence for Exceptional Properties';
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute('content', 'Explore AI-generated design possibilities for the world\'s finest properties. Room Institute transforms how buyers experience luxury real estate.');
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-stone-950 text-stone-200">
+      {/* Fonts */}
+      <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+      {/* Header */}
+      <header className="border-b border-stone-800/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-5 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <img src="/room-logo.png" alt="Room" style={{ height: 22 }} className="opacity-90" />
+          </div>
+          <div className="flex items-center gap-4">
+            <LanguageSwitcher />
+            <Link
+              to="/design"
+              className="hidden sm:block text-[11px] uppercase tracking-widest text-stone-500 hover:text-emerald-400 transition-colors"
+              style={{ fontFamily: 'Nunito, sans-serif' }}
+            >
+              Design Your Space
+            </Link>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero text */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-12 pb-8">
+        <h1
+          className="text-4xl sm:text-5xl lg:text-6xl text-stone-100 leading-[1.1] mb-4"
+          style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 400 }}
+        >
+          See the future of<br />every room
+        </h1>
+        <p className="text-stone-500 text-base sm:text-lg max-w-xl" style={{ fontFamily: 'Nunito, sans-serif', fontWeight: 300 }}>
+          AI-generated design directions for the world's finest properties.
+          Tap any listing to explore what's possible.
+        </p>
+      </div>
+
+      {/* Filter bar */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-6">
+        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+          {['all', 'featured', ...cities].map(c => (
+            <button
+              key={c}
+              onClick={() => setFilter(c)}
+              className={`flex-shrink-0 px-3 py-1.5 text-[11px] uppercase tracking-widest transition-colors ${
+                filter === c
+                  ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30'
+                  : 'text-stone-500 border border-stone-800 hover:border-stone-600'
+              }`}
+              style={{ fontFamily: 'Nunito, sans-serif' }}
+            >
+              {c === 'all' ? 'All Listings' : c === 'featured' ? 'Featured' : c}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Listings grid */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-16">
+        {loading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="aspect-[4/3] bg-stone-900 animate-pulse" />
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {filtered.map((listing, i) => (
+              <ListingCard key={listing.id} listing={listing} index={i} />
+            ))}
+          </div>
+        )}
+
+        {!loading && filtered.length === 0 && (
+          <div className="text-center py-20">
+            <p className="text-stone-600 text-sm" style={{ fontFamily: 'Nunito, sans-serif' }}>
+              No listings in this market yet.
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* CTA for agents */}
+      <div className="border-t border-stone-800/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 text-center">
+          <h2
+            className="text-2xl sm:text-3xl text-stone-100 mb-3"
+            style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 400 }}
+          >
+            List with Room Institute
+          </h2>
+          <p className="text-stone-500 text-sm mb-6 max-w-md mx-auto" style={{ fontFamily: 'Nunito, sans-serif' }}>
+            Give your buyers a reason to choose your listing. Design visualizations that sell.
+          </p>
+          <Link
+            to="/agent/onboard"
+            className="inline-block px-8 py-3 border border-emerald-600 text-emerald-400 hover:bg-emerald-600 hover:text-stone-950 text-xs uppercase tracking-widest transition-all"
+            style={{ fontFamily: 'Nunito, sans-serif' }}
+          >
+            Get Started — Free
+          </Link>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <footer className="border-t border-stone-800/50 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <img src="/room-logo.png" alt="Room" style={{ height: 14 }} className="opacity-40" />
+            <span className="text-stone-600 text-[10px] uppercase tracking-widest" style={{ fontFamily: 'Nunito, sans-serif' }}>
+              Design Intelligence for Exceptional Properties
+            </span>
+          </div>
+          <Link
+            to="/design"
+            className="text-stone-600 hover:text-stone-400 text-[10px] uppercase tracking-widest transition-colors"
+            style={{ fontFamily: 'Nunito, sans-serif' }}
+          >
+            Try Your Space
+          </Link>
+        </div>
+      </footer>
+
+      <style>{`.scrollbar-hide::-webkit-scrollbar { display: none; } .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }`}</style>
+    </div>
+  );
+}

@@ -461,7 +461,9 @@ function PitchBuilder({
 
 export function AdminDashboard() {
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'overview' | 'events' | 'designs' | 'pitches' | 'strategy'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'publication' | 'events' | 'designs' | 'pitches' | 'strategy'>('overview');
+  const [pubListings, setPubListings] = useState<any[]>([]);
+  const [savingOrder, setSavingOrder] = useState(false);
 
   // Data
   const [markets, setMarkets] = useState<Market[]>([]);
@@ -669,6 +671,7 @@ export function AdminDashboard() {
         <div className="max-w-7xl mx-auto px-6 flex gap-0">
           {[
             { id: 'overview' as const, label: 'Overview', icon: BarChart3 },
+            { id: 'publication' as const, label: 'Publication', icon: Layers },
             { id: 'events' as const, label: 'Event Stream', icon: Eye },
             { id: 'designs' as const, label: 'Design Intel', icon: Layers },
             { id: 'pitches' as const, label: 'Pitch Portfolios', icon: FileText },
@@ -904,6 +907,154 @@ export function AdminDashboard() {
                 );
               })()}
             </div>
+          </div>
+        )}
+
+        {/* ── Publication Manager ── */}
+        {activeTab === 'publication' && (
+          <div>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold text-stone-100" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
+                Publication Order
+              </h2>
+              <div className="flex items-center gap-3">
+                <a href="/" target="_blank" rel="noopener" className="text-emerald-500 hover:text-emerald-400 text-xs uppercase tracking-wider transition-colors" style={{ fontFamily: 'Nunito, sans-serif' }}>
+                  View Live
+                </a>
+                <button
+                  onClick={async () => {
+                    setSavingOrder(true);
+                    for (let i = 0; i < pubListings.length; i++) {
+                      await supabase.from('listings').update({ display_order: i + 1 }).eq('id', pubListings[i].id);
+                    }
+                    setSavingOrder(false);
+                  }}
+                  disabled={savingOrder}
+                  className="px-4 py-2 bg-emerald-500 text-stone-900 font-bold text-xs uppercase tracking-wider hover:bg-emerald-400 transition-colors disabled:opacity-50"
+                  style={{ fontFamily: 'Nunito, sans-serif' }}
+                >
+                  {savingOrder ? 'Saving...' : 'Save Order'}
+                </button>
+              </div>
+            </div>
+            <p className="text-stone-500 text-sm mb-6" style={{ fontFamily: 'Nunito, sans-serif' }}>
+              Drag listings to reorder. The first listing appears as the hero on the homepage. Toggle featured to highlight specific properties.
+            </p>
+            {pubListings.length === 0 ? (
+              <button
+                onClick={async () => {
+                  const { data } = await supabase.from('listings').select('id, address, city, state, price, neighborhood, is_featured, display_order, sold_date, hero_image').eq('status', 'ready').order('display_order');
+                  setPubListings(data || []);
+                }}
+                className="px-4 py-2 border border-stone-700 text-stone-400 text-sm hover:border-stone-500 transition-colors"
+              >
+                Load Listings
+              </button>
+            ) : (
+              <div className="space-y-2">
+                {pubListings.map((listing, idx) => (
+                  <div
+                    key={listing.id}
+                    className={`flex items-center gap-4 border p-4 transition-colors ${
+                      listing.is_featured ? 'border-emerald-500/30 bg-emerald-950/10' : 'border-stone-800 bg-stone-900'
+                    }`}
+                  >
+                    {/* Position controls */}
+                    <div className="flex flex-col gap-1">
+                      <button
+                        onClick={() => {
+                          if (idx === 0) return;
+                          const next = [...pubListings];
+                          [next[idx - 1], next[idx]] = [next[idx], next[idx - 1]];
+                          setPubListings(next);
+                        }}
+                        className="text-stone-500 hover:text-stone-300 text-xs"
+                        disabled={idx === 0}
+                      >
+                        ▲
+                      </button>
+                      <span className="text-stone-600 text-xs font-mono text-center w-6">{idx + 1}</span>
+                      <button
+                        onClick={() => {
+                          if (idx === pubListings.length - 1) return;
+                          const next = [...pubListings];
+                          [next[idx], next[idx + 1]] = [next[idx + 1], next[idx]];
+                          setPubListings(next);
+                        }}
+                        className="text-stone-500 hover:text-stone-300 text-xs"
+                        disabled={idx === pubListings.length - 1}
+                      >
+                        ▼
+                      </button>
+                    </div>
+
+                    {/* Thumbnail */}
+                    <div className="w-16 h-12 bg-stone-800 flex-shrink-0 overflow-hidden">
+                      {listing.hero_image ? (
+                        <img src={listing.hero_image} alt="" className="w-full h-full object-cover" />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-stone-600 text-[8px]">No img</div>
+                      )}
+                    </div>
+
+                    {/* Details */}
+                    <div className="flex-1 min-w-0">
+                      <div className="text-stone-200 text-sm font-medium truncate">{listing.address}</div>
+                      <div className="text-stone-500 text-xs" style={{ fontFamily: 'Nunito, sans-serif' }}>
+                        {listing.city}, {listing.state} · ${(listing.price / 1_000_000).toFixed(1)}M
+                        {listing.neighborhood ? ` · ${listing.neighborhood}` : ''}
+                      </div>
+                    </div>
+
+                    {/* Featured toggle */}
+                    <button
+                      onClick={async () => {
+                        const updated = pubListings.map(l => l.id === listing.id ? { ...l, is_featured: !l.is_featured } : l);
+                        setPubListings(updated);
+                        await supabase.from('listings').update({ is_featured: !listing.is_featured }).eq('id', listing.id);
+                      }}
+                      className={`px-3 py-1 text-[10px] uppercase tracking-wider transition-colors ${
+                        listing.is_featured
+                          ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+                          : 'text-stone-600 border border-stone-700 hover:border-stone-500'
+                      }`}
+                      style={{ fontFamily: 'Nunito, sans-serif' }}
+                    >
+                      {listing.is_featured ? 'Featured' : 'Feature'}
+                    </button>
+
+                    {/* SOLD toggle */}
+                    <button
+                      onClick={async () => {
+                        const newDate = listing.sold_date ? null : new Date().toISOString().split('T')[0];
+                        const updated = pubListings.map(l => l.id === listing.id ? { ...l, sold_date: newDate } : l);
+                        setPubListings(updated);
+                        await supabase.from('listings').update({ sold_date: newDate }).eq('id', listing.id);
+                      }}
+                      className={`px-3 py-1 text-[10px] uppercase tracking-wider transition-colors ${
+                        listing.sold_date
+                          ? 'bg-white/10 text-white border border-white/20'
+                          : 'text-stone-600 border border-stone-700 hover:border-stone-500'
+                      }`}
+                      style={{ fontFamily: 'Nunito, sans-serif' }}
+                    >
+                      {listing.sold_date ? 'Sold' : 'Mark Sold'}
+                    </button>
+
+                    {/* Manage link */}
+                    <a
+                      href={`/listing/${listing.id}/manage`}
+                      target="_blank"
+                      rel="noopener"
+                      className="text-stone-600 hover:text-stone-400 text-[10px] uppercase tracking-wider transition-colors"
+                      style={{ fontFamily: 'Nunito, sans-serif' }}
+                    >
+                      Manage
+                    </a>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         )}
 

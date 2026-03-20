@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './app.css';
 import App from './App';
+import PublicationHome from './components/PublicationHome';
 import { NotFound } from './components/NotFound';
 import { ThemeProvider } from './components/ThemeContext';
 import { I18nProvider } from './i18n/I18nContext';
@@ -28,7 +29,8 @@ root.render(
     <ThemeProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<App />} />
+          <Route path="/" element={<PublicationHome />} />
+          <Route path="/design" element={<App />} />
           <Route path="/agent/onboard" element={<AgentOnboarding />} />
           <Route path="/agent/dashboard" element={<AgentDashboard />} />
           <Route path="/admin" element={<AdminDashboard />} />
