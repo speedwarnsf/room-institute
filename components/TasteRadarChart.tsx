@@ -7,6 +7,7 @@
 import { useMemo, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { TasteProfile, TasteDimension } from '../services/tasteProfile';
+import { useI18n } from '../i18n/I18nContext';
 import { DIMENSION_LABELS, getTasteSummary } from '../services/tasteProfile';
 
 interface TasteRadarChartProps {
@@ -38,6 +39,7 @@ function formatDimensionValue(val: number): string {
 }
 
 export function TasteRadarChart({ profile, size = 280, className = '' }: TasteRadarChartProps) {
+  const { t } = useI18n();
   const [hoveredDim, setHoveredDim] = useState<TasteDimension | null>(null);
   const [focusedDim, setFocusedDim] = useState<TasteDimension | null>(null);
   const activeDim = hoveredDim || focusedDim;

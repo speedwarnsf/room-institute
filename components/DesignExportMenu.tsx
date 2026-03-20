@@ -27,6 +27,7 @@ interface DesignExportMenuProps {
 type ExportAction = 'image' | 'before-after' | 'pdf' | 'instagram' | 'pinterest';
 
 export function DesignExportMenu({ entry, sourceImage, compact = false, className = '' }: DesignExportMenuProps) {
+  const { t } = useI18n();
   const { userTier } = useAuth();
   const isPro = userTier.tier === 'pro';
   const [open, setOpen] = useState(false);
