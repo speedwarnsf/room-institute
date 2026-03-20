@@ -127,7 +127,7 @@ export default function DiscoverPage({ onBack, onShowUpgrade }: DiscoverPageProp
                 : 'bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-400 hover:bg-stone-200 dark:hover:bg-stone-700'
             }`}
           >
-            {style}
+            {(t as any)(`style.${style.toLowerCase().replace(/[- ]/g, '')}`) || style}
           </button>
         ))}
       </div>
@@ -181,10 +181,10 @@ export default function DiscoverPage({ onBack, onShowUpgrade }: DiscoverPageProp
             <div className="p-4">
               <div className="flex items-center justify-between mb-1">
                 <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
-                  {image.style}
+                  {(t as any)(`style.${image.style.toLowerCase().replace(/[- ]/g, '')}`) || image.style}
                 </span>
                 <span className="text-xs text-stone-400 dark:text-stone-500">
-                  {image.room}
+                  {(t as any)(`room.${image.room.replace(/\s+(.)/g, (_, c) => c.toUpperCase()).replace(/^./, c => c.toLowerCase())}`) || image.room}
                 </span>
               </div>
               <p className="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
