@@ -30,7 +30,7 @@ export function TrendingStyles({ onOpenDiscover }: TrendingStylesProps) {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {trending.map(({ style, descriptionKey, imageId }) => {
           const image = getImageById(imageId);
-          const styleKey = `style.${style.toLowerCase().replace(/\s+/g, '')}` as any;
+          const styleKey = `style.${style.toLowerCase().replace(/[\s-]+/g, '')}` as any;
           return (
             <button
               key={style}
