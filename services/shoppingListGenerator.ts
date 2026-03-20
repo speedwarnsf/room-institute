@@ -52,7 +52,7 @@ Curate 8-15 specific, editorial-grade products across these categories: furnitur
 
 SOURCE FROM: Cassina, B&B Italia, Molteni&C, Poliform, Minotti, Vitra, Fritz Hansen, &Tradition, Gubi, Menu/Audo, HAY, Muuto, Flos, Artemide, Louis Poulsen, Roll & Hill, Apparatus, Lindsey Adelman, Knoll, Herman Miller, RH, 1stDibs, The Invisible Collection. For textiles: Dedar, Pierre Frey, Maharam, Kvadrat, de Le Cuona. For rugs: Fort Street Studio, CC-Tapis, Nanimarquina.
 
-Mix high and attainable: 3-4 investment pieces from top houses alongside 4-5 accessible designer pieces (CB2, Article, Rejuvenation, Schoolhouse, Lulu & Georgia, Serena & Lily, McGee & Co). This is how real designers work — splurge on anchor pieces, save on accessories. Each product must be a specific, named piece.
+LUXURY TIER ONLY. Source exclusively from: Cassina, B&B Italia, Molteni&C, Poliform, Minotti, Flexform, Meridiani, De La Espada, Holly Hunt, Donghia (furniture). Flos, Artemide, Louis Poulsen, Apparatus, Lindsey Adelman, Roll & Hill, Bocci (lighting). Dedar, Pierre Frey, de Le Cuona, Kvadrat (textiles). Fort Street Studio, CC-Tapis, Jan Kath (rugs). 1stDibs, The Invisible Collection for gallery/collectible pieces. Price ranges: $5K-80K+ furniture, $2K-30K lighting. Each product must be a specific, named piece worthy of an AD 100 project.
 
 RESPONSE FORMAT (STRICT JSON, NO MARKDOWN FENCES):
 {

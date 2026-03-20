@@ -285,9 +285,10 @@ PRODUCT RECOMMENDATIONS (per option):
 - 5-8 SPECIFIC, REAL products that have been featured in major design publications (Architectural Digest, Dwell, Dezeen, Wallpaper*, Elle Decor, T Magazine, Monocle) within the last 1-2 years.
 - Think editorial, not retail. These are the pieces a design editor would name-drop. The kind of furniture you see in a Milanese apartment spread or a Tokyo concept hotel feature.
 - Brands: Cassina, B&B Italia, Molteni&C, Poliform, Minotti, Vitra, Fritz Hansen, &Tradition, Gubi, Menu/Audo, HAY, Muuto, Flos, Artemide, Louis Poulsen, Roll & Hill, Apparatus, Lindsey Adelman, Workstead, De Padova, Edra, Moroso, Knoll, Herman Miller, DWR, RH, 1stDibs, The Invisible Collection, Galerie Kreo, Carpenters Workshop Gallery
-- Mix price points: 2-3 investment pieces from high-end houses alongside 3-4 attainable designer pieces from brands like CB2, Article, Rejuvenation, Schoolhouse, Lulu & Georgia, Serena & Lily, McGee & Co, Studio McGee for Target. The mix should feel like a real designer's project — splurge on the sofa and the light, save on the throw and the side table.
+- LUXURY TIER ONLY. Every product must be from the highest tier of design: Cassina, B&B Italia, Molteni&C, Poliform, Minotti, Edra, De Padova, Moroso, Baxter, Flexform, Meridiani, De La Espada, Holly Hunt, Donghia, Christian Liaigre, Pierre Yovanovitch, India Mahdavi, Vincenzo De Cotiis (furniture). Flos, Artemide, Louis Poulsen, Roll & Hill, Apparatus, Lindsey Adelman, Workstead, Bocci, Moooi, Foscarini (lighting). Dedar, Pierre Frey, Rubelli, Fortuny, de Le Cuona, Holland & Sherry (textiles). Fort Street Studio, CC-Tapis, Jan Kath, Tai Ping (rugs). 1stDibs, The Invisible Collection, Galerie Kreo, Carpenters Workshop Gallery (collectible/gallery pieces).
+- Price ranges should reflect reality: $5,000-80,000+ for furniture, $2,000-30,000 for lighting, $1,000-15,000 for textiles/rugs.
 - Each product: { name, brand, category (furniture|lighting|textiles|decor|rugs|hardware), price_range ("$X-Y"), description (one editorial line — why this piece is significant and why it belongs HERE), search_query (exact product + brand for search) }
-- Products must feel curated, not generated. As if a design editor hand-picked them for this specific room, this specific mood. A $12,000 Cassina sofa next to a $89 Schoolhouse hook is exactly how real designers work.
+- Products must feel like they belong in an AD 100 designer's portfolio. The kind of specification sheet you'd see from a Peter Marino or Kelly Wearstler project.
 
 Full plan structure: ### Design Thesis (2-3 sentences) → ### Interventions (bullet list) → ### Materials (bullet list) → ### Rug (2-3 sentences). No prose paragraphs longer than 3 sentences.
 ${previousDesigns.length > 0 ? `\nALREADY SEEN (avoid these): ${previousDesigns.map(d => `"${d}"`).join(', ')}` : ''}
@@ -613,7 +614,7 @@ RULES:
 - Key changes: 3-5 specific, actionable bullets with material/finish details
 - Full plan: markdown with ### headings, 250-400 words
 - Visualization prompt: detailed, keep room geometry, describe the EVOLVED room
-- Products: 5-8 editorial-grade products from high-end design brands (Cassina, B&B Italia, Flos, Fritz Hansen, Gubi, Apparatus, 1stDibs, The Invisible Collection) — the kind featured in AD/Dwell/Dezeen. Not mass market.
+- Products: 5-8 luxury-tier products (Cassina, B&B Italia, Minotti, Flos, Apparatus, 1stDibs, The Invisible Collection, Holly Hunt, Donghia). Think AD 100 designer spec sheet, not retail.
 - Frameworks: 2-3 from [Aesthetic Order, Human-Centric, Universal Design, Biophilic, Phenomenological]
 
 WRITING RULES: Short sentences. Punchy. One adjective per noun max. No banned words (embracing, evoking, channeling, curated, sophisticated, elevating).
