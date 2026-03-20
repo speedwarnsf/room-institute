@@ -229,7 +229,7 @@ export default function DesignSpread({ design, listingAddress, roomLabel, onBack
               {design.name}
             </p>
             <p className="text-emerald-500 text-xs tracking-widest uppercase" style={{ fontFamily: fonts.body }}>
-              {translateRoomLabel(roomLabel, t)} — {listingAddress}
+              {translateRoomLabel(roomLabel, t as (key: string) => string)} — {listingAddress}
             </p>
           </div>
         </div>

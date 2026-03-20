@@ -350,7 +350,7 @@ const normalizeAnalysisResponse = (data: unknown, rawText: string): AnalysisResu
  * @returns Analysis results including markdown analysis, visualization prompt, and product suggestions
  * @throws GeminiApiError if the API call fails
  */
-export const analyzeImage = async (base64Image: string, mimeType: string, options?: { style?: string; roomType?: string }): Promise<AnalysisResult> => {
+export const analyzeImage = async (base64Image: string, mimeType: string, options?: { style?: string; roomType?: string }, languageInstruction?: string): Promise<AnalysisResult> => {
   // Pre-flight checks
   if (!isApiConfigured()) {
     throw new GeminiApiError(
@@ -370,7 +370,8 @@ export const analyzeImage = async (base64Image: string, mimeType: string, option
 
   try {
     const { withTimeout } = createTimeoutHandler(ANALYSIS_TIMEOUT_MS);
-    const promptText = createAnalysisPrompt({ roomType: options?.roomType || 'room', style: options?.style || 'modern' });
+    let promptText = createAnalysisPrompt({ roomType: options?.roomType || 'room', style: options?.style || 'modern' });
+    if (languageInstruction) promptText = languageInstruction + '\n\n' + promptText;
     const response = await withTimeout(ai.models.generateContent({
       model: ANALYSIS_MODEL,
       contents: {
@@ -853,7 +854,8 @@ export const iterateDesign = async (
   originalImageBase64: string,
   originalImageMimeType: string,
   currentDesign: DesignOption,
-  iterationPrompt: string
+  iterationPrompt: string,
+  languageInstruction?: string
 ): Promise<DesignOption> => {
   if (!originalImageBase64 || !originalImageMimeType?.startsWith('image/')) {
     throw new GeminiApiError('Original image required for iteration', 'INVALID_INPUT', false);
@@ -864,7 +866,8 @@ export const iterateDesign = async (
 
   try {
     const { withTimeout } = createTimeoutHandler(60000);
-    const promptText = createIterationPrompt(currentDesign, iterationPrompt);
+    let promptText = createIterationPrompt(currentDesign, iterationPrompt);
+    if (languageInstruction) promptText = languageInstruction + '\n\n' + promptText;
 
     const response = await withTimeout(ai.models.generateContent({
       model: ANALYSIS_MODEL,

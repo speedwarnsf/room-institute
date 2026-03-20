@@ -36,7 +36,7 @@ export function UserMenu({ onOpenPricing, onOpenAuth }: UserMenuProps) {
           <button
             onClick={onOpenPricing}
             className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium text-stone-500 dark:text-stone-400 bg-stone-100 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 hover:border-emerald-400 dark:hover:border-emerald-500 transition-colors"
-            title={`${remaining} free design${remaining === 1 ? '' : 's'} remaining`}
+            title={t('mode.freeRemaining' as any).replace('{count}', String(remaining)).replace('{plural}', remaining === 1 ? '' : 's')}
           >
             <span className={remaining <= 1 ? 'text-emerald-400' : 'text-emerald-500'}>{remaining}</span>
             <span>/ {userTier.generationsLimit} {t('user.free')}</span>

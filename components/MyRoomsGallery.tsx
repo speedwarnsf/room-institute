@@ -218,7 +218,9 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({
   rooms, searchQuery, onSearchChange, onSelectRoom,
   editingId, editName, onStartEdit, onSaveEdit, onCancelEdit, onEditNameChange,
   confirmDeleteId, onConfirmDelete, onDelete, loading
-}) => (
+}) => {
+  const { t } = useI18n();
+  return (
   <div className="p-6">
     {/* Search */}
     <div className="relative mb-6">
@@ -269,7 +271,8 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({
       </div>
     )}
   </div>
-);
+  );
+};
 
 // ============================================================================
 // ROOM CARD

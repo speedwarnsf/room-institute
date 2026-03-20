@@ -253,6 +253,7 @@ const ProjectDetail: React.FC<{
   onUpdate: () => void;
   onOpenRoom: (roomId: string) => void;
 }> = ({ project, allRooms, onUpdate, onOpenRoom }) => {
+  const { t } = useI18n();
   const [activeTab, setActiveTab] = useState<'overview' | 'style' | 'notes' | 'budget'>('overview');
   const [notes, setNotes] = useState(project.notes);
   const [showRoomPicker, setShowRoomPicker] = useState(false);

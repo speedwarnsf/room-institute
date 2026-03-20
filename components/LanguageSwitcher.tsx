@@ -23,6 +23,7 @@ export function LanguageSwitcher() {
       document.addEventListener('mousedown', handleClick);
       return () => document.removeEventListener('mousedown', handleClick);
     }
+    return undefined;
   }, [open]);
 
   const locales = Object.entries(LOCALE_NAMES) as [SupportedLocale, string][];

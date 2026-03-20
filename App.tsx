@@ -810,7 +810,7 @@ function AppContent() {
       setIsAnalyzing(true);
       setError(null);
       
-      analyzeImage(uploadedImage.base64, uploadedImage.mimeType)
+      analyzeImage(uploadedImage.base64, uploadedImage.mimeType, undefined, geminiLanguageInstruction)
         .then(result => {
           setAnalysis(result);
           const chat = createChatSession(result.rawText);
@@ -865,7 +865,8 @@ function AppContent() {
         opt.mood,
         opt.fullPlan,
         designAnalysis.roomReading,
-        sid
+        sid,
+        geminiLanguageInstruction
       ).then(setShoppingList).catch(err => console.error('Shopping list error:', err));
     }
   }, [designAnalysis, currentSessionId]);
@@ -1391,7 +1392,8 @@ function AppContent() {
                   uploadedImage.base64,
                   uploadedImage.mimeType,
                   studioEntry.option,
-                  prompt
+                  prompt,
+                  geminiLanguageInstruction
                 );
                 const updatedEntry = { ...studioEntry, option: newDesign, generatedAt: Date.now() };
                 setStudioEntry(updatedEntry);

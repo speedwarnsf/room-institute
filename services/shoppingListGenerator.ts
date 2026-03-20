@@ -38,9 +38,10 @@ export async function generateShoppingList(
   designDescription: string,
   fullPlan: string,
   roomReading: string,
-  sessionId: string
+  sessionId: string,
+  languageInstruction?: string
 ): Promise<ShoppingListData> {
-  const prompt = `You are a shopping assistant for an interior design platform. Given a design direction and room analysis, create a specific shopping list.
+  const prompt = `${languageInstruction ? languageInstruction + '\n\n' : ''}You are a shopping assistant for an interior design platform. Given a design direction and room analysis, create a specific shopping list.
 
 DESIGN DIRECTION: "${designName}"
 DESCRIPTION: ${designDescription}

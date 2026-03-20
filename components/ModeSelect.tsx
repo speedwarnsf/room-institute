@@ -122,16 +122,16 @@ export function ModeSelect({ onSelectMode, uploadedImage }: ModeSelectProps) {
       {/* What's included hint */}
       {userTier.tier === 'free' && (
         <div className="mt-10 max-w-md w-full border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 p-4">
-          <h4 className="text-xs font-bold uppercase tracking-widest text-stone-400 dark:text-stone-500 mb-3">Free vs Pro</h4>
+          <h4 className="text-xs font-bold uppercase tracking-widest text-stone-400 dark:text-stone-500 mb-3">{t('mode.freeVsPro')}</h4>
           <div className="grid grid-cols-2 gap-x-6 gap-y-1.5 text-xs">
-            <span className="text-stone-500 dark:text-stone-400">Designs</span>
-            <span className="text-stone-700 dark:text-stone-300">3 free, then Pro</span>
-            <span className="text-stone-500 dark:text-stone-400">Design Studio</span>
-            <span className="text-stone-700 dark:text-stone-300 flex items-center gap-1"><Crown className="w-3 h-3 text-emerald-500" /> Pro only</span>
-            <span className="text-stone-500 dark:text-stone-400">Saved rooms</span>
-            <span className="text-stone-700 dark:text-stone-300">1 free, 10 with Pro</span>
-            <span className="text-stone-500 dark:text-stone-400">PDF export</span>
-            <span className="text-stone-700 dark:text-stone-300 flex items-center gap-1"><Crown className="w-3 h-3 text-emerald-500" /> Pro only</span>
+            <span className="text-stone-500 dark:text-stone-400">{t('mode.designs')}</span>
+            <span className="text-stone-700 dark:text-stone-300">{t('mode.designsFreeThenPro')}</span>
+            <span className="text-stone-500 dark:text-stone-400">{t('mode.designStudio')}</span>
+            <span className="text-stone-700 dark:text-stone-300 flex items-center gap-1"><Crown className="w-3 h-3 text-emerald-500" /> {t('mode.proOnly')}</span>
+            <span className="text-stone-500 dark:text-stone-400">{t('mode.savedRooms')}</span>
+            <span className="text-stone-700 dark:text-stone-300">{t('mode.savedRoomsFree')}</span>
+            <span className="text-stone-500 dark:text-stone-400">{t('mode.pdfExport')}</span>
+            <span className="text-stone-700 dark:text-stone-300 flex items-center gap-1"><Crown className="w-3 h-3 text-emerald-500" /> {t('mode.proOnly')}</span>
           </div>
         </div>
       )}
