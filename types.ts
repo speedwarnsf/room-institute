@@ -149,6 +149,8 @@ export interface LookbookEntry {
   rating: DesignRating | null;
   generatedAt: number;
   batchIndex: number;
+  /** If this entry was iterated from another design, the parent entry id */
+  iteratedFrom?: string;
 }
 
 export type FlowMode = 'redesign';

@@ -1395,10 +1395,18 @@ function AppContent() {
                   prompt,
                   geminiLanguageInstruction
                 );
-                const updatedEntry = { ...studioEntry, option: newDesign, generatedAt: Date.now() };
-                setStudioEntry(updatedEntry);
-                // Also update in lookbook entries
-                setLookbookEntries(prev => prev.map(e => e.id === updatedEntry.id ? updatedEntry : e));
+                // Add iteration as a NEW entry in the lookbook (don't replace the original)
+                const iteratedEntry: LookbookEntry = {
+                  id: `design-${Date.now()}-iter`,
+                  option: newDesign,
+                  rating: null,
+                  generatedAt: Date.now(),
+                  batchIndex: (studioEntry.batchIndex ?? 0),
+                  iteratedFrom: studioEntry.id,
+                };
+                setLookbookEntries(prev => [...prev, iteratedEntry]);
+                // Switch to the new iteration in the studio
+                setStudioEntry(iteratedEntry);
               }}
             />
           </Suspense>
@@ -1410,7 +1418,13 @@ function AppContent() {
           <ErrorBoundary>
           <Suspense fallback={null}>
             <RoomManager
-              onAddRoom={resetApp}
+              onAddRoom={() => {
+                if (!user) {
+                  setShowAuthGate(true);
+                } else {
+                  resetApp();
+                }
+              }}
               onOpenDesign={(entry, _room) => {
                 setStudioEntry(entry);
                 setAppState(AppState.DESIGN_STUDIO);

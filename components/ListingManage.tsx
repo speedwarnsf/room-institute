@@ -9,6 +9,7 @@ import { createClient } from '@supabase/supabase-js';
 
 import { supabase } from '../services/auth';
 import { useI18n } from '../i18n/I18nContext';
+import { getListingById } from '../services/listingService';
 
 interface Design {
   id: string;
@@ -112,6 +113,14 @@ export function ListingManage() {
         .single();
 
       if (listingError || !listingData) {
+        // Fall back to seed data
+        const seedListing = await getListingById(listingId);
+        if (seedListing) {
+          setListing(seedListing as any);
+          setHeroImage(seedListing.heroImage || '');
+          setLoading(false);
+          return;
+        }
         console.error('Failed to load listing:', listingError);
         setLoading(false);
         return;

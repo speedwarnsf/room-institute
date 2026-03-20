@@ -160,7 +160,7 @@ export default function DiscoverPage({ onBack, onShowUpgrade }: DiscoverPageProp
                 className={`absolute top-3 right-3 p-2 transition-all ${
                   savedIds.has(image.id)
                     ? 'bg-emerald-600 text-white'
-                    : 'bg-white/80 dark:bg-stone-900/80 text-stone-600 dark:text-stone-300 opacity-0 group-hover:opacity-100'
+                    : 'bg-white/80 dark:bg-stone-900/80 text-stone-600 dark:text-stone-300 sm:opacity-0 sm:group-hover:opacity-100'
                 }`}
                 aria-label={savedIds.has(image.id) ? t('discover.removeFromBoard') : t('discover.saveToBoard')}
                 title={savedIds.has(image.id) ? t('discover.savedToBoard') : t('discover.saveToBoard')}
@@ -173,7 +173,7 @@ export default function DiscoverPage({ onBack, onShowUpgrade }: DiscoverPageProp
               </button>
               {/* Pro badge on save button for free users */}
               {!canSaveToMoodBoard(userTier) && (
-                <span className="absolute top-3 right-14 bg-amber-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-200 text-[10px] font-bold px-1.5 py-0.5 opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-wider">
+                <span className="absolute top-3 right-14 bg-amber-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-200 text-[10px] font-bold px-1.5 py-0.5 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity uppercase tracking-wider">
                   Pro
                 </span>
               )}

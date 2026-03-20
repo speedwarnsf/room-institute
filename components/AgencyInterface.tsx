@@ -44,6 +44,7 @@ export function AgencyInterface() {
       <section className="relative min-h-[80vh] flex items-end">
         <div className="absolute inset-0 bg-gradient-to-b from-stone-950 via-stone-900 to-stone-900" />
         <div className="relative max-w-5xl mx-auto px-6 pb-16 pt-32 md:pb-24">
+          <img src="/room-logo.png" alt="Room" className="h-6 mb-8 opacity-80" />
           <p className="text-emerald-500 text-sm tracking-widest uppercase mb-6" style={{ fontFamily: 'Nunito, sans-serif' }}>
             {t('agency.forBrokerages')}
           </p>

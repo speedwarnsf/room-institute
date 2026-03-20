@@ -267,7 +267,7 @@ function StudioBrief({
               >
                 {String(i + 1).padStart(2, '0')}
               </span>
-              <p className="text-sm text-neutral-300 leading-relaxed" style={{ fontFamily: tp.body }}>
+              <p className="text-sm text-neutral-300 leading-relaxed" style={{ fontFamily: tp.body, textWrap: 'balance' as any }}>
                 {change}
               </p>
             </motion.div>
