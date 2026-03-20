@@ -68,6 +68,7 @@ function StudioHero({
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const imageY = useTransform(scrollYProgress, [0, 1], ['0%', '15%']);
 
+  const { t } = useI18n();
   const { option } = entry;
   const imgSrc = option.visualizationImage
     ? `data:image/png;base64,${option.visualizationImage}`
@@ -172,6 +173,7 @@ function StudioBrief({
   tp: TypePalette;
   accent: string;
 }) {
+  const { t } = useI18n();
   const { option } = entry;
   const imgSrc = option.visualizationImage
     ? `data:image/png;base64,${option.visualizationImage}`
@@ -414,6 +416,7 @@ function StudioIterate({
   isIterating: boolean;
   activeLabel: string | null;
 }) {
+  const { t } = useI18n();
   const [customPrompt, setCustomPrompt] = useState('');
 
   return (
@@ -554,6 +557,7 @@ function saveVisualization(entry: LookbookEntry) {
    ═══════════════════════════════════════════════════ */
 
 export function DesignStudio({ entry, onBack, onIterate, sourceImage }: DesignStudioProps) {
+  const { t } = useI18n();
   const [isIterating, setIsIterating] = useState(false);
   const [activeIterationLabel, setActiveIterationLabel] = useState<string | null>(null);
   const [sharing, setSharing] = useState(false);

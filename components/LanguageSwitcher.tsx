@@ -8,7 +8,7 @@ import { LOCALE_NAMES, type SupportedLocale } from '../i18n/translations';
  * Designed to sit in the header bar of buyer-facing pages
  */
 export function LanguageSwitcher() {
-  const { locale, setLocale } = useI18n();
+  const { locale, setLocale, t } = useI18n();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 

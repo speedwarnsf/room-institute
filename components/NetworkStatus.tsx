@@ -22,7 +22,7 @@ interface NetworkStatusProps {
 }
 
 export function NetworkStatus({ onNetworkChange, showIndicator = true, className = '' }: NetworkStatusProps) {
-  const [status, setStatus] = useState<NetworkStatus>({
+  const { t } = useI18n();  const [status, setStatus] = useState<NetworkStatus>({
     isOnline: navigator.onLine,
     isSlowConnection: false,
   });

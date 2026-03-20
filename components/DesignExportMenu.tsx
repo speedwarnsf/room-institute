@@ -29,7 +29,7 @@ type ExportAction = 'image' | 'before-after' | 'pdf' | 'instagram' | 'pinterest'
 export function DesignExportMenu({ entry, sourceImage, compact = false, className = '' }: DesignExportMenuProps) {
   const { userTier } = useAuth();
   const isPro = userTier.tier === 'pro';
-  const [open, setOpen] = useState(false);
+  const { t } = useI18n();  const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState<ExportAction | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 

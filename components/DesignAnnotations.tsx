@@ -23,7 +23,7 @@ export function DesignAnnotations({
   onAnnotationsChange,
   className = '',
 }: DesignAnnotationsProps) {
-  const [isAnnotating, setIsAnnotating] = useState(false);
+  const { t } = useI18n();  const [isAnnotating, setIsAnnotating] = useState(false);
   const [pendingPoint, setPendingPoint] = useState<{ x: number; y: number } | null>(null);
   const [noteText, setNoteText] = useState('');
   const [activeId, setActiveId] = useState<string | null>(null);
