@@ -71,6 +71,10 @@ const translations = {
     'ad.startDesigning': 'Start really designing.',
     'ad.description': 'Gretchen Murdock is an award-winning San Francisco interior designer — Architectural Digest, Dwell, San Francisco Decorator Showcase. Her firm MODTAGE transforms San Francisco\'s finest homes.',
     'ad.cta': 'Work with MODTAGE',
+    'ad.ownSpace': 'What about your space?',
+    'ad.seeItFirst': 'See it before you change it.',
+    'ad.roomDescription': 'Upload a photo of any room. Get three design directions grounded in real design theory — in seconds.',
+    'ad.tryYourSpace': 'Try your space',
     
     // Agent onboarding
     'onboard.title': 'Set Up Your Profile',
@@ -881,6 +885,10 @@ const translations = {
     'ad.startDesigning': 'Commencez à vraiment designer.',
     'ad.description': 'Gretchen Murdock est une designer d\'intérieur primée de San Francisco — Architectural Digest, Dwell, San Francisco Decorator Showcase. Son cabinet MODTAGE transforme les plus belles demeures de San Francisco.',
     'ad.cta': 'Travailler avec MODTAGE',
+    'ad.ownSpace': 'Et votre espace à vous ?',
+    'ad.seeItFirst': 'Voyez-le avant de le changer.',
+    'ad.roomDescription': 'Téléchargez une photo de n\'importe quelle pièce. Obtenez trois directions de design fondées sur la théorie — en quelques secondes.',
+    'ad.tryYourSpace': 'Essayez votre espace',
     
     'onboard.title': 'Configurez votre profil',
     'onboard.name': 'Votre nom',
@@ -1669,6 +1677,10 @@ const translations = {
     'ad.startDesigning': 'Fangen Sie an, wirklich zu designen.',
     'ad.description': 'Gretchen Murdock ist eine preisgekrönte Innenarchitektin aus San Francisco — Architectural Digest, Dwell, San Francisco Decorator Showcase. Ihre Firma MODTAGE verwandelt San Franciscos schönste Häuser.',
     'ad.cta': 'Mit MODTAGE arbeiten',
+    'ad.ownSpace': 'Wie wäre es mit Ihrem Raum?',
+    'ad.seeItFirst': 'Sehen Sie es, bevor Sie es ändern.',
+    'ad.roomDescription': 'Laden Sie ein Foto eines beliebigen Raums hoch. Erhalten Sie drei Designrichtungen auf Basis echter Designtheorie — in Sekunden.',
+    'ad.tryYourSpace': 'Probieren Sie Ihren Raum',
     
     'onboard.title': 'Profil einrichten',
     'onboard.name': 'Ihr Name',
@@ -2440,6 +2452,10 @@ const translations = {
     'ad.startDesigning': 'Empieza a diseñar de verdad.',
     'ad.description': 'Gretchen Murdock es una galardonada diseñadora de interiores de San Francisco — Architectural Digest, Dwell, San Francisco Decorator Showcase. Su firma MODTAGE transforma las casas más selectas de San Francisco.',
     'ad.cta': 'Trabajar con MODTAGE',
+    'ad.ownSpace': '¿Y tu espacio?',
+    'ad.seeItFirst': 'Véalo antes de cambiarlo.',
+    'ad.roomDescription': 'Sube una foto de cualquier habitación. Obtén tres direcciones de diseño basadas en teoría real — en segundos.',
+    'ad.tryYourSpace': 'Prueba tu espacio',
     
     'onboard.title': 'Configura tu perfil',
     'onboard.name': 'Tu nombre',
@@ -3211,6 +3227,10 @@ const translations = {
     'ad.startDesigning': '开始真正的设计。',
     'ad.description': 'Gretchen Murdock 是旧金山屡获殊荣的室内设计师 — Architectural Digest、Dwell、San Francisco Decorator Showcase。她的公司 MODTAGE 改造旧金山最优质的住宅。',
     'ad.cta': '与 MODTAGE 合作',
+    'ad.ownSpace': '你的空间呢？',
+    'ad.seeItFirst': '改变之前，先看看效果。',
+    'ad.roomDescription': '上传任意房间的照片。基于真实设计理论，几秒内获得三个设计方向。',
+    'ad.tryYourSpace': '试试你的空间',
     
     'onboard.title': '设置您的个人资料',
     'onboard.name': '您的姓名',
@@ -3982,6 +4002,10 @@ const translations = {
     'ad.startDesigning': 'Comece a realmente projetar.',
     'ad.description': 'Gretchen Murdock é uma premiada designer de interiores de San Francisco — Architectural Digest, Dwell, San Francisco Decorator Showcase. Sua empresa MODTAGE transforma as melhores casas de San Francisco.',
     'ad.cta': 'Trabalhe com a MODTAGE',
+    'ad.ownSpace': 'E o seu espaço?',
+    'ad.seeItFirst': 'Veja antes de mudar.',
+    'ad.roomDescription': 'Envie uma foto de qualquer ambiente. Receba três direções de design baseadas em teoria real — em segundos.',
+    'ad.tryYourSpace': 'Experimente seu espaço',
     
     'onboard.title': 'Configure seu perfil',
     'onboard.name': 'Seu nome',

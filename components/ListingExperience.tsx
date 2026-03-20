@@ -537,25 +537,23 @@ export function ListingExperience() {
 
       {/* Design partner — visually separated as advertisement */}
       <div className="border-t-2 border-stone-700 bg-stone-900">
-        <p className="text-stone-600 text-[9px] tracking-[0.3em] uppercase text-center pt-4 mb-0">{t('ad.label')}</p>
-        <div className="max-w-sm mx-auto px-5 py-8 text-center">
+        <div className="max-w-sm mx-auto px-5 py-12 text-center">
+          <img src="/room-logo.png" alt="Room" style={{ height: 18 }} className="mx-auto mb-6 opacity-60" />
           <h3 className="text-stone-200 text-2xl mb-1" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
-            {t('ad.dreaming')}
+            {(t as any)('ad.ownSpace')}
           </h3>
           <p className="text-emerald-500 text-lg font-bold mb-6" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
-            {t('ad.startDesigning')}
+            {(t as any)('ad.seeItFirst')}
           </p>
           <p className="text-stone-400 text-[13px] leading-relaxed mb-6" data-no-smooth>
-            {t('ad.description')}
+            {(t as any)('ad.roomDescription')}
           </p>
           <a
-            href="https://www.modtagedesign.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => track({ eventType: 'partner_clicked', listingId, metadata: { context: 'v2', partner: 'modtage' } })}
-            className="inline-block px-6 pt-[14px] pb-[12px] border border-stone-600 text-stone-300 hover:text-stone-100 hover:border-stone-400 text-xs tracking-widest uppercase transition-colors"
+            href="https://room.institute"
+            onClick={() => track({ eventType: 'room_cta_clicked', listingId, metadata: { context: 'v2', source: 'listing_ad' } })}
+            className="inline-block px-6 pt-[14px] pb-[12px] border border-emerald-600 text-emerald-400 hover:text-emerald-300 hover:border-emerald-500 text-xs tracking-widest uppercase transition-colors"
           >
-            {t('ad.cta')}
+            {(t as any)('ad.tryYourSpace')}
           </a>
         </div>
       </div>
