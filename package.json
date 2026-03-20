@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && npx tsx scripts/generate-seo-pages.ts",
+    "build:app": "vite build",
+    "seo": "npx tsx scripts/generate-seo-pages.ts",
     "preview": "vite preview",
     "test": "vitest",
     "test:run": "vitest run",

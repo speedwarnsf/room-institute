@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://zenspace-two.vercel.app/</loc>
-    <lastmod>2026-02-13</lastmod>
-    <priority>1.0</priority>
-  </url>
+  <url><loc>https://room.institute</loc><priority>1.0</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://room.institute/for/agencies</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://room.institute/listing/1177-california-1210</loc><priority>0.9</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://room.institute/listing/listing-4b687eb0fafd</loc><priority>0.9</priority><changefreq>weekly</changefreq></url>
 </urlset>
