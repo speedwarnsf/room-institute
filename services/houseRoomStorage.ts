@@ -8,6 +8,7 @@
 
 import { Room, House, LookbookEntry } from '../types';
 import { supabase, getCurrentUser } from './auth';
+import { uploadVisualizationImage } from './imageStorage';
 
 const HOUSE_KEY = 'room-institute-house';
 const THUMBNAIL_MAX = 200;
@@ -96,24 +97,35 @@ function createDefaultHouse(): House {
 // ============================================================================
 
 /** Strip large base64 from designs before saving to Supabase */
-function stripDesignsForDb(designs: LookbookEntry[]): LookbookEntry[] {
-  return designs.map(d => ({
-    ...d,
-    option: {
-      ...d.option,
-      visualizationImage: undefined,
-      visualizationThumb: d.option.visualizationThumb,
-    },
+async function stripDesignsForDb(designs: LookbookEntry[], roomId: string): Promise<LookbookEntry[]> {
+  const results = await Promise.all(designs.map(async (d) => {
+    let vizUrl = d.option.visualizationImage;
+    
+    // If it's base64 data, upload to storage and get URL
+    if (vizUrl && !vizUrl.startsWith('http')) {
+      const uploaded = await uploadVisualizationImage(vizUrl, roomId, d.id);
+      vizUrl = uploaded || undefined;
+    }
+    
+    return {
+      ...d,
+      option: {
+        ...d.option,
+        visualizationImage: vizUrl,
+        visualizationThumb: d.option.visualizationThumb,
+      },
+    };
   }));
+  return results;
 }
 
-function roomToRow(room: Room, userId: string) {
+async function roomToRow(room: Room, userId: string) {
   return {
     id: room.id,
     user_id: userId,
     name: room.name,
     source_image_thumb: room.sourceImageThumb || null,
-    designs: stripDesignsForDb(room.designs),
+    designs: await stripDesignsForDb(room.designs, room.id),
     created_at: new Date(room.createdAt).toISOString(),
     updated_at: new Date(room.updatedAt).toISOString(),
   };
@@ -220,7 +232,7 @@ export async function saveRoom(room: Room): Promise<void> {
   if (userId) {
     const { error } = await supabase
       .from('rooms')
-      .upsert(roomToRow(room, userId), { onConflict: 'id' });
+      .upsert(await roomToRow(room, userId), { onConflict: 'id' });
     if (error) {
       console.warn('houseRoomStorage: Supabase saveRoom failed, falling back', error);
     } else {
