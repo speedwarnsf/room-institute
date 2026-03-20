@@ -3,7 +3,7 @@
  * Beautiful, accessible loading states for all app components
  */
 import { ReactNode, useEffect, useState } from 'react';
-import { Camera, Brain, Image, Sparkles } from 'lucide-react';
+import { Camera, Brain, Image, Palette, Wand2 } from 'lucide-react';
 import { useI18n } from '../i18n/I18nContext';
 
 interface LoadingSkeletonProps {
@@ -227,7 +227,7 @@ export function AnalysisLoading({ stage, progress = 0, className = '' }: Analysi
       estimate: t('loading.estimate30'),
     },
     generating: {
-      icon: Sparkles,
+      icon: Palette,
       message: t('loading.generatingConcepts'),
       detail: t('loading.generatingDetail'),
       color: 'text-emerald-400',
@@ -237,7 +237,7 @@ export function AnalysisLoading({ stage, progress = 0, className = '' }: Analysi
       estimate: t('loading.estimate45'),
     },
     visualizing: {
-      icon: Sparkles,
+      icon: Wand2,
       message: t('loading.renderingDesigns'),
       detail: t('loading.renderingDetail'),
       color: 'text-emerald-400',

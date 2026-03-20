@@ -1,6 +1,7 @@
 import { Listing } from '../types';
 
 export const SEED_LISTINGS: Listing[] = [{
+  status: "ready",
   id: "1177-california-1210",
   address: "1177 California\u00A0Street, Unit\u00A01210",
   city: "San Francisco",

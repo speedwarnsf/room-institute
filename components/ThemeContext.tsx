@@ -82,13 +82,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   };
 
   const toggleTheme = () => {
-    // Cycle: light -> dark -> system -> light
-    const next: Record<Theme, Theme> = {
-      light: 'dark',
-      dark: 'system',
-      system: 'light',
-    };
-    setTheme(next[theme]);
+    // Simple two-state toggle based on what's currently showing
+    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
   };
 
   return (
