@@ -327,6 +327,7 @@ export interface StructureChoices {
 
 export interface Listing {
   id: string;
+  status?: string;
   address: string;
   city: string;
   state: string;

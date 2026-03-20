@@ -9,14 +9,11 @@ import { useI18n } from '../i18n/I18nContext';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { translateRoomLabel } from '../i18n/roomLabels';
 
-interface Listing extends ListingType {
-  status: string;
-}
 
 export function ListingPage() {
   const { t } = useI18n();
   const { listingId } = useParams<{ listingId: string }>();
-  const [listing, setListing] = useState<Listing | null>(null);
+  const [listing, setListing] = useState<ListingType | null>(null);
   const [loading, setLoading] = useState(true);
   const [descriptionExpanded, setDescriptionExpanded] = useState(false);
 

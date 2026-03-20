@@ -12,9 +12,6 @@ import { translateRoomLabel } from '../i18n/roomLabels';
 
 const DesignSpread = lazy(() => import('./DesignSpread'));
 
-interface Listing extends ListingType {
-  status: string;
-}
 
 /** ═══════════════════════════════════════════════════
  *  Horizontal design carousel for a single room
@@ -55,7 +52,7 @@ function RoomLane({
       {/* Room label */}
       <div className="px-5 py-3 flex items-center justify-between">
         <h3 className="text-stone-300 text-sm" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
-          {translateRoomLabel(room.label, t)}
+          {translateRoomLabel(room.label, t as (key: string) => string)}
         </h3>
         <span className="text-stone-600 text-xs">
           {room.designs.length} {t('listing.designs')}
@@ -262,7 +259,7 @@ function DesignOverlay({
           >
             {design.name}
           </h2>
-          <p className="text-stone-500 text-xs mb-4">{translateRoomLabel(room.label, t)} — {listingAddress}</p>
+          <p className="text-stone-500 text-xs mb-4">{translateRoomLabel(room.label, t as (key: string) => string)} — {listingAddress}</p>
 
           {design.description && (
             <p className="text-stone-400 text-[13px] leading-relaxed mb-4 line-clamp-2">
@@ -362,7 +359,7 @@ function SpreadSheet({
 export function ListingExperience() {
   const { listingId } = useParams<{ listingId: string }>();
   const { t } = useI18n();
-  const [listing, setListing] = useState<Listing | null>(null);
+  const [listing, setListing] = useState<ListingType | null>(null);
   const [loading, setLoading] = useState(true);
 
   // Overlay state

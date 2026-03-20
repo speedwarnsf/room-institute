@@ -38,9 +38,6 @@ function TrackedDesignCard({
 
 const DesignSpread = lazy(() => import('./DesignSpread'));
 
-interface Listing extends ListingType {
-  status: string;
-}
 
 interface SpreadDesign {
   id: string;
@@ -55,7 +52,7 @@ interface SpreadDesign {
 export function RoomPage() {
   const { t } = useI18n();
   const { listingId, roomId } = useParams<{ listingId: string; roomId: string }>();
-  const [listing, setListing] = useState<Listing | null>(null);
+  const [listing, setListing] = useState<ListingType | null>(null);
   const [loading, setLoading] = useState(true);
   const [spreadDesign, setSpreadDesign] = useState<SpreadDesign | null>(null);
 
