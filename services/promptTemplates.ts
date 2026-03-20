@@ -648,8 +648,8 @@ export function buildProjectStyleContext(styleGuide: {
 /**
  * Structure detection prompt for identifying permanent vs moveable elements
  */
-export function createStructureDetectionPrompt(): string {
-  return `You are a structure detection AI for interior design. Analyze this room photo and identify all visible elements, categorizing them as structural (permanent), fixture (semi-permanent), or moveable.
+export function createStructureDetectionPrompt(languageInstruction?: string): string {
+  return `You are a structure detection AI for interior design. ${languageInstruction ? languageInstruction + ' Name all elements in that language.' : ''} Analyze this room photo and identify all visible elements, categorizing them as structural (permanent), fixture (semi-permanent), or moveable.
 
 **RESPOND WITH STRICT JSON ONLY:**
 {

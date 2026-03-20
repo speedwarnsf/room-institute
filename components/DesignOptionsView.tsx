@@ -151,7 +151,7 @@ const DesignCard: React.FC<DesignCardProps> = ({ option, index, onSelect, isGene
           </div>
         ) : (
           <div className="flex flex-col items-center gap-2">
-            <img src="/room-logo.png" alt="" className="w-8 h-8 opacity-40" />
+            <Sparkles className="w-8 h-8 text-stone-300 dark:text-stone-500" />
             <span className="text-xs text-stone-400 dark:text-stone-500">AI Preview</span>
           </div>
         )}

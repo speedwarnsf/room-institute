@@ -1,4 +1,5 @@
 import { ROOM_PRESETS, type RoomPreset } from '../services/roomPresets';
+import { useI18n } from '../i18n/I18nContext';
 
 interface RoomPresetsProps {
   onSelectPreset: (preset: RoomPreset) => void;
@@ -6,6 +7,7 @@ interface RoomPresetsProps {
 }
 
 export function RoomPresets({ onSelectPreset, selectedPresetId }: RoomPresetsProps) {
+  const { t } = useI18n();
   return (
     <div className="w-full max-w-2xl space-y-3">
       <button
@@ -17,15 +19,15 @@ export function RoomPresets({ onSelectPreset, selectedPresetId }: RoomPresetsPro
       >
         <div>
           <h3 className="text-sm font-bold text-stone-800 dark:text-stone-200 uppercase tracking-widest">
-            Quick Presets
+            {(t as any)('prefs.quickPresets')}
           </h3>
           <p className="text-xs text-stone-500 dark:text-stone-400 mt-0.5">
             {selectedPresetId
-              ? ROOM_PRESETS.find(p => p.id === selectedPresetId)?.name
-              : 'One-tap room + style combos'}
+              ? (t as any)(`prefs.preset.${selectedPresetId}`) || ROOM_PRESETS.find(p => p.id === selectedPresetId)?.name
+              : (t as any)('prefs.quickPresetsDesc')}
           </p>
         </div>
-        <span className="text-stone-400 text-xs">Browse</span>
+        <span className="text-stone-400 text-xs">{(t as any)('prefs.browse')}</span>
       </button>
 
       <div id="presets-grid" className="hidden grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -45,7 +47,7 @@ export function RoomPresets({ onSelectPreset, selectedPresetId }: RoomPresetsPro
                   ? 'text-emerald-700 dark:text-emerald-300'
                   : 'text-stone-800 dark:text-stone-200'
               }`}>
-                {preset.name}
+                {(t as any)(`prefs.preset.${preset.id}`) || preset.name}
               </span>
               {/* Mini palette */}
               <div className="flex gap-0.5">
@@ -58,7 +60,7 @@ export function RoomPresets({ onSelectPreset, selectedPresetId }: RoomPresetsPro
                 ))}
               </div>
             </div>
-            <p className="text-xs text-stone-500 dark:text-stone-400">{preset.description}</p>
+            <p className="text-xs text-stone-500 dark:text-stone-400">{(t as any)(`prefs.presetDesc.${preset.id}`) || preset.description}</p>
             <div className="flex gap-1.5 mt-2">
               {preset.keywords.map(kw => (
                 <span key={kw} className="text-[10px] text-stone-400 dark:text-stone-500 border border-stone-200 dark:border-stone-700 px-1.5 py-0.5">

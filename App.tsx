@@ -99,7 +99,7 @@ function DesignCounter() {
  * Main application component wrapper with enhanced providers
  */
 function AppContent() {
-  const { t } = useI18n();
+  const { t, geminiLanguageInstruction } = useI18n();
   // Application state
   const [appState, setAppState] = useState<AppState>(AppState.HOME);
   const [analysis, setAnalysis] = useState<AnalysisResult | null>(null);
@@ -228,7 +228,7 @@ function AppContent() {
     
     try {
       announce('Analyzing room structure...', 'polite');
-      const result = await detectRoomStructure(uploadedImage.base64, uploadedImage.mimeType);
+      const result = await detectRoomStructure(uploadedImage.base64, uploadedImage.mimeType, geminiLanguageInstruction);
       setStructureDetection(result);
     } catch (error) {
       console.error('Structure detection failed:', error);
@@ -294,7 +294,8 @@ function AppContent() {
         uploadedImage.base64,
         uploadedImage.mimeType,
         [],
-        { structuralConstraints: constraints }
+        { structuralConstraints: constraints },
+        geminiLanguageInstruction
       );
       
       clearInterval(progressInterval);
@@ -901,7 +902,7 @@ function AppContent() {
         flexible: structureChoices.elementsToKeepFlexible?.map(el => el.name)
       } : undefined;
 
-      const newBatch = await generateDesignOptions(uploadedImage.base64, uploadedImage.mimeType, previousNames, { structuralConstraints: constraints });
+      const newBatch = await generateDesignOptions(uploadedImage.base64, uploadedImage.mimeType, previousNames, { structuralConstraints: constraints }, geminiLanguageInstruction);
       const batchIndex = Math.max(0, ...lookbookEntries.map(e => e.batchIndex)) + 1;
       const newEntries: LookbookEntry[] = newBatch.options.map((opt, idx) => ({
         id: `design-${Date.now()}-${idx}`,

@@ -674,7 +674,8 @@ export const generateDesignOptions = async (
   base64Image: string,
   mimeType: string,
   previousDesigns: string[] = [],
-  options?: { style?: string; roomType?: string; structuralConstraints?: import('./promptTemplates').StructureConstraints }
+  options?: { style?: string; roomType?: string; structuralConstraints?: import('./promptTemplates').StructureConstraints },
+  languageInstruction?: string
 ): Promise<DesignAnalysis> => {
   if (!base64Image || !mimeType?.startsWith('image/')) {
     throw new GeminiApiError('Invalid image data', 'INVALID_INPUT', false);
@@ -682,7 +683,8 @@ export const generateDesignOptions = async (
 
   try {
     const { withTimeout } = createTimeoutHandler(60000); // 60s for richer prompt
-    const promptText = createDesignAnalysisPrompt({ roomType: options?.roomType || 'room', previousDesigns, style: options?.style, structuralConstraints: options?.structuralConstraints });
+    let promptText = createDesignAnalysisPrompt({ roomType: options?.roomType || 'room', previousDesigns, style: options?.style, structuralConstraints: options?.structuralConstraints });
+    if (languageInstruction) promptText = languageInstruction + '\n\n' + promptText;
 
     const response = await withTimeout(ai.models.generateContent({
       model: ANALYSIS_MODEL,
@@ -948,7 +950,8 @@ export const iterateDesign = async (
  */
 export const detectRoomStructure = async (
   base64Image: string,
-  mimeType: string
+  mimeType: string,
+  languageInstruction?: string
 ): Promise<StructureDetectionResult> => {
   if (!base64Image || !mimeType?.startsWith('image/')) {
     throw new GeminiApiError('Invalid image data for structure detection', 'INVALID_INPUT', false);
@@ -956,7 +959,7 @@ export const detectRoomStructure = async (
 
   try {
     const { withTimeout } = createTimeoutHandler(30000); // 30s timeout
-    const promptText = createStructureDetectionPrompt();
+    const promptText = createStructureDetectionPrompt(languageInstruction);
 
     const response = await withTimeout(ai.models.generateContent({
       model: ANALYSIS_MODEL,
