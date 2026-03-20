@@ -4,7 +4,6 @@ import { getProductUrl } from '../services/affiliateLinks';
 import { useI18n } from '../i18n/I18nContext';
 
 function ProductCard({ product }: { product: ProductRecommendation }) {
-  const { t } = useI18n();
 
   const categoryKey = `category.${product.category}` as const;
   const categoryLabel = t(categoryKey as any);
@@ -53,7 +52,6 @@ interface ProductShelfProps {
 }
 
 export function ProductShelf({ products, title, light = false }: ProductShelfProps) {
-  const { t } = useI18n();
   const scrollRef = useRef<HTMLDivElement>(null);
 
   if (!products || products.length === 0) return null;

@@ -3,7 +3,6 @@ import { Sun, Moon, Monitor } from 'lucide-react';
 import { useI18n } from '../i18n/I18nContext';
 
 export function ThemeToggle() {
-  const { t } = useI18n();
   const { theme, toggleTheme } = useTheme();
 
   const getIcon = () => {

@@ -2,7 +2,6 @@
  * My Rooms Gallery — portfolio-style grid of saved design projects
  */
 
-  const { t } = useI18n();
 import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import {
   X, Trash2, Check, Edit2, Clock, Palette, Star,

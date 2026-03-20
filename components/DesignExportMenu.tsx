@@ -4,7 +4,6 @@
  * NO border-radius. NO emojis.
  */
 
-  const { t } = useI18n();
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { Download, FileText, Image, Share2, ChevronDown, Loader2, Lock } from 'lucide-react';
 import { useAuth } from './AuthProvider';

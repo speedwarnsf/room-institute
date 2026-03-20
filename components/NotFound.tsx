@@ -2,7 +2,6 @@ import { Home, ArrowLeft } from 'lucide-react';
 import { useI18n } from '../i18n/I18nContext';
 
 export function NotFound() {
-  const { t } = useI18n();
 
   return (
     <div className="min-h-screen bg-stone-50 dark:bg-stone-900 flex items-center justify-center px-4">

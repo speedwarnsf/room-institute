@@ -2,7 +2,6 @@
  * SaveToRoomPicker — modal picker to save a LookbookEntry to an existing or new room.
  */
 
-  const { t } = useI18n();
 import React, { useState, useEffect, useCallback } from 'react';
 import { X, Plus, Home, Check } from 'lucide-react';
 import { Room, LookbookEntry } from '../types';
