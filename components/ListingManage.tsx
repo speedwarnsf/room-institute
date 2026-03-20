@@ -431,9 +431,12 @@ export function ListingManage() {
               className="flex items-center gap-2 text-stone-400 hover:text-emerald-500 transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
-              Back to Listing
+              {t('manage.backToListing' as any)}
             </button>
             <div className="flex items-center gap-3">
+              <a href="https://room.institute" className="hover:opacity-80 transition-opacity">
+                <img src="/room-logo.png" alt="Room" style={{ height: 18 }} />
+              </a>
               <div className={`px-3 py-1 text-xs font-medium tracking-wide uppercase ${
                 listing.status === 'review' ? 'bg-emerald-950 text-emerald-200' : 'bg-green-900 text-green-300'
               }`}>
@@ -446,7 +449,7 @@ export function ListingManage() {
             className="text-3xl md:text-4xl font-bold text-stone-100 mb-2"
             style={{ fontFamily: 'Cormorant Garamond, serif' }}
           >
-            Manage Listing
+            {t('manage.manageListing' as any)}
           </h1>
           <p className="text-stone-300 text-lg">
             {listing.address}, {listing.city}, {listing.state} {listing.zip}

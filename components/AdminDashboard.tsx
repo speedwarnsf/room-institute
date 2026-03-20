@@ -590,9 +590,12 @@ export function AdminDashboard() {
       {/* Header */}
       <header className="border-b border-stone-800">
         <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-          <div>
+          <div className="flex items-center gap-4">
+            <a href="https://room.institute" className="hover:opacity-80 transition-opacity">
+              <img src="/room-logo.png" alt="Room" style={{ height: 22 }} />
+            </a>
             <h1 className="text-2xl font-bold text-stone-100" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
-              Room Command Center
+              Command Center
             </h1>
             <p className="text-stone-500 text-xs mt-1">Platform intelligence and market operations</p>
           </div>

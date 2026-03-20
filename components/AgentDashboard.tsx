@@ -223,6 +223,10 @@ export function AgentDashboard() {
       <header className="border-b border-stone-800 bg-stone-950">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
+            <a href="https://room.institute" className="hover:opacity-80 transition-opacity">
+              <img src="/room-logo.png" alt="Room" style={{ height: 20 }} />
+            </a>
+            <div className="w-px h-8 bg-stone-700" />
             {agent?.portrait_url && (
               <div className="lens-circle overflow-hidden flex-shrink-0" style={{ width: 40, height: 40 }}>
                 <img src={agent.portrait_url} alt="" className="w-full h-full object-cover" />
