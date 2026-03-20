@@ -3,6 +3,7 @@
  * Catches JavaScript errors anywhere in the child component tree and displays fallback UI
  */
 import { Component, ReactNode } from 'react';
+import { getTranslation } from '../i18n/I18nContext';
 import { AlertTriangle, RefreshCw, Home, Bug } from 'lucide-react';
 import { analytics } from '../services/analytics';
 
