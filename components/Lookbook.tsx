@@ -1,4 +1,3 @@
-  const { t } = useI18n();
 import { useState, useCallback, useMemo, useRef, memo } from 'react';
 import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
 import { Loader2, ChevronDown, ChevronUp, Home, Palette, Sun, Layers, Lightbulb, Crown } from 'lucide-react';
