@@ -96,16 +96,16 @@ function RoomLane({
                   href={sourceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="absolute bottom-3 left-3 z-10 text-stone-200 hover:text-white transition-colors"
-                  style={{ background: "rgba(0,0,0,0.70)", padding: "4px 10px", fontSize: "10px", lineHeight: "1.2", fontFamily: 'Cormorant Garamond, serif', textDecoration: 'none', letterSpacing: '0.05em' }}
+                  className="absolute bottom-3 left-3 z-10 text-stone-400 hover:text-stone-200 transition-colors"
+                  style={{ fontSize: "9px", lineHeight: "1", fontFamily: 'Nunito, sans-serif', textDecoration: 'none', letterSpacing: '0.15em', textTransform: 'uppercase' }}
                   onClick={e => e.stopPropagation()}
                 >
                   {t('listing.asListed')}
                 </a>
               ) : (
                 <span
-                  className="absolute bottom-3 left-3 z-10 text-stone-200"
-                  style={{ background: "rgba(0,0,0,0.70)", padding: "4px 10px", fontSize: "10px", lineHeight: "1.2", fontFamily: 'Cormorant Garamond, serif', letterSpacing: '0.05em' }}
+                  className="absolute bottom-3 left-3 z-10 text-stone-400"
+                  style={{ fontSize: "9px", lineHeight: "1", fontFamily: 'Nunito, sans-serif', letterSpacing: '0.15em', textTransform: 'uppercase' }}
                 >
                   {t('listing.asListed')}
                 </span>
