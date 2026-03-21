@@ -58,7 +58,7 @@ EXISTING DESIGNS ALREADY CREATED (DO NOT REPEAT THESE — create something compl
 ${existingNames.map(n => `- ${n}`).join('\n')}
 
 Generate 3 completely NEW and DIFFERENT design directions. Each must be dramatically distinct from the existing ones and from each other.
-${locale !== 'en' ? `\nLANGUAGE: Write ALL text in ${({fr:'French',de:'German',es:'Spanish',zh:'Mandarin Chinese',pt:'Portuguese'} as Record<string,string>)[locale] || 'English'} — design names, mood descriptions, room reading, key changes, full plan, product descriptions. Keep brand names and product names in their original form. The design direction names should be evocative and punchy in ${({fr:'French',de:'German',es:'Spanish',zh:'Mandarin Chinese',pt:'Portuguese'} as Record<string,string>)[locale] || 'English'}, not translated from English.` : ''}
+${locale !== 'en' ? `\nLANGUAGE: Write ALL text in ${({fr:'French',de:'German',es:'Spanish',zh:'Mandarin Chinese',pt:'Portuguese',ar:'Arabic'} as Record<string,string>)[locale] || 'English'} — design names, mood descriptions, room reading, key changes, full plan, product descriptions. Keep brand names and product names in their original form. The design direction names should be evocative and punchy in ${({fr:'French',de:'German',es:'Spanish',zh:'Mandarin Chinese',pt:'Portuguese',ar:'Arabic'} as Record<string,string>)[locale] || 'English'}, not translated from English.` : ''}
 
 Return ONLY valid JSON:
 {

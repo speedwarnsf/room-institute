@@ -333,10 +333,12 @@ FURNITURE & MATERIAL DIVERSITY:
 WRITING RULES:
 - Short sentences. Punchy. One adjective per noun max.
 - Lead bullets with the MOVE: "Rip out the overhead light. Three mismatched pendants at different heights."
-- Name materials and finishes specifically: "limewashed plaster, chalky to the touch"
-- Banned words: embracing, evoking, channeling, curated, sophisticated, elevating, creating a sense of, a nod to, steeped in, imbued with, pays homage to
+- Name materials and finishes specifically: "limewashed plaster, chalky to the touch" — but NEVER name brands in editorial text.
+- ZERO BRAND NAMES in mood, full_plan, key_changes, or room_reading. Describe the object ("low walnut credenza with brass pulls") not the brand ("Cassina 512 Ombra"). Brand names belong ONLY in the products array.
+- Banned words: embracing, evoking, channeling, curated, sophisticated, elevating, creating a sense of, a nod to, steeped in, imbued with, pays homage to, sanctuary, haven, retreat, pulsates, symphony, harmonious, respite, refuge, emerges, transforms, transcends
+- No purple prose. No "in the heart of." No "a sanctuary emerges." If it sounds like a luxury hotel brochure, delete it and write what you actually see.
 - Never repeat a phrase within the response
-- Mood: 2-3 sentences. What it feels like to stand in the room, one unforgettable sensory detail, and why it works for this space.
+- Mood: 2 sentences MAX. One concrete sensory detail. One reason it works. That's it.
 
 Each design MUST include a specific high-end rug (material, weave, pattern — not just "add a rug").
 
@@ -351,15 +353,12 @@ NAMING RULES (CRITICAL):
 PER OPTION: name (2-3 punchy words — see rules above), mood (2-3 sentences), frameworks (2-3), palette (5 hex), key_changes (3-5 bullets — specific enough to act on, with material/finish details), full_plan (markdown with ### headings, bullet lists, 250-400 words), visualization_prompt (detailed, keep room geometry), products (5-8 REAL product recommendations).
 
 PRODUCT RECOMMENDATIONS (per option):
-- 5-8 SPECIFIC, REAL products that have been featured in major design publications (Architectural Digest, Dwell, Dezeen, Wallpaper*, Elle Decor, T Magazine, Monocle) within the last 1-2 years.
-- Think editorial, not retail. These are the pieces a design editor would name-drop. The kind of furniture you see in a Milanese apartment spread or a Tokyo concept hotel feature.
-- Brands: Cassina, B&B Italia, Molteni&C, Poliform, Minotti, Vitra, Fritz Hansen, &Tradition, Gubi, Menu/Audo, HAY, Muuto, Flos, Artemide, Louis Poulsen, Roll & Hill, Apparatus, Lindsey Adelman, Workstead, De Padova, Edra, Moroso, Knoll, Herman Miller, DWR, RH, 1stDibs, The Invisible Collection, Galerie Kreo, Carpenters Workshop Gallery
-- LUXURY TIER ONLY. Every product must be from the highest tier of design: Cassina, B&B Italia, Molteni&C, Poliform, Minotti, Edra, De Padova, Moroso, Baxter, Flexform, Meridiani, De La Espada, Holly Hunt, Donghia, Christian Liaigre, Pierre Yovanovitch, India Mahdavi, Vincenzo De Cotiis (furniture). Flos, Artemide, Louis Poulsen, Roll & Hill, Apparatus, Lindsey Adelman, Workstead, Bocci, Moooi, Foscarini (lighting). Dedar, Pierre Frey, Rubelli, Fortuny, de Le Cuona, Holland & Sherry (textiles). Fort Street Studio, CC-Tapis, Jan Kath, Tai Ping (rugs). 1stDibs, The Invisible Collection, Galerie Kreo, Carpenters Workshop Gallery (collectible/gallery pieces).
-- Price ranges should reflect reality: $5,000-80,000+ for furniture, $2,000-30,000 for lighting, $1,000-15,000 for textiles/rugs.
-- Each product: { name, brand, category (furniture|lighting|textiles|decor|rugs|hardware), price_range ("$X-Y"), description (one editorial line — why this piece is significant and why it belongs HERE), search_query (exact product + brand for search) }
-- Products must feel like they belong in an AD 100 designer's portfolio. The kind of specification sheet you'd see from a Peter Marino or Kelly Wearstler project.
+- 5-8 SPECIFIC, REAL products. Actual names from actual manufacturers.
+- Range from accessible to aspirational — not everything needs to be $10K+. Mix price points.
+- Each product: { name, brand, category (furniture|lighting|textiles|decor|rugs|hardware), price_range ("$X-Y"), description (one line — why it works HERE specifically), search_query (exact product + brand) }
+- Products live in the products array ONLY. They must NEVER appear in mood, full_plan, or key_changes text.
 
-Full plan structure: ### Design Thesis (2-3 sentences) → ### Interventions (bullet list) → ### Materials (bullet list) → ### Rug (2-3 sentences). No prose paragraphs longer than 3 sentences.
+Full plan structure: ### Design Thesis (2 sentences, no fluff) → ### Interventions (bullet list, each bullet is a specific action) → ### Materials (bullet list, name the material not the brand) → ### Rug (2 sentences). Total 150-250 words. No prose paragraphs longer than 2 sentences. Zero brand names in this section.
 ${previousDesigns.length > 0 ? `\nALREADY SEEN (avoid these): ${previousDesigns.map(d => `"${d}"`).join(', ')}` : ''}
 
 VISUALIZATION PROMPT RULES:

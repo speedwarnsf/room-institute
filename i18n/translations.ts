@@ -10,7 +10,7 @@
  * - Product names: kept in original language (brand names are universal)
  */
 
-export type SupportedLocale = 'en' | 'fr' | 'de' | 'es' | 'zh' | 'pt';
+export type SupportedLocale = 'en' | 'fr' | 'de' | 'es' | 'zh' | 'pt' | 'ar';
 
 export const LOCALE_NAMES: Record<SupportedLocale, string> = {
   en: 'English',
@@ -19,6 +19,7 @@ export const LOCALE_NAMES: Record<SupportedLocale, string> = {
   es: 'Español',
   zh: '中文',
   pt: 'Português',
+  ar: 'العربية',
 };
 
 export const LOCALE_FLAGS: Record<SupportedLocale, string> = {
@@ -28,6 +29,7 @@ export const LOCALE_FLAGS: Record<SupportedLocale, string> = {
   es: '🇪🇸',
   zh: '🇨🇳',
   pt: '🇧🇷',
+  ar: '🇦🇪',
 };
 
 type TranslationKey = keyof typeof translations.en;

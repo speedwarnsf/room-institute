@@ -1,12 +1,17 @@
 import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from 'react';
 import { translations, type SupportedLocale, type Translations } from './translations';
 
+/** RTL locales */
+const RTL_LOCALES = new Set<SupportedLocale>(['ar']);
+
 interface I18nContextType {
   locale: SupportedLocale;
   setLocale: (locale: SupportedLocale) => void;
   t: (key: keyof Translations) => string;
   /** Get the Gemini language instruction for AI-generated content */
   geminiLanguageInstruction: string;
+  /** Whether current locale is RTL */
+  isRTL: boolean;
 }
 
 const I18nContext = createContext<I18nContextType | null>(null);
@@ -48,6 +53,7 @@ function getGeminiLanguageInstruction(locale: SupportedLocale): string {
     es: 'Escribe todo el contenido en español. Write all content in Spanish.',
     zh: '用中文写所有内容。Write all content in Mandarin Chinese.',
     pt: 'Escreva todo o conteúdo em português. Write all content in Brazilian Portuguese.',
+    ar: 'اكتب كل المحتوى باللغة العربية. Write all content in Arabic.',
   };
   return instructions[locale];
 }
@@ -75,13 +81,16 @@ export function I18nProvider({ children }: { children: ReactNode }) {
 
   const geminiLanguageInstruction = getGeminiLanguageInstruction(locale);
 
-  // Set html lang attribute
+  const isRTL = RTL_LOCALES.has(locale);
+
+  // Set html lang + dir attributes
   useEffect(() => {
     document.documentElement.lang = locale;
-  }, [locale]);
+    document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
+  }, [locale, isRTL]);
 
   return (
-    <I18nContext.Provider value={{ locale, setLocale, t, geminiLanguageInstruction }}>
+    <I18nContext.Provider value={{ locale, setLocale, t, geminiLanguageInstruction, isRTL }}>
       {children}
     </I18nContext.Provider>
   );
@@ -99,6 +108,7 @@ export function useI18n() {
       setLocale: () => {},
       t: (key: keyof Translations) => (translations.en as any)[key] || key,
       geminiLanguageInstruction: 'Write all content in English.',
+      isRTL: false,
     };
   }
   return ctx;

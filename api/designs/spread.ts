@@ -104,6 +104,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       es: 'Escribe todo el contenido en español. Write all content in Spanish.',
       zh: '用中文写所有内容。Write all content in Mandarin Chinese.',
       pt: 'Escreva todo o conteúdo em português. Write all content in Brazilian Portuguese.',
+      ar: 'اكتب كل المحتوى باللغة العربية. Write all content in Arabic.',
     };
     const languageInstruction = languageInstructions[locale] || languageInstructions.en;
 
