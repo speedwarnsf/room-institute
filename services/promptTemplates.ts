@@ -288,22 +288,10 @@ STEP 1 — ROOM READING
 Analyze this ${roomType} honestly. What works, what doesn't. Be specific about what you see. 2-3 short paragraphs.
 
 STEP 2 — 3 DESIGN DIRECTIONS
-Each driven by a different design principle, reshaped through a unique rhetorical device:
-
+Each driven by a different principle:
 1. ${seeds[0].principle} — ${seeds[0].approach}
-   RHETORICAL CONSTRAINT (non-negotiable): Express this principle through "${tropes[0]?.name ?? 'Metaphor'}": ${tropes[0]?.definition ?? 'Implied comparison between unlike things.'}
-   Apply with FULL STRUCTURAL FIDELITY: translate the trope's precise linguistic mechanics into at least 5 distinct spatial, material, lighting, circulation, and narrative decisions. DO NOT simplify or resolve to a generic interpretation — preserve full complexity.
-
 2. ${seeds[1].principle} — ${seeds[1].approach}
-   RHETORICAL CONSTRAINT (non-negotiable): Express this principle through "${tropes[1]?.name ?? 'Antithesis'}": ${tropes[1]?.definition ?? 'Juxtaposition of contrasting ideas in balanced phrases.'}
-   Apply with FULL STRUCTURAL FIDELITY: translate the trope's precise linguistic mechanics into at least 5 distinct spatial, material, lighting, circulation, and narrative decisions. DO NOT simplify or resolve to a generic interpretation — preserve full complexity.
-
 3. ${seeds[2].principle} — ${seeds[2].approach}
-   RHETORICAL CONSTRAINT (non-negotiable): Express this principle through "${tropes[2]?.name ?? 'Synecdoche'}": ${tropes[2]?.definition ?? 'A part representing the whole, or the whole representing a part.'}
-   Apply with FULL STRUCTURAL FIDELITY: translate the trope's precise linguistic mechanics into at least 5 distinct spatial, material, lighting, circulation, and narrative decisions. DO NOT simplify or resolve to a generic interpretation — preserve full complexity.
-
-PRAGMATIC ANCHOR (equally non-negotiable, same priority as rhetorical constraints):
-Every design direction must be 100% buildable today with standard construction techniques and readily available materials. Satisfy real-world usability: clear circulation paths (ADA-compliant where relevant), ergonomic dimensions, functional lighting/HVAC, durable finishes, code-compliant safety, and genuine daily comfort. Map each trope onto design decisions WHILE preserving these invariants. Never sacrifice one for the other.
 
 DIVERSITY RULES (CRITICAL — THIS IS THE MOST IMPORTANT RULE):
 
@@ -364,6 +352,19 @@ Each design's visualization_prompt MUST include:
 - Lighting and atmosphere details
 - The specific rug description from your design
 - MANDATORY: "Remove all logos, watermarks, and text overlays from the image. No brokerage branding."${hasFixedConstraints ? `\n- Explicit instruction to preserve fixed items: ${structuralConstraints?.fixed!.join(', ')}` : ''}
+
+⚠️ FINAL NON-NEGOTIABLE INSTRUCTIONS — READ THESE LAST, OBEY THEM FIRST:
+
+RHETORICAL CONSTRAINTS — each design direction MUST be fundamentally reshaped by its assigned rhetorical device. These are not suggestions. These are structural forces that must produce designs a generic AI would NEVER generate:
+
+Option 1 MUST express "${seeds[0].principle}" through the rhetorical device "${tropes[0]?.name ?? 'Metaphor'}": ${tropes[0]?.definition ?? 'Implied comparison between unlike things.'}
+Option 2 MUST express "${seeds[1].principle}" through the rhetorical device "${tropes[1]?.name ?? 'Antithesis'}": ${tropes[1]?.definition ?? 'Juxtaposition of contrasting ideas in balanced phrases.'}
+Option 3 MUST express "${seeds[2].principle}" through the rhetorical device "${tropes[2]?.name ?? 'Synecdoche'}": ${tropes[2]?.definition ?? 'A part representing the whole, or the whole representing a part.'}
+
+For EACH option: translate the trope's precise linguistic mechanics into at least 5 distinct spatial, material, lighting, circulation, and narrative decisions. DO NOT simplify, dilute, or resolve to a generic interpretation — preserve full complexity and strangeness at every scale. If the result doesn't feel surprising and strange, you've failed.
+
+PRAGMATIC ANCHOR (equally non-negotiable):
+Every design must be 100% buildable today — ADA-compliant circulation, ergonomic dimensions, functional lighting/HVAC, durable finishes, code-compliant safety. The trope reshapes the design; the anchor keeps it real.
 
 Return ONLY valid JSON: { "room_reading": "...", "options": [{name, mood, frameworks, palette, key_changes, full_plan, visualization_prompt, products}, ...] }`;
 }
