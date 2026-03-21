@@ -300,6 +300,24 @@ export function ListingManage() {
     }
   }
 
+  async function generateMore(roomId: string) {
+    setRegeneratingRoomId(roomId);
+    try {
+      const response = await fetch('/api/listings/regenerate-room', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ listingId, roomId, locale, addMore: true })
+      });
+      if (!response.ok) throw new Error('Failed');
+      await loadData();
+    } catch (error) {
+      console.error('Failed to generate more:', error);
+      alert('Failed to generate designs');
+    } finally {
+      setRegeneratingRoomId(null);
+    }
+  }
+
   async function saveRoomLabel(roomId: string, newLabel: string) {
     try {
       await supabase
@@ -565,16 +583,23 @@ export function ListingManage() {
                         {isExpanded ? 'Collapse' : 'Expand'}
                       </button>
                       <button
-                        onClick={() => regenerateRoom(room.id)}
+                        onClick={() => generateMore(room.id)}
                         disabled={regeneratingRoomId === room.id}
-                        className="p-2 bg-stone-800 text-stone-300 hover:bg-stone-700 transition-colors disabled:opacity-50"
-                        title={t('manage.regenerateAll')}
+                        className="px-3 py-2 bg-emerald-600 text-stone-900 hover:bg-emerald-500 transition-colors disabled:opacity-50 text-xs font-bold uppercase tracking-wider"
                       >
                         {regeneratingRoomId === room.id ? (
                           <Loader2 className="w-4 h-4 animate-spin" />
                         ) : (
-                          <RefreshCw className="w-4 h-4" />
+                          '+ Generate 5'
                         )}
+                      </button>
+                      <button
+                        onClick={() => regenerateRoom(room.id)}
+                        disabled={regeneratingRoomId === room.id}
+                        className="p-2 bg-stone-800 text-stone-300 hover:bg-stone-700 transition-colors disabled:opacity-50"
+                        title="Replace all designs"
+                      >
+                        <RefreshCw className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => removeRoom(room.id)}
@@ -656,6 +681,16 @@ export function ListingManage() {
                                 ) : (
                                   'Approve'
                                 )}
+                              </button>
+                              {/* Delete design */}
+                              <button
+                                onClick={async () => {
+                                  await supabase.from('listing_designs').delete().eq('id', design.id);
+                                  await loadData();
+                                }}
+                                className="w-full py-2 mt-1 text-red-400 bg-stone-800 hover:bg-red-900/30 text-sm transition-colors"
+                              >
+                                Delete
                               </button>
                             </div>
                           </div>

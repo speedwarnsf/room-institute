@@ -39,6 +39,7 @@ interface RegenerateRequest {
   listingId: string;
   roomId: string;
   locale?: string;
+  addMore?: boolean; // If true, add designs without deleting existing ones
 }
 
 interface RegenerateResponse {
@@ -600,11 +601,13 @@ export default async function handler(req: any, res: any) {
       return res.status(404).json({ error: 'Room not found' });
     }
 
-    // Delete old designs
-    await supabaseAdmin
-      .from('listing_designs')
-      .delete()
-      .eq('room_id', roomId);
+    // Delete old designs (unless addMore mode)
+    if (!body.addMore) {
+      await supabaseAdmin
+        .from('listing_designs')
+        .delete()
+        .eq('room_id', roomId);
+    }
 
     // Update room status
     await supabaseAdmin
