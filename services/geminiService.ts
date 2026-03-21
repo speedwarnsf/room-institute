@@ -566,7 +566,8 @@ CRITICAL RULES:
 - Keep the same wall color, floor material, window placement
 - Do NOT change the room layout or add new furniture
 - Do NOT change the camera perspective
-- Only remove clutter and organize what's already there` 
+- Only remove clutter and organize what's already there
+- REMOVE ALL LOGOS AND WATERMARKS from the image — no real estate brokerage logos, no photographer watermarks, no text overlays. The output must be clean with zero branding.` 
           }
         ]
       },

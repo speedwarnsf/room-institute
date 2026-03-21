@@ -298,7 +298,8 @@ Each design's visualization_prompt MUST include:
 - Specific furniture placement and layout description
 - Material and finish specifications
 - Lighting and atmosphere details
-- The specific rug description from your design${hasFixedConstraints ? `\n- Explicit instruction to preserve fixed items: ${structuralConstraints?.fixed!.join(', ')}` : ''}
+- The specific rug description from your design
+- MANDATORY: "Remove all logos, watermarks, and text overlays from the image. No brokerage branding."${hasFixedConstraints ? `\n- Explicit instruction to preserve fixed items: ${structuralConstraints?.fixed!.join(', ')}` : ''}
 
 Return ONLY valid JSON: { "room_reading": "...", "options": [{name, mood, frameworks, palette, key_changes, full_plan, visualization_prompt, products}, ...] }`;
 }

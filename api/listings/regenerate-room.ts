@@ -245,6 +245,7 @@ Each design's visualization_prompt MUST include:
 - Material and finish specifications
 - Lighting and atmosphere details
 - The specific rug description from your design
+- MANDATORY: "Remove all logos, watermarks, and text overlays from the image. No brokerage branding."
 
 Return ONLY valid JSON: { "room_reading": "...", "options": [{name, mood, frameworks, palette, key_changes, full_plan, visualization_prompt, products}, ...] }
 ${locale !== 'en' ? `\nLANGUAGE: Write ALL text in ${LOCALE_LANGUAGE_MAP[locale] || 'English'} — design names, mood descriptions, room reading, key changes, full plan, product descriptions. Keep brand names and product names in their original form. The design direction names should be evocative and punchy in ${LOCALE_LANGUAGE_MAP[locale] || 'English'}, not translated from English.` : ''}`;
@@ -407,7 +408,8 @@ STYLE DIRECTION:
 
 RULES:
 - Same room shell and approximate camera angle — recognizable as the same space
-- Be BOLD — this should feel like a dramatic transformation. Make the user excited about the possibility.`
+- Be BOLD — this should feel like a dramatic transformation. Make the user excited about the possibility.
+- REMOVE ALL LOGOS AND WATERMARKS — no real estate brokerage logos (Compass, Sotheby's, etc.), no photographer watermarks, no text overlays. The output image must be completely clean.`
               }
             ]
           },
