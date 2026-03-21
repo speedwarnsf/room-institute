@@ -79,48 +79,46 @@ function RoomLane({
               }
             }}
           >
-            <div className="aspect-[16/10] overflow-hidden bg-stone-800">
+            <div className="aspect-[16/10] overflow-hidden bg-stone-800 relative">
               <img
                 src={img.url}
                 alt={img.label}
                 className="w-full h-full object-cover"
                 loading="lazy"
               />
-            </div>
 
-            {/* Label overlay */}
-            {img.type === 'original' ? (
-              /* As Listed: pill label directly on image — no wrapper div, no gradient */
-              sourceUrl ? (
-                <a
-                  href={sourceUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="absolute bottom-3 left-3 z-10 py-0 px-1 text-[9px] leading-none bg-black/60 text-stone-200 hover:text-white transition-colors"
-                  style={{ fontFamily: 'Cormorant Garamond, serif', textDecoration: 'none', letterSpacing: '0.05em' }}
-                  onClick={e => e.stopPropagation()}
-                >
-                  {t('listing.asListed')}
-                </a>
+              {/* Label overlay — INSIDE the image container */}
+              {img.type === 'original' ? (
+                sourceUrl ? (
+                  <a
+                    href={sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute bottom-2 left-2 z-10 py-0 px-1 text-[9px] leading-none bg-black/60 text-stone-200 hover:text-white transition-colors"
+                    style={{ fontFamily: 'Cormorant Garamond, serif', textDecoration: 'none', letterSpacing: '0.05em' }}
+                    onClick={e => e.stopPropagation()}
+                  >
+                    {t('listing.asListed')}
+                  </a>
+                ) : (
+                  <span
+                    className="absolute bottom-2 left-2 z-10 py-0 px-1 text-[9px] leading-none bg-black/60 text-stone-200"
+                    style={{ fontFamily: 'Cormorant Garamond, serif', letterSpacing: '0.05em' }}
+                  >
+                    {t('listing.asListed')}
+                  </span>
+                )
               ) : (
-                <span
-                  className="absolute bottom-3 left-3 z-10 py-0 px-1 text-[9px] leading-none bg-black/60 text-stone-200"
-                  style={{ fontFamily: 'Cormorant Garamond, serif', letterSpacing: '0.05em' }}
-                >
-                  {t('listing.asListed')}
-                </span>
-              )
-            ) : (
-              /* Design cards: gradient overlay with name */
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-stone-900/90 to-transparent p-4">
-                <p className="text-stone-100 text-sm font-bold" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
-                  {img.label}
-                </p>
-                <p className="text-emerald-500 text-xs mt-0.5 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                  {t('listing.goDeeper')} <ArrowRight className="w-3 h-3" />
-                </p>
-              </div>
-            )}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-stone-900/90 to-transparent p-4">
+                  <p className="text-stone-100 text-sm font-bold" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
+                    {img.label}
+                  </p>
+                  <p className="text-emerald-500 text-xs mt-0.5 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    {t('listing.goDeeper')} <ArrowRight className="w-3 h-3" />
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
         ))}
 
