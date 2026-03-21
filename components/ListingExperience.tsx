@@ -88,27 +88,7 @@ function RoomLane({
               />
 
               {/* Label overlay — INSIDE the image container */}
-              {img.type === 'original' ? (
-                sourceUrl ? (
-                  <a
-                    href={sourceUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="absolute bottom-2 left-2 z-10 py-0 px-1 text-[9px] leading-none bg-black/60 text-stone-200 hover:text-white transition-colors"
-                    style={{ fontFamily: 'Cormorant Garamond, serif', textDecoration: 'none', letterSpacing: '0.05em' }}
-                    onClick={e => e.stopPropagation()}
-                  >
-                    {t('listing.asListed')}
-                  </a>
-                ) : (
-                  <span
-                    className="absolute bottom-2 left-2 z-10 py-0 px-1 text-[9px] leading-none bg-black/60 text-stone-200"
-                    style={{ fontFamily: 'Cormorant Garamond, serif', letterSpacing: '0.05em' }}
-                  >
-                    {t('listing.asListed')}
-                  </span>
-                )
-              ) : (
+              {img.type === 'original' ? null : (
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-stone-900/90 to-transparent p-4">
                   <p className="text-stone-100 text-sm font-bold" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
                     {img.label}
