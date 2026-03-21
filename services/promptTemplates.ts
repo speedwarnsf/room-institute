@@ -1,7 +1,56 @@
 /**
  * Enhanced AI Prompts for Room
  * Optimized prompts for better room analysis and visualization
+ * Now with rhetorical trope engine (293-device corpus)
  */
+
+// ====================== RHETORICAL TROPE ENGINE ======================
+import tropesData from '../data/tropes.json';
+
+interface RhetoricalTrope {
+  figure_name: string;
+  definition: string;
+}
+
+const TROPES: RhetoricalTrope[] = tropesData as RhetoricalTrope[];
+
+// Session-level anti-repetition (resets on server restart / cold start)
+const usedTropes = new Set<string>();
+
+/**
+ * Select N unique rhetorical tropes, never repeating until corpus is exhausted.
+ * Returns tropes with normalized name (title case) and definition.
+ */
+export function selectTropes(count: number): Array<{ name: string; definition: string }> {
+  let available = TROPES.filter(t => !usedTropes.has(t.figure_name));
+  if (available.length < count) {
+    usedTropes.clear();
+    available = [...TROPES];
+  }
+
+  const selected: Array<{ name: string; definition: string }> = [];
+  for (let i = 0; i < count; i++) {
+    if (available.length === 0) break;
+    const idx = Math.floor(Math.random() * available.length);
+    const trope = available.splice(idx, 1)[0]!;
+    selected.push({
+      name: trope.figure_name.split('_').map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
+      definition: trope.definition,
+    });
+    usedTropes.add(trope.figure_name);
+  }
+  return selected;
+}
+
+/** Reset the anti-repetition tracker */
+export function resetTropeUsage(): void {
+  usedTropes.clear();
+}
+
+/** How many tropes have been used / total */
+export function tropeUsageStats(): { used: number; total: number } {
+  return { used: usedTropes.size, total: TROPES.length };
+}
 
 export interface PromptContext {
   roomType?: string;
@@ -190,6 +239,9 @@ export function createDesignAnalysisPrompt(context: PromptContext & { previousDe
   const { roomType = 'room', previousDesigns = [], style, structuralConstraints } = context;
   const seeds = getDesignSeed() as [DesignSeed, DesignSeed, DesignSeed];
 
+  // Assign a unique rhetorical trope to each seed direction
+  const tropes = selectTropes(3);
+
   // Build constraints section
   const hasFixedConstraints = structuralConstraints?.fixed && structuralConstraints.fixed.length > 0;
   const hasFlexibleConstraints = structuralConstraints?.flexible && structuralConstraints.flexible.length > 0;
@@ -236,10 +288,22 @@ STEP 1 — ROOM READING
 Analyze this ${roomType} honestly. What works, what doesn't. Be specific about what you see. 2-3 short paragraphs.
 
 STEP 2 — 3 DESIGN DIRECTIONS
-Each driven by a different principle:
+Each driven by a different design principle, reshaped through a unique rhetorical device:
+
 1. ${seeds[0].principle} — ${seeds[0].approach}
+   RHETORICAL CONSTRAINT (non-negotiable): Express this principle through "${tropes[0]?.name ?? 'Metaphor'}": ${tropes[0]?.definition ?? 'Implied comparison between unlike things.'}
+   Apply with FULL STRUCTURAL FIDELITY: translate the trope's precise linguistic mechanics into at least 5 distinct spatial, material, lighting, circulation, and narrative decisions. DO NOT simplify or resolve to a generic interpretation — preserve full complexity.
+
 2. ${seeds[1].principle} — ${seeds[1].approach}
+   RHETORICAL CONSTRAINT (non-negotiable): Express this principle through "${tropes[1]?.name ?? 'Antithesis'}": ${tropes[1]?.definition ?? 'Juxtaposition of contrasting ideas in balanced phrases.'}
+   Apply with FULL STRUCTURAL FIDELITY: translate the trope's precise linguistic mechanics into at least 5 distinct spatial, material, lighting, circulation, and narrative decisions. DO NOT simplify or resolve to a generic interpretation — preserve full complexity.
+
 3. ${seeds[2].principle} — ${seeds[2].approach}
+   RHETORICAL CONSTRAINT (non-negotiable): Express this principle through "${tropes[2]?.name ?? 'Synecdoche'}": ${tropes[2]?.definition ?? 'A part representing the whole, or the whole representing a part.'}
+   Apply with FULL STRUCTURAL FIDELITY: translate the trope's precise linguistic mechanics into at least 5 distinct spatial, material, lighting, circulation, and narrative decisions. DO NOT simplify or resolve to a generic interpretation — preserve full complexity.
+
+PRAGMATIC ANCHOR (equally non-negotiable, same priority as rhetorical constraints):
+Every design direction must be 100% buildable today with standard construction techniques and readily available materials. Satisfy real-world usability: clear circulation paths (ADA-compliant where relevant), ergonomic dimensions, functional lighting/HVAC, durable finishes, code-compliant safety, and genuine daily comfort. Map each trope onto design decisions WHILE preserving these invariants. Never sacrifice one for the other.
 
 DIVERSITY RULES (CRITICAL — THIS IS THE MOST IMPORTANT RULE):
 
