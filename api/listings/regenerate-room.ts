@@ -587,7 +587,7 @@ export default async function handler(req: any, res: any) {
       .single();
 
     if (listingError || !listing) {
-      return res.status(404).json({ error: 'Listing not found' });
+      return res.status(404).json({ error: 'Listing not found', detail: listingError?.message, hasKey: !!SUPABASE_SERVICE_KEY, listingId });
     }
 
     // Get the room
