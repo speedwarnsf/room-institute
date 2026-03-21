@@ -259,7 +259,7 @@ export default function DesignSpread({ design, listingAddress, roomLabel, onBack
       <TrackedSection section="narrative" designId={design.id}>
       <div className="max-w-3xl mx-auto px-6 py-16 md:py-24">
         <RevealSection>
-          <div className="prose-stone text-stone-300 text-[15px] leading-relaxed space-y-6">
+          <div className="prose-stone text-stone-300 text-[15px] leading-relaxed space-y-6" style={{ textWrap: 'balance' as any }} data-typeset>
             <ReactMarkdown>{spread.narrative}</ReactMarkdown>
           </div>
         </RevealSection>
@@ -319,7 +319,7 @@ export default function DesignSpread({ design, listingAddress, roomLabel, onBack
             <p className="text-emerald-500 text-xs tracking-widest uppercase mb-4" style={{ fontFamily: fonts.body }}>
               {t('spread.spatialFlow')}
             </p>
-            <p className="text-stone-300 text-[14px] leading-relaxed">
+            <p className="text-stone-300 text-[14px] leading-relaxed" style={{ textWrap: 'balance' as any }} data-typeset>
               {spread.spatialNarrative}
             </p>
           </RevealSection>
@@ -327,7 +327,7 @@ export default function DesignSpread({ design, listingAddress, roomLabel, onBack
             <p className="text-emerald-500 text-xs tracking-widest uppercase mb-4" style={{ fontFamily: fonts.body }}>
               {t('spread.lightStudy')}
             </p>
-            <p className="text-stone-300 text-[14px] leading-relaxed">
+            <p className="text-stone-300 text-[14px] leading-relaxed" style={{ textWrap: 'balance' as any }} data-typeset>
               {spread.lightStudy}
             </p>
           </RevealSection>
@@ -341,7 +341,7 @@ export default function DesignSpread({ design, listingAddress, roomLabel, onBack
             <p className="text-emerald-500 text-xs tracking-widest uppercase mb-4" style={{ fontFamily: fonts.body }}>
               {t('spread.designPhilosophy')}
             </p>
-            <p className="text-stone-300 text-[14px] leading-relaxed">
+            <p className="text-stone-300 text-[14px] leading-relaxed" style={{ textWrap: 'balance' as any }} data-typeset>
               {spread.designPhilosophy}
             </p>
             {design.frameworks?.length > 0 && (
