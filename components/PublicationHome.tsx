@@ -73,7 +73,7 @@ function ListingCard({ listing, index }: { listing: PublicationListing; index: n
         )}
 
         {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/10" />
 
         {/* SOLD badge */}
         {isSold && (
