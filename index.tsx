@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './app.css';
 import App from './App';
 import PublicationHome from './components/PublicationHome';
+import StagingGate from './components/StagingGate';
 import { NotFound } from './components/NotFound';
 import { ThemeProvider } from './components/ThemeContext';
 import { I18nProvider } from './i18n/I18nContext';
@@ -27,6 +28,7 @@ root.render(
   <React.StrictMode>
     <I18nProvider>
     <ThemeProvider>
+      <StagingGate>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<PublicationHome />} />
@@ -43,6 +45,7 @@ root.render(
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
+      </StagingGate>
     </ThemeProvider>
     </I18nProvider>
   </React.StrictMode>
