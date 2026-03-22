@@ -266,14 +266,22 @@ Return ONLY valid JSON:
             parts: [
               { inlineData: { mimeType, data: photoBase64 } },
               {
-                text: `REDESIGN THIS ROOM PHOTO. Keep the architectural shell (walls, windows, doors, ceiling, floor material) and similar camera angle.
+                text: `REDESIGN THIS ROOM PHOTO. Keep the architectural shell EXACTLY as shown — walls, windows, doors, ceiling, floor material, and camera angle must match the original photo.
+
+ABSOLUTE ARCHITECTURAL CONSTRAINTS — DO NOT VIOLATE:
+- DO NOT move, add, or remove any windows. Window count, size, shape, and position must match the original exactly.
+- DO NOT move, add, or remove any doors or doorways.
+- DO NOT change wall positions, ceiling height, or room proportions.
+- DO NOT change floor material or wall color unless the design vision explicitly calls for it.
+- The architectural bones of this room are SACRED. Only furniture, decor, textiles, and lighting fixtures may change.
 
 REARRANGE THE FURNITURE COMPLETELY according to this design vision:
 ${option.visualization_prompt}
 
 STYLE: Professional interior design portfolio shot — Architectural Digest / Dwell quality.
-Rich textures, atmospheric lighting, tactile materials. Be BOLD.
-Same room shell and approximate camera angle — recognizable as the same space.`
+Rich textures, atmospheric lighting, tactile materials. Be BOLD with furniture and decor — but NEVER with architecture.
+
+FINAL CHECK: Same room shell, same windows, same doors, same camera angle — recognizable as the same space.`
               }
             ]
           },

@@ -808,7 +808,14 @@ export const generateDesignVisualization = async (
         parts: [
           { inlineData: { mimeType, data: originalImageBase64 } },
           {
-            text: `REDESIGN THIS ROOM PHOTO. Keep the architectural shell (walls, windows, doors, ceiling, floor material) and similar camera angle so the user recognizes their space.${constraintText}
+            text: `REDESIGN THIS ROOM PHOTO. Keep the architectural shell EXACTLY as shown — walls, windows, doors, ceiling, floor material, and camera angle must match the original photo.${constraintText}
+
+ABSOLUTE ARCHITECTURAL CONSTRAINTS — DO NOT VIOLATE:
+- DO NOT move, add, or remove any windows. Window count, size, shape, and position must match the original exactly.
+- DO NOT move, add, or remove any doors or doorways.
+- DO NOT change wall positions, ceiling height, or room proportions.
+- DO NOT change floor material or wall color unless the design vision explicitly calls for it.
+- The architectural bones of this room are SACRED. Only furniture, decor, textiles, and lighting fixtures may change.
 
 ${constraints?.fixed && constraints.fixed.length > 0 ? 'REDESIGN THE REST OF THE SPACE' : 'REARRANGE THE FURNITURE COMPLETELY'} according to this design vision:
 ${visualizationPrompt.trim()}
@@ -827,7 +834,9 @@ STYLE DIRECTION:
 
 RULES:
 - Same room shell and approximate camera angle — recognizable as the same space
-- ${creativityPrompt}`
+- ${creativityPrompt}
+
+FINAL CHECK: Windows, doors, walls, ceiling — all must match the original photo exactly. Architecture is untouchable.`
           }
         ]
       },
