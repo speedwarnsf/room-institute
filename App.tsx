@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect, lazy, Suspense } from 'react';
+import GlobalTypeset from './components/GlobalTypeset';
 import { UploadZone } from './components/UploadZone';
 import { ThemeToggle } from './components/ThemeToggle';
 import { ErrorBoundary } from './components/ErrorBoundary';
@@ -1256,10 +1257,11 @@ function AppContent() {
         {/* Home State */}
         {appState === AppState.HOME && (
           <div className="flex flex-col items-center justify-center min-h-[60vh] animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ paddingTop: 30 }}>
-            <h1 className="text-4xl md:text-5xl font-bold text-stone-900 dark:text-stone-100 text-center mb-6 font-serif">
+            <GlobalTypeset />
+            <h1 className="text-3xl md:text-4xl font-bold text-stone-900 dark:text-stone-100 text-center mb-8 font-serif" style={{ fontFamily: 'Cormorant Garamond, serif', lineHeight: '1.2' }}>
               <span dangerouslySetInnerHTML={{ __html: (t as any)('app.hero.title') }} />
             </h1>
-            <p className="text-sm sm:text-base text-stone-600 dark:text-stone-400 text-center max-w-xl mb-4 leading-relaxed" style={{ textWrap: 'balance' }}>
+            <p className="text-sm sm:text-base text-stone-600 dark:text-stone-400 text-center max-w-lg mb-4 leading-relaxed" style={{ lineHeight: '1.8' }}>
               <span dangerouslySetInnerHTML={{ __html: (t as any)('app.hero.description') }} />
             </p>
 

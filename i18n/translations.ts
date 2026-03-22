@@ -406,8 +406,8 @@ const translations = {
     'dashboard.editProfileGeneratePortrait': 'Edit Profile & Generate Portrait',
 
     // App.tsx
-    'app.hero.title': 'Reimagine <em>your</em> room',
-    'app.hero.description': 'Our AI interprets your space, its light, its framework, its potential — and generates 3 unique designs grounded in theory. Dive even deeper into any that inspire you. <strong>Click the lens below to get started.</strong>',
+    'app.hero.title': 'Every room tells more than one story.',
+    'app.hero.description': 'What we\u2019re shown is never the whole of it. Staging suggests a point of view, a way to move through space. But the architecture holds other intentions. The light shifts. The room waits.<br/><br/>Room <a href="https://room.institute" style="text-decoration:none;color:inherit;border-bottom:1px solid currentColor;opacity:0.5">(room.institute)</a> reads what\u2019s already there\u2014and reveals what else might be. Because a home is not defined by what it is, but by what it allows.',
     'app.hero.tryFree': 'Try it free — no account required',
     'app.hero.freeRemaining': '{count} of {limit} free designs remaining',
     'app.hero.proRemaining': 'Pro — {count} designs remaining this month',
