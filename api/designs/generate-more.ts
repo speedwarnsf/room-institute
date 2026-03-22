@@ -11,6 +11,7 @@ import { GoogleGenAI } from '@google/genai';
 import crypto from 'crypto';
 import { readFileSync } from 'fs';
 import { join } from 'path';
+import { fileURLToPath } from 'url';
 
 export const maxDuration = 300;
 
@@ -22,18 +23,28 @@ function loadTropes(): TropeEntry[] {
   if (_tropes) return _tropes;
   const paths = [
     join(process.cwd(), 'data', 'tropes.json'),
-    join(__dirname, '..', 'data', 'tropes.json'),
-    join(__dirname, '..', '..', 'data', 'tropes.json'),
+    join(process.cwd(), 'api', 'data', 'tropes.json'),
+    '/var/task/data/tropes.json',
+    '/var/task/api/data/tropes.json',
   ];
   for (const p of paths) {
-    try { _tropes = JSON.parse(readFileSync(p, 'utf-8')); return _tropes!; } catch {}
+    try { _tropes = JSON.parse(readFileSync(p, 'utf-8')); console.log(`[TropeEngine API] Loaded ${_tropes!.length} tropes from ${p}`); return _tropes!; } catch {}
   }
+  console.warn('[TropeEngine API] Could not load tropes.json, using fallback');
   // Fallback: minimal set
-  return [
+  _tropes = [
     { figure_name: 'chiasmus', definition: 'A reversal of grammatical structure (ABBA) for emphasis or surprise.' },
     { figure_name: 'aposiopesis', definition: 'Deliberate breaking off mid-sentence, trailing into silence for dramatic effect.' },
     { figure_name: 'litotes', definition: 'Understatement by negating the opposite, for ironic emphasis.' },
+    { figure_name: 'antithesis', definition: 'Juxtaposition of contrasting ideas in balanced phrases or clauses.' },
+    { figure_name: 'synecdoche', definition: 'A part representing the whole, or the whole representing a part.' },
+    { figure_name: 'zeugma', definition: 'One verb governing two or more objects in different senses.' },
+    { figure_name: 'catachresis', definition: 'Deliberate misuse of words or strained metaphor for rhetorical effect.' },
+    { figure_name: 'meiosis', definition: 'Deliberate understatement for rhetorical effect.' },
+    { figure_name: 'auxesis', definition: 'Arrangement from least to most important for climactic effect.' },
+    { figure_name: 'epanalepsis', definition: 'Beginning and ending a phrase with the same word.' },
   ];
+  return _tropes;
 }
 
 function selectTropesServer(count: number): Array<{ name: string; definition: string }> {
