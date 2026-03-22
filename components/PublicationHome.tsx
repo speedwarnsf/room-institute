@@ -198,12 +198,12 @@ export default function PublicationHome() {
         >
           Every room tells more than one story.
         </h1>
-        <p className="text-stone-400 text-sm sm:text-base max-w-lg leading-relaxed" data-no-smooth style={{ fontFamily: 'Nunito, sans-serif', fontWeight: 300, lineHeight: '1.8' }}>
-          What we{'\u2019'}re shown is never the whole of it. Staging suggests a{'\u00A0'}point of{'\u00A0'}view, a{'\u00A0'}way to{'\u00A0'}move through space. But the architecture holds other intentions. The{'\u00A0'}light shifts. The{'\u00A0'}room{'\u00A0'}waits.
-        </p>
-        <p className="text-stone-400 text-sm sm:text-base max-w-lg mt-4 leading-relaxed" data-no-smooth style={{ fontFamily: 'Nunito, sans-serif', fontWeight: 300, lineHeight: '1.8' }}>
-          Room <a href="https://room.institute" className="border-b border-stone-600 hover:border-stone-400 transition-colors">(room.institute)</a> reads what{'\u2019'}s already there{'\u2014'}and reveals what else might{'\u00A0'}be. Because a{'\u00A0'}home is{'\u00A0'}not defined by{'\u00A0'}what it{'\u00A0'}is, but by{'\u00A0'}what it{'\u00A0'}allows.
-        </p>
+        <div className="text-stone-400 text-sm sm:text-base max-w-lg leading-relaxed" data-no-typeset style={{ fontFamily: 'Nunito, sans-serif', fontWeight: 300, lineHeight: '1.8' }}>
+          <p style={{ marginBottom: '0.5em' }}>What we{'\u2019'}re shown is never the whole of{'\u00A0'}it.</p>
+          <p style={{ marginBottom: '0.5em' }}>Staging suggests a point of view, a way to move through space. But the architecture holds other intentions. The light shifts. The room{'\u00A0'}waits.</p>
+          <p style={{ marginTop: '1.2em', marginBottom: '0.5em' }}>Room <a href="https://room.institute" className="border-b border-stone-600 hover:border-stone-400 transition-colors">(room.institute)</a> reads what{'\u2019'}s already there{'\u2014'}and reveals what else might{'\u00A0'}be.</p>
+          <p>Because a home is not defined by what it is, but by what it{'\u00A0'}allows.</p>
+        </div>
       </div>
 
       {/* Filter bar */}
