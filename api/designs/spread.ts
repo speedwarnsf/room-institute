@@ -108,49 +108,50 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     };
     const languageInstruction = languageInstructions[locale] || languageInstructions.en;
 
-    const prompt = `You are an editorial director for an award-winning interior design magazine — think Architectural Digest meets Kinfolk. You're writing a magazine spread about this specific design concept for a real estate listing.
+    const prompt = `You are a direct-response copywriter who knows interiors. Every sentence has a job. If it doesn't tell the reader something useful about this room, cut it.
 
 ${languageInstruction}
 
-DESIGN NAME: ${design.name}
-DESCRIPTION: ${design.description || ''}
-MOOD: ${seed.mood || ''}
+DESIGN: ${design.name}
+MOOD: ${seed.mood || design.description || ''}
 FRAMEWORKS: ${(design.frameworks || []).join(', ')}
 PALETTE: ${(seed.palette || []).join(', ')}
 KEY CHANGES: ${(seed.key_changes || seed.keyChanges || []).join('\n')}
 FULL PLAN: ${seed.fullPlan || seed.full_plan || ''}
 ROOM READING: ${typeof roomReading === 'string' ? roomReading : JSON.stringify(roomReading)}
-PRODUCTS: ${JSON.stringify(seed.products || [])}
 
-When writing about PRODUCTS: Translate all product names and descriptions to the target language. Keep brand names in their original form (e.g., "Herman Miller" stays "Herman Miller", but "Aeron Chair" becomes the translated version).
+WRITING RULES (non-negotiable):
+- ZERO BRAND NAMES anywhere. Describe materials and objects by what they ARE, not who made them. "Polished concrete floor" not "a Crate & Barrel concrete finish." "Chrome cantilever chair" not "Knoll's chrome frame chair."
+- Short sentences. Concrete. Physical. Every sentence does one job: says what changed, what it feels like, or why it matters.
+- BANNED: embracing, evoking, channeling, curated, sophisticated, elevating, sanctuary, haven, retreat, pulsates, symphony, harmonious, respite, refuge, emerges, transforms, transcends, nestled, boasts, seamlessly, effortlessly, timeless, bespoke, metamorphosis, ephemeral, luminosity
+- No hedging: no "perhaps", "maybe", "might", "could be"
+- No purple prose. If it sounds like a hotel brochure, rewrite it.
+- Narrative: 2 SHORT paragraphs max. 3-4 sentences each. Say what the room does, not what it "evokes."
+- Material callouts: the material, how it feels, how it ages. One sentence each. No poetry.
+- Spatial narrative: 2-3 sentences. Where your eye goes first, where you end up, why.
+- Light study: 2-3 sentences. Morning vs evening. Be specific about direction and quality.
+- Living vignette: 2 sentences. One specific moment. No "steaming mug of tea" clichés.
+- Pull quote: One sharp sentence. Not a metaphor. A statement about what the room actually does.
 
-Write a magazine-quality editorial spread. This should feel like turning a page in a physical magazine — editorial, evocative, specific. Not generic marketing copy. Reference the actual materials, products, and spatial decisions in the design.
-
-CRITICAL RULES:
-- Write with AUTHORITY. Never use "perhaps", "maybe", "might", "could be", "possibly", or any hedging language.
-- If a specific product or brand is listed in PRODUCTS above, name it directly and confidently.
-- If you don't know a specific product, describe the material and texture without guessing at brands. Say "a deep matte wall finish" not "perhaps a Farrow & Ball shade."
-- This is a magazine editorial, not a suggestion. State things as fact. Be declarative.
-
-Return ONLY valid JSON matching this exact schema:
+Return ONLY valid JSON:
 {
-  "headline": "short, evocative editorial headline (5-8 words, no quotes)",
-  "narrative": "2-3 paragraphs of editorial prose about this design, in markdown. Reference specific materials, brands, and spatial decisions. Written like AD or Dwell, not a product listing.",
+  "headline": "4-6 words. Concrete. Not poetic.",
+  "narrative": "2 short paragraphs, markdown. No brands. Describe materials and space, not feelings.",
   "typeMood": "one of: warm-editorial, stark-minimal, bold-expressive, classic-refined, raw-industrial",
-  "designPhilosophy": "1 paragraph about the design theory/philosophy behind this direction. Reference specific frameworks if applicable.",
+  "designPhilosophy": "3-4 sentences about the design thinking. Reference frameworks by name. No fluff.",
   "materialCallouts": [
-    {"material": "Material name", "description": "Sensory description — how it looks, feels, ages"},
-    {"material": "Material name", "description": "Sensory description"},
-    {"material": "Material name", "description": "Sensory description"}
+    {"material": "Material name", "description": "How it feels and ages. One sentence."},
+    {"material": "Material name", "description": "One sentence."},
+    {"material": "Material name", "description": "One sentence."}
   ],
-  "spatialNarrative": "How you move through this room. What draws your eye first, where you settle, how the space flows.",
-  "lightStudy": "How light works in this design — morning, afternoon, evening. How the materials respond to changing light.",
-  "livingVignette": "A 3-4 sentence vignette of a moment of life in this space. Specific, sensory, human.",
-  "pullQuote": "One striking sentence that captures the essence of this design. Magazine pull-quote style."
+  "spatialNarrative": "2-3 sentences. Where you look, where you walk, where you sit.",
+  "lightStudy": "2-3 sentences. Morning light vs evening light. Specific.",
+  "livingVignette": "2 sentences. One real moment. No clichés.",
+  "pullQuote": "One declarative sentence about what the room does."
 }`;
 
     const response = await ai.models.generateContent({
-      model: 'gemini-2.0-flash',
+      model: 'gemini-2.5-flash',
       contents: prompt,
       config: {
         responseMimeType: 'application/json',
