@@ -13,6 +13,7 @@ import { supabase } from '../services/auth';
 import { useI18n } from '../i18n/I18nContext';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import GlobalTypeset from './GlobalTypeset';
+import ComparisonHero from './ComparisonHero';
 
 interface PublicationListing {
   id: string;
@@ -189,9 +190,14 @@ export default function PublicationHome() {
         </div>
       </header>
 
+      {/* Before/After Comparison */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-8">
+        <ComparisonHero />
+      </div>
+
       {/* Hero text */}
       <GlobalTypeset />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-12 pb-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-10 pb-8">
         <h1
           className="text-3xl sm:text-4xl lg:text-5xl text-stone-100 leading-[1.15] mb-6"
           style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 400 }}
