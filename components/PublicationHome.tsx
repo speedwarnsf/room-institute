@@ -56,7 +56,7 @@ function ListingCard({ listing, index }: { listing: PublicationListing; index: n
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: index * 0.05, duration: 0.5 }}
-        className={`relative ${isHero ? 'aspect-[21/9]' : 'aspect-[4/3]'} bg-stone-900 overflow-hidden`}
+        className={`relative ${isHero ? 'aspect-[4/3] sm:aspect-[21/9]' : 'aspect-[4/3]'} bg-stone-900 overflow-hidden`}
       >
         {/* Image */}
         {listing.hero_image ? (
