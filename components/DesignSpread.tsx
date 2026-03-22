@@ -436,27 +436,24 @@ export default function DesignSpread({ design, listingAddress, roomLabel, onBack
 
       </TrackedSection>
 
-      {/* Design partner — visually separated as advertisement */}
+      {/* Room Institute self-promo */}
       <div className="border-t-2 border-stone-700 bg-stone-900">
-        <p className="text-stone-600 text-[9px] tracking-[0.3em] uppercase text-center pt-4 mb-0">{t('ad.label')}</p>
-        <div className="max-w-sm mx-auto px-6 py-8 text-center">
+        <div className="max-w-sm mx-auto px-6 py-10 text-center">
           <h3 className="text-stone-200 text-2xl mb-1" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
-            {t('ad.dreaming')}
+            {t('ad.ownSpace')}
           </h3>
           <p className="text-emerald-500 text-lg font-bold mb-6" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
-            {t('ad.startDesigning')}
+            {t('ad.seeItFirst')}
           </p>
           <p className="text-stone-400 text-[13px] leading-relaxed mb-6" data-no-smooth>
-            {t('ad.description')}
+            {t('ad.roomDescription')}
           </p>
           <a
-            href="https://www.modtagedesign.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => track({ eventType: 'partner_clicked', designId: design.id, metadata: { partner: 'modtage', context: 'spread' } })}
-            className="inline-block px-6 pt-[14px] pb-[12px] border border-stone-600 text-stone-300 hover:text-stone-100 hover:border-stone-400 text-xs tracking-widest uppercase transition-colors"
+            href="https://room.institute/design"
+            onClick={() => track({ eventType: 'room_cta_clicked', designId: design.id, metadata: { context: 'spread' } })}
+            className="inline-block px-6 pt-[14px] pb-[12px] border border-emerald-600 text-emerald-400 hover:text-emerald-300 hover:border-emerald-500 text-xs tracking-widest uppercase transition-colors"
           >
-            {t('ad.cta')}
+            {t('ad.tryYourSpace')}
           </a>
         </div>
       </div>
