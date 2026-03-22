@@ -5,8 +5,10 @@
  */
 
 import { useRef, useState, useCallback, useEffect } from 'react';
+import { useI18n } from '../i18n/I18nContext';
 
 export default function ComparisonHero() {
+  const { t } = useI18n();
   const containerRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState(50); // percentage
   const [isDragging, setIsDragging] = useState(false);
@@ -138,7 +140,7 @@ export default function ComparisonHero() {
             className="bg-black/70 backdrop-blur-sm text-white text-[10px] uppercase tracking-[0.2em] px-3 py-1.5"
             style={{ fontFamily: 'Nunito, sans-serif' }}
           >
-            As Listed
+            {(t as any)('pub.asListed')}
           </span>
         </div>
         <div className="absolute bottom-4 right-4 z-10">
@@ -146,7 +148,7 @@ export default function ComparisonHero() {
             className="bg-emerald-500/90 backdrop-blur-sm text-stone-950 text-[10px] uppercase tracking-[0.2em] px-3 py-1.5 font-bold"
             style={{ fontFamily: 'Nunito, sans-serif' }}
           >
-            Reimagined
+            {(t as any)('pub.reimagined')}
           </span>
         </div>
       </div>

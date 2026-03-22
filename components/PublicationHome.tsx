@@ -69,7 +69,7 @@ function ListingCard({ listing, index }: { listing: PublicationListing; index: n
         ) : (
           <div className="w-full h-full bg-gradient-to-br from-stone-800 to-stone-900 flex items-center justify-center">
             <span className="text-stone-600 text-xs uppercase tracking-widest" style={{ fontFamily: 'Nunito, sans-serif' }}>
-              Coming Soon
+              {(t as any)('pub.comingSoon')}
             </span>
           </div>
         )}
@@ -184,7 +184,7 @@ export default function PublicationHome() {
               className="hidden sm:block text-[11px] uppercase tracking-widest text-stone-500 hover:text-emerald-400 transition-colors"
               style={{ fontFamily: 'Nunito, sans-serif' }}
             >
-              Design Your Space
+              {(t as any)('pub.designYourSpace')}
             </Link>
           </div>
         </div>
@@ -202,13 +202,13 @@ export default function PublicationHome() {
           className="text-3xl sm:text-4xl lg:text-5xl text-stone-100 leading-[1.15] mb-6"
           style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 400 }}
         >
-          Every room tells more than one story.
+          {(t as any)('pub.hero')}
         </h1>
         <div className="text-stone-400 text-sm sm:text-base max-w-lg leading-relaxed" data-no-typeset style={{ fontFamily: 'Nunito, sans-serif', fontWeight: 300, lineHeight: '1.8' }}>
-          <p style={{ marginBottom: '0.5em' }}>What we{'\u2019'}re shown is never the whole of{'\u00A0'}it.</p>
-          <p style={{ marginBottom: '0.5em' }}>Staging suggests a point of view, a way to move through space. But the architecture holds other intentions. The light shifts. The room{'\u00A0'}waits.</p>
-          <p style={{ marginTop: '1.2em', marginBottom: '0.5em' }}>Room <a href="https://room.institute" className="border-b border-stone-600 hover:border-stone-400 transition-colors">(room.institute)</a> reads what{'\u2019'}s already there{'\u2014'}and reveals what else might{'\u00A0'}be.</p>
-          <p>Because a home is not defined by what it is, but by what it{'\u00A0'}allows.</p>
+          <p style={{ marginBottom: '0.5em' }}>{(t as any)('pub.body1')}</p>
+          <p style={{ marginBottom: '0.5em' }}>{(t as any)('pub.body2')}</p>
+          <p style={{ marginTop: '1.2em', marginBottom: '0.5em' }}>{(t as any)('pub.body3a')}<a href="https://room.institute" className="border-b border-stone-600 hover:border-stone-400 transition-colors">(room.institute)</a>{(t as any)('pub.body3b')}</p>
+          <p>{(t as any)('pub.body4')}</p>
         </div>
       </div>
 
@@ -226,7 +226,7 @@ export default function PublicationHome() {
               }`}
               style={{ fontFamily: 'Nunito, sans-serif' }}
             >
-              {c === 'all' ? 'All Listings' : c === 'featured' ? 'Featured' : c}
+              {c === 'all' ? (t as any)('pub.allListings') : c === 'featured' ? (t as any)('pub.featured') : c}
             </button>
           ))}
         </div>
@@ -251,7 +251,7 @@ export default function PublicationHome() {
         {!loading && filtered.length === 0 && (
           <div className="text-center py-20">
             <p className="text-stone-600 text-sm" style={{ fontFamily: 'Nunito, sans-serif' }}>
-              No listings in this market yet.
+              {(t as any)('pub.noListings')}
             </p>
           </div>
         )}
@@ -264,17 +264,17 @@ export default function PublicationHome() {
             className="text-2xl sm:text-3xl text-stone-100 mb-3"
             style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 400 }}
           >
-            List with Room Institute
+            {(t as any)('pub.listWith')}
           </h2>
           <p className="text-stone-500 text-sm mb-6 max-w-md mx-auto" style={{ fontFamily: 'Nunito, sans-serif' }}>
-            Give your buyers a reason to choose your listing. Design visualizations that sell.
+            {(t as any)('pub.listSub')}
           </p>
           <Link
             to="/agent/onboard"
             className="inline-block px-8 py-3 border border-emerald-600 text-emerald-400 hover:bg-emerald-600 hover:text-stone-950 text-xs uppercase tracking-widest transition-all"
             style={{ fontFamily: 'Nunito, sans-serif' }}
           >
-            Get Started — Free
+            {(t as any)('pub.getStarted')}
           </Link>
         </div>
       </div>
@@ -285,7 +285,7 @@ export default function PublicationHome() {
           <div className="flex items-center gap-3">
             <img src="/room-logo.png" alt="Room" style={{ height: 14 }} className="opacity-40" />
             <span className="text-stone-600 text-[10px] uppercase tracking-widest" style={{ fontFamily: 'Nunito, sans-serif' }}>
-              Design Intelligence for Exceptional Properties
+              {(t as any)('pub.tagline')}
             </span>
           </div>
           <Link
@@ -293,7 +293,7 @@ export default function PublicationHome() {
             className="text-stone-600 hover:text-stone-400 text-[10px] uppercase tracking-widest transition-colors"
             style={{ fontFamily: 'Nunito, sans-serif' }}
           >
-            Try Your Space
+            {(t as any)('pub.tryYourSpace')}
           </Link>
         </div>
       </footer>
