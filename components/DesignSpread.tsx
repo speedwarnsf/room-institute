@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 import { ArrowLeft, Loader2 } from 'lucide-react';
 import GlobalTypeset from './GlobalTypeset';
+import { getProductUrl } from '../services/affiliateLinks';
 import { track, trackTimeOnPage, trackVisibility } from '../services/tracking';
 import { useI18n } from '../i18n/I18nContext';
 import { LanguageSwitcher } from './LanguageSwitcher';
@@ -398,22 +399,7 @@ export default function DesignSpread({ design, listingAddress, roomLabel, onBack
             {design.products.map((p, i) => (
               <RevealSection key={i}>
                 <a
-                  href={(() => {
-                    // Brand-direct linking: design brands go to their own sites
-                    const BRAND_URLS: Record<string, string> = {
-                      'herman miller': 'hermanmiller.com', 'knoll': 'knoll.com', 'flos': 'usa.flos.com',
-                      'hay': 'hay.com', 'cb2': 'cb2.com', 'west elm': 'westelm.com', 'rh': 'rh.com',
-                      'restoration hardware': 'rh.com', 'article': 'article.com', 'dwr': 'dwr.com',
-                      'design within reach': 'dwr.com', 'vitra': 'vitra.com', 'terrain': 'shopterrain.com',
-                      'serena & lily': 'serenaandlily.com', 'pottery barn': 'potterybarn.com',
-                    };
-                    const brandKey = (p.brand || '').toLowerCase().trim();
-                    const brandDomain = BRAND_URLS[brandKey];
-                    const q = encodeURIComponent((p.brand ? p.brand + ' ' : '') + p.name);
-                    return brandDomain
-                      ? `https://www.${brandDomain}/search?q=${q}`
-                      : `https://www.google.com/search?q=${q}&tbm=shop`;
-                  })()}
+                  href={getProductUrl(p.search_query || p.name, p.brand, p.category)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block border border-stone-800 bg-stone-950 p-6 hover:border-stone-600 transition-colors group"
