@@ -242,6 +242,13 @@ export function createDesignAnalysisPrompt(context: PromptContext & { previousDe
   // Assign a unique rhetorical trope to each seed direction
   const tropes = selectTropes(3);
 
+  // Debug: log seed + trope pairings to browser console
+  console.log('%c[TropeEngine] Starting trope selection', 'color:#00ff00; font-weight:bold');
+  tropes.forEach((t, i) => {
+    console.log(`%c[TropeEngine] Seed ${i+1} "${seeds[i].principle.split('—')[0]?.trim()}" → "${t.name}"`, 'color:#00aaff');
+  });
+  console.log('%c[TropeEngine] Full prompt assembled — SYSTEM DIRECTIVES + compliance proof injected', 'color:#00ff00; font-weight:bold');
+
   // Build constraints section
   const hasFixedConstraints = structuralConstraints?.fixed && structuralConstraints.fixed.length > 0;
   const hasFlexibleConstraints = structuralConstraints?.flexible && structuralConstraints.flexible.length > 0;
@@ -270,21 +277,20 @@ export function createDesignAnalysisPrompt(context: PromptContext & { previousDe
     }
   }
 
-  return `You are a direct-response copywriter who happens to know interiors cold. You write like Drayton Bird and Dave Harland — every sentence has a job. If it doesn't sell the room, cut it.
+  return `SYSTEM DIRECTIVES (HIGHEST PRIORITY — YOU MUST OBEY THESE EXACTLY. THEY OVERRIDE EVERY OTHER RULE, FRAMEWORK, DIVERSITY RULE, WRITING RULE, NAMING RULE, OR INSTRUCTION THAT APPEARS ANYWHERE ELSE IN THIS PROMPT.)
 
-You describe what a room DOES to the person standing in it. Not what it "evokes." Not what it "channels." You write in concrete, physical, sensory language. Short sentences. Rhythm matters. A five-word sentence after a fifteen-word sentence hits harder than two ten-word sentences.
+You are an avant-garde interior designer. Your sole job is to escape generic outputs.
 
-FRAMEWORKS (use 2-3 per design, by exact name):
-- "Aesthetic Order" — proportion, rhythm, architectural integrity
-- "Human-Centric" — ergonomics, how the body moves through space
-- "Universal Design" — inclusive without feeling clinical
-- "Biophilic" — nature, organic forms, living materials, light
-- "Phenomenological" — multi-sensory experience, emotional resonance
+RHETORICAL CONSTRAINTS (non-negotiable — highest priority):
+You MUST reshape EVERY one of the 3 design directions by applying the exact rhetorical trope shown below with FULL STRUCTURAL FIDELITY. Explicitly translate its precise linguistic/rhetorical mechanics (not just the theme) into at least 5 distinct spatial, material, lighting, circulation, and narrative decisions. DO NOT simplify, dilute, reduce, ignore, cherry-pick, or resolve any trope to a generic or easier interpretation — preserve its full complexity and strangeness at every scale.
 
-NEVER mention designer names, style labels, or movement names. No "wabi-sabi," no "Scandinavian," no "Parisian salon."
+PRAGMATIC ANCHOR (equally non-negotiable and same priority):
+Every resulting design direction must be 100% buildable today with standard construction techniques and readily available materials. Satisfy real-world usability: clear circulation paths (ADA-compliant where relevant), ergonomic dimensions, functional lighting/HVAC, durable finishes, code-compliant safety, and genuine daily comfort. Map the trope onto decisions WHILE preserving or enhancing these invariants. Never sacrifice one for the other.
 
-ROOM CONTEXT:
-- Room type: ${roomType}${style ? `\n- USER-REQUESTED STYLE DIRECTION: "${style}" — All 3 design options should interpret this style in different ways. Do NOT just copy-paste the style name. Use it as a starting point and explore 3 genuinely different interpretations that all respect this aesthetic family. Include furniture and fixtures appropriate for a ${roomType}.` : ''}${constraintsSection}
+If you ignore, partially follow, or cherry-pick any SYSTEM DIRECTIVE or any rhetorical constraint, the entire output is invalid. You must regenerate from scratch until you comply perfectly.
+
+USER BRIEF & CONTEXT:
+Room type: ${roomType}${style ? `\n- USER-REQUESTED STYLE DIRECTION: "${style}" — All 3 design options should interpret this style in different ways. Do NOT just copy-paste the style name. Use it as a starting point and explore 3 genuinely different interpretations that all respect this aesthetic family. Include furniture and fixtures appropriate for a ${roomType}.` : ''}${constraintsSection}
 
 STEP 1 — ROOM READING
 Look at this ${roomType}. Say what works and what doesn't. Be specific — name the actual things you see, not feelings about them. 3-5 sentences total. No preamble.
@@ -308,9 +314,6 @@ STEP 2 — 3 DESIGN DIRECTIONS (each wrapped with its own non-negotiable rhetori
    You MUST reshape this entire design direction by applying the rhetorical trope "${tropes[2]?.name ?? 'Synecdoche'}": ${tropes[2]?.definition ?? 'A part representing the whole, or the whole representing a part.'}
    Apply with FULL STRUCTURAL FIDELITY: explicitly translate its precise linguistic/rhetorical mechanics (not just the theme) into at least 5 distinct spatial, material, lighting, circulation, and narrative decisions.
    DO NOT simplify, dilute, reduce, or resolve the trope to a generic, obvious, or easier interpretation — preserve its full complexity and strangeness at every scale.
-
-PRAGMATIC ANCHOR (equally non-negotiable and same priority):
-Every resulting design direction must be 100% buildable today with standard construction techniques and readily available materials. Satisfy real-world usability: clear circulation paths (ADA-compliant where relevant), ergonomic dimensions, functional lighting/HVAC, durable finishes, code-compliant safety, and genuine daily comfort. Map the trope onto decisions WHILE preserving or enhancing these invariants. Never sacrifice one for the other.
 
 DIVERSITY RULES (CRITICAL — THIS IS THE MOST IMPORTANT RULE):
 
@@ -360,7 +363,7 @@ PER OPTION: name (2-3 punchy words — see rules above), mood (2-3 sentences), f
 
 PRODUCT RECOMMENDATIONS (per option):
 - 5-8 SPECIFIC, REAL products. Actual names from actual manufacturers.
-- Range from accessible to aspirational — not everything needs to be $10K+. Mix price points.
+- Range from accessible to aspirational — mix price points realistically.
 - Each product: { name, brand, category (furniture|lighting|textiles|decor|rugs|hardware), price_range ("$X-Y"), description (one line — why it works HERE specifically), search_query (exact product + brand) }
 - Products live in the products array ONLY. They must NEVER appear in mood, full_plan, or key_changes text.
 
@@ -372,10 +375,21 @@ Each design's visualization_prompt MUST include:
 - Specific furniture placement and layout description
 - Material and finish specifications
 - Lighting and atmosphere details
-- The specific rug description from your design
-- MANDATORY: "Remove all logos, watermarks, and text overlays from the image. No brokerage branding."${hasFixedConstraints ? `\n- Explicit instruction to preserve fixed items: ${structuralConstraints?.fixed!.join(', ')}` : ''}
+- The specific rug description from your design${hasFixedConstraints ? `\n- Explicit instruction to preserve fixed items: ${structuralConstraints?.fixed!.join(', ')}` : ''}
 
-Return ONLY valid JSON: { "room_reading": "...", "options": [{name, mood, frameworks, palette, key_changes, full_plan, visualization_prompt, products}, ...] }`;
+OUTPUT FORMAT (exactly — no deviations allowed):
+Return ONLY valid JSON with this exact structure:
+{
+  "compliance": [
+    "Direction 1: I followed ${tropes[0]?.name ?? 'Metaphor'} with full fidelity by [list 3–5 specific spatial/material/lighting/circulation/narrative mappings I made]",
+    "Direction 2: I followed ${tropes[1]?.name ?? 'Antithesis'} with full fidelity by [list 3–5 specific spatial/material/lighting/circulation/narrative mappings I made]",
+    "Direction 3: I followed ${tropes[2]?.name ?? 'Synecdoche'} with full fidelity by [list 3–5 specific spatial/material/lighting/circulation/narrative mappings I made]"
+  ],
+  "room_reading": "...",
+  "options": [{name, mood, frameworks, palette, key_changes, full_plan, visualization_prompt, products}, ...]
+}
+
+If the "compliance" field does not contain 3 detailed entries proving at least 5 mappings per trope + pragmatic anchor adherence, the output is invalid — regenerate until it does.`;
 }
 
 /**
