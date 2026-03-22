@@ -555,7 +555,7 @@ export function ListingExperience() {
             {(t as any)('ad.roomDescription')}
           </p>
           <a
-            href="https://room.institute"
+            href="https://room.institute/design"
             onClick={() => track({ eventType: 'room_cta_clicked', listingId, metadata: { context: 'v2', source: 'listing_ad' } })}
             className="inline-block px-6 pt-[14px] pb-[12px] border border-emerald-600 text-emerald-400 hover:text-emerald-300 hover:border-emerald-500 text-xs tracking-widest uppercase transition-colors"
           >
