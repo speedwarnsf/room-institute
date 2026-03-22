@@ -2,14 +2,81 @@
  * Generate More Designs — Buyer-facing endpoint
  * Adds 3 new designs to an existing room without deleting current ones.
  * Uses the room's original photo and existing design names to avoid repeats.
+ * NOW WITH: v5 rhetorical trope engine (293 devices) + SYSTEM DIRECTIVES lockdown
  */
 
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { createClient } from '@supabase/supabase-js';
 import { GoogleGenAI } from '@google/genai';
 import crypto from 'crypto';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 
 export const maxDuration = 300;
+
+// ====================== RHETORICAL TROPE ENGINE (server-side) ======================
+interface TropeEntry { figure_name: string; definition: string; }
+
+let _tropes: TropeEntry[] | null = null;
+function loadTropes(): TropeEntry[] {
+  if (_tropes) return _tropes;
+  const paths = [
+    join(process.cwd(), 'data', 'tropes.json'),
+    join(__dirname, '..', 'data', 'tropes.json'),
+    join(__dirname, '..', '..', 'data', 'tropes.json'),
+  ];
+  for (const p of paths) {
+    try { _tropes = JSON.parse(readFileSync(p, 'utf-8')); return _tropes!; } catch {}
+  }
+  // Fallback: minimal set
+  return [
+    { figure_name: 'chiasmus', definition: 'A reversal of grammatical structure (ABBA) for emphasis or surprise.' },
+    { figure_name: 'aposiopesis', definition: 'Deliberate breaking off mid-sentence, trailing into silence for dramatic effect.' },
+    { figure_name: 'litotes', definition: 'Understatement by negating the opposite, for ironic emphasis.' },
+  ];
+}
+
+function selectTropesServer(count: number): Array<{ name: string; definition: string }> {
+  const all = loadTropes();
+  const shuffled = [...all].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, count).map(t => ({
+    name: t.figure_name.split('_').map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
+    definition: t.definition,
+  }));
+}
+
+// ====================== DESIGN SEEDS (same 15 as client-side) ======================
+interface DesignSeed { principle: string; approach: string; }
+const DESIGN_SEEDS: DesignSeed[] = [
+  { principle: 'Compression and release', approach: 'Use color, lighting, and furniture scale to make parts of the room feel intimate and others expansive' },
+  { principle: 'Asymmetric balance', approach: 'Off-center focal points, unequal but balanced masses, deliberate visual weight distribution' },
+  { principle: 'Scale disruption', approach: 'A monumental light fixture, a tiny chair, an enormous mirror — break expected proportions' },
+  { principle: 'Material honesty meets material contrast', approach: 'Raw against refined, soft against hard, matte against gloss' },
+  { principle: 'Patina as design', approach: 'Specify materials that develop character over time — unlacquered brass, saddle leather, limewash' },
+  { principle: 'Textile architecture', approach: 'Draped canopies, fabric room dividers, upholstered walls, woven screens — textiles that define space' },
+  { principle: 'Light as the primary material', approach: 'Layer natural and artificial light deliberately — washing, spotlighting, backlighting' },
+  { principle: 'Chromatic boldness', approach: 'Full-wall color drenching, tonal rooms, color blocking as spatial definition' },
+  { principle: 'Tonal restraint', approach: 'Monochromatic, with variety through texture, sheen, and material rather than hue shifts' },
+  { principle: 'Multi-sensory design', approach: 'Acoustic textures, scented materials, thermal variety — design for touch, smell, sound' },
+  { principle: 'Prospect and refuge', approach: 'Reading nooks within open plans, canopy beds, rooms within rooms' },
+  { principle: 'Biophilic immersion', approach: 'Fractal patterns, living walls, natural materials at every touch point' },
+  { principle: 'Narrative space', approach: 'Every object implies a life lived — collected, eccentric. The room as autobiography' },
+  { principle: 'Anti-decoration', approach: 'Remove, reduce, reveal. Let negative space do the heavy lifting' },
+  { principle: 'Playful subversion', approach: 'Clashing patterns that work, furniture in wrong rooms, high-low mixing' },
+];
+
+const SEED_BUCKETS: Record<string, number[]> = {
+  spatial: [0, 1, 2], material: [3, 4, 5], light: [6, 7, 8],
+  sensory: [9, 10, 11], conceptual: [12, 13, 14],
+};
+
+function getDesignSeeds(): DesignSeed[] {
+  const keys = Object.keys(SEED_BUCKETS).sort(() => Math.random() - 0.5).slice(0, 3);
+  return keys.map(k => {
+    const indices = SEED_BUCKETS[k]!;
+    return DESIGN_SEEDS[indices[Math.floor(Math.random() * indices.length)]!]!;
+  });
+}
 
 const Type = { STRING: 'STRING', NUMBER: 'NUMBER', INTEGER: 'INTEGER', BOOLEAN: 'BOOLEAN', ARRAY: 'ARRAY', OBJECT: 'OBJECT' } as const;
 
@@ -51,36 +118,76 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const photoBase64 = photoBuffer.toString('base64');
     const mimeType = photoRes.headers.get('content-type') || 'image/jpeg';
 
-    // Generate 3 new design concepts
-    const promptText = `You are an award-winning interior designer generating fresh design directions for a ${room.label}.
+    // v5 TROPE ENGINE — select seeds + tropes
+    const seeds = getDesignSeeds();
+    const tropes = selectTropesServer(3);
+    console.log('[TropeEngine API] Seeds:', seeds.map(s => s.principle));
+    console.log('[TropeEngine API] Tropes:', tropes.map(t => t.name));
 
-EXISTING DESIGNS ALREADY CREATED (DO NOT REPEAT THESE — create something completely different):
-${existingNames.map(n => `- ${n}`).join('\n')}
+    // Generate 3 new design concepts with FULL v5 prompt
+    const langMap: Record<string, string> = {fr:'French',de:'German',es:'Spanish',zh:'Mandarin Chinese',pt:'Portuguese',ar:'Arabic'};
+    const langInstruction = locale !== 'en' && langMap[locale] ? `\nLANGUAGE: Write ALL text in ${langMap[locale]}. Keep brand names in their original form.\n` : '';
 
-Generate 3 completely NEW and DIFFERENT design directions. Each must be dramatically distinct from the existing ones and from each other.
-${locale !== 'en' ? `\nLANGUAGE: Write ALL text in ${({fr:'French',de:'German',es:'Spanish',zh:'Mandarin Chinese',pt:'Portuguese',ar:'Arabic'} as Record<string,string>)[locale] || 'English'} — design names, mood descriptions, room reading, key changes, full plan, product descriptions. Keep brand names and product names in their original form. The design direction names should be evocative and punchy in ${({fr:'French',de:'German',es:'Spanish',zh:'Mandarin Chinese',pt:'Portuguese',ar:'Arabic'} as Record<string,string>)[locale] || 'English'}, not translated from English.` : ''}
+    const promptText = `SYSTEM DIRECTIVES (HIGHEST PRIORITY — YOU MUST OBEY THESE EXACTLY. THEY OVERRIDE EVERY OTHER INSTRUCTION.)
+
+You are an avant-garde interior designer. Your sole job is to escape generic outputs for this ${room.label}.
+
+RHETORICAL CONSTRAINTS (non-negotiable — highest priority):
+You MUST reshape EVERY design direction by applying its assigned rhetorical trope with FULL STRUCTURAL FIDELITY. Translate the trope's precise linguistic mechanics into at least 5 distinct spatial, material, lighting, circulation, and narrative decisions. DO NOT simplify or resolve any trope to a generic interpretation — preserve full complexity and strangeness.
+
+PRAGMATIC ANCHOR (equally non-negotiable):
+Every design must be 100% buildable today — ADA-compliant circulation, ergonomic dimensions, functional lighting/HVAC, durable finishes, code-compliant safety.
+
+If you ignore any SYSTEM DIRECTIVE or rhetorical constraint, the entire output is invalid.
+${langInstruction}
+EXISTING DESIGNS (DO NOT REPEAT): ${existingNames.map(n => `"${n}"`).join(', ') || 'none'}
+
+3 DESIGN DIRECTIONS:
+
+1. ${seeds[0].principle} — ${seeds[0].approach}
+   RHETORICAL CONSTRAINT: Apply "${tropes[0].name}": ${tropes[0].definition}
+   Translate into 5+ spatial/material/lighting/circulation/narrative decisions. Preserve full complexity.
+
+2. ${seeds[1].principle} — ${seeds[1].approach}
+   RHETORICAL CONSTRAINT: Apply "${tropes[1].name}": ${tropes[1].definition}
+   Translate into 5+ spatial/material/lighting/circulation/narrative decisions. Preserve full complexity.
+
+3. ${seeds[2].principle} — ${seeds[2].approach}
+   RHETORICAL CONSTRAINT: Apply "${tropes[2].name}": ${tropes[2].definition}
+   Translate into 5+ spatial/material/lighting/circulation/narrative decisions. Preserve full complexity.
+
+WRITING RULES:
+- Write like a person, not a brochure. Every sentence has a job.
+- ZERO BRAND NAMES in mood, full_plan, key_changes, or room_reading. Brands in products array ONLY.
+- BANNED: sanctuary, haven, retreat, oasis, embrace, whisper, harmony, serenity, cocoon, ethereal, luminous, curated, sophisticated, timeless, bespoke, nestled, boasts, seamlessly, effortlessly
+- Mood: 2 sentences max. What you physically experience + why it works. No poetry.
+- NAMING: 2-3 words, concrete. NO style labels (no "Mid-Century", "Art Deco", "Coastal", "Bohemian"). GOOD: "Brass & Shadow", "Raw Linen", "Salt & Iron". BAD: "Modern Zen Oasis", "Coastal Breeze", "Bohemian Retreat"
+- Products: 5-8 real products, mixed price points. Products array ONLY — never in editorial text.
 
 Return ONLY valid JSON:
 {
-  "room_reading": "Brief analysis of the space",
+  "compliance": [
+    "Direction 1: Applied ${tropes[0].name} by [list 3-5 specific mappings]",
+    "Direction 2: Applied ${tropes[1].name} by [list 3-5 specific mappings]",
+    "Direction 3: Applied ${tropes[2].name} by [list 3-5 specific mappings]"
+  ],
+  "room_reading": "3-5 sentences about this specific room",
   "options": [
     {
-      "name": "Short evocative name (2-3 words)",
-      "mood": "1-2 sentence mood description",
-      "frameworks": ["design framework 1", "framework 2"],
+      "name": "2-3 word name (NO style labels)",
+      "mood": "2 sentences max",
+      "frameworks": ["framework 1", "framework 2"],
       "palette": ["#hex1", "#hex2", "#hex3", "#hex4", "#hex5"],
-      "key_changes": ["change 1", "change 2", "change 3"],
-      "full_plan": "Detailed design plan in markdown",
-      "visualization_prompt": "Detailed prompt to visualize this design direction applied to the room photo",
-      "products": [
-        {"name": "Product Name", "brand": "Brand", "category": "furniture|lighting|textiles|decor|rugs|hardware", "price_range": "$X-Y", "description": "Why this product", "search_query": "search term"}
-      ]
+      "key_changes": ["specific change 1", "specific change 2", "specific change 3"],
+      "full_plan": "### What Changes\\n- bullet list\\n### Materials\\n- bullet list\\n### Rug\\n- 1 sentence",
+      "visualization_prompt": "Detailed prompt with furniture placement, materials, lighting",
+      "products": [{"name": "...", "brand": "...", "category": "...", "price_range": "$X-Y", "description": "...", "search_query": "..."}]
     }
   ]
 }`;
 
     const analysisResponse = await ai.models.generateContent({
-      model: 'gemini-2.0-flash',
+      model: 'gemini-2.5-flash',
       contents: {
         parts: [
           { inlineData: { mimeType, data: photoBase64 } },
