@@ -49,6 +49,7 @@ export async function getListingById(id: string): Promise<Listing | null> {
       label: roomRow.label,
       originalPhoto: roomRow.original_photo,
       thumbnail: roomRow.thumbnail || roomRow.original_photo,
+      designable: roomRow.designable !== false,
       designs: (designsData || [])
         .filter(d => d.room_id === roomRow.id)
         .map(designRow => {

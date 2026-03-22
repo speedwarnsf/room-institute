@@ -355,6 +355,7 @@ export interface ListingRoom {
   originalPhoto: string;
   thumbnail: string;
   designs: ListingDesign[];
+  designable?: boolean;
 }
 
 export interface ListingDesign {

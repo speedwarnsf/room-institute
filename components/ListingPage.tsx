@@ -186,27 +186,52 @@ export function ListingPage() {
           {t('listingPage.exploreDesigns')}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          {listing.rooms.map(room => (
-            <Link
-              key={room.id}
-              to={`/listing/${listing.id}/room/${room.id}`}
-              className="group block bg-stone-950 border border-stone-800 overflow-hidden hover:border-emerald-500 transition-colors"
-            >
-              <div className="aspect-[16/10] overflow-hidden">
-                <img
-                  src={room.thumbnail}
-                  alt={translateRoomLabel(room.label, t as (key: string) => string)}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div className="p-4">
-                <div className="text-stone-200 font-semibold mb-1">{translateRoomLabel(room.label, t as (key: string) => string)}</div>
-                <div className="text-emerald-500 text-xs">
-                  {room.designs.length} {room.designs.length === 1 ? t('listingPage.designDirection') : t('listingPage.designDirections')}
+          {listing.rooms.map(room => {
+            const isDesignable = room.designable !== false;
+
+            if (isDesignable) {
+              return (
+                <Link
+                  key={room.id}
+                  to={`/listing/${listing.id}/room/${room.id}`}
+                  className="group block bg-stone-950 border border-stone-800 overflow-hidden hover:border-emerald-500 transition-colors"
+                >
+                  <div className="aspect-[16/10] overflow-hidden">
+                    <img
+                      src={room.thumbnail}
+                      alt={translateRoomLabel(room.label, t as (key: string) => string)}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <div className="text-stone-200 font-semibold mb-1">{translateRoomLabel(room.label, t as (key: string) => string)}</div>
+                    <div className="text-emerald-500 text-xs">
+                      {room.designs.length} {room.designs.length === 1 ? t('listingPage.designDirection') : t('listingPage.designDirections')}
+                    </div>
+                  </div>
+                </Link>
+              );
+            }
+
+            // Non-designable: photo only, no link, no design count
+            return (
+              <div
+                key={room.id}
+                className="bg-stone-950 border border-stone-800 overflow-hidden"
+              >
+                <div className="aspect-[16/10] overflow-hidden">
+                  <img
+                    src={room.thumbnail}
+                    alt={translateRoomLabel(room.label, t as (key: string) => string)}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-4">
+                  <div className="text-stone-200 font-semibold mb-1">{translateRoomLabel(room.label, t as (key: string) => string)}</div>
                 </div>
               </div>
-            </Link>
-          ))}
+            );
+          })}
         </div>
       </div>
 

@@ -47,6 +47,33 @@ function RoomLane({
     setActiveIndex(idx);
   }, [allImages.length]);
 
+  const isDesignable = room.designable !== false;
+
+  // Non-designable room: just show the photo, no carousel, no generate
+  if (!isDesignable) {
+    return (
+      <div className="mb-1">
+        <div className="px-5 py-3">
+          <h3 className="text-stone-300 text-sm" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
+            {translateRoomLabel(room.label, t as (key: string) => string)}
+          </h3>
+        </div>
+        <div className="px-5 pb-2">
+          <div style={{ width: 'calc(85vw)', maxWidth: '520px' }}>
+            <div className="aspect-[16/10] overflow-hidden bg-stone-800">
+              <img
+                src={room.originalPhoto}
+                alt={translateRoomLabel(room.label, t as (key: string) => string)}
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="mb-1">
       {/* Room label */}
