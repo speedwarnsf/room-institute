@@ -12,6 +12,7 @@ import { motion } from 'framer-motion';
 import { supabase } from '../services/auth';
 import { useI18n } from '../i18n/I18nContext';
 import { LanguageSwitcher } from './LanguageSwitcher';
+import GlobalTypeset from './GlobalTypeset';
 
 interface PublicationListing {
   id: string;
@@ -189,16 +190,19 @@ export default function PublicationHome() {
       </header>
 
       {/* Hero text */}
+      <GlobalTypeset />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-12 pb-8">
         <h1
-          className="text-4xl sm:text-5xl lg:text-6xl text-stone-100 leading-[1.1] mb-4"
+          className="text-3xl sm:text-4xl lg:text-5xl text-stone-100 leading-[1.15] mb-6"
           style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 400 }}
         >
-          See the future of<br />every room
+          Every room tells more than one story.
         </h1>
-        <p className="text-stone-500 text-base sm:text-lg max-w-xl" style={{ fontFamily: 'Nunito, sans-serif', fontWeight: 300 }}>
-          AI-generated design directions for the world's finest properties.
-          Tap any listing to explore what's possible.
+        <p className="text-stone-400 text-sm sm:text-base max-w-lg leading-relaxed" style={{ fontFamily: 'Nunito, sans-serif', fontWeight: 300, lineHeight: '1.8' }}>
+          What we{'\u2019'}re shown is never the whole of it. Staging suggests a point of view, a way to move through space. But the architecture holds other intentions. The light shifts. The room waits.
+        </p>
+        <p className="text-stone-400 text-sm sm:text-base max-w-lg mt-4 leading-relaxed" style={{ fontFamily: 'Nunito, sans-serif', fontWeight: 300, lineHeight: '1.8' }}>
+          Room <a href="https://room.institute" className="border-b border-stone-600 hover:border-stone-400 transition-colors">(room.institute)</a> reads what{'\u2019'}s already there{'\u2014'}and reveals what else might be. Because a home is not defined by what it is, but by what it allows.
         </p>
       </div>
 
