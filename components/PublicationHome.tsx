@@ -177,33 +177,31 @@ export default function PublicationHome() {
           <div className="flex items-center gap-4">
             <img src="/room-logo.png" alt="Room" style={{ height: 22 }} className="opacity-90" />
           </div>
-          <div className="flex items-center gap-4">
-            <LanguageSwitcher />
-            <Link
-              to="/design"
-              className="hidden sm:block text-[11px] uppercase tracking-widest text-stone-500 hover:text-emerald-400 transition-colors"
-              style={{ fontFamily: 'Nunito, sans-serif' }}
-            >
-              {(t as any)('pub.designYourSpace')}
-            </Link>
-          </div>
+          <LanguageSwitcher />
         </div>
       </header>
 
+      {/* Welcome */}
+      <GlobalTypeset />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-10 pb-6">
+        <p className="text-stone-400 text-sm sm:text-base max-w-2xl leading-relaxed" data-no-typeset style={{ fontFamily: 'Nunito, sans-serif', fontWeight: 300, lineHeight: '1.8' }}>
+          Welcome to our private collection of the world{'\u2019'}s most exceptional available properties, each room can be instantly restaged by visitors using our rhetorical design engine. Users can dive deeper into exclusive editorial content generated for their designed spaces. Realtor access is by introduction{'\u00A0'}only.
+        </p>
+      </div>
+
       {/* Before/After Comparison */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-6">
         <ComparisonHero />
       </div>
 
-      {/* Hero text */}
-      <GlobalTypeset />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-10 pb-8">
-        <h1
+      {/* Editorial copy */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-6 pb-8">
+        <h2
           className="text-3xl sm:text-4xl lg:text-5xl text-stone-100 leading-[1.15] mb-6"
           style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 400 }}
         >
           {(t as any)('pub.hero')}
-        </h1>
+        </h2>
         <div className="text-stone-400 text-sm sm:text-base max-w-lg leading-relaxed" data-no-typeset style={{ fontFamily: 'Nunito, sans-serif', fontWeight: 300, lineHeight: '1.8' }}>
           <p style={{ marginBottom: '0.5em' }}>{(t as any)('pub.body1')}</p>
           <p style={{ marginBottom: '0.5em' }}>{(t as any)('pub.body2')}</p>
@@ -257,44 +255,10 @@ export default function PublicationHome() {
         )}
       </div>
 
-      {/* CTA for agents */}
-      <div className="border-t border-stone-800/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 text-center">
-          <h2
-            className="text-2xl sm:text-3xl text-stone-100 mb-3"
-            style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 400 }}
-          >
-            {(t as any)('pub.listWith')}
-          </h2>
-          <p className="text-stone-500 text-sm mb-6 max-w-md mx-auto" style={{ fontFamily: 'Nunito, sans-serif' }}>
-            {(t as any)('pub.listSub')}
-          </p>
-          <Link
-            to="/agent/onboard"
-            className="inline-block px-8 py-3 border border-emerald-600 text-emerald-400 hover:bg-emerald-600 hover:text-stone-950 text-xs uppercase tracking-widest transition-all"
-            style={{ fontFamily: 'Nunito, sans-serif' }}
-          >
-            {(t as any)('pub.getStarted')}
-          </Link>
-        </div>
-      </div>
-
       {/* Footer */}
-      <footer className="border-t border-stone-800/50 py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <img src="/room-logo.png" alt="Room" style={{ height: 14 }} className="opacity-40" />
-            <span className="text-stone-600 text-[10px] uppercase tracking-widest" style={{ fontFamily: 'Nunito, sans-serif' }}>
-              {(t as any)('pub.tagline')}
-            </span>
-          </div>
-          <Link
-            to="/design"
-            className="text-stone-600 hover:text-stone-400 text-[10px] uppercase tracking-widest transition-colors"
-            style={{ fontFamily: 'Nunito, sans-serif' }}
-          >
-            {(t as any)('pub.tryYourSpace')}
-          </Link>
+      <footer className="border-t border-stone-800/50 py-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
+          <img src="/room-logo.png" alt="Room" style={{ height: 16 }} className="opacity-30 mx-auto" />
         </div>
       </footer>
 
