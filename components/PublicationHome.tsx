@@ -184,11 +184,9 @@ export default function PublicationHome() {
       {/* Welcome */}
       <GlobalTypeset />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-10 pb-6">
-        <div className="text-stone-400 text-sm sm:text-base max-w-2xl leading-relaxed" data-no-typeset style={{ fontFamily: 'Nunito, sans-serif', fontWeight: 300, lineHeight: '1.8' }}>
-          <p style={{ marginBottom: '0.8em' }}>A private collection of the world{'\u2019'}s most exceptional{'\u00A0'}properties.</p>
-          <p style={{ marginBottom: '0.8em' }}>Rooms are instantly reinterpreted through our design engine{'\u2014'}revealing new possibilities. Beyond each render, a deeper layer of editorial emerges, shaped by what you{'\u00A0'}see.</p>
-          <p>Realtor access is by introduction{'\u00A0'}only.</p>
-        </div>
+        <p className="text-stone-400 text-sm sm:text-base max-w-2xl leading-relaxed" data-no-typeset style={{ fontFamily: 'Nunito, sans-serif', fontWeight: 300, lineHeight: '1.8' }}>
+          A private collection of the world{'\u2019'}s most exceptional properties. Every room can be reimagined{'\u00A0'}{'\u2014'} tap any listing to see what{'\u2019'}s{'\u00A0'}possible.
+        </p>
       </div>
 
       {/* Before/After Comparison */}
@@ -260,7 +258,10 @@ export default function PublicationHome() {
       {/* Footer */}
       <footer className="border-t border-stone-800/50 py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
-          <img src="/room-logo.png" alt="Room" style={{ height: 16 }} className="opacity-30 mx-auto" />
+          <img src="/room-logo.png" alt="Room" style={{ height: 16 }} className="opacity-30 mx-auto mb-4" />
+          <p className="text-stone-700 text-[10px] tracking-wider" style={{ fontFamily: 'Nunito, sans-serif' }}>
+            Realtor access is by introduction only
+          </p>
         </div>
       </footer>
 
