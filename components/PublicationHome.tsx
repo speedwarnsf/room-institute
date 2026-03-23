@@ -184,9 +184,11 @@ export default function PublicationHome() {
       {/* Welcome */}
       <GlobalTypeset />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-10 pb-6">
-        <p className="text-stone-400 text-sm sm:text-base max-w-2xl leading-relaxed" data-no-typeset style={{ fontFamily: 'Nunito, sans-serif', fontWeight: 300, lineHeight: '1.8' }}>
-          Welcome to our private collection of the world{'\u2019'}s most exceptional available properties, each room can be instantly restaged by visitors using our rhetorical design engine. Users can dive deeper into exclusive editorial content generated for their designed spaces. Realtor access is by introduction{'\u00A0'}only.
-        </p>
+        <div className="text-stone-400 text-sm sm:text-base max-w-2xl leading-relaxed" data-no-typeset style={{ fontFamily: 'Nunito, sans-serif', fontWeight: 300, lineHeight: '1.8' }}>
+          <p style={{ marginBottom: '0.8em' }}>A private collection of the world{'\u2019'}s most exceptional{'\u00A0'}properties.</p>
+          <p style={{ marginBottom: '0.8em' }}>Rooms are instantly reinterpreted through our design engine{'\u2014'}revealing new possibilities. Beyond each render, a deeper layer of editorial emerges, shaped by what you{'\u00A0'}see.</p>
+          <p>Realtor access is by introduction{'\u00A0'}only.</p>
+        </div>
       </div>
 
       {/* Before/After Comparison */}
