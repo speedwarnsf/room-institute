@@ -207,7 +207,7 @@ export default function PublicationHome() {
         <div className="text-stone-400 text-sm sm:text-base max-w-lg leading-relaxed" data-no-typeset style={{ fontFamily: 'Nunito, sans-serif', fontWeight: 300, lineHeight: '1.8' }}>
           <p style={{ marginBottom: '0.5em' }}>{(t as any)('pub.body1')}</p>
           <p style={{ marginBottom: '0.5em' }}>{(t as any)('pub.body2')}</p>
-          <p style={{ marginTop: '1.2em', marginBottom: '0.5em' }}>{(t as any)('pub.body3a')}<a href="https://room.institute" className="border-b border-stone-600 hover:border-stone-400 transition-colors">(room.institute)</a>{(t as any)('pub.body3b')}</p>
+          <p style={{ marginTop: '1.2em', marginBottom: '0.5em' }}>{(t as any)('pub.body3a')}<a href="https://room.institute" className="italic hover:text-stone-300 transition-colors" style={{ textDecoration: 'none' }}>(room.institute)</a>{(t as any)('pub.body3b')}</p>
           <p>{(t as any)('pub.body4')}</p>
         </div>
       </div>
