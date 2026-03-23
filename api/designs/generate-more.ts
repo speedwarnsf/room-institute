@@ -307,8 +307,14 @@ FINAL CHECK: Same room shell, same windows, same doors, same camera angle — re
         const extension = imageMime.includes('jpeg') || imageMime.includes('jpg') ? 'jpg' : 'png';
         const fileName = `${listingId}/${roomId}/${designId}.${extension}`;
 
-        // Upload to storage
-        const imageBuffer = Buffer.from(imageBase64, 'base64');
+        // Apply watermark before upload
+        const { applyWatermark } = await import('../../services/watermark');
+        let imageBuffer = Buffer.from(imageBase64, 'base64');
+        try {
+          imageBuffer = await applyWatermark(imageBuffer, imageMime);
+        } catch (wmErr) {
+          console.error('Watermark failed, uploading without:', wmErr);
+        }
         const { error: uploadErr } = await supabase.storage
           .from('listing-designs')
           .upload(fileName, imageBuffer, { contentType: imageMime, upsert: true });

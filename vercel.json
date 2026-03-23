@@ -7,7 +7,7 @@
     "api/designs/generate-more.ts": {
       "maxDuration": 300,
       "memory": 1024,
-      "includeFiles": "data/**"
+      "includeFiles": "data/**,public/room-logo.png,public/room-logo-dark.png,services/watermark.ts"
     },
     "api/listings/intake.ts": {
       "maxDuration": 300,
