@@ -116,14 +116,19 @@ function RoomLane({
 
               {/* Label overlay — INSIDE the image container */}
               {img.type === 'original' ? null : (
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-stone-900/90 to-transparent p-4">
-                  <p className="text-stone-100 text-sm font-bold" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
-                    {img.label}
-                  </p>
-                  <p className="text-emerald-500 text-xs mt-0.5 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                    {t('listing.goDeeper')} <ArrowRight className="w-3 h-3" />
-                  </p>
-                </div>
+                <>
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-stone-900/90 to-transparent p-4">
+                    <p className="text-stone-100 text-sm font-bold" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
+                      {img.label}
+                    </p>
+                    <p className="text-emerald-500 text-xs mt-0.5 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                      {t('listing.goDeeper')} <ArrowRight className="w-3 h-3" />
+                    </p>
+                  </div>
+                  {/* Watermark */}
+                  <span className="absolute select-none pointer-events-none text-white/70 font-bold" style={{ bottom: 8, right: 10, fontFamily: 'Helvetica,Arial,sans-serif', fontSize: '11px', letterSpacing: '1px', textShadow: '0 1px 2px rgba(0,0,0,0.6)' }}>room</span>
+                  <span className="absolute select-none pointer-events-none" style={{ bottom: 8, left: 10, background: 'rgba(0,0,0,0.7)', color: 'rgba(255,255,255,0.85)', fontFamily: 'Helvetica,Arial,sans-serif', fontSize: '7px', letterSpacing: '0.3px', padding: '2px 6px' }}>room.institute — AI visualization</span>
+                </>
               )}
             </div>
           </div>
@@ -254,6 +259,9 @@ function DesignOverlay({
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-transparent to-transparent" />
+          {/* Watermark */}
+          <span className="absolute select-none pointer-events-none text-white/70 font-bold" style={{ bottom: 80, right: 20, fontFamily: 'Helvetica,Arial,sans-serif', fontSize: '14px', letterSpacing: '1px', textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}>room</span>
+          <span className="absolute select-none pointer-events-none" style={{ bottom: 80, left: 20, background: 'rgba(0,0,0,0.7)', color: 'rgba(255,255,255,0.85)', fontFamily: 'Helvetica,Arial,sans-serif', fontSize: '8px', letterSpacing: '0.3px', padding: '3px 7px' }}>room.institute — AI visualization</span>
         </div>
 
         {/* Info bar */}

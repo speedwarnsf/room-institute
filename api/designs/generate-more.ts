@@ -307,16 +307,8 @@ FINAL CHECK: Same room shell, same windows, same doors, same camera angle — re
         const extension = imageMime.includes('jpeg') || imageMime.includes('jpg') ? 'jpg' : 'png';
         const fileName = `${listingId}/${roomId}/${designId}.${extension}`;
 
-        const rawBuffer = Buffer.from(imageBase64, 'base64');
-        // Watermark is MANDATORY — no watermark, no upload
-        let imageBuffer: Buffer;
-        try {
-          const wm = await import('../../services/watermark');
-          imageBuffer = await wm.applyWatermark(rawBuffer);
-        } catch (wmErr: any) {
-          console.error(`WATERMARK FAILED for ${option.name}:`, wmErr?.message || String(wmErr));
-          continue; // Do not upload without watermark
-        }
+        // Upload raw image — watermark applied client-side (Canvas API, like Nudio)
+        const imageBuffer = Buffer.from(imageBase64, 'base64');
         const { error: uploadErr } = await supabase.storage
           .from('listing-designs')
           .upload(fileName, imageBuffer, { contentType: imageMime, upsert: true });

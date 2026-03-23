@@ -210,12 +210,15 @@ export function RoomPage() {
               <TrackedDesignCard key={design.id} designId={design.id} listingId={listingId} roomId={roomId}>
               <div className="bg-stone-950 border border-stone-800">
                 {/* Design Image */}
-                <div className="p-2">
+                <div className="p-2 relative">
                   <img
                     src={design.imageUrl}
                     alt={design.name}
                     className="w-full h-auto"
                   />
+                  {/* Watermark */}
+                  <span className="absolute select-none pointer-events-none text-white/70 font-bold" style={{ bottom: 16, right: 16, fontFamily: 'Helvetica,Arial,sans-serif', fontSize: '13px', letterSpacing: '1px', textShadow: '0 1px 3px rgba(0,0,0,0.5)' }}>room</span>
+                  <span className="absolute select-none pointer-events-none" style={{ bottom: 16, left: 16, background: 'rgba(0,0,0,0.7)', color: 'rgba(255,255,255,0.85)', fontFamily: 'Helvetica,Arial,sans-serif', fontSize: '8px', letterSpacing: '0.3px', padding: '3px 7px' }}>room.institute — AI visualization</span>
                 </div>
 
                 {/* Design Content */}
