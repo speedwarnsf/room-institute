@@ -591,23 +591,23 @@ export function AdminDashboard() {
 
       {/* Header */}
       <header className="border-b border-stone-800">
-        <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <a href="https://room.institute" className="hover:opacity-80 transition-opacity">
-              <img src="/room-logo.png" alt="Room" style={{ height: 22 }} />
-            </a>
-            <h1 className="text-2xl font-bold text-stone-100" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
-              Command Center
-            </h1>
-            <p className="text-stone-500 text-xs mt-1">Platform intelligence and market operations</p>
-          </div>
-          <div className="flex items-center gap-3">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-5">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <a href="https://room.institute" className="hover:opacity-80 transition-opacity">
+                <img src="/room-logo.png" alt="Room" style={{ height: 20 }} />
+              </a>
+              <h1 className="text-lg sm:text-2xl font-bold text-stone-100" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
+                Command Center
+              </h1>
+            </div>
             <button
               onClick={() => setActiveTab('pitches')}
-              className="flex items-center gap-2 px-4 py-2 bg-emerald-500 text-stone-900 font-bold text-sm hover:bg-emerald-400 transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 bg-emerald-500 text-stone-900 font-bold text-xs sm:text-sm hover:bg-emerald-400 transition-colors flex-shrink-0"
             >
-              <FileText className="w-4 h-4" />
-              New Pitch
+              <FileText className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">New Pitch</span>
+              <span className="sm:hidden">Pitch</span>
             </button>
           </div>
         </div>
@@ -615,8 +615,8 @@ export function AdminDashboard() {
 
       {/* Quick Access — all four interfaces */}
       <div className="border-b border-stone-800 bg-stone-900/50">
-        <div className="max-w-7xl mx-auto px-6 py-3 flex items-center gap-2 overflow-x-auto">
-          <span className="text-stone-600 text-[10px] uppercase tracking-widest mr-2 flex-shrink-0">Jump to</span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 sm:py-3 flex items-center gap-1.5 sm:gap-2 overflow-x-auto scrollbar-hide" style={{ WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none' }}>
+          <span className="text-stone-600 text-[9px] sm:text-[10px] uppercase tracking-widest mr-1 sm:mr-2 flex-shrink-0">Jump to</span>
           <Link
             to="/for/agencies"
             className="flex items-center gap-1.5 px-3 py-1.5 bg-stone-800 hover:bg-stone-700 text-stone-300 text-xs transition-colors flex-shrink-0"
@@ -668,32 +668,32 @@ export function AdminDashboard() {
 
       {/* Tabs */}
       <nav className="border-b border-stone-800">
-        <div className="max-w-7xl mx-auto px-6 flex gap-0">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex gap-0 overflow-x-auto scrollbar-hide" style={{ WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none' }}>
           {[
             { id: 'overview' as const, label: 'Overview', icon: BarChart3 },
             { id: 'publication' as const, label: 'Publication', icon: Layers },
-            { id: 'events' as const, label: 'Event Stream', icon: Eye },
-            { id: 'designs' as const, label: 'Design Intel', icon: Layers },
-            { id: 'pitches' as const, label: 'Pitch Portfolios', icon: FileText },
+            { id: 'events' as const, label: 'Events', icon: Eye },
+            { id: 'designs' as const, label: 'Designs', icon: Layers },
+            { id: 'pitches' as const, label: 'Pitches', icon: FileText },
             { id: 'strategy' as const, label: 'Strategy', icon: TrendingUp },
           ].map(tab => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 px-5 py-3 text-sm font-medium border-b-2 transition-colors ${
+              className={`flex items-center gap-1.5 px-3 sm:px-5 py-3 text-xs sm:text-sm font-medium border-b-2 transition-colors whitespace-nowrap flex-shrink-0 ${
                 activeTab === tab.id
                   ? 'border-emerald-500 text-emerald-500'
                   : 'border-transparent text-stone-500 hover:text-stone-300'
               }`}
             >
-              <tab.icon className="w-4 h-4" />
+              <tab.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               {tab.label}
             </button>
           ))}
         </div>
       </nav>
 
-      <main className="max-w-7xl mx-auto px-6 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
 
         {/* ── Overview ── */}
         {activeTab === 'overview' && (
@@ -710,7 +710,7 @@ export function AdminDashboard() {
                   <div className="flex items-center justify-between mb-3">
                     <stat.icon className="w-5 h-5 text-stone-600" />
                   </div>
-                  <div className="text-3xl font-bold text-stone-100" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                  <div className="text-2xl sm:text-3xl font-bold text-stone-100" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                     {stat.value}
                   </div>
                   <div className="text-xs text-stone-500 uppercase tracking-wide mt-1">{stat.label}</div>
@@ -722,21 +722,21 @@ export function AdminDashboard() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="border border-stone-800 bg-stone-900 p-5">
                 <div className="text-xs text-stone-500 uppercase tracking-wide mb-2">Go Deeper Rate</div>
-                <div className="text-4xl font-bold text-emerald-500" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                <div className="text-2xl sm:text-4xl font-bold text-emerald-500" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                   {goDeepRate}%
                 </div>
                 <div className="text-xs text-stone-600 mt-1">of page views led to a deep dive</div>
               </div>
               <div className="border border-stone-800 bg-stone-900 p-5">
                 <div className="text-xs text-stone-500 uppercase tracking-wide mb-2">Avg Time on Page</div>
-                <div className="text-4xl font-bold text-emerald-500" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                <div className="text-2xl sm:text-4xl font-bold text-emerald-500" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                   {avgTimeMs > 0 ? `${Math.round(avgTimeMs / 1000)}s` : '--'}
                 </div>
                 <div className="text-xs text-stone-600 mt-1">across all listing and room pages</div>
               </div>
               <div className="border border-stone-800 bg-stone-900 p-5">
                 <div className="text-xs text-stone-500 uppercase tracking-wide mb-2">Partner CTA Clicks</div>
-                <div className="text-4xl font-bold text-emerald-500" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                <div className="text-2xl sm:text-4xl font-bold text-emerald-500" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                   {partnerClicks}
                 </div>
                 <div className="text-xs text-stone-600 mt-1">clicked through to design partner</div>
