@@ -311,13 +311,11 @@ FINAL CHECK: Same room shell, same windows, same doors, same camera angle — re
         // Watermark is MANDATORY — no watermark, no upload
         let imageBuffer: Buffer;
         try {
-          const { applyWatermark } = await import('../../services/watermark');
-          imageBuffer = await applyWatermark(rawBuffer);
-          console.log(`Watermark applied to ${option.name}`);
+          const wm = await import('../../services/watermark');
+          imageBuffer = await wm.applyWatermark(rawBuffer);
         } catch (wmErr: any) {
-          console.error(`WATERMARK FAILED for ${option.name}:`, wmErr?.message || wmErr);
-          // Skip this design entirely — do not upload without watermark
-          continue;
+          console.error(`WATERMARK FAILED for ${option.name}:`, wmErr?.message || String(wmErr));
+          continue; // Do not upload without watermark
         }
         const { error: uploadErr } = await supabase.storage
           .from('listing-designs')

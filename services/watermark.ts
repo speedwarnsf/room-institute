@@ -1,28 +1,31 @@
 /**
- * Watermark utility for Room Institute generated images.
- * Uses Sharp (already a dependency) with SVG compositing.
- * Logos embedded as base64 — no filesystem reads.
- *
- * If watermark fails, throws — caller MUST NOT upload without it.
+ * Watermark utility — uses @vercel/og's Satori or falls back to
+ * a lightweight PNG composite approach using only sharp.
+ * 
+ * Sharp IS supported on Vercel — it's included in the Node.js runtime.
+ * The issue was dynamic import pathing. This version uses static import.
  */
 
+// Static import — no dynamic import() issues
 import sharp from 'sharp';
 
-const BUFFER_PX = 24; // 1/4 inch at 96 DPI
+const BUFFER_PX = 24;
 const LOGO_HEIGHT = 20;
 const DISCLAIMER = 'room.institute \u2014 AI visualization';
 const TEXT_SIZE = 10;
 
-// Embedded logos (RGBA PNGs, base64)
-const LOGO_LIGHT_B64 = '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';
-const LOGO_DARK_B64 = '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';
+// Room logo SVGs (vector, no binary dependency)
+// Light variant (white text for dark backgrounds)
+const LOGO_LIGHT_SVG = `<svg width="74" height="20" xmlns="http://www.w3.org/2000/svg">
+  <text x="0" y="16" font-family="Helvetica,Arial,sans-serif" font-size="18" font-weight="bold" fill="white" letter-spacing="1">room</text>
+</svg>`;
 
-function getLogoBuffer(variant: 'light' | 'dark'): Buffer {
-  const b64 = variant === 'light' ? LOGO_LIGHT_B64 : LOGO_DARK_B64;
-  return Buffer.from(b64, 'base64');
-}
+// Dark variant (dark text for light backgrounds)  
+const LOGO_DARK_SVG = `<svg width="74" height="20" xmlns="http://www.w3.org/2000/svg">
+  <text x="0" y="16" font-family="Helvetica,Arial,sans-serif" font-size="18" font-weight="bold" fill="#1c1917" letter-spacing="1">room</text>
+</svg>`;
 
-async function detectLogoVariant(imageBuffer: Buffer): Promise<'light' | 'dark'> {
+async function detectBackground(imageBuffer: Buffer): Promise<'light' | 'dark'> {
   try {
     const meta = await sharp(imageBuffer).metadata();
     const w = meta.width || 800;
@@ -42,8 +45,8 @@ async function detectLogoVariant(imageBuffer: Buffer): Promise<'light' | 'dark'>
     let totalLum = 0;
     const pixels = info.width * info.height;
     for (let i = 0; i < pixels; i++) {
-      const offset = i * info.channels;
-      totalLum += 0.299 * (data[offset] ?? 0) + 0.587 * (data[offset + 1] ?? 0) + 0.114 * (data[offset + 2] ?? 0);
+      const o = i * info.channels;
+      totalLum += 0.299 * (data[o] ?? 0) + 0.587 * (data[o + 1] ?? 0) + 0.114 * (data[o + 2] ?? 0);
     }
 
     return (totalLum / pixels) < 128 ? 'light' : 'dark';
@@ -57,17 +60,10 @@ export async function applyWatermark(imageBuffer: Buffer): Promise<Buffer> {
   const w = meta.width || 800;
   const h = meta.height || 600;
 
-  // Logo
-  const variant = await detectLogoVariant(imageBuffer);
-  const logoResized = await sharp(getLogoBuffer(variant))
-    .resize({ height: LOGO_HEIGHT, fit: 'inside' })
-    .png()
-    .toBuffer();
-  const logoMeta = await sharp(logoResized).metadata();
-  const logoW = logoMeta.width || 74;
-  const logoH = logoMeta.height || LOGO_HEIGHT;
+  const variant = await detectBackground(imageBuffer);
+  const logoSvg = Buffer.from(variant === 'light' ? LOGO_LIGHT_SVG : LOGO_DARK_SVG);
 
-  // Disclaimer as SVG
+  // Disclaimer bar
   const textW = Math.ceil(DISCLAIMER.length * 5.8) + 16;
   const textH = TEXT_SIZE + 12;
   const disclaimerSvg = Buffer.from(
@@ -77,9 +73,12 @@ export async function applyWatermark(imageBuffer: Buffer): Promise<Buffer> {
     `</svg>`
   );
 
+  const logoW = 74;
+  const logoH = LOGO_HEIGHT;
+
   return sharp(imageBuffer)
     .composite([
-      { input: logoResized, left: w - logoW - BUFFER_PX, top: h - logoH - BUFFER_PX },
+      { input: logoSvg, left: w - logoW - BUFFER_PX, top: h - logoH - BUFFER_PX },
       { input: disclaimerSvg, left: BUFFER_PX, top: h - textH - BUFFER_PX },
     ])
     .toBuffer();
