@@ -307,13 +307,17 @@ FINAL CHECK: Same room shell, same windows, same doors, same camera angle — re
         const extension = imageMime.includes('jpeg') || imageMime.includes('jpg') ? 'jpg' : 'png';
         const fileName = `${listingId}/${roomId}/${designId}.${extension}`;
 
-        // Apply watermark before upload
-        const { applyWatermark } = await import('../../services/watermark');
-        let imageBuffer = Buffer.from(imageBase64, 'base64');
+        const rawBuffer = Buffer.from(imageBase64, 'base64');
+        // Watermark is MANDATORY — no watermark, no upload
+        let imageBuffer: Buffer;
         try {
-          imageBuffer = await applyWatermark(imageBuffer, imageMime);
-        } catch (wmErr) {
-          console.error('Watermark failed, uploading without:', wmErr);
+          const { applyWatermark } = await import('../../services/watermark');
+          imageBuffer = await applyWatermark(rawBuffer);
+          console.log(`Watermark applied to ${option.name}`);
+        } catch (wmErr: any) {
+          console.error(`WATERMARK FAILED for ${option.name}:`, wmErr?.message || wmErr);
+          // Skip this design entirely — do not upload without watermark
+          continue;
         }
         const { error: uploadErr } = await supabase.storage
           .from('listing-designs')
