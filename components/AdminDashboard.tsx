@@ -639,7 +639,6 @@ export function AdminDashboard() {
             Agent Dashboard
           </Link>
           {sampleListingId && (
-            <>
               <Link
                 to={`/listing/${sampleListingId}`}
                 className="flex items-center gap-1.5 px-3 py-1.5 bg-stone-800 hover:bg-stone-700 text-stone-300 text-xs transition-colors flex-shrink-0"
@@ -647,14 +646,6 @@ export function AdminDashboard() {
                 <Home className="w-3 h-3" />
                 Buyer Experience
               </Link>
-              <Link
-                to={`/listing/${sampleListingId}/classic`}
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-stone-800 hover:bg-stone-700 text-stone-300 text-xs transition-colors flex-shrink-0"
-              >
-                <Home className="w-3 h-3" />
-                Buyer Classic
-              </Link>
-            </>
           )}
           <Link
             to="/design"
@@ -943,12 +934,12 @@ export function AdminDashboard() {
             {pubListings.length === 0 ? (
               <button
                 onClick={async () => {
-                  const { data } = await supabase.from('listings').select('id, address, city, state, price, neighborhood, is_featured, display_order, sold_date, hero_image').eq('status', 'ready').order('display_order');
+                  const { data } = await supabase.from('listings').select('id, address, city, state, price, neighborhood, is_featured, display_order, sold_date, hero_image, status').order('display_order');
                   setPubListings(data || []);
                 }}
                 className="px-4 py-2 border border-stone-700 text-stone-400 text-sm hover:border-stone-500 transition-colors"
               >
-                Load Listings
+                Load All Listings
               </button>
             ) : (
               <div className="space-y-2">
@@ -999,7 +990,12 @@ export function AdminDashboard() {
 
                     {/* Details */}
                     <div className="flex-1 min-w-0">
-                      <div className="text-stone-200 text-sm font-medium truncate">{listing.address}</div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-stone-200 text-sm font-medium truncate">{listing.address}</span>
+                        {listing.status !== 'ready' && (
+                          <span className="text-[9px] uppercase tracking-wider px-1.5 py-0.5 bg-stone-700 text-stone-400 flex-shrink-0">{listing.status}</span>
+                        )}
+                      </div>
                       <div className="text-stone-500 text-xs" style={{ fontFamily: 'Nunito, sans-serif' }}>
                         {listing.city}, {listing.state} · ${(listing.price / 1_000_000).toFixed(1)}M
                         {listing.neighborhood ? ` · ${listing.neighborhood}` : ''}
