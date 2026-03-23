@@ -656,13 +656,13 @@ export function AdminDashboard() {
               </Link>
             </>
           )}
-          <a
-            href="/"
+          <Link
+            to="/design"
             className="flex items-center gap-1.5 px-3 py-1.5 bg-stone-800 hover:bg-stone-700 text-stone-300 text-xs transition-colors flex-shrink-0"
           >
             <Palette className="w-3 h-3" />
             Room Camera
-          </a>
+          </Link>
         </div>
       </div>
 
