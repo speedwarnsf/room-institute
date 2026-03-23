@@ -255,6 +255,31 @@ export default function PublicationHome() {
         )}
       </div>
 
+      {/* Camera CTA */}
+      <div className="border-t border-stone-800/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-14 text-center">
+          <p className="text-stone-500 text-sm mb-2" style={{ fontFamily: 'Nunito, sans-serif', fontWeight: 300 }}>
+            What about your space?
+          </p>
+          <h3
+            className="text-2xl sm:text-3xl text-stone-200 mb-4"
+            style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 400 }}
+          >
+            See it before you change it.
+          </h3>
+          <p className="text-stone-500 text-sm max-w-md mx-auto mb-6" data-no-typeset style={{ fontFamily: 'Nunito, sans-serif', fontWeight: 300, lineHeight: '1.7' }}>
+            Photograph any room. Our engine reads the architecture, light, and spatial language{'\u00A0'}{'\u2014'} then generates three design directions grounded in{'\u00A0'}theory.
+          </p>
+          <Link
+            to="/design"
+            className="inline-block px-8 py-3 border border-stone-700 text-stone-300 hover:border-stone-400 hover:text-stone-100 text-[11px] uppercase tracking-widest transition-all"
+            style={{ fontFamily: 'Nunito, sans-serif' }}
+          >
+            Try your space
+          </Link>
+        </div>
+      </div>
+
       {/* Footer */}
       <footer className="border-t border-stone-800/50 py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
